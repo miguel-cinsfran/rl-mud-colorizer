@@ -706,6 +706,76 @@
       "replace": "<span style=\"color: #00ffff;\">$1</span><span style=\"color: #ffffff;\">$2</span>"
     },
     {
+      "id": "group_status_header_prompted",
+      "category": "status",
+      "priority": 35,
+      "prompt_only": true,
+      "pattern": "^(De un fugaz vistazo, examinas el estado de los que te rodean\\.)\\s*$",
+      "sets_context": "group_status",
+      "replace": "<span style=\"color: #717100;\">$1</span>"
+    },
+    {
+      "id": "group_status_header",
+      "category": "status",
+      "priority": 35,
+      "pattern": "^(De un fugaz vistazo, examinas el estado de los que te rodean\\.)\\s*$",
+      "sets_context": "group_status",
+      "replace": "<span style=\"color: #c0c0c0;\">$1</span>"
+    },
+    {
+      "id": "group_status_health",
+      "category": "status",
+      "priority": 36,
+      "requires_context": "group_status",
+      "type": "composite_health_tier",
+      "pattern": "^([^\\s:\"¡!?][^:\"¡!?]*?)(\\s+)(-?\\d{1,3}%)(\\s*)$",
+      "tier_groups": [
+        3
+      ],
+      "tier_source": 3,
+      "tiers": [
+        {
+          "min": 70,
+          "color": "#5fd75f"
+        },
+        {
+          "min": 31,
+          "color": "#ffcc4b"
+        },
+        {
+          "min": -100000,
+          "color": "#ea063f"
+        }
+      ]
+    },
+    {
+      "id": "vitals_health_line",
+      "category": "status",
+      "priority": 37,
+      "type": "composite_health_tier",
+      "pattern": "^(Puntos de Vida: )(\\d+)( de )(\\d+)( \\()(\\d{1,3}%)(\\)\\s*)$",
+      "tier_groups": [
+        2,
+        4,
+        6
+      ],
+      "tier_source": 6,
+      "tiers": [
+        {
+          "min": 70,
+          "color": "#5fd75f"
+        },
+        {
+          "min": 31,
+          "color": "#ffcc4b"
+        },
+        {
+          "min": -100000,
+          "color": "#ea063f"
+        }
+      ]
+    },
+    {
       "id": "spell_chant",
       "category": "spell",
       "priority": 40,
@@ -731,6 +801,20 @@
       "category": "spell",
       "priority": 42,
       "pattern": "^(?:[>\\]]\\s*)?([A-ZÁÉÍÓÚ][\\w\\s'-]+?\\s+(?:empieza a formular un hechizo|mueve la boca mientras dice lo que para ti son palabras sin sentido)\\b.*)$",
+      "replace": "<span style=\"color: #ff00f3; font-weight: bold;\">$1</span>"
+    },
+    {
+      "id": "spell_touch_cast",
+      "category": "spell",
+      "priority": 41,
+      "pattern": "^(?:[>\\]]\\s*)?(Tocas a [^:\"¡!?.]+? mientras formulas el hechizo\\.)\\s*$",
+      "replace": "<span style=\"color: #008080;\">$1</span>"
+    },
+    {
+      "id": "spell_cast_enemy_concentrate",
+      "category": "spell",
+      "priority": 42,
+      "pattern": "^(?:[>\\]]\\s*)?([A-ZÁÉÍÓÚÑÜ][^:\"¡!?.]*? se concentra en un(?: [a-záéíóúñ]+)? hechizo\\.)\\s*$",
       "replace": "<span style=\"color: #ff00f3; font-weight: bold;\">$1</span>"
     },
     {
@@ -899,7 +983,7 @@
       "category": "combat",
       "priority": 61,
       "pattern": "^(?:[>\\]]\\s*)?([A-ZÁÉÍÓÚÑÜ][^:\"¡!?.]*? (?:se propina el golpe mortal|propina el golpe mortal a [^:\"]+?)\\.)\\s*$",
-      "replace": "<span style=\"color: #00ff00; font-weight: bold;\">$1</span>"
+      "replace": "<span style=\"color: #008000; font-weight: bold;\">$1</span>"
     },
     {
       "id": "combat_crit_eviscerate",

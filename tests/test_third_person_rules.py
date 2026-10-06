@@ -53,7 +53,7 @@ class Cases:
 
 
 class FatalBlowThird(Cases, unittest.TestCase):
-    COLOR = "#00ff00"
+    COLOR = "#008000"  # darker than the own blow ("Propinas el golpe mortal a X", #00ff00)
     TEMPLATES = ("{a} propina el golpe mortal a {b}.", "{a} se propina el golpe mortal.")
     NEGATIVES = (
         "Dices: '{a} propina el golpe mortal a {b}.'",
@@ -61,6 +61,45 @@ class FatalBlowThird(Cases, unittest.TestCase):
         "[Chat] {a}: {a} se propina el golpe mortal.",
         "Dices a {a}: {a} se propina el golpe mortal.",
     )
+
+
+class TouchCast(Cases, unittest.TestCase):
+    COLOR = "#008080"  # same as the "Pronuncias el cántico:" prefix
+    TEMPLATES = ("Tocas a {a} mientras formulas el hechizo.",)
+    NEGATIVES = (
+        "Dices: 'Tocas a {a} mientras formulas el hechizo.'",
+        "{a} te dice: Tocas a {b} mientras formulas el hechizo.",
+        "[Chat] {a}: Tocas a {b} mientras formulas el hechizo.",
+    )
+
+    def test_negatives_stay_uncolored_by_this_rule(self):
+        # Chat lines are legitimately teal-prefixed by the chat rules, so check the rule itself.
+        rule = next(r for r in self.c.compiled_rules if r["id"] == "spell_touch_cast")
+        for tpl in self.NEGATIVES:
+            for a in NAMES[:3]:
+                line = tpl.format(a=a, b=NAMES[1])
+                with self.subTest(line=line):
+                    self.assertIsNone(rule["_regex"].match(line))
+
+    def test_same_color_as_chant_prefix(self):
+        chant = colors(self.c, "Pronuncias el cántico: 'abc'")
+        self.assertIn(self.COLOR, chant)
+
+
+class EnemyConcentrates(Cases, unittest.TestCase):
+    COLOR = "#ff00f3"  # same as "X mueve la boca mientras dice..." (spell_cast_enemy*)
+    TEMPLATES = ("{a} se concentra en un hechizo.", "{a} se concentra en un oscuro hechizo.")
+    NEGATIVES = (
+        "Dices: '{a} se concentra en un hechizo.'",
+        "{a} te dice: {b} se concentra en un hechizo.",
+        "[Chat] {a}: {b} se concentra en un hechizo.",
+        "Una intensa luz desciende hasta la zona y se concentra formando la figura de {a}.",
+        "{a} se concentra en una brillante gema que sostiene entre sus manos.",
+    )
+
+    def test_same_color_as_friend_enemy_cast(self):
+        line = "{a} mueve la boca mientras dice lo que para ti son palabras sin sentido.".format(a=NAMES[1])
+        self.assertIn(self.COLOR, colors(self.c, line))
 
 
 class ReflectedSpells(Cases, unittest.TestCase):

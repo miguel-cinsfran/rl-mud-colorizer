@@ -260,6 +260,24 @@ HOWL_EFFECTS = (
     + r'|' + ACTOR + r' parece no ser consciente de los sonidos que le rodean\.'
 )
 
+# Health tiers (composite_health_tier). Chosen to stay >= 60 RGB distance from every other
+# color used by the rules and >= 4.5 contrast on black (checked by tests/test_health_tiers.py).
+HEALTH_TIERS = [
+    {"min": 70, "color": "#5fd75f"},
+    {"min": 31, "color": "#ffcc4b"},
+    {"min": -100000, "color": "#ea063f"},
+]
+
+# Composite rule types are rendered by engine.py / webapp/engine.js (kept in parity):
+#   composite_health_tier  {tiers, tier_groups, tier_source}
+#       Every capture group is emitted in order (the pattern must cover the whole line so the
+#       visible text is unchanged). Groups listed in `tier_groups` take the color of the first
+#       tier whose `min` <= the integer found in group `tier_source` (the percentage); the other
+#       groups keep the default color.
+# Block context (any rule): `sets_context: "<name>"` opens a context when the rule matches a line;
+#   `requires_context: "<name>"` makes a rule eligible only while that context is open. The context
+#   stays open while consecutive lines match a `requires_context` rule and closes on a blank line
+#   or on any other line.
 RULES_DATA = {
     "theme": {
         "bg": "#000000",
@@ -503,6 +521,49 @@ RULES_DATA = {
             "replace": r'<span style="color: #00ffff;">$1</span><span style="color: #ffffff;">$2</span>'
         },
 
+        # --- Health percentages (tiered colors, only the percentage token is colored) ---
+        {
+            # With a leading "> " / "] " the line used to be colored as a command echo (olive,
+            # command_explicit_prompt); keep that color and still open the block context.
+            "id": "group_status_header_prompted",
+            "category": "status",
+            "priority": 35,
+            "prompt_only": True,
+            "pattern": r"^(De un fugaz vistazo, examinas el estado de los que te rodean\.)\s*$",
+            "sets_context": "group_status",
+            "replace": r'<span style="color: #717100;">$1</span>'
+        },
+        {
+            "id": "group_status_header",
+            "category": "status",
+            "priority": 35,
+            "pattern": r"^(De un fugaz vistazo, examinas el estado de los que te rodean\.)\s*$",
+            "sets_context": "group_status",
+            "replace": r'<span style="color: #c0c0c0;">$1</span>'
+        },
+        {
+            # "<Name><padding>NN%" lines, only right after the header above (a bare "Name 28%" elsewhere,
+            # such as an inventory durability, is left alone). Names are generic (commas, accents, spaces).
+            "id": "group_status_health",
+            "category": "status",
+            "priority": 36,
+            "requires_context": "group_status",
+            "type": "composite_health_tier",
+            "pattern": r'^([^\s:"¡!?][^:"¡!?]*?)(\s+)(-?\d{1,3}%)(\s*)$',
+            "tier_groups": [3],
+            "tier_source": 3,
+            "tiers": HEALTH_TIERS
+        },
+        {
+            "id": "vitals_health_line",
+            "category": "status",
+            "priority": 37,
+            "type": "composite_health_tier",
+            "pattern": r"^(Puntos de Vida: )(\d+)( de )(\d+)( \()(\d{1,3}%)(\)\s*)$",
+            "tier_groups": [2, 4, 6],
+            "tier_source": 6,
+            "tiers": HEALTH_TIERS
+        },
         # --- 4. SPELLS, CASTING & MAGICAL EFFECTS ---
         {
             "id": "spell_chant",
@@ -530,6 +591,26 @@ RULES_DATA = {
             "category": "spell",
             "priority": 42,
             "pattern": r"^(?:[>\]]\s*)?([A-ZÁÉÍÓÚ][\w\s'-]+?\s+(?:empieza a formular un hechizo|mueve la boca mientras dice lo que para ti son palabras sin sentido)\b.*)$",
+            "replace": r'<span style="color: #ff00f3; font-weight: bold;">$1</span>'
+        },
+        {
+            # "Tocas a <X> mientras formulas el hechizo." Same teal as the "Pronuncias el cántico:"
+            # prefix of spell_chant. That rule colors a prefix (plus the quoted words in cyan); this
+            # sentence has no quoted part, so the whole sentence takes the prefix color.
+            "id": "spell_touch_cast",
+            "category": "spell",
+            "priority": 41,
+            "pattern": r'^(?:[>\]]\s*)?(Tocas a ' + NAME + r' mientras formulas el hechizo\.)\s*$',
+            "replace": r'<span style="color: #008080;">$1</span>'
+        },
+        {
+            # "<X> se concentra en un [oscuro] hechizo." (enemy starts casting): same magenta as the
+            # friend's enemy-spellcasting rules (spell_cast_enemy_plain). "se concentra formando la
+            # figura de..." and "en una brillante gema..." are other events and do not match.
+            "id": "spell_cast_enemy_concentrate",
+            "category": "spell",
+            "priority": 42,
+            "pattern": r'^(?:[>\]]\s*)?(' + ACTOR + r' se concentra en un(?: [a-záéíóúñ]+)? hechizo\.)\s*$',
             "replace": r'<span style="color: #ff00f3; font-weight: bold;">$1</span>'
         },
         {
@@ -704,13 +785,13 @@ RULES_DATA = {
         },
         {
             # Third person ("<X> se propina el golpe mortal." / "<X> propina el golpe mortal a <Y>.").
-            # Same green as the friend's own-blow rule above (which does not highlight the target).
+            # Darker green than the own-blow rule above (#00ff00), so ours and others' blows look different.
             # The actor may not contain ":" or quotes, so chat/tell lines never match.
             "id": "combat_fatal_blow_third",
             "category": "combat",
             "priority": 61,
             "pattern": r'^(?:[>\]]\s*)?(' + ACTOR + r' (?:se propina el golpe mortal|propina el golpe mortal a [^:"]+?)\.)\s*$',
-            "replace": r'<span style="color: #00ff00; font-weight: bold;">$1</span>'
+            "replace": r'<span style="color: #008000; font-weight: bold;">$1</span>'
         },
         {
             "id": "combat_crit_eviscerate",

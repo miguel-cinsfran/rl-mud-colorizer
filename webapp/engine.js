@@ -185,6 +185,7 @@ class RLColorizerJS {
         this.cardinalRegex = /\b(norte|sur|este|oeste|noreste|noroeste|sudeste|sudoeste|arriba|abajo|n|s|e|o|ne|no|se|so)\b/i;
         
         this.detectedClient = null;
+        this._context = null; // block context set by a `sets_context` rule (e.g. group status list)
         this._initPreprocess(this.config.preprocess || {});
 
         const sortedRules = [...this.config.rules].sort((a, b) => (a.priority || 100) - (b.priority || 100));
@@ -202,6 +203,7 @@ class RLColorizerJS {
         rawText = rawText.replace(/&gt;/g, '>').replace(/&lt;/g, '<').replace(/&amp;/g, '&');
 
         if (!rawText.trim()) {
+            this._context = null;
             return "";
         }
 
@@ -218,16 +220,23 @@ class RLColorizerJS {
         }
 
         let lineHtml = null;
+        let usedRule = null;
         for (const rule of this.compiledRules) {
             if (rule.prompt_only && !prompt) continue;
+            if (rule.requires_context && rule.requires_context !== this._context) continue;
             const m = rule._regex.exec(rawText);
             if (!m) continue;
+            usedRule = rule;
 
             const type = rule.type;
 
             // 1. Composite Prompt Handler
             if (type === 'composite_prompt_extended') {
                 lineHtml = this._renderPromptExtended(m);
+                break;
+            }
+            else if (type === 'composite_health_tier') {
+                lineHtml = this._renderHealthTier(rule, m);
                 break;
             }
             else if (type === 'composite_prompt_vitals') {
@@ -320,6 +329,12 @@ class RLColorizerJS {
             }
         }
 
+        // Block context: a `sets_context` rule opens it, a `requires_context` rule keeps it,
+        // anything else (or a blank line) closes it.
+        if (lineHtml === null || usedRule === null) this._context = null;
+        else if (usedRule.sets_context) this._context = usedRule.sets_context;
+        else if (!usedRule.requires_context) this._context = null;
+
         if (lineHtml === null) {
             const escaped = escapeHtml(rawText);
             const defaultFg = this.theme.default_fg || '#c0c0c0';
@@ -332,6 +347,21 @@ class RLColorizerJS {
     }
 
     // ` (+12)` after a stat: only the signed number is colored; a zero delta stays default.
+    // Tiered health: groups in `tier_groups` take the tier color of the % in `tier_source`.
+    _renderHealthTier(rule, m) {
+        const pct = parseInt(/-?\d+/.exec(m[rule.tier_source])[0], 10);
+        const color = rule.tiers.find(t => pct >= t.min).color;
+        const defaultFg = this.theme.default_fg || '#c0c0c0';
+        let out = '';
+        for (let i = 1; i < m.length; i++) {
+            const text = m[i] || '';
+            if (!text) continue;
+            const c = rule.tier_groups.includes(i) ? color : defaultFg;
+            out += `<span style="color: ${c};">${escapeHtml(text)}</span>`;
+        }
+        return out;
+    }
+
     _promptDeltaHtml(ws, delta) {
         const color = delta.startsWith('-') ? "#ff0000" : (delta.startsWith('+') ? "#00ff00" : null);
         let number = escapeHtml(delta);
@@ -910,6 +940,7 @@ class RLColorizerJS {
         }
 
         const lines = normalized.split('\n');
+        this._context = null;
         const renderedLines = lines.map(line => this.colorizeLine(line));
         // No newline after <br>: Deathlogs renders the paste inside <PRE>, where it would double-space.
         const bodyContent = renderedLines.map(r => r + '<br>').join('');

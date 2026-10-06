@@ -167,6 +167,7 @@ class RLColorizer:
         self.cardinal_regex = re.compile(r'\b(norte|sur|este|oeste|noreste|noroeste|sudeste|sudoeste|arriba|abajo|n|s|e|o|ne|no|se|so)\b', re.IGNORECASE)
         
         self.detected_client = None
+        self._context = None  # block context set by a `sets_context` rule (e.g. group status list)
         self._init_preprocess(self.config.get('preprocess') or {})
 
         # Precompile regular expressions
@@ -184,6 +185,7 @@ class RLColorizer:
         raw_text = raw_text.replace('&gt;', '>').replace('&lt;', '<').replace('&amp;', '&')
         
         if not raw_text.strip():
+            self._context = None
             return ""
 
         # A leading prompt symbol ("> " / "] ") is split off verbatim; rules see the rest.
@@ -196,14 +198,17 @@ class RLColorizer:
             return normalize_line_to_mudlet(prompt_html)
 
         line_html = None
+        used_rule = None
         # Match rules in priority order
         for rule in self.compiled_rules:
             if rule.get('prompt_only') and not prompt:
                 continue
+            if rule.get('requires_context') and rule['requires_context'] != self._context:
+                continue
             m = rule['_regex'].match(raw_text)
             if not m:
                 continue
-                
+            used_rule = rule
             rule_type = rule.get('type')
             
             # 1. Composite Prompt Handler
@@ -213,6 +218,10 @@ class RLColorizer:
 
             elif rule_type == 'composite_prompt_vitals':
                 line_html = self._render_prompt_vitals(m)
+                break
+
+            elif rule_type == 'composite_health_tier':
+                line_html = self._render_health_tier(rule, m)
                 break
                 
             # 2. Composite HP Delta Handler
@@ -294,6 +303,15 @@ class RLColorizer:
                 line_html = self._apply_template(m, rule['replace'])
                 break
                 
+        # Block context: a `sets_context` rule opens it, a `requires_context` rule keeps it,
+        # anything else (or a blank line) closes it.
+        if line_html is None or used_rule is None:
+            self._context = None
+        elif used_rule.get('sets_context'):
+            self._context = used_rule['sets_context']
+        elif not used_rule.get('requires_context'):
+            self._context = None
+
         if line_html is None:
             escaped = html.escape(raw_text)
             line_html = f'<span style="color: {self.theme.get("default_fg", "#c0c0c0")};">{escaped}</span>'
@@ -337,6 +355,20 @@ class RLColorizer:
             f'<span style="color: {color};">{html.escape(mx)}</span>{html.escape(rest)}'
             f'<span style="color: #ffffff;">{html.escape(fe)}</span>{html.escape(tail)}'
         )
+
+    def _render_health_tier(self, rule, m):
+        """Tiered health: groups in `tier_groups` take the tier color of the % in `tier_source`."""
+        pct = int(re.search(r'-?\d+', m.group(rule['tier_source'])).group())
+        color = next(t['color'] for t in rule['tiers'] if pct >= t['min'])
+        default_fg = self.theme.get('default_fg', '#c0c0c0')
+        out = []
+        for i in range(1, len(m.groups()) + 1):
+            text = m.group(i) or ''
+            if not text:
+                continue
+            c = color if i in rule['tier_groups'] else default_fg
+            out.append(f'<span style="color: {c};">{html.escape(text)}</span>')
+        return ''.join(out)
 
     def get_race_color(self, text):
         if not text:
@@ -819,6 +851,7 @@ class RLColorizer:
             return MUDLET_HEADER + " </div></body>\n</html>"
 
         lines = normalized.split('\n')
+        self._context = None
         rendered_lines = [self.colorize_line(line) for line in lines]
         # No newline after <br>: Deathlogs renders the paste inside <PRE>, where it would double-space.
         body_content = "".join(r + "<br>" for r in rendered_lines)
