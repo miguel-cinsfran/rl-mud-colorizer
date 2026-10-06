@@ -55,6 +55,8 @@ const MUDLET_HEADER = `<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01//EN' 'http:/
 const MUDLET_FOOTER = ` </div></body>\n</html>`;
 const PROMPT_PREFIX_RE = /^([>\]](?:[ \t]+|$))(.*)$/;
 const DEFAULT_MUDLET_STYLE ="color: rgb(192,192,192); background: rgb(0,0,0); ";
+// Room titles this close to the body silver (#c0c0c0) are rendered white (mirrors engine.py).
+const SILVER_TITLE_DISTANCE = 30;
 
 function hexToRgb(hexStr) {
     let h = hexStr.trim().replace(/^#/, '');
@@ -438,11 +440,17 @@ class RLColorizerJS {
         return null;
     }
 
+    _nearSilver(color) {
+        const [r, g, b] = hexToRgb(color);
+        return Math.sqrt((r - 192) ** 2 + (g - 192) ** 2 + (b - 192) ** 2) < SILVER_TITLE_DISTANCE;
+    }
+
     // Bold title: known color on the matched prefix, fallback color when unknown.
     _roomTitleHtml(roomTitle) {
         const found = this.getRoomColor(roomTitle);
         if (!found) return `<span style="color: ${this.roomFallbackColor}; font-weight: bold;">${escapeHtml(roomTitle)}</span>`;
-        return `<span style="color: ${found.color}; font-weight: bold;">${escapeHtml(roomTitle.slice(0, found.n))}</span>${escapeHtml(roomTitle.slice(found.n))}`;
+        const color = this._nearSilver(found.color) ? '#ffffff' : found.color;
+        return `<span style="color: ${color}; font-weight: bold;">${escapeHtml(roomTitle.slice(0, found.n))}</span>${escapeHtml(roomTitle.slice(found.n))}`;
     }
 
     _renderRoomExits(m) {
@@ -677,7 +685,7 @@ class RLColorizerJS {
         }));
         this.preRules = (cfg.rules || []).map(r => {
             const comp = { ...r };
-            for (const key of ['pattern', 'start', 'end', 'until', 'candidate', 'record', 'echo']) {
+            for (const key of ['pattern', 'start', 'end', 'until', 'candidate', 'record', 'echo', 'keep_before']) {
                 if (key in r) comp['_' + key] = toSharedRegex(r[key]);
             }
             return comp;
@@ -716,6 +724,23 @@ class RLColorizerJS {
         });
     }
 
+    _squeezeBlank(lines, rule) {
+        // Drop blank lines, keeping one only where the source had blanks right before a
+        // line matching `keep_before` (a new prompt/turn). Leading/trailing blanks go.
+        const out = [];
+        let pending = false;
+        for (const line of lines) {
+            if (/^[ 	]*$/.test(line)) {
+                pending = true;
+                continue;
+            }
+            if (pending && out.length > 0 && rule._keep_before.test(line)) out.push('');
+            pending = false;
+            out.push(line);
+        }
+        return out;
+    }
+
     preprocessText(text, client = null) {
         const lines = (text || '').replace(/\r\n/g, '\n').split('\n');
         if (client === null || client === undefined) {
@@ -740,6 +765,7 @@ class RLColorizerJS {
             let handled = false;
             for (const r of rules) {
                 const kind = r.kind;
+                if (kind === 'squeeze_blank') continue; // post-pass over the finished output
                 if (kind === 'rewrite') {
                     const m = r._pattern.exec(line);
                     if (m) {
@@ -856,6 +882,12 @@ class RLColorizerJS {
             i += 1;
         }
 
+        for (const r of rules) {
+            if (r.kind === 'squeeze_blank') {
+                out = this._squeezeBlank(out, r);
+                changed = true;
+            }
+        }
         let result = out;
         if (changed) {
             result = [];
@@ -879,9 +911,10 @@ class RLColorizerJS {
 
         const lines = normalized.split('\n');
         const renderedLines = lines.map(line => this.colorizeLine(line));
-        const bodyContent = renderedLines.map(r => r + '<br>').join('\n');
+        // No newline after <br>: Deathlogs renders the paste inside <PRE>, where it would double-space.
+        const bodyContent = renderedLines.map(r => r + '<br>').join('');
 
-        return `${MUDLET_HEADER}${bodyContent}\n </div></body>\n</html>`;
+        return `${MUDLET_HEADER}${bodyContent} </div></body>\n</html>`;
     }
 }
 

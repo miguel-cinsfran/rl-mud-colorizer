@@ -56,6 +56,12 @@ RULES_FILE = BASE_DIR / "rules.json"
 #                    removed as a login echo (drop_after `record`, drop_before
 #                    candidates) but only within `window` lines after a rule flagged
 #                    "login": true fired, so gameplay commands elsewhere are safe.
+#   squeeze_blank    {keep_before}
+#                    post-pass: drop every blank line except one kept right before
+#                    a line matching `keep_before` (start of a new prompt/turn) when
+#                    the source had blanks there. Leading/trailing blanks are dropped.
+#                    VIPMud adds a blank line after most server messages; this keeps
+#                    the colored paste compact.
 # Any rule may carry "clients": [...]; without it the rule is client-agnostic.
 # Client detection: the client whose "signatures" match the most lines wins
 # (ties: first declared); no match -> only client-agnostic rules apply.
@@ -223,9 +229,36 @@ PREPROCESS_DATA = {
             "group": "status",
             "pattern": r"^[>\]][ \t]*$",
         },
+        # VIPMud pads most server messages with a blank line; keep one only before a new
+        # turn: a prompt (`>` / `]`), a `Pv:` status line, or a room line with exits.
+        {
+            "id": "vip_squeeze_blank",
+            "kind": "squeeze_blank",
+            "clients": ["vipmud"],
+            "keep_before": r"^(?:[>\]]|Pv:\d|.*[ \t]\[[a-z,]+\][ \t]*$)",
+        },
     ],
 }
 
+
+# Shared regex fragments for the third-person rules. Actor/target names are generic: any
+# capitalized text (accents, commas, several words) without ":" or quotes, so a sentence quoted
+# inside chat ("Dices: '...'") or a tell ("X te dice: ...") can never match.
+ACTOR = r'[A-ZÁÉÍÓÚÑÜ][^:"¡!?.]*?'
+NAME = r'[^:"¡!?.]+?'
+REFLECT_BOUNCE = (
+    r'(?:(?:El|La|Los|Las) [a-záéíóúñ ]+? convocad[oa]s? por|La magia de) ' + NAME
+    + r' se vuelve contra (?:[ée]l|ella) [^:"]*\.'
+    + r'|El Ojo del cintur[oó]n brilla (?:con fuerza dispersando|enviando el hechizo a su lanzador)[^:"]*'
+)
+HOWL_EFFECTS = (
+    ACTOR + r' emite un aullido [^:"]*\.'
+    + r'|¡U{3,}O{3,}R{3,}H!'
+    + r'|¡?Te retuerces d(?:e|el) [^:"]*aullido de [^:"]+[.!]'
+    + r'|¡Tus t[ií]mpanos revientan [^:"]*!'
+    + r'|De pronto el mundo a tu alrededor queda en silencio\.'
+    + r'|' + ACTOR + r' parece no ser consciente de los sonidos que le rodean\.'
+)
 
 RULES_DATA = {
     "theme": {
@@ -535,6 +568,46 @@ RULES_DATA = {
             "replace": r'<span style="color: #ff0000;">$1</span>'
         },
 
+        # Devolver conjuro / reflected spells. Own spell effects share the magic-missile blue
+        # (#8cc4ff); the spell winding down uses the gray of "deja de formular"; effects that the
+        # enemy lands on you use the enemy-effect red (#cc6666) of combat_enemy_attack.
+        {
+            "id": "spell_reflect_own_activates",
+            "category": "spell",
+            "priority": 48,
+            "pattern": r'^(?:[>\]]\s*)?(¡?(?:Tu hechizo de devolver conjuro(?: mayor| menor)? se activa y fuerza al de|El Ojo de tu cintur[oó]n brilla y fuerza al hechizo de) [^:"]+? a cambiar su objetivo hacia s[ií] mism[ao]s?!)\s*$',
+            "replace": r'<span style="color: #8cc4ff;">$1</span>'
+        },
+        {
+            "id": "spell_reflect_bounce",
+            "category": "spell",
+            "priority": 48,
+            "pattern": r'^(?:[>\]]\s*)?(' + REFLECT_BOUNCE + r')\s*$',
+            "replace": r'<span style="color: #8cc4ff;">$1</span>'
+        },
+        {
+            "id": "spell_reflect_ends",
+            "category": "spell",
+            "priority": 48,
+            "pattern": r"^(?:[>\]]\s*)?(Tu hechizo de devolver conjuro(?: mayor| menor)? llega a su fin\.)\s*$",
+            "replace": r'<span style="color: #808080;">$1</span>'
+        },
+        {
+            "id": "spell_redirected_to_you",
+            "category": "spell",
+            "priority": 48,
+            "pattern": r'^(?:[>\]]\s*)?(¡El hechizo de [^:"]+? cambia de objetivo hacia ti!)\s*$',
+            "replace": r'<span style="color: #cc6666;">$1</span>'
+        },
+        # Howl sequence (hechizo aullido infernal): the enemy's howl and what it does to you.
+        {
+            "id": "spell_howl_effects",
+            "category": "spell",
+            "priority": 48,
+            "pattern": r'^(?:[>\]]\s*)?(' + HOWL_EFFECTS + r')\s*$',
+            "replace": r'<span style="color: #cc6666;">$1</span>'
+        },
+
         # --- 5. MOVEMENTS, ROOM EXITS & ENTITIES ---
         {
             "id": "room_exits_inline",
@@ -627,6 +700,16 @@ RULES_DATA = {
             "category": "combat",
             "priority": 61,
             "pattern": r"^(?:[>\]]\s*)?(Propinas el golpe mortal a\s+.*)$",
+            "replace": r'<span style="color: #00ff00; font-weight: bold;">$1</span>'
+        },
+        {
+            # Third person ("<X> se propina el golpe mortal." / "<X> propina el golpe mortal a <Y>.").
+            # Same green as the friend's own-blow rule above (which does not highlight the target).
+            # The actor may not contain ":" or quotes, so chat/tell lines never match.
+            "id": "combat_fatal_blow_third",
+            "category": "combat",
+            "priority": 61,
+            "pattern": r'^(?:[>\]]\s*)?(' + ACTOR + r' (?:se propina el golpe mortal|propina el golpe mortal a [^:"]+?)\.)\s*$',
             "replace": r'<span style="color: #00ff00; font-weight: bold;">$1</span>'
         },
         {

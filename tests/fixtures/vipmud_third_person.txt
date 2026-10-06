@@ -1,0 +1,33 @@
+Pv:2900\3201 Pe:640\760 Xp:100
+SL: [so,e]
+PL:Zorak (Org)
+Jgd:Zorak (Org)
+Imágenes:0
+Pieles:15
+>
+
+Zorak emite un aullido penetrante, demoníaco, infernal, destrozándote los tímpanos.
+
+¡UUUUUUUUUOOOOOOOOOOOOOOOOOOOOOOORRRRRRH!
+
+¡Te retuerces de dolor cuando el atronador aullido de Zorak penetra en tu cabeza, destrozándote los timpanos!
+
+¡Tus tímpanos revientan dejándote sorda!
+
+Esqueleto del Túmulo propina el golpe mortal a Viajero.
+
+Zorak se propina el golpe mortal.
+
+Campos de Cultivo [so,e]
+
+Pv:1914\3201 Pe:638\760 Xp:101
+SL: [ne,o]
+PL:
+Jgd:
+Imágenes:0
+Pieles:15
+> ¡Tu hechizo de devolver conjuro se activa y fuerza al de Zorak a cambiar su objetivo hacia si misma!
+
+El rayo convocado por Zorak se vuelve contra él electrocutándole al impactar sobre su pecho.
+
+Tu hechizo de devolver conjuro llega a su fin.

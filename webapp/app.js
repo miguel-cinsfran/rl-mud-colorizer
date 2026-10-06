@@ -151,7 +151,8 @@ Propinas el golpe mortal a Sowy.
         const endTag = '</div></body>';
         const startIdx = htmlResult.indexOf(startTag);
         const endIdx = htmlResult.lastIndexOf(endTag);
-        // The container uses pre-wrap, so the newline after each <br> would add a blank line.
+        // Defensive: the container uses pre-wrap, so a newline after <br> would add a blank line
+        // (the engine no longer emits one; older pasted output might).
         const previewHtml = ((startIdx !== -1 && endIdx !== -1)
             ? htmlResult.slice(startIdx + startTag.length, endIdx)
             : htmlResult).replace(/<br\s*\/?>\n/g, '<br>');

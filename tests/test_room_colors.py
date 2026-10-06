@@ -1,6 +1,7 @@
 """Room-title colors: legibility of the compiled tables and the map > catalog > fallback order."""
 
 import json
+import re
 import unittest
 
 from _common import ROOT
@@ -89,6 +90,38 @@ class LookupOrder(unittest.TestCase):
     def test_known_title_only_line_is_colored(self):
         out = self.make().colorize_line("Plaza: Sur")
         self.assertIn("color: rgb(0,255,0)", out)
+
+
+class SilverTitlesTurnWhite(unittest.TestCase):
+    def make(self, color):
+        return RLColorizer(config={
+            "rules": [
+                {"id": "exits", "type": "composite_room_exits", "priority": 1,
+                 "pattern": r"^(?:([>\]])\s*)?(.+?)(\s+)(\[[a-z,]+\])\s*$"},
+            ],
+            "room_colors": {"plaza: norte": color, "bosque": color},
+            "room_fallback_color": "#ffffff",
+        })
+
+    def title_color(self, color, line="Plaza: Norte [norte]"):
+        out = self.make(color).colorize_line(line)
+        return re.search(r"color: rgb\((\d+,\d+,\d+)\)[^>]*>(?:Plaza|Bosque)", out).group(1)
+
+    def test_exact_silver_title_is_white(self):
+        self.assertEqual(self.title_color("#c0c0c0"), "255,255,255")
+
+    def test_near_silver_title_is_white(self):
+        for near in ("#cacdbe", "#bbb7aa", "#b9b9b9"):
+            with self.subTest(color=near):
+                self.assertEqual(self.title_color(near), "255,255,255")
+
+    def test_distinct_colors_are_kept(self):
+        self.assertEqual(self.title_color("#eac6a6"), "234,198,166")
+        self.assertEqual(self.title_color("#ff0000"), "255,0,0")
+
+    def test_zone_prefix_match_turns_white_too(self):
+        out = self.make("#c0c0c0").colorize_line("Bosque: Claro [norte]")
+        self.assertIn('<span style="color: rgb(255,255,255); background: rgb(0,0,0); ">Bosque:</span>', out)
 
 
 if __name__ == "__main__":

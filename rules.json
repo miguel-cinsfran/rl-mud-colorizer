@@ -518,6 +518,14 @@
         ],
         "group": "status",
         "pattern": "^[>\\]][ \\t]*$"
+      },
+      {
+        "id": "vip_squeeze_blank",
+        "kind": "squeeze_blank",
+        "clients": [
+          "vipmud"
+        ],
+        "keep_before": "^(?:[>\\]]|Pv:\\d|.*[ \\t]\\[[a-z,]+\\][ \\t]*$)"
       }
     ]
   },
@@ -761,6 +769,41 @@
       "replace": "<span style=\"color: #ff0000;\">$1</span>"
     },
     {
+      "id": "spell_reflect_own_activates",
+      "category": "spell",
+      "priority": 48,
+      "pattern": "^(?:[>\\]]\\s*)?(¡?(?:Tu hechizo de devolver conjuro(?: mayor| menor)? se activa y fuerza al de|El Ojo de tu cintur[oó]n brilla y fuerza al hechizo de) [^:\"]+? a cambiar su objetivo hacia s[ií] mism[ao]s?!)\\s*$",
+      "replace": "<span style=\"color: #8cc4ff;\">$1</span>"
+    },
+    {
+      "id": "spell_reflect_bounce",
+      "category": "spell",
+      "priority": 48,
+      "pattern": "^(?:[>\\]]\\s*)?((?:(?:El|La|Los|Las) [a-záéíóúñ ]+? convocad[oa]s? por|La magia de) [^:\"¡!?.]+? se vuelve contra (?:[ée]l|ella) [^:\"]*\\.|El Ojo del cintur[oó]n brilla (?:con fuerza dispersando|enviando el hechizo a su lanzador)[^:\"]*)\\s*$",
+      "replace": "<span style=\"color: #8cc4ff;\">$1</span>"
+    },
+    {
+      "id": "spell_reflect_ends",
+      "category": "spell",
+      "priority": 48,
+      "pattern": "^(?:[>\\]]\\s*)?(Tu hechizo de devolver conjuro(?: mayor| menor)? llega a su fin\\.)\\s*$",
+      "replace": "<span style=\"color: #808080;\">$1</span>"
+    },
+    {
+      "id": "spell_redirected_to_you",
+      "category": "spell",
+      "priority": 48,
+      "pattern": "^(?:[>\\]]\\s*)?(¡El hechizo de [^:\"]+? cambia de objetivo hacia ti!)\\s*$",
+      "replace": "<span style=\"color: #cc6666;\">$1</span>"
+    },
+    {
+      "id": "spell_howl_effects",
+      "category": "spell",
+      "priority": 48,
+      "pattern": "^(?:[>\\]]\\s*)?([A-ZÁÉÍÓÚÑÜ][^:\"¡!?.]*? emite un aullido [^:\"]*\\.|¡U{3,}O{3,}R{3,}H!|¡?Te retuerces d(?:e|el) [^:\"]*aullido de [^:\"]+[.!]|¡Tus t[ií]mpanos revientan [^:\"]*!|De pronto el mundo a tu alrededor queda en silencio\\.|[A-ZÁÉÍÓÚÑÜ][^:\"¡!?.]*? parece no ser consciente de los sonidos que le rodean\\.)\\s*$",
+      "replace": "<span style=\"color: #cc6666;\">$1</span>"
+    },
+    {
       "id": "room_exits_inline",
       "category": "movement",
       "priority": 50,
@@ -849,6 +892,13 @@
       "category": "combat",
       "priority": 61,
       "pattern": "^(?:[>\\]]\\s*)?(Propinas el golpe mortal a\\s+.*)$",
+      "replace": "<span style=\"color: #00ff00; font-weight: bold;\">$1</span>"
+    },
+    {
+      "id": "combat_fatal_blow_third",
+      "category": "combat",
+      "priority": 61,
+      "pattern": "^(?:[>\\]]\\s*)?([A-ZÁÉÍÓÚÑÜ][^:\"¡!?.]*? (?:se propina el golpe mortal|propina el golpe mortal a [^:\"]+?)\\.)\\s*$",
       "replace": "<span style=\"color: #00ff00; font-weight: bold;\">$1</span>"
     },
     {

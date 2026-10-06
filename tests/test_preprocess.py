@@ -178,6 +178,40 @@ class BlankLineTest(unittest.TestCase):
         self.assertEqual(out, ["", "", "a", "", "", "b"])
 
 
+class SqueezeBlankTest(unittest.TestCase):
+    RULES = [{"id": "sq", "kind": "squeeze_blank", "keep_before": r"^(?:[>\]]|Pv:\d|.*[ \t]\[[a-z,]+\][ \t]*$)"}]
+
+    def test_blank_lines_between_messages_are_dropped(self):
+        out, _ = run(self.RULES, "a\n\nb\n\n\nc")
+        self.assertEqual(out, ["a", "b", "c"])
+
+    def test_one_blank_kept_before_prompt_status_and_exits_lines(self):
+        text = "a\n\n> go\nb\n\nPv:1\\2 Pe:1\\2\nc\n\n\nPlaza [n,s] \nd"
+        out, _ = run(self.RULES, text)
+        self.assertEqual(out, ["a", "", "> go", "b", "", "Pv:1\\2 Pe:1\\2", "c", "", "Plaza [n,s] ", "d"])
+
+    def test_no_blank_is_invented(self):
+        out, _ = run(self.RULES, "a\n> go")
+        self.assertEqual(out, ["a", "> go"])
+
+    def test_leading_and_trailing_blanks_are_dropped(self):
+        out, _ = run(self.RULES, "\n\n> a\nb\n\n")
+        self.assertEqual(out, ["> a", "b"])
+
+    def test_only_runs_for_its_client(self):
+        rules = [dict(self.RULES[0], clients=["alpha"])]
+        out, _ = run(rules, "a\n\nb", client="beta")
+        self.assertEqual(out, ["a", "", "b"])
+        out, _ = run(rules, "a\n\nb", client="alpha")
+        self.assertEqual(out, ["a", "b"])
+
+    def test_real_rules_squeeze_vipmud_but_mudlet_keeps_blanks(self):
+        c = make_colorizer()
+        text = "Pv:10\\10 Pe:1\\1 Xp:5\nSL: [n]\nPL:\nJgd:\nImágenes:0\nPieles:0\n> \nHola.\n\nAdios.\n\n> x"
+        self.assertEqual(c.preprocess_text(text, "vipmud").split("\n")[-4:], ["Hola.", "Adios.", "", "> x"])
+        self.assertIn("", c.preprocess_text("Hola.\n\nAdios.", "mudlet").split("\n"))
+
+
 class ClientScopingTest(unittest.TestCase):
     RULES = [
         {"id": "agnostic", "kind": "drop", "pattern": r"^AG"},

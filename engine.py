@@ -27,6 +27,9 @@ MUDLET_HEADER = (
 MUDLET_FOOTER = " </div></body>\n</html>"
 PROMPT_PREFIX_RE = re.compile(r'^([>\]](?:[ \t]+|$))(.*)$')
 DEFAULT_MUDLET_STYLE = "color: rgb(192,192,192); background: rgb(0,0,0); "
+# A room title whose resolved color is this close to the body silver (#c0c0c0) cannot be told
+# apart from the text around it, so it is rendered white instead.
+SILVER_TITLE_DISTANCE = 30
 
 
 def decode_log_bytes(raw):
@@ -399,12 +402,19 @@ class RLColorizer:
                     return zones[zone], len(room_title[:room_title.index('-')].rstrip())
         return None
 
+    @staticmethod
+    def _near_silver(color):
+        r, g, b = hex_to_rgb(color)
+        return ((r - 192) ** 2 + (g - 192) ** 2 + (b - 192) ** 2) ** 0.5 < SILVER_TITLE_DISTANCE
+
     def _room_title_html(self, room_title):
         """Bold title: known color on the matched prefix, fallback color when unknown."""
         found = self.get_room_color(room_title)
         if not found:
             return f'<span style="color: {self.room_fallback_color}; font-weight: bold;">{html.escape(room_title)}</span>'
         color, n = found
+        if self._near_silver(color):
+            color = '#ffffff'
         return f'<span style="color: {color}; font-weight: bold;">{html.escape(room_title[:n])}</span>{html.escape(room_title[n:])}'
 
     def _render_room_exits(self, m):
@@ -578,7 +588,7 @@ class RLColorizer:
         self.pre_rules = []
         for r in cfg.get('rules', []):
             comp = dict(r)
-            for key in ('pattern', 'start', 'end', 'until', 'candidate', 'record', 'echo'):
+            for key in ('pattern', 'start', 'end', 'until', 'candidate', 'record', 'echo', 'keep_before'):
                 if key in r:
                     comp['_' + key] = re.compile(r[key])
             self.pre_rules.append(comp)
@@ -617,6 +627,22 @@ class RLColorizer:
             return g if g is not None else ''
         return re.sub(r'\$(\d)', sub, template)
 
+    @staticmethod
+    def _squeeze_blank(lines, rule):
+        """Drop blank lines, keeping one only where the source had blanks right before a
+        line matching `keep_before` (a new prompt/turn). Leading/trailing blanks go."""
+        out = []
+        pending = False
+        for line in lines:
+            if re.match(r'^[ 	]*$', line):
+                pending = True
+                continue
+            if pending and out and rule['_keep_before'].search(line):
+                out.append('')
+            pending = False
+            out.append(line)
+        return out
+
     def preprocess_text(self, text, client=None):
         """Sanitize a raw log (login/credentials, client status blocks) before colorizing.
 
@@ -645,6 +671,8 @@ class RLColorizer:
             handled = False
             for r in rules:
                 kind = r['kind']
+                if kind == 'squeeze_blank':
+                    continue  # post-pass over the finished output
                 if kind == 'rewrite':
                     m = r['_pattern'].search(line)
                     if m:
@@ -769,6 +797,10 @@ class RLColorizer:
             run = None
             i += 1
 
+        for r in rules:
+            if r['kind'] == 'squeeze_blank':
+                out = self._squeeze_blank(out, r)
+                changed = True
         if changed:
             collapsed = []
             for line in out:
@@ -788,9 +820,10 @@ class RLColorizer:
 
         lines = normalized.split('\n')
         rendered_lines = [self.colorize_line(line) for line in lines]
-        body_content = "\n".join(r + "<br>" for r in rendered_lines)
+        # No newline after <br>: Deathlogs renders the paste inside <PRE>, where it would double-space.
+        body_content = "".join(r + "<br>" for r in rendered_lines)
 
-        return f"{MUDLET_HEADER}{body_content}\n </div></body>\n</html>"
+        return f"{MUDLET_HEADER}{body_content} </div></body>\n</html>"
 
 
 def main(argv=None):
