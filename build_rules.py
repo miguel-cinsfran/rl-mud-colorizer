@@ -757,18 +757,94 @@ RULES_DATA = {
 }
 
 ROOMS_FILE = BASE_DIR / "rooms.json"
+MAP_COLORS_FILE = BASE_DIR / "room_map_colors.json"
 WEBAPP_RULES_FILE = BASE_DIR / "webapp" / "rules.js"
 
+# Room-title legibility rules (checked by tests/test_room_colors.py).
+EXITS_COLOR = "#00ffff"
+ROOM_FALLBACK = "#ffffff"
+MIN_CONTRAST = 4.5
+MIN_EXITS_DISTANCE = 80
+# Readable alternatives used when a title color is too close to the exits color.
+EXITS_ALTERNATIVES = ["#5fafff", "#00ff00", "#ffff00", "#ff5555", "#ff55ff", "#ff8000", "#c0c0c0", "#ffffff"]
+
+
+def _rgb(color):
+    return tuple(int(color[i:i + 2], 16) for i in (1, 3, 5))
+
+
+def _hex(rgb):
+    return "#%02x%02x%02x" % tuple(rgb)
+
+
+def contrast_on_black(color):
+    """WCAG contrast ratio of a #rrggbb color against #000000."""
+    def lin(c):
+        c /= 255
+        return c / 12.92 if c <= 0.03928 else ((c + 0.055) / 1.055) ** 2.4
+    r, g, b = (lin(c) for c in _rgb(color))
+    return (0.2126 * r + 0.7152 * g + 0.0722 * b + 0.05) / 0.05
+
+
+def color_distance(a, b):
+    return sum((x - y) ** 2 for x, y in zip(_rgb(a), _rgb(b))) ** 0.5
+
+
+def make_readable(color):
+    """Deterministically lighten (mix toward white) until contrast on black >= MIN_CONTRAST,
+    then, if still too close to the exits color, switch to the nearest readable alternative."""
+    color = color.lower()
+    for _ in range(40):
+        if contrast_on_black(color) >= MIN_CONTRAST:
+            break
+        color = _hex(round(c + (255 - c) * 0.1) for c in _rgb(color))
+    else:
+        color = "#ffffff"
+    if color_distance(color, EXITS_COLOR) < MIN_EXITS_DISTANCE:
+        ok = [c for c in EXITS_ALTERNATIVES if color_distance(c, EXITS_COLOR) >= MIN_EXITS_DISTANCE]
+        color = min(ok, key=lambda c: (color_distance(c, color), c))
+    return color
+
+
+def _readable_table(table, adjustments):
+    out = {}
+    for key, color in table.items():
+        fixed = make_readable(color)
+        if fixed != color.lower():
+            adjustments.append((color.lower(), fixed))
+        out[key] = fixed
+    return out
+
+
 def build_rules_data(verbose=False):
-    """Return the full compiled rules dict (RULES_DATA + room colors from rooms.json)."""
+    """Return the full compiled rules dict (RULES_DATA + room color tables)."""
+    adjustments = []
     if ROOMS_FILE.exists():
         with open(ROOMS_FILE, 'r', encoding='utf-8') as rf:
             rooms_catalog = json.load(rf)
-        RULES_DATA["room_colors"] = {k.lower(): v for k, v in rooms_catalog.items()}
+        RULES_DATA["room_colors"] = _readable_table({k.lower(): v for k, v in rooms_catalog.items()}, adjustments)
         if verbose:
             print(f"Loaded {len(RULES_DATA['room_colors'])} room colors from rooms.json")
     elif verbose:
         print("Warning: rooms.json not found!")
+    map_colors = {"names": {}, "zones": {}}
+    if MAP_COLORS_FILE.exists():
+        with open(MAP_COLORS_FILE, 'r', encoding='utf-8') as mf:
+            raw = json.load(mf)
+        map_colors = {
+            "names": _readable_table(raw.get("names", {}), adjustments),
+            "zones": _readable_table(raw.get("zones", {}), adjustments),
+        }
+        if verbose:
+            print(f"Loaded {len(map_colors['names'])} names and {len(map_colors['zones'])} zones from room_map_colors.json")
+    elif verbose:
+        print("Warning: room_map_colors.json not found!")
+    RULES_DATA["room_map_colors"] = map_colors
+    RULES_DATA["room_fallback_color"] = ROOM_FALLBACK
+    if verbose:
+        pairs = sorted(set(adjustments))
+        print(f"Adjusted {len(adjustments)} room colors ({len(pairs)} distinct): "
+              + ", ".join(f"{a}->{b}" for a, b in pairs))
     return RULES_DATA
 
 

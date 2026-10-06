@@ -149,6 +149,10 @@ class RLColorizer:
         self.colors = self.config.get('colors', {})
         self.race_colors = self.config.get('race_colors', {})
         self.room_colors = self.config.get('room_colors', {})
+        map_colors = self.config.get('room_map_colors') or {}
+        self.room_map_names = map_colors.get('names', {})
+        self.room_map_zones = map_colors.get('zones', {})
+        self.room_fallback_color = self.config.get('room_fallback_color', '#ffffff')
         self.theme = self.config.get('theme', {})
         
         self.races_str = r'Hlag|Lag|Melf|Elf|S-e|Gob|Gno|Hum|Orc|S-o|Ena|Mdro|Drow|S-d|Hal|Hlf|Duer|Drg|Min|Mino|Gnl|Gnol|Kob|Org|Orgo|Drax|Ctd|Cent|Kuo|Ggt|S-g'
@@ -374,37 +378,38 @@ class RLColorizer:
     def get_room_color(self, room_title):
         """(color, n) with the first n characters of the title to color, or None when unknown.
 
-        An exact catalog match colors the whole title; a zone match colors only the zone
-        prefix, up to the ":" or the first "-" (the reference leaves the rest default).
+        Order: Mudlet map (exact name, then zone), then the room catalog (exact, then zone).
+        An exact match colors the whole title; a zone match colors only the zone prefix,
+        up to the ":" or the first "-" (the reference leaves the rest default).
         """
         if not room_title:
             return None
         clean_title = re.sub(r'\s+', ' ', re.sub(r'\s*-\s*', ' - ', room_title)).strip().lower()
         clean_title = re.sub(r'\s*:\s*', ': ', clean_title)
-        if clean_title in self.room_colors:
-            return self.room_colors[clean_title], len(room_title)
-        if ':' in clean_title:
-            zone = clean_title.split(':')[0].strip()
-            if zone in self.room_colors:
-                return self.room_colors[zone], room_title.index(':') + 1
-        if ' - ' in clean_title:
-            zone = clean_title.split(' - ')[0].strip()
-            if zone in self.room_colors:
-                return self.room_colors[zone], len(room_title[:room_title.index('-')].rstrip())
+        for names, zones in ((self.room_map_names, self.room_map_zones), (self.room_colors, self.room_colors)):
+            if clean_title in names:
+                return names[clean_title], len(room_title)
+            if ':' in clean_title:
+                zone = clean_title.split(':')[0].strip()
+                if zone in zones:
+                    return zones[zone], room_title.index(':') + 1
+            if ' - ' in clean_title:
+                zone = clean_title.split(' - ')[0].strip()
+                if zone in zones:
+                    return zones[zone], len(room_title[:room_title.index('-')].rstrip())
         return None
 
     def _room_title_html(self, room_title):
+        """Bold title: known color on the matched prefix, fallback color when unknown."""
         found = self.get_room_color(room_title)
         if not found:
-            return html.escape(room_title)
+            return f'<span style="color: {self.room_fallback_color}; font-weight: bold;">{html.escape(room_title)}</span>'
         color, n = found
-        return f'<span style="color: {color};">{html.escape(room_title[:n])}</span>{html.escape(room_title[n:])}'
+        return f'<span style="color: {color}; font-weight: bold;">{html.escape(room_title[:n])}</span>{html.escape(room_title[n:])}'
 
     def _render_room_exits(self, m):
         prompt_sym, room_title, sep, exits = m.groups()
         title_html = self._room_title_html(room_title)
-        if not self.get_room_color(room_title):
-            title_html = f'<span style="color: #008000; font-weight: bold;">{html.escape(room_title)}</span>'
         return f'{title_html}{html.escape(sep)}<span style="color: #00ffff;">{html.escape(exits)}</span>'
 
     def _render_room_title(self, m):

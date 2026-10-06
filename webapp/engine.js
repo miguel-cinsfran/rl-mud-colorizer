@@ -172,6 +172,10 @@ class RLColorizerJS {
         this.colors = this.config.colors || {};
         this.raceColors = this.config.race_colors || {};
         this.roomColors = this.config.room_colors || {};
+        const mapColors = this.config.room_map_colors || {};
+        this.roomMapNames = mapColors.names || {};
+        this.roomMapZones = mapColors.zones || {};
+        this.roomFallbackColor = this.config.room_fallback_color || '#ffffff';
         
         this.racesStr = "Hlag|Lag|Melf|Elf|S-e|Gob|Gno|Hum|Orc|S-o|Ena|Mdro|Drow|S-d|Hal|Hlf|Duer|Drg|Min|Mino|Gnl|Gnol|Kob|Org|Orgo|Drax|Ctd|Cent|Kuo|Ggt|S-g";
         this.raceTagRegex = new RegExp(`\\((?:${this.racesStr})\\)`, 'i');
@@ -413,39 +417,39 @@ class RLColorizerJS {
     }
 
     // {color, n}: color for the first n characters of the title, or null when unknown.
-    // An exact catalog match colors the whole title; a zone match colors only the zone
+    // Order: Mudlet map (exact name, then zone), then the room catalog (exact, then zone).
+    // An exact match colors the whole title; a zone match colors only the zone
     // prefix, up to the ":" or the first "-" (the reference leaves the rest default).
     getRoomColor(roomTitle) {
         if (!roomTitle) return null;
-        let cleanTitle = roomTitle.replace(/\s*-\s*/g, ' - ').replace(/\s*:\s*/g, ': ').replace(/\s+/g, ' ').trim().toLowerCase();
-        if (this.roomColors[cleanTitle]) {
-            return { color: this.roomColors[cleanTitle], n: roomTitle.length };
-        }
-        if (cleanTitle.includes(':')) {
-            const zone = cleanTitle.split(':')[0].trim();
-            if (this.roomColors[zone]) return { color: this.roomColors[zone], n: roomTitle.indexOf(':') + 1 };
-        }
-        if (cleanTitle.includes(' - ')) {
-            const zone = cleanTitle.split(' - ')[0].trim();
-            if (this.roomColors[zone]) return { color: this.roomColors[zone], n: roomTitle.slice(0, roomTitle.indexOf('-')).trimEnd().length };
+        const cleanTitle = roomTitle.replace(/\s*-\s*/g, ' - ').replace(/\s*:\s*/g, ': ').replace(/\s+/g, ' ').trim().toLowerCase();
+        const has = (t, k) => Object.prototype.hasOwnProperty.call(t, k);
+        for (const [names, zones] of [[this.roomMapNames, this.roomMapZones], [this.roomColors, this.roomColors]]) {
+            if (has(names, cleanTitle)) return { color: names[cleanTitle], n: roomTitle.length };
+            if (cleanTitle.includes(':')) {
+                const zone = cleanTitle.split(':')[0].trim();
+                if (has(zones, zone)) return { color: zones[zone], n: roomTitle.indexOf(':') + 1 };
+            }
+            if (cleanTitle.includes(' - ')) {
+                const zone = cleanTitle.split(' - ')[0].trim();
+                if (has(zones, zone)) return { color: zones[zone], n: roomTitle.slice(0, roomTitle.indexOf('-')).trimEnd().length };
+            }
         }
         return null;
     }
 
+    // Bold title: known color on the matched prefix, fallback color when unknown.
     _roomTitleHtml(roomTitle) {
         const found = this.getRoomColor(roomTitle);
-        if (!found) return escapeHtml(roomTitle);
-        return `<span style="color: ${found.color};">${escapeHtml(roomTitle.slice(0, found.n))}</span>${escapeHtml(roomTitle.slice(found.n))}`;
+        if (!found) return `<span style="color: ${this.roomFallbackColor}; font-weight: bold;">${escapeHtml(roomTitle)}</span>`;
+        return `<span style="color: ${found.color}; font-weight: bold;">${escapeHtml(roomTitle.slice(0, found.n))}</span>${escapeHtml(roomTitle.slice(found.n))}`;
     }
 
     _renderRoomExits(m) {
         const roomTitle = m[2];
         const sep = m[3];
         const exits = m[4];
-        let titleHtml = this._roomTitleHtml(roomTitle);
-        if (!this.getRoomColor(roomTitle)) {
-            titleHtml = `<span style="color: #008000; font-weight: bold;">${escapeHtml(roomTitle)}</span>`;
-        }
+        const titleHtml = this._roomTitleHtml(roomTitle);
         return `${titleHtml}${escapeHtml(sep)}<span style="color: #00ffff;">${escapeHtml(exits)}</span>`;
     }
 
