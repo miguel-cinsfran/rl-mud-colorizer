@@ -27,10 +27,12 @@ RULES_FILE = BASE_DIR / "rules.json"
 #                    drop from a `start` line through the `end` line (end kept
 #                    unless include_end). Only fires when `end` is found within
 #                    max_lines lines, so a truncated fragment is never swallowed.
-#   drop_after       {pattern, until, include_until, max_lines}
+#   drop_after       {pattern, until, include_until, max_lines, echo}
 #                    drop the matching line and every following line up to (not
 #                    including, unless include_until) a line matching `until`;
 #                    at most max_lines (default 8) lines. Used for echoed input.
+#                    With `echo`, also stop at the first non-blank line that does
+#                    not match it, so a fragment without `until` keeps its game text.
 #   dedupe_on_change {pattern, scope_id, key_group | key}
 #                    keep the line only when its key differs from the last kept
 #                    line of the same scope_id. Key = capture group N
@@ -125,6 +127,7 @@ PREPROCESS_DATA = {
             "until": r"^(?:Escribe \"recuperar clave\"|Introduce la clave de tu ficha)",
             "include_until": False,
             "record": r"^\S{1,40}$",
+            "echo": r"^\S{1,40}$",
             "max_lines": 8,
         },
         {
@@ -141,6 +144,7 @@ PREPROCESS_DATA = {
             "until": r"^(?:[ \t]*Los Dioses te dan la bienvenida|Tu personaje ya se encuentra|LPmud version:|Introduce el nombre de tu personaje:)",
             "include_until": False,
             "record": r"^\S{1,40}$",
+            "echo": r"^\S{1,40}$",
             "max_lines": 6,
         },
         {

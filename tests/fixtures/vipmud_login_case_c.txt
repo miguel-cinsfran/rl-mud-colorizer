@@ -1,0 +1,8 @@
+fakeuser
+fakepass123
+Escribe "recuperar clave" si has olvidado tu clave.
+Introduce la clave de tu ficha o de tu cuenta:
+Pv:2611\2611 Pe:625\688 Xp:1231367
+SL: [so,e]
+Jgd:Koch (Org)
+Estás siendo atacada por Agricultora.

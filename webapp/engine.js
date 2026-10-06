@@ -614,7 +614,7 @@ class RLColorizerJS {
         }));
         this.preRules = (cfg.rules || []).map(r => {
             const comp = { ...r };
-            for (const key of ['pattern', 'start', 'end', 'until', 'candidate', 'record']) {
+            for (const key of ['pattern', 'start', 'end', 'until', 'candidate', 'record', 'echo']) {
                 if (key in r) comp['_' + key] = toSharedRegex(r[key]);
             }
             return comp;
@@ -733,13 +733,17 @@ class RLColorizerJS {
                     const maxLines = (r.max_lines === undefined || r.max_lines === null) ? 8 : r.max_lines;
                     const limit = Math.min(n, i + 1 + maxLines);
                     let j = i + 1;
-                    while (j < limit && !r._until.test(lines[j])) j++;
+                    while (j < limit && !r._until.test(lines[j])) {
+                        // Stop at the first real server line so fragments keep their content.
+                        if (r._echo && lines[j].trim() && !r._echo.test(lines[j])) break;
+                        j++;
+                    }
                     if (r._record) {
                         for (let k = i + 1; k < j; k++) {
                             if (r._record.test(lines[k])) secrets.add(lines[k].replace(/[ \t]+$/, ''));
                         }
                     }
-                    if (j < limit && r.include_until) j++;
+                    if (j < limit && r.include_until && r._until.test(lines[j])) j++;
                     i = j;
                 } else if (kind === 'drop_closer') {
                     if (!(run !== null && run.group === r.group && run.kept === 0 && r._pattern.test(line))) continue;

@@ -506,7 +506,7 @@ class RLColorizer:
         self.pre_rules = []
         for r in cfg.get('rules', []):
             comp = dict(r)
-            for key in ('pattern', 'start', 'end', 'until', 'candidate', 'record'):
+            for key in ('pattern', 'start', 'end', 'until', 'candidate', 'record', 'echo'):
                 if key in r:
                     comp['_' + key] = re.compile(r[key])
             self.pre_rules.append(comp)
@@ -632,12 +632,15 @@ class RLColorizer:
                     limit = min(n, i + 1 + r.get('max_lines', 8))
                     j = i + 1
                     while j < limit and not r['_until'].search(lines[j]):
+                        # Stop at the first real server line so fragments keep their content.
+                        if '_echo' in r and lines[j].strip() and not r['_echo'].search(lines[j]):
+                            break
                         j += 1
                     if '_record' in r:
                         for k in range(i + 1, j):
                             if r['_record'].search(lines[k]):
                                 secrets.add(re.sub(r'[ \t]+$', '', lines[k]))
-                    if j < limit and r.get('include_until'):
+                    if j < limit and r.get('include_until') and r['_until'].search(lines[j]):
                         j += 1
                     i = j
                 elif kind == 'drop_closer':

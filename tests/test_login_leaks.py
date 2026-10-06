@@ -12,6 +12,7 @@ NAMES = (
     "vipmud_login_case_a.txt",
     "vipmud_login_case_b.txt",
     "vipmud_login_case_a_head.txt",
+    "vipmud_login_case_c.txt",
     "vipmud_login.txt",
 )
 NODE = shutil.which("node")
@@ -76,6 +77,12 @@ class TypeAheadFixtureTest(unittest.TestCase):
         pre = c.preprocess_text(fixture_text("vipmud_login_case_b.txt")).split("\n")
         self.assertIn("                    posible que el MUD siga mejorando.", pre)
         self.assertEqual([l for l in pre if l][-1], "s")
+
+    def test_fragment_without_end_marker_keeps_game_output(self):
+        c = make_colorizer()
+        pre = c.preprocess_text(fixture_text("vipmud_login_case_c.txt"))
+        self.assertIn(r"Pv:2611\2611 Pe:625\688 Xp:1231367", pre)
+        self.assertIn("Estás siendo atacada por Agricultora.", pre)
 
     def test_head_only_fragment_leaves_nothing(self):
         c = make_colorizer()

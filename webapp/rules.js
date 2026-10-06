@@ -412,6 +412,7 @@ window.COLORIZER_RULES = {
         "until": "^(?:Escribe \\\"recuperar clave\\\"|Introduce la clave de tu ficha)",
         "include_until": false,
         "record": "^\\S{1,40}$",
+        "echo": "^\\S{1,40}$",
         "max_lines": 8
       },
       {
@@ -428,6 +429,7 @@ window.COLORIZER_RULES = {
         "until": "^(?:[ \\t]*Los Dioses te dan la bienvenida|Tu personaje ya se encuentra|LPmud version:|Introduce el nombre de tu personaje:)",
         "include_until": false,
         "record": "^\\S{1,40}$",
+        "echo": "^\\S{1,40}$",
         "max_lines": 6
       },
       {
