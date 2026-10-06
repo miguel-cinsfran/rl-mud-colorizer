@@ -53,7 +53,7 @@ class Cases:
 
 
 class FatalBlowThird(Cases, unittest.TestCase):
-    COLOR = "#008000"  # darker than the own blow ("Propinas el golpe mortal a X", #00ff00)
+    COLOR = "#1a9a1a"  # darker than the own blow ("Propinas el golpe mortal a X", #00ff00)
     TEMPLATES = ("{a} propina el golpe mortal a {b}.", "{a} se propina el golpe mortal.")
     NEGATIVES = (
         "Dices: '{a} propina el golpe mortal a {b}.'",

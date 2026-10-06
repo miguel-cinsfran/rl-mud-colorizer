@@ -555,6 +555,29 @@ RULES_DATA = {
             "tiers": HEALTH_TIERS
         },
         {
+            # "<Name><padding>Vida: NN% Energía: NN%" in the same block; only the Vida percentage is tiered.
+            "id": "group_status_health_energy",
+            "category": "status",
+            "priority": 36,
+            "requires_context": "group_status",
+            "type": "composite_health_tier",
+            "pattern": r'^([^\s:"¡!?][^:"¡!?]*?)(\s+Vida: )(-?\d{1,3}%)( Energía: -?\d{1,3}%\s*)$',
+            "tier_groups": [3],
+            "tier_source": 3,
+            "tiers": HEALTH_TIERS
+        },
+        {
+            # "Puntos de Vida        : [########    ] (21637/50601) (42%)": the two numbers and the percentage.
+            "id": "vitals_health_bar_line",
+            "category": "status",
+            "priority": 37,
+            "type": "composite_health_tier",
+            "pattern": r"^(Puntos de Vida\s*:\s*\[[# ]*\]\s*\()(\d+)(/)(\d+)(\)\s*\()(\d{1,3}%)(\)\s*)$",
+            "tier_groups": [2, 4, 6],
+            "tier_source": 6,
+            "tiers": HEALTH_TIERS
+        },
+        {
             "id": "vitals_health_line",
             "category": "status",
             "priority": 37,
@@ -786,12 +809,13 @@ RULES_DATA = {
         {
             # Third person ("<X> se propina el golpe mortal." / "<X> propina el golpe mortal a <Y>.").
             # Darker green than the own-blow rule above (#00ff00), so ours and others' blows look different.
+            # #1a9a1a instead of #008000: same idea, but readable on black (contrast 5.7 vs 4.1).
             # The actor may not contain ":" or quotes, so chat/tell lines never match.
             "id": "combat_fatal_blow_third",
             "category": "combat",
             "priority": 61,
             "pattern": r'^(?:[>\]]\s*)?(' + ACTOR + r' (?:se propina el golpe mortal|propina el golpe mortal a [^:"]+?)\.)\s*$',
-            "replace": r'<span style="color: #008000; font-weight: bold;">$1</span>'
+            "replace": r'<span style="color: #1a9a1a; font-weight: bold;">$1</span>'
         },
         {
             "id": "combat_crit_eviscerate",

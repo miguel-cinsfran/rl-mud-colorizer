@@ -76,11 +76,21 @@ class GroupStatus(unittest.TestCase):
             "Dices: 'Zorak 90%'",
             "Zorak te dice: Rothe 90%",
             "[Chat] Zorak: vida 90%",
-            "Koch Vida: 100% Energía: 72%",
             "Zorak 90% de acierto",
         ):
             with self.subTest(line=line):
                 self.assertFalse(tier_colored(self.c, f"{HEADER}\n{line}")[1])
+
+    def test_vida_energia_lines_tier_only_the_vida_percentage(self):
+        for pct, color in ((100, GREEN), (48, AMBER), (25, RED)):
+            for name in NAMES:
+                text = f"{HEADER}\n{name}                  Vida: {pct}% Energía: 4%"
+                with self.subTest(name=name, pct=pct):
+                    self.assertEqual(colored(self.c, text)[1], [(f"{pct}%", color)])
+                    self.assertEqual(visible_lines(self.c.colorize_text(text, preprocess=False))[1], text.split("\n")[1])
+
+    def test_vida_energia_line_needs_the_header(self):
+        self.assertEqual(colored(self.c, "Zeh Vida: 48% Energía: 2%"), [[]])
 
     def test_context_does_not_leak_between_texts(self):
         self.c.colorize_text(HEADER, preprocess=False)
@@ -101,6 +111,21 @@ class VitalsLine(unittest.TestCase):
             with self.subTest(line=line):
                 got = colored(self.c, line)[0]
                 self.assertEqual(got, [(p, color) for p in parts])
+
+    def test_bar_format_colors_numbers_and_percentage(self):
+        for line, color, parts in (
+            ("Puntos de Vida        : [################### ] (9655/10000) (96%)", GREEN, ["9655", "10000", "96%"]),
+            ("Puntos de Vida        : [########            ] (21637/50601) (42%)", AMBER, ["21637", "50601", "42%"]),
+            ("Puntos de Vida        : [##                  ] (900/50601) (2%)", RED, ["900", "50601", "2%"]),
+        ):
+            with self.subTest(line=line):
+                self.assertEqual(colored(self.c, line)[0], [(p, color) for p in parts])
+                self.assertEqual(visible_lines(self.c.colorize_text(line, preprocess=False))[0], line)
+
+    def test_other_bars_stay_default(self):
+        for line in ("Puntos de Energía     : [################### ] (9572/10000) (95%)",
+                     "Puntos Sociales       : [####################] (2000/2000) (100%)"):
+            self.assertFalse(tier_colored(self.c, line)[0], line)
 
     def test_not_a_vitals_line(self):
         for line in ("Dices: 'Puntos de Vida: 1 de 2 (50%)'", "Zorak te dice: Puntos de Vida: 1 de 2 (50%)"):

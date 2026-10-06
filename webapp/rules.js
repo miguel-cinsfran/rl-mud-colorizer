@@ -750,6 +750,59 @@ window.COLORIZER_RULES = {
       ]
     },
     {
+      "id": "group_status_health_energy",
+      "category": "status",
+      "priority": 36,
+      "requires_context": "group_status",
+      "type": "composite_health_tier",
+      "pattern": "^([^\\s:\"¡!?][^:\"¡!?]*?)(\\s+Vida: )(-?\\d{1,3}%)( Energía: -?\\d{1,3}%\\s*)$",
+      "tier_groups": [
+        3
+      ],
+      "tier_source": 3,
+      "tiers": [
+        {
+          "min": 70,
+          "color": "#5fd75f"
+        },
+        {
+          "min": 31,
+          "color": "#ffcc4b"
+        },
+        {
+          "min": -100000,
+          "color": "#ea063f"
+        }
+      ]
+    },
+    {
+      "id": "vitals_health_bar_line",
+      "category": "status",
+      "priority": 37,
+      "type": "composite_health_tier",
+      "pattern": "^(Puntos de Vida\\s*:\\s*\\[[# ]*\\]\\s*\\()(\\d+)(/)(\\d+)(\\)\\s*\\()(\\d{1,3}%)(\\)\\s*)$",
+      "tier_groups": [
+        2,
+        4,
+        6
+      ],
+      "tier_source": 6,
+      "tiers": [
+        {
+          "min": 70,
+          "color": "#5fd75f"
+        },
+        {
+          "min": 31,
+          "color": "#ffcc4b"
+        },
+        {
+          "min": -100000,
+          "color": "#ea063f"
+        }
+      ]
+    },
+    {
       "id": "vitals_health_line",
       "category": "status",
       "priority": 37,
@@ -984,7 +1037,7 @@ window.COLORIZER_RULES = {
       "category": "combat",
       "priority": 61,
       "pattern": "^(?:[>\\]]\\s*)?([A-ZÁÉÍÓÚÑÜ][^:\"¡!?.]*? (?:se propina el golpe mortal|propina el golpe mortal a [^:\"]+?)\\.)\\s*$",
-      "replace": "<span style=\"color: #008000; font-weight: bold;\">$1</span>"
+      "replace": "<span style=\"color: #1a9a1a; font-weight: bold;\">$1</span>"
     },
     {
       "id": "combat_crit_eviscerate",
