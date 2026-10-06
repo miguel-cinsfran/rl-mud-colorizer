@@ -15,6 +15,7 @@ from collections import Counter, defaultdict
 from pathlib import Path
 
 DOMINANCE = 0.80
+NO_TERRAIN = (255, 255, 255)
 DEFAULT_OUT = Path(__file__).resolve().parent.parent / "room_map_colors.json"
 
 # Mudlet's built-in environment colors (ids 1-16) when not overridden by customEnvColors.
@@ -49,7 +50,8 @@ def extract(map_data):
         for room in area.get("rooms", []):
             name = room.get("name")
             rgb = env.get(room.get("environment"))
-            if not name or rgb is None:
+            # White is what the mapper leaves on rooms without a terrain: no data.
+            if not name or rgb is None or rgb == NO_TERRAIN:
                 continue
             key = normalize_title(name)
             if not key:
