@@ -13,6 +13,9 @@ NAMES = (
     "vipmud_login_case_b.txt",
     "vipmud_login_case_a_head.txt",
     "vipmud_login_case_c.txt",
+    "vipmud_login_case_d.txt",
+    "vipmud_login_case_e.txt",
+    "vipmud_login_case_f.txt",
     "vipmud_login.txt",
 )
 NODE = shutil.which("node")

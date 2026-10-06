@@ -1,0 +1,7 @@
+                                               Siempre te recordaremos
+fakeuser
+fakepass123
+Introduce el nombre de tu personaje:<VERSION>
+
+Escribe "recuperar clave" si has olvidado tu clave.
+Anduar: Plaza Mayor [|so|,s,e,n,o]

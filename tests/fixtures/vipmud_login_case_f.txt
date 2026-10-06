@@ -1,0 +1,10 @@
+Introduce el nombre de tu personaje:<VERSION>
+
+fakeuser
+fakepass123
+Escribe "recuperar clave" si has olvidado tu clave.
+Introduce la clave de tu ficha o de tu cuenta:
+
+Tu personaje ya se encuentra en Reinos de Leyenda. ¿Deseas entrar con la copia existente? [s/n]
+fakepass123
+s
