@@ -135,6 +135,19 @@ Incluye pruebas de cada tipo de regla de preprocesado, de la detección de clien
 
 ---
 
+## 📏 Evaluación contra logs coloreados de referencia
+
+Para medir automáticamente la exactitud de los colores se comparan nuestras salidas con logs reales coloreados por Mudlet (Deathlogs, jugadores Naghig y Kunkh).
+
+```bash
+python tools/fetch_reference_logs.py          # descarga a cache_reference/ (ignorado por git, con pausa de 1 s entre peticiones)
+python tools/evaluate.py --top 40 --json resultado.json
+```
+
+El evaluador alinea cada línea por índice y verifica que el texto visible sea idéntico; las líneas cuyo texto difiere se cuentan aparte y no se puntúan. Informa de la exactitud por carácter (sin espacios), el porcentaje de líneas exactas, las confusiones de color más frecuentes (esperado -> obtenido) y las formas de línea que más fallan, con un ejemplo en texto plano apto para lectores de pantalla (`[#c0c0c0]Sendero [#808080][so,se]`). Los logs descargados nunca se versionan.
+
+---
+
 ## 🤝 Fork y Contribuciones
 
 Si eres un jugador de RL o desarrollador y quieres agregar nuevas reglas, colores de rooms o habilidades:

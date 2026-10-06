@@ -33,3 +33,6 @@ audit_uncolored.py
 # OS files
 .DS_Store
 Thumbs.db
+
+# Reference logs downloaded from Deathlogs (never commit)
+cache_reference/
