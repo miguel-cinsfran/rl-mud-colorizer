@@ -124,11 +124,11 @@ Propinas el golpe mortal a Sowy.
         updateInputStats(text);
 
         if (!text.trim()) {
-            previewContainer.innerHTML = '<span style="color: #6e7681; font-style: italic;">El log colorizado se mostrará aquí...</span>';
+            previewContainer.innerHTML = '<span class="preview-empty">El log colorizado se mostrará aquí.</span>';
             rawHtmlTextarea.value = '';
             currentHtmlOutput = '';
             updateOutputStats(0, 0);
-            statClient.textContent = '—';
+            statClient.textContent = 'ninguno';
             return;
         }
 
@@ -151,9 +151,10 @@ Propinas el golpe mortal a Sowy.
         const endTag = '</div></body>';
         const startIdx = htmlResult.indexOf(startTag);
         const endIdx = htmlResult.lastIndexOf(endTag);
-        const previewHtml = (startIdx !== -1 && endIdx !== -1)
+        // The container uses pre-wrap, so the newline after each <br> would add a blank line.
+        const previewHtml = ((startIdx !== -1 && endIdx !== -1)
             ? htmlResult.slice(startIdx + startTag.length, endIdx)
-            : htmlResult;
+            : htmlResult).replace(/<br\s*\/?>\n/g, '<br>');
 
         previewContainer.innerHTML = previewHtml;
         rawHtmlTextarea.value = htmlResult;
@@ -195,7 +196,7 @@ Propinas el golpe mortal a Sowy.
 
     function showToast(message, isError = false) {
         toast.textContent = message;
-        toast.style.backgroundColor = isError ? 'var(--accent-red)' : 'var(--accent-green)';
+        toast.classList.toggle('error', isError);
         toast.classList.add('show');
         setTimeout(() => {
             toast.classList.remove('show');
@@ -248,49 +249,20 @@ Propinas el golpe mortal a Sowy.
         announce("Archivo HTML de Mudlet descargado con éxito.");
     }
 
-    // Accessible Tab Switching (W3C WAI-ARIA Tabs pattern)
+    // Switch between the preview and the raw HTML (plain toggle buttons, state in aria-pressed)
     function selectTab(targetTab) {
-        if (targetTab === 'preview') {
-            tabPreview.classList.add('active');
-            tabPreview.setAttribute('aria-selected', 'true');
-            tabPreview.setAttribute('tabindex', '0');
-
-            tabHtml.classList.remove('active');
-            tabHtml.setAttribute('aria-selected', 'false');
-            tabHtml.setAttribute('tabindex', '-1');
-
-            previewContainer.style.display = 'block';
-            rawHtmlTextarea.style.display = 'none';
-            announce("Vista de terminal visual seleccionada.");
-        } else {
-            tabHtml.classList.add('active');
-            tabHtml.setAttribute('aria-selected', 'true');
-            tabHtml.setAttribute('tabindex', '0');
-
-            tabPreview.classList.remove('active');
-            tabPreview.setAttribute('aria-selected', 'false');
-            tabPreview.setAttribute('tabindex', '-1');
-
-            previewContainer.style.display = 'none';
-            rawHtmlTextarea.style.display = 'block';
-            announce("Vista de código HTML fuente seleccionada.");
-        }
+        const showPreview = targetTab === 'preview';
+        tabPreview.classList.toggle('active', showPreview);
+        tabPreview.setAttribute('aria-pressed', String(showPreview));
+        tabHtml.classList.toggle('active', !showPreview);
+        tabHtml.setAttribute('aria-pressed', String(!showPreview));
+        previewContainer.style.display = showPreview ? 'block' : 'none';
+        rawHtmlTextarea.style.display = showPreview ? 'none' : 'block';
+        announce(showPreview ? "Vista previa seleccionada." : "Vista de código HTML seleccionada.");
     }
 
     tabPreview.addEventListener('click', () => selectTab('preview'));
     tabHtml.addEventListener('click', () => selectTab('html'));
-
-    // Keyboard Arrow navigation between tabs
-    [tabPreview, tabHtml].forEach(tabBtn => {
-        tabBtn.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
-                e.preventDefault();
-                const next = (e.target === tabPreview) ? 'html' : 'preview';
-                selectTab(next);
-                (next === 'preview' ? tabPreview : tabHtml).focus();
-            }
-        });
-    });
 
     // Event Listeners
     btnColorize.addEventListener('click', () => {

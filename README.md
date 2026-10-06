@@ -1,167 +1,72 @@
-# Reinos de Leyenda (RL) - MUD Log Colorizer
+# RL Log Colorizer
 
-Colorizador de logs de combate y rol para **[Reinos de Leyenda (RL)](https://reinosdeleyenda.com/)**, diseñado específicamente para que jugadores que juegan en **modo accesibilidad (sin colores / lectores de pantalla)** puedan convertir sus logs en bruto a formato HTML con la paleta de colores visual oficial del cliente Mudlet para subirlos directamente a **[Deathlogs](https://deathlogs.com/)**.
+Convierte un log de VIPMud o Mudlet de Reinos de Leyenda, sin colores, en HTML coloreado en el formato que acepta [Deathlogs](https://deathlogs.com/). Los colores son los que ve un jugador de Mudlet con la vista habitual del juego, así que quien juega con lector de pantalla puede subir sus logs con el mismo aspecto.
 
----
+Página en vivo: https://miguel-cinsfran.github.io/rl-mud-colorizer/
 
-## 🌐 Probar en vivo (GitHub Pages)
+## Cómo se usa la página
 
-👉 **[Abrir RL Log Colorizer en vivo](https://miguel-cinsfran.github.io/rl-mud-colorizer/)**
+1. Pega el log en el cuadro de la izquierda o carga un archivo `.txt`. Se leen archivos en UTF-8 y en Windows-1252, que es lo que escribe VIPMud.
+2. El resultado se actualiza mientras pegas. `Ctrl+Enter` lo fuerza.
+3. Pulsa "Copiar para Deathlogs" y pega el contenido en el formulario de envío.
 
----
+También puedes descargar el resultado como `.html` o revisar el código en la pestaña "HTML".
 
-## ✨ Características Principales
+## Privacidad
 
-* **Formato 1:1 Nativo para Deathlogs:**
-  * Genera el bloque HTML estándar de Mudlet (`<font color="#cccccc" size="2"><div>...<br /></div></font>`).
-  * Sin saltos de línea `\n` redundantes para evitar el problema de doble interlineado dentro del `<PRE>` de Deathlogs.
-  * Botón de copiado directo con un solo clic listo para pegar en el formulario de envío.
-* **100% Paridad entre Python y JavaScript:**
-  * Motor dual: [`engine.py`](engine.py) y [`webapp/engine.js`](webapp/engine.js) ejecutan exactamente la misma lógica y producen resultados carácter a carácter idénticos.
-* **Soporte de logs de VIPMud (y Mudlet):**
-  * Detecta el cliente automáticamente y limpia lo que no es salida del juego: el inicio de sesión (banner, **usuario y clave**, MOTD) se elimina siempre y el bloque de estado repetido (`Pv:`, `SL:`, `PL:`, `Jgd:`, `Imágenes:`, `Pieles:` y el `> ` de cierre) se reduce a los valores que cambian.
-  * Los archivos subidos o arrastrados a la web se leen como UTF-8 y, si no lo son, como Windows-1252 (VIPMud).
-* **Colores Oficiales por Raza de Jugador:**
-  * Identificación precisa de jugadores mediante sufijos de raza (`(Elf)`, `(Melf)`, `(Orc)`, `(Mdro)`, `(Gob)`, etc.).
-  * No colorea NPCs genéricos como si fueran jugadores.
-* **Catálogo de Habitaciones (Rooms):**
-  * Más de 280 habitaciones catalogadas con su color exacto minado a partir de logs reales de jugadores videntes (zonas urbanas en plata, bosques en verde, templos en blanco, caminos de agua en cian, mesetas en oliva, etc.).
-  * Si solo se reconoce la zona (antes de `:` o `-`), se colorea únicamente ese prefijo. Las habitaciones no catalogadas usan el verde por defecto (`#008000`).
-* **Soporte Completo de Combate y Magia:**
-  * En las líneas que empiezan por `#`, `*` o `+`, el símbolo se colorea según el tipo de evento, como en los logs de referencia: `#` verde `#008000` (o púrpura `#800080` si el ataque falla), `*` granate `#800000` (púrpura si lo esquivas, rojo en críticos, azul/verde azulado en hechizos) y `+` amarillo. El resto de la línea conserva los colores de siempre (cuerpo verde con daños resaltados en los ataques propios, `#cc6666` en los recibidos, gris en esquivas, etc.).
-  * El prompt `Pvs: N/N (±N) Pe: N/N (±N)` colorea la etiqueta y los números en verde `#008000`; los paréntesis quedan por defecto y la variación va en rojo (pérdida) o verde brillante (ganancia); un delta `(0)` queda sin color. El prompt de VIPMud (`Pv:A\B Pe:C\D Xp:N`) mantiene el verde `#008000`.
-  * Ninguna línea que antes tenía color puede quedar sin color: lo vigilan `tests/test_stays_colored.py` y los ficheros `must_stay_colored.txt` y `marker_line_masks.tsv`.
-  * El texto visible de cada línea nunca se modifica (el prompt `]` o `>` se conserva tal cual).
+Todo se ejecuta en tu navegador y no se envía nada a ningún servidor.
 
----
+El inicio de sesión (banner, usuario, clave y texto de bienvenida) se borra siempre antes de colorizar, incluso si pegas solo un fragmento del log. En el bloque de estado de VIPMud se conservan `Pv`, `Imágenes` y `Pieles` solo cuando cambian, y se quitan `SL`, `PL` y `Jgd`. Los logs de Mudlet no pierden esas líneas.
 
-## 🎨 Leyenda Oficial de Razas
+## Colores de los títulos de sala
 
-| Raza / Etiqueta | Color | Código Hex |
-| :--- | :--- | :--- |
-| **Elfo / Semi-Elfo** (`Elf`, `Melf`, `S-e`) | Verde | `#008000` |
-| **Enano** (`Ena`, `Enano`) | Oliva | `#808000` |
-| **Kobold** (`Kob`) | Granate / Rojo oscuro | `#800000` |
-| **Drow / Semi-Drow** (`Mdro`, `Drow`, `S-d`) | Gris | `#808080` |
-| **Duergar** (`Duer`, `Drg`) | Púrpura | `#800080` |
-| **Goblin** (`Gob`) | Verde lima | `#00ff00` |
-| **Gnomo** (`Gno`) | Cian | `#00ffff` |
-| **Humano** (`Hum`) | Amarillo | `#ffff00` |
-| **Gnoll** (`Gnl`, `Gnol`) | Rojo brillante | `#ff0000` |
-| **Halfling** (`Hal`, `Hlf`) | Magenta | `#ff00ff` |
-| **Lagarto / Hombre-Lagarto** (`Lag`, `Hlag`) | Azul | `#0000ff` |
-| **Minotauro** (`Min`, `Mino`) | Plata | `#c0c0c0` |
-| **Orco / Semi-Orco** (`Orc`, `S-o`) | Blanco | `#ffffff` |
-| **Ogro-Mago / Ogro** (`Org`, `Orgo`) | Cian oscuro / Teal | `#008080` |
+Cada título de sala toma su color de la primera fuente que lo conozca:
 
----
+1. El color del terreno en el mapa de Mudlet, por nombre exacto de sala y después por zona.
+2. El catálogo de salas (`rooms.json`).
+3. Blanco, si ninguna de las dos lo conoce.
 
-## 🚀 Uso Rápido
+Los colores demasiado oscuros sobre fondo negro se aclaran hasta llegar a un contraste de 4,5. Las salas que en el mapa quedaron con terreno blanco se tratan como sin dato, para que decida el catálogo.
 
-### Opción 1: Aplicación Web (Navegador)
-1. Entra a la web en **[GitHub Pages](https://miguel-cinsfran.github.io/rl-mud-colorizer/)**.
-2. Pega tu log en el panel izquierdo (o arrastra un archivo `.txt`).
-3. Haz clic en **Copiar para Deathlogs**.
-4. Pega el contenido directamente en el formulario de subida de [Deathlogs.com](https://deathlogs.com/).
+Cuando tengas una exportación nueva del mapa en JSON, regenera los colores y las reglas:
 
-### Opción 2: Línea de comandos (Python)
-
-```bash
-# Colorizar un log (UTF-8 o Windows-1252) y guardar el HTML
-python engine.py tu_log.txt -o log_colorizado.html
-
-# Sin -o escribe el HTML por la salida estándar.
-# --client fuerza el cliente (vipmud, mudlet); --no-preprocess omite la limpieza
-python engine.py tu_log.txt --client vipmud -o log_colorizado.html
+```
+python tools/extract_map_colors.py ruta/al/map_export.json
+python build_rules.py
 ```
 
----
+El primer comando escribe `room_map_colors.json` y el segundo recompila `rules.json` y `webapp/rules.js`.
 
-## 🧹 Preprocesado (VIPMud / Mudlet)
+## Línea de comandos
 
-Antes de colorizar, el texto pasa por una capa **guiada por datos**: la sección `preprocess` de [`build_rules.py`](build_rules.py), compilada a `rules.json` y `webapp/rules.js`, de modo que Python y JavaScript comparten exactamente las mismas reglas.
-
-* **Detección de cliente:** gana el cliente cuyas firmas (`signatures`) coinciden con más líneas; si ninguna coincide solo se aplican las reglas sin `clients`.
-  * `vipmud`: el prompt `Pv:N\N Pe:N\N Xp:N` (con barra invertida), `Jgd:` y `LPmud version:`.
-  * `mudlet`: el prompt `Pv: N Pe: N` / `Pvs: N Pe: N` (sin barras).
-  * `SL:`, `PL:`, `Pieles:` e `Imágenes:` también aparecen en logs de Mudlet con prompt personalizado, por eso **no** disparan la detección (los logs de Mudlet se conservan intactos).
-* **Tipos de regla** (se evalúan en orden; todos aceptan un `clients: [...]` opcional):
-
-| `kind` | Campos | Qué hace |
-| :--- | :--- | :--- |
-| `drop` | `pattern` | Elimina la línea. |
-| `drop_block` | `start`, `end`, `include_end`, `max_lines` | Elimina desde `start` hasta `end`; solo actúa si encuentra `end` (un fragmento cortado nunca se traga). |
-| `drop_after` | `pattern`, `until`, `include_until`, `max_lines` | Elimina la línea y las siguientes hasta una línea del servidor (`until`): lo escrito tras un prompt (usuario/clave). |
-| `dedupe_on_change` | `pattern`, `scope_id`, `key_group` o `key` | Conserva la línea solo si su clave cambia respecto a la última conservada del mismo `scope_id` (por defecto, la línea entera). |
-| `rewrite` | `pattern`, `replace` | Reescribe la línea (`$1`..`$9`); las reglas siguientes ven el resultado. |
-| `drop_closer` | `group`, `pattern` | Elimina el prompt `> ` que cierra un bloque de estado (`group`) que no conservó ninguna línea. |
-| `drop_before` | `pattern`, `candidate`, `max_lines` | Al coincidir `pattern`, elimina hasta `max_lines` líneas anteriores que cumplan `candidate` (usuario/clave escritos por adelantado, antes de su prompt). |
-| `drop_secret` | `window` | Defensa extra: elimina una línea igual a un token ya eliminado como eco de login, solo dentro de `window` líneas tras una regla de login. |
-
-* Los patrones usan solo el subconjunto de regex idéntico en Python `re` y JavaScript (sin lookbehind, sin `\Z`, sin flags en línea) y se aplican con *search*: ancla con `^`.
-* El estado de `dedupe_on_change` empieza vacío en cada entrada, así que pegar un fragmento (sin banner, o a mitad de un bloque de estado) funciona igual.
-
----
-
-## 🛠️ Estructura del Proyecto
-
-```text
-├── engine.py              # Motor principal en Python (+ CLI: python engine.py log.txt)
-├── build_rules.py         # Compilador de reglas (colorizado + preprocess) a JSON y JS
-├── mine_rooms.py          # Extractor de habitaciones desde logs videntes
-├── rooms.json             # Catálogo de 280+ rooms y sus colores
-├── rules.json             # Reglas compiladas
-├── run_all_tests.py       # Atajo para ejecutar toda la suite
-├── tests/                 # Suite unittest (fixtures cortos, preprocesado, paridad Python/JS)
-├── webapp/                # Aplicación Web estática
-│   ├── index.html         # Interfaz de usuario
-│   ├── style.css          # Estilos MUD terminal
-│   ├── app.js             # Controlador de eventos y UI
-│   ├── engine.js          # Motor JavaScript (espejo de engine.py)
-│   └── rules.js           # Reglas compiladas para el navegador
-└── .github/workflows/
-    └── deploy.yml         # Despliegue automático a GitHub Pages
+```
+python engine.py log.txt -o salida.html
 ```
 
----
+Sin `-o`, el HTML sale por la salida estándar. `--client vipmud` (o `mudlet`) fuerza el cliente en lugar de detectarlo, y `--no-preprocess` omite la limpieza de inicio de sesión y bloque de estado.
 
-## 🧪 Pruebas y Validación de Paridad
+## Para quien quiera contribuir
 
-```bash
-python -m unittest discover -s tests -v
+Las reglas de color y de limpieza están en `build_rules.py`. Después de cambiarlas, o de tocar `rooms.json`, ejecuta:
+
+```
+python build_rules.py
+python -m unittest discover -s tests
 ```
 
-Incluye pruebas de cada tipo de regla de preprocesado, de la detección de cliente, fixtures cortos de VIPMud/Mudlet (con credenciales falsas) y la **paridad exacta Python == JavaScript** (`tests/test_parity.py`; requiere `node` en el PATH, si no está se omite con un aviso).
+El motor existe dos veces, `engine.py` y `webapp/engine.js`, y ambos deben dar exactamente la misma salida. `tests/test_parity.py` lo comprueba con `node`; si `node` no está instalado, esa prueba se omite.
 
----
+Hay tres garantías con pruebas propias: ninguna línea que antes tenía color puede quedarse sin él, el texto visible nunca cambia, y el borrado de credenciales se verifica quitando cada regla de login por turnos para confirmar que alguna prueba falla.
 
-## 📏 Evaluación contra logs coloreados de referencia
+Para medir la exactitud contra logs reales coloreados por Mudlet:
 
-Para medir automáticamente la exactitud de los colores se comparan nuestras salidas con logs reales coloreados por Mudlet (Deathlogs, jugadores Naghig y Kunkh).
-
-```bash
-python tools/fetch_reference_logs.py          # descarga a cache_reference/ (ignorado por git, con pausa de 1 s entre peticiones)
-python tools/evaluate.py --top 40 --json resultado.json
+```
+python tools/fetch_reference_logs.py
+python tools/evaluate.py
 ```
 
-El evaluador alinea cada línea por índice y verifica que el texto visible sea idéntico; las líneas cuyo texto difiere se cuentan aparte y no se puntúan. Informa de la exactitud por carácter (sin espacios) y el porcentaje de líneas exactas, en versión estricta y en versión con equivalencias (`COLOR_EQUIVALENTS` en `tools/evaluate.py`: `#cccccc`≈`#c0c0c0` y `#0800ff`≈`#0000ff`, tonos que un jugador no distingue),  además de las confusiones de color más frecuentes (esperado -> obtenido) y las formas de línea que más fallan, con un ejemplo en texto plano apto para lectores de pantalla (`[#c0c0c0]Sendero [#808080][so,se]`). Los logs descargados nunca se versionan.
+El primer comando descarga los logs a `cache_reference/`, que git ignora. El segundo compara línea por línea, solo cuando el texto visible coincide, e informa del porcentaje de caracteres y líneas con el color correcto y de las confusiones más frecuentes.
 
----
+## Créditos y licencia
 
-## 🤝 Fork y Contribuciones
-
-Si eres un jugador de RL o desarrollador y quieres agregar nuevas reglas, colores de rooms o habilidades:
-
-1. Haz un **Fork** de este repositorio.
-2. Si agregas o modificas reglas en `build_rules.py` o habitaciones en `rooms.json`, ejecuta:
-   ```bash
-   python build_rules.py
-   python -m unittest discover -s tests
-   ```
-3. Envía tu **Pull Request**.
-
----
-
-## 📄 Licencia
-
-Este proyecto está bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
+La versión original y el trabajo de colores vienen de Franco M. Paniagua (FrancoMPaniagua), jugador de Mudlet. Licencia MIT, en el archivo [LICENSE](LICENSE).
