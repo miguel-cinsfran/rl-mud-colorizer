@@ -53,7 +53,8 @@ const MUDLET_HEADER = `<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01//EN' 'http:/
   <body><div>`;
 
 const MUDLET_FOOTER = ` </div></body>\n</html>`;
-const DEFAULT_MUDLET_STYLE = "color: rgb(192,192,192); background: rgb(0,0,0); ";
+const PROMPT_PREFIX_RE = /^([>\]](?:[ \t]+|$))(.*)$/;
+const DEFAULT_MUDLET_STYLE ="color: rgb(192,192,192); background: rgb(0,0,0); ";
 
 function hexToRgb(hexStr) {
     let h = hexStr.trim().replace(/^#/, '');
@@ -183,7 +184,8 @@ class RLColorizerJS {
         const sortedRules = [...this.config.rules].sort((a, b) => (a.priority || 100) - (b.priority || 100));
         this.compiledRules = sortedRules.map(r => ({
             ...r,
-            _regex: toSharedRegex(r.pattern)
+            _regex: toSharedRegex(r.pattern),
+            _categories: (r.categories || []).map(c => ({ ...c, _regex: toSharedRegex(c.pattern) }))
         }));
     }
 
@@ -195,8 +197,21 @@ class RLColorizerJS {
             return "";
         }
 
+        // A leading prompt symbol ("> " / "] ") is split off verbatim; rules see the rest.
+        let prompt = "";
+        const pm = PROMPT_PREFIX_RE.exec(rawText);
+        if (pm) {
+            prompt = pm[1];
+            rawText = pm[2];
+        }
+        const promptHtml = prompt ? `<span style="color: #c0c0c0;">${escapeHtml(prompt)}</span>` : '';
+        if (prompt && !rawText) {
+            return normalizeLineToMudlet(promptHtml);
+        }
+
         let lineHtml = null;
         for (const rule of this.compiledRules) {
+            if (rule.prompt_only && !prompt) continue;
             const m = rule._regex.exec(rawText);
             if (!m) continue;
 
@@ -205,6 +220,10 @@ class RLColorizerJS {
             // 1. Composite Prompt Handler
             if (type === 'composite_prompt_extended') {
                 lineHtml = this._renderPromptExtended(m);
+                break;
+            }
+            else if (type === 'composite_prompt_vitals') {
+                lineHtml = this._renderPromptVitals(m);
                 break;
             }
             // 2. Composite HP Delta Handler
@@ -230,29 +249,9 @@ class RLColorizerJS {
                 lineHtml = this._renderInfo(m);
                 break;
             }
-            // 6. Composite Spell Completion
-            else if (type === 'composite_spell_completion') {
-                lineHtml = this._renderSpellCompletion(m);
-                break;
-            }
-            // 7. Composite Magic Missiles
-            else if (type === 'composite_magic_missiles') {
-                const promptSym = m[1];
-                const prefixSym = m[2];
-                const rest = m[3];
-                const promptHtml = promptSym ? '<span style="color: #c0c0c0;">&gt; </span>' : '';
-                const pHtml = prefixSym ? '<span style="color: #0000ff;">#</span> ' : '';
-                lineHtml = `${promptHtml}${pHtml}<span style="color: #8cc4ff;">${escapeHtml(rest)}</span>`;
-                break;
-            }
-            // 8. Composite Enemy Maneuver
-            else if (type === 'composite_enemy_maneuver') {
-                lineHtml = this._renderEnemyManeuver(m);
-                break;
-            }
-            // 9. Composite Player Combat
-            else if (type === 'composite_player_combat') {
-                lineHtml = this._renderPlayerCombat(m);
+            // 6. Composite Marker Line
+            else if (type === 'composite_marker') {
+                lineHtml = this._renderMarker(m, rule);
                 break;
             }
             // 10. Composite Room Player
@@ -263,11 +262,6 @@ class RLColorizerJS {
             // 11. Composite Room NPC
             else if (type === 'composite_room_npc') {
                 lineHtml = this._renderRoomNpc(m);
-                break;
-            }
-            // 12. Composite Follower Player
-            else if (type === 'composite_follower_player') {
-                lineHtml = this._renderFollowerPlayer(m);
                 break;
             }
             // 13. Composite Room Exits
@@ -299,42 +293,41 @@ class RLColorizerJS {
             lineHtml = `<span style="color: ${defaultFg};">${escaped}</span>`;
         }
 
-        return normalizeLineToMudlet(lineHtml);
+        return normalizeLineToMudlet(promptHtml + lineHtml);
+    }
+
+    // ` (+12)` after a stat: only the signed number is colored; a zero delta stays default.
+    _promptDeltaHtml(ws, delta) {
+        const color = delta.startsWith('-') ? "#ff0000" : (delta.startsWith('+') ? "#00ff00" : null);
+        let number = escapeHtml(delta);
+        if (color && delta.replace(/^[+-]+/, '').replace(/^0+|0+$/g, '').trim()) {
+            number = `<span style="color: ${color};">${number}</span>`;
+        }
+        return `${escapeHtml(ws)}(` + number + ')';
     }
 
     _renderPromptExtended(m) {
-        const pvs = m[1];
-        const pvsDelta = m[2];
-        const pe = m[3];
-        const peDelta = m[4];
-        const extra = m[5];
-
-        let out = '';
-        if (pvs) {
-            out += `<span style="color: #008000; font-weight: bold;">${escapeHtml(pvs)}</span>`;
-        }
-
-        if (pvsDelta) {
-            const color = pvsDelta.startsWith('-') ? "#ff0000" : (pvsDelta.startsWith('+') ? "#00ff00" : "#008000");
-            const prefixSpace = (pvs && !pvs.endsWith(' ')) ? ' ' : '';
-            out += `${prefixSpace}<span style="color: #008000;">(</span><span style="color: ${color}; font-weight: bold;">${escapeHtml(pvsDelta)}</span><span style="color: #008000;">)</span>`;
-        }
-
-        if (pe) {
-            out += `<span style="color: #008000;">${escapeHtml(pe)}</span>`;
-        }
-
-        if (peDelta) {
-            const color = peDelta.startsWith('-') ? "#ff0000" : (peDelta.startsWith('+') ? "#00ff00" : "#008000");
-            const prefixSpace = (pe && !pe.endsWith(' ')) ? ' ' : '';
-            out += `${prefixSpace}<span style="color: #008000;">(</span><span style="color: ${color}; font-weight: bold;">${escapeHtml(peDelta)}</span><span style="color: #008000;">)</span>`;
-        }
-
-        if (extra) {
-            out += `<span style="color: #008000;">${escapeHtml(extra)}</span>`;
-        }
-
+        const [lead, pvs, pvsWs, pvsDelta, pe, peWs, peDelta, extra] = [1, 2, 3, 4, 5, 6, 7, 8].map(i => m[i] || '');
+        let out = escapeHtml(lead);
+        out += `<span style="color: #008000;">${escapeHtml(pvs)}</span>`;
+        if (pvsDelta) out += this._promptDeltaHtml(pvsWs, pvsDelta);
+        if (pe) out += `<span style="color: #008000;">${escapeHtml(pe)}</span>`;
+        if (peDelta) out += this._promptDeltaHtml(peWs, peDelta);
+        if (extra) out += `<span style="color: #008000;">${escapeHtml(extra)}</span>`;
         return out;
+    }
+
+    // `Pvs: 4381(4381)  Pe: 550(980)  Fe: 67(220) ...`: numbers colored by health, Fe white.
+    _renderPromptVitals(m) {
+        const [lead, label, cur, mid, mx, rest, fe, tail] = [1, 2, 3, 4, 5, 6, 7, 8].map(i => m[i] || '');
+        const ratio = parseInt(mx, 10) ? parseInt(cur, 10) / parseInt(mx, 10) : 1;
+        const color = ratio < 0.3 ? "#ff0000" : "#00ff00";
+        return (
+            `${escapeHtml(lead)}${escapeHtml(label)}` +
+            `<span style="color: ${color};">${escapeHtml(cur)}</span>${escapeHtml(mid)}` +
+            `<span style="color: ${color};">${escapeHtml(mx)}</span>${escapeHtml(rest)}` +
+            `<span style="color: #ffffff;">${escapeHtml(fe)}</span>${escapeHtml(tail)}`
+        );
     }
 
     getRaceColor(text) {
@@ -378,59 +371,55 @@ class RLColorizerJS {
         const actor = m[2];
         const verb = m[3];
         const dest = m[4];
+        const period = m[5];
         const promptHtml = promptSym ? '<span style="color: #c0c0c0;">&gt; </span>' : '';
         const tagM = this.raceTagRegex.exec(actor);
         const actorColor = tagM ? this.getRaceColor(actor) : "#c0c0c0";
         const actorHtml = tagM
             ? `<span style="color: ${actorColor}; font-weight: bold;">${escapeHtml(actor)}</span>`
             : `<span style="color: #c0c0c0;">${escapeHtml(actor)}</span>`;
-        const verbHtml = `<span style="color: #ffffff;">${escapeHtml(verb)}</span>`;
-        const destHtml = `<span style="color: #c0c0c0;">${escapeHtml(dest)}.</span>`;
+        const verbHtml = `<span style="color: #c0c0c0;">${escapeHtml(verb)}</span>`;
+        const destHtml = `<span style="color: #c0c0c0;">${escapeHtml(dest + period)}</span>`;
         return `${promptHtml}${actorHtml} ${verbHtml} ${destHtml}`;
     }
 
-    _renderFollowerPlayer(m) {
-        const promptSym = m[1];
-        const actor = m[2];
-        const verb = m[3];
-        const promptHtml = promptSym ? '<span style="color: #c0c0c0;">&gt; </span>' : '';
-        const actorColor = this.getRaceColor(actor);
-        return `${promptHtml}<span style="color: ${actorColor}; font-weight: bold;">${escapeHtml(actor)}</span> <span style="color: #c0c0c0;">${escapeHtml(verb)}.</span>`;
-    }
-
-    getRoomColor(roomTitle, fallback = null) {
-        if (!roomTitle) return fallback || "#008000";
+    // {color, n}: color for the first n characters of the title, or null when unknown.
+    // An exact catalog match colors the whole title; a zone match colors only the zone
+    // prefix, up to the ":" or the first "-" (the reference leaves the rest default).
+    getRoomColor(roomTitle) {
+        if (!roomTitle) return null;
         let cleanTitle = roomTitle.replace(/\s*-\s*/g, ' - ').replace(/\s*:\s*/g, ': ').replace(/\s+/g, ' ').trim().toLowerCase();
         if (this.roomColors[cleanTitle]) {
-            return this.roomColors[cleanTitle];
+            return { color: this.roomColors[cleanTitle], n: roomTitle.length };
         }
         if (cleanTitle.includes(':')) {
             const zone = cleanTitle.split(':')[0].trim();
-            if (this.roomColors[zone]) return this.roomColors[zone];
+            if (this.roomColors[zone]) return { color: this.roomColors[zone], n: roomTitle.indexOf(':') + 1 };
         }
         if (cleanTitle.includes(' - ')) {
             const zone = cleanTitle.split(' - ')[0].trim();
-            if (this.roomColors[zone]) return this.roomColors[zone];
+            if (this.roomColors[zone]) return { color: this.roomColors[zone], n: roomTitle.slice(0, roomTitle.indexOf('-')).trimEnd().length };
         }
-        return fallback;
+        return null;
+    }
+
+    _roomTitleHtml(roomTitle) {
+        const found = this.getRoomColor(roomTitle);
+        if (!found) return escapeHtml(roomTitle);
+        return `<span style="color: ${found.color};">${escapeHtml(roomTitle.slice(0, found.n))}</span>${escapeHtml(roomTitle.slice(found.n))}`;
     }
 
     _renderRoomExits(m) {
-        const promptSym = m[1];
         const roomTitle = m[2];
-        const exits = m[3];
-        const promptHtml = promptSym ? '<span style="color: #c0c0c0;">&gt; </span>' : '';
-        const color = this.getRoomColor(roomTitle, "#008000");
-        return `${promptHtml}<span style="color: ${color}; font-weight: bold;">${escapeHtml(roomTitle)}</span> <span style="color: #00ffff;">${escapeHtml(exits)}</span>`;
+        const sep = m[3];
+        const exits = m[4];
+        return `${this._roomTitleHtml(roomTitle)}${escapeHtml(sep)}<span style="color: #00ffff;">${escapeHtml(exits)}</span>`;
     }
 
     _renderRoomTitle(m) {
-        const promptSym = m[1];
         const roomTitle = m[2];
-        const color = this.getRoomColor(roomTitle, null);
-        if (!color) return null;
-        const promptHtml = promptSym ? '<span style="color: #c0c0c0;">&gt; </span>' : '';
-        return `${promptHtml}<span style="color: ${color}; font-weight: bold;">${escapeHtml(roomTitle)}</span>`;
+        if (!this.getRoomColor(roomTitle)) return null;
+        return this._roomTitleHtml(roomTitle);
     }
 
     _renderTirada(m) {
@@ -439,14 +428,12 @@ class RLColorizerJS {
         const body = m[3];
         const result = m[4];
         const b2 = m[5];
-        const resColor = (result.includes('Éxito') || result.includes('Exito')) ? "#00ff00" : "#ff0000";
 
         return (
             `<span style="color: #c0c0c0;">[</span>` +
             `<span style="color: #ffff00; font-weight: bold;">${escapeHtml(tag)}</span>` +
             `<span style="color: #c0c0c0;">${escapeHtml(body)}</span>` +
-            `<span style="color: ${resColor}; font-weight: bold;">${escapeHtml(result)}</span>` +
-            `<span style="color: #c0c0c0;">${escapeHtml(b2)}</span>`
+            `<span style="color: #c0c0c0;">${escapeHtml(result)}${escapeHtml(b2)}</span>`
         );
     }
 
@@ -470,128 +457,36 @@ class RLColorizerJS {
         );
     }
 
-    _renderSpellCompletion(m) {
-        const line = m[0];
-        const parts = [];
-        let pos = 0;
-        const qRegex = /'[^']+'/g;
-        let qM;
-        while ((qM = qRegex.exec(line)) !== null) {
-            const start = qM.index;
-            const end = qRegex.lastIndex;
-            if (start > pos) {
-                parts.push(`<span style="color: #c0c0c0;">${escapeHtml(line.slice(pos, start))}</span>`);
-            }
-            parts.push(`<span style="color: #00ffff;">${escapeHtml(qM[0])}</span>`);
-            pos = end;
-        }
-        if (pos < line.length) {
-            parts.push(`<span style="color: #c0c0c0;">${escapeHtml(line.slice(pos))}</span>`);
-        }
-        return parts.join('');
-    }
-
-    _renderEnemyManeuver(m) {
-        const promptSym = m[1];
-        const alertSym = m[2];
-        const actor = m[3];
-        const verb = m[4];
-        const rest = m[5] || "";
-        const promptHtml = promptSym ? '<span style="color: #c0c0c0;">&gt; </span>' : '';
-        const alertHtml = alertSym ? '<span style="color: #ff0000; font-weight: bold;">!</span> ' : '';
-        const tagM = this.raceTagRegex.exec(actor);
-        const actorColor = tagM ? this.getRaceColor(actor) : "#ff4444";
-        const actorHtml = `<span style="color: ${actorColor}; font-weight: bold;">${escapeHtml(actor)}</span>`;
-        const actionHtml = `<span style="color: #ff8080;">${escapeHtml(verb + rest)}</span>`;
-        return `${promptHtml}${alertHtml}${actorHtml} ${actionHtml}`;
-    }
-
     _renderRoomPlayer(m) {
         const promptSym = m[1];
         const players = m[2];
-        const verb = m[3];
+        const sep = m[3];
+        const verb = m[4];
         const promptHtml = promptSym ? '<span style="color: #c0c0c0;">&gt; </span>' : '';
         const coloredPlayers = this._colorizePlayerEntities(players);
-        return `${promptHtml}${coloredPlayers}<span style="color: #c0c0c0;"> ${escapeHtml(verb)}.</span>`;
+        return `${promptHtml}${coloredPlayers}<span style="color: #c0c0c0;">${escapeHtml(sep)}${escapeHtml(verb)}.</span>`;
     }
 
     _renderRoomNpc(m) {
         const promptSym = m[1];
         const npc = m[2];
-        const verb = m[3];
+        const sep = m[3];
+        const verb = m[4];
         const promptHtml = promptSym ? '<span style="color: #c0c0c0;">&gt; </span>' : '';
-        return `${promptHtml}<span style="color: #c0c0c0;">${escapeHtml(npc)} ${escapeHtml(verb)}.</span>`;
+        return `${promptHtml}<span style="color: #c0c0c0;">${escapeHtml(npc)}${escapeHtml(sep)}${escapeHtml(verb)}.</span>`;
     }
 
-    _renderPlayerCombat(m) {
-        const promptSym = m[1];
-        const hashPrefix = m[2];
-        const hashBody = m[3];
-        const starPrefix = m[4];
-        const verb = m[5];
-        const rest = m[6];
-
-        const promptHtml = promptSym ? '<span style="color: #c0c0c0;">&gt; </span>' : '';
-
-        let prefixSym = "";
-        let body = "";
-        if (hashPrefix) {
-            prefixSym = hashPrefix;
-            body = hashBody || "";
-        } else {
-            prefixSym = starPrefix || "";
-            body = (verb || "") + (rest || "");
-        }
-
-        const fullLine = prefixSym + body;
-
-        const lower = fullLine.toLowerCase();
-        if (lower.includes('esquiva tu ataque') ||
-            lower.includes('fallas tu ataque') ||
-            lower.includes('bloquea tu') ||
-            lower.includes('consigue parar') ||
-            lower.includes('consigue esquivar')) {
-            return `${promptHtml}<span style="color: #808080;">${escapeHtml(fullLine)}</span>`;
-        }
-
-        const parts = [];
-        let pos = 0;
-        const bracketRe = /(\()(\d+)(?:(-)(\d+))?(\))/g;
-        let bM;
-        while ((bM = bracketRe.exec(body)) !== null) {
-            const start = bM.index;
-            const end = bracketRe.lastIndex;
-            if (start > pos) {
-                parts.push(`<span style="color: #00ff00;">${escapeHtml(body.slice(pos, start))}</span>`);
-            }
-            const b1 = bM[1];
-            const d1 = bM[2];
-            const sep = bM[3];
-            const d2 = bM[4];
-            const b2 = bM[5];
-            parts.push(`<span style="color: #ffff00;">${b1}</span><span style="color: #ff0000; font-weight: bold;">${d1}</span>`);
-            if (sep) {
-                parts.push(`<span style="color: #ffffff;">${sep}</span><span style="color: #ff0000; font-weight: bold;">${d2}</span>`);
-            }
-            parts.push(`<span style="color: #ffff00;">${b2}</span>`);
-            pos = end;
-        }
-        if (pos < body.length) {
-            parts.push(`<span style="color: #00ff00;">${escapeHtml(body.slice(pos))}</span>`);
-        }
-
-        const combatHtml = parts.join('');
-
-        let prefixHtml = "";
-        if (prefixSym) {
-            if (prefixSym.includes('#')) {
-                prefixHtml = '<span style="color: #008000;">#</span> ';
-            } else if (prefixSym.includes('*')) {
-                prefixHtml = '<span style="color: #008000;">*</span> ';
+    _renderMarker(m, rule) {
+        const marker = m[1];
+        const rest = m[2];
+        let color = rule.color;
+        for (const cat of rule._categories) {
+            if (cat._regex.test(rest)) {
+                color = cat.color;
+                break;
             }
         }
-
-        return `${promptHtml}${prefixHtml}${combatHtml}`;
+        return `<span style="color: ${color};">${escapeHtml(marker)}</span>${escapeHtml(rest)}`;
     }
 
     _applyTemplate(m, template) {

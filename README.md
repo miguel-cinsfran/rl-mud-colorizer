@@ -26,12 +26,12 @@ Colorizador de logs de combate y rol para **[Reinos de Leyenda (RL)](https://rei
   * No colorea NPCs genéricos como si fueran jugadores.
 * **Catálogo de Habitaciones (Rooms):**
   * Más de 280 habitaciones catalogadas con su color exacto minado a partir de logs reales de jugadores videntes (zonas urbanas en plata, bosques en verde, templos en blanco, caminos de agua en cian, mesetas en oliva, etc.).
-  * Habitaciones no catalogadas usan el verde por defecto (`#008000`).
+  * Si solo se reconoce la zona (antes de `:` o `-`), se colorea únicamente ese prefijo; el resto del título y las habitaciones no catalogadas quedan en el color por defecto.
 * **Soporte Completo de Combate y Magia:**
-  * Ataques propios en verde brillante (`#00ff00`) con números de daño resaltados.
-  * Maniobras y preparación de enemigos en fucsia/rojo.
-  * Esquivas, paradas y bloqueos en gris tenue (`#808080`).
-  * Cánticos y finalización de hechizos en cian (`#00ffff`).
+  * Igual que los logs de referencia, solo se colorea el marcador de la línea y el texto queda en el color por defecto: `#` (ataques propios) en verde `#008000` o en púrpura `#800080` si el ataque falla (esquiva, parada, rebote); `*` (ataques recibidos) en granate `#800000`, púrpura si los esquivas, rojo en golpes críticos y azul/verde azulado en hechizos; `+` (preparación de habilidades) en amarillo.
+  * El prompt `Pvs: N/N (±N) Pe: N/N (±N)` colorea solo la etiqueta y los números en verde `#008000`; los paréntesis quedan por defecto y la variación va en rojo (pérdida) o verde brillante (ganancia). Un delta `(0)` queda sin color. El prompt de VIPMud (`Pv:A\B Pe:C\D Xp:N`) mantiene el verde `#008000`.
+  * Los mensajes que la referencia deja sin color (canales y `dice`, `[Obtienes N puntos de experiencia]`, muertes, equipamiento, avisos del sistema, maniobras de enemigos...) se muestran en el color por defecto.
+  * El texto visible de cada línea nunca se modifica (el prompt `]` o `>` se conserva tal cual).
 
 ---
 
@@ -144,7 +144,7 @@ python tools/fetch_reference_logs.py          # descarga a cache_reference/ (ign
 python tools/evaluate.py --top 40 --json resultado.json
 ```
 
-El evaluador alinea cada línea por índice y verifica que el texto visible sea idéntico; las líneas cuyo texto difiere se cuentan aparte y no se puntúan. Informa de la exactitud por carácter (sin espacios), el porcentaje de líneas exactas, las confusiones de color más frecuentes (esperado -> obtenido) y las formas de línea que más fallan, con un ejemplo en texto plano apto para lectores de pantalla (`[#c0c0c0]Sendero [#808080][so,se]`). Los logs descargados nunca se versionan.
+El evaluador alinea cada línea por índice y verifica que el texto visible sea idéntico; las líneas cuyo texto difiere se cuentan aparte y no se puntúan. Informa de la exactitud por carácter (sin espacios) y el porcentaje de líneas exactas, en versión estricta y en versión con equivalencias (`COLOR_EQUIVALENTS` en `tools/evaluate.py`: `#cccccc`≈`#c0c0c0` y `#0800ff`≈`#0000ff`, tonos que un jugador no distingue),  además de las confusiones de color más frecuentes (esperado -> obtenido) y las formas de línea que más fallan, con un ejemplo en texto plano apto para lectores de pantalla (`[#c0c0c0]Sendero [#808080][so,se]`). Los logs descargados nunca se versionan.
 
 ---
 

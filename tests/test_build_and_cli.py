@@ -63,7 +63,7 @@ class CliTest(unittest.TestCase):
             src.write_text("SL: [n]\nfoo\n", encoding="utf-8")
             proc = self.run_cli(str(src), "--no-preprocess")
             self.assertEqual(proc.returncode, 0, proc.stderr)
-            self.assertIn(b">SL:</span>", proc.stdout)
+            self.assertIn("SL: [n]", visible_lines(proc.stdout.decode("utf-8")))
 
 
 if __name__ == "__main__":

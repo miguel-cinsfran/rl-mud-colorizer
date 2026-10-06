@@ -524,39 +524,81 @@ window.COLORIZER_RULES = {
   },
   "rules": [
     {
+      "id": "prompt_vitals",
+      "category": "prompt",
+      "priority": 9,
+      "pattern": "^(\\s*)(Pvs?:\\s*)(\\d+)(\\()(\\d+)(\\)\\s+Pe:\\s*\\d+\\(\\d+\\)\\s+Fe:\\s*)(\\d+)(.*)$",
+      "type": "composite_prompt_vitals"
+    },
+    {
       "id": "prompt_full",
       "category": "prompt",
       "priority": 10,
-      "pattern": "^(?:>|\\])?\\s*(Pvs?:\\s*(?:\\d+(?:[/(\\\\]\\d+\\)?)?)?)(?:\\s*\\(([+-]?\\d+)\\))?(\\s*Pe:\\s*\\d+(?:[/(\\\\]\\d+\\)?)?)?(?:\\s*\\(([+-]?\\d+)\\))?(.*)$",
+      "pattern": "^(\\s*)(Pvs?:\\s*(?:\\d+(?:[/(\\\\]\\d+\\)?)?)?)(?:(\\s*)\\(([+-]?\\d+)\\))?(\\s*Pe:\\s*\\d+(?:[/(\\\\]\\d+\\)?)?)?(?:(\\s*)\\(([+-]?\\d+)\\))?(.*)$",
       "type": "composite_prompt_extended"
     },
     {
       "id": "prompt_pe_xp",
       "category": "prompt",
       "priority": 10,
-      "pattern": "^(?:>|\\])?\\s*(Pe:\\s*\\d+(?:[/(\\\\]\\d+\\)?)?)(?:\\s*\\(([+-]?\\d+)\\))?(.*)$",
-      "replace": "<span style=\"color: #008000; font-weight: bold;\">$1</span><span style=\"color: #008000;\">$2$3</span>"
+      "pattern": "^(\\s*)(Pe:\\s*\\d+(?:[/(\\\\]\\d+\\)?)?)(\\s*\\([+-]?\\d+\\))?(.*)$",
+      "replace": "$1<span style=\"color: #008000;\">$2$3$4</span>"
     },
     {
       "id": "prompt_hp_delta",
       "category": "prompt",
       "priority": 11,
-      "pattern": "^(?:>|\\])?\\s*(HP:\\s*)([+-]?\\d+)\\s*$",
+      "pattern": "^(\\s*HP:\\s*)([+-]?\\d+)\\s*$",
       "type": "composite_hp_delta"
     },
     {
-      "id": "prompt_symbol_alone",
-      "category": "prompt",
-      "priority": 12,
-      "pattern": "^(?:>|\\])\\s*$",
-      "replace": "<span style=\"color: #c0c0c0;\">&gt; </span>"
+      "id": "marker_hash",
+      "category": "combat",
+      "priority": 13,
+      "pattern": "^(#)(\\s.*)$",
+      "type": "composite_marker",
+      "color": "#008000",
+      "categories": [
+        {
+          "pattern": "esquiv|parar|bloquea|desaparece al golpearlo|rebota en|No logras acertar|Intentas",
+          "color": "#800080"
+        }
+      ]
     },
     {
-      "id": "system_exp",
-      "category": "system",
-      "priority": 20,
-      "pattern": "^(?:[>\\]]\\s*)?(\\[Obtienes )(\\d+)( puntos de experiencia\\])\\s*$",
-      "replace": "<span style=\"color: #c0c0c0;\">$1</span><span style=\"color: #ffffff; font-weight: bold;\">$2</span><span style=\"color: #c0c0c0;\">$3</span>"
+      "id": "marker_star",
+      "category": "combat",
+      "priority": 13,
+      "pattern": "^(\\*)(\\s.*)$",
+      "type": "composite_marker",
+      "color": "#800000",
+      "categories": [
+        {
+          "pattern": "esquiv|dejarse intimidar",
+          "color": "#800080"
+        },
+        {
+          "pattern": "^\\s¡?(?:\\d+ misiles|Un rayo|Una esfera de energía|El aire se congela|El rayo de)",
+          "color": "#0000ff"
+        },
+        {
+          "pattern": "^\\s¡?El cielo ruge",
+          "color": "#008080"
+        },
+        {
+          "pattern": "malherido,|Te tambaleas cuando|Un brutal golpe|surge de alguna parte",
+          "color": "#ff0000"
+        }
+      ]
+    },
+    {
+      "id": "marker_plus",
+      "category": "skill",
+      "priority": 13,
+      "pattern": "^(\\+)(\\s.*)$",
+      "type": "composite_marker",
+      "color": "#ffff00",
+      "categories": []
     },
     {
       "id": "system_glory",
@@ -622,34 +664,6 @@ window.COLORIZER_RULES = {
       "replace": "<span style=\"color: #008000;\">$1</span><span style=\"color: #ffff00; font-weight: bold;\">$2</span>"
     },
     {
-      "id": "channels_standard",
-      "category": "channel",
-      "priority": 30,
-      "pattern": "^(?:[>\\]]\\s*)?(\\[[A-Za-z0-9_]+\\])(\\s+[^:]+:)(.*)$",
-      "replace": "<span style=\"color: #008080;\">$1</span><span style=\"color: #ffffff;\">$2</span><span style=\"color: #00ffff;\">$3</span>"
-    },
-    {
-      "id": "say_player",
-      "category": "channel",
-      "priority": 31,
-      "pattern": "^(?:[>\\]]\\s*)?(Dices(?: en [^:]+)?:)(.*)$",
-      "replace": "<span style=\"color: #00ffff;\">$1</span><span style=\"color: #ffffff;\">$2</span>"
-    },
-    {
-      "id": "say_other",
-      "category": "channel",
-      "priority": 32,
-      "pattern": "^(?:[>\\]]\\s*)?([A-Z][a-z0-9'-]+ dice(?: en [^:]+)?:)(.*)$",
-      "replace": "<span style=\"color: #008080;\">$1</span><span style=\"color: #c0c0c0;\">$2</span>"
-    },
-    {
-      "id": "tell_player",
-      "category": "channel",
-      "priority": 33,
-      "pattern": "^(?:[>\\]]\\s*)?([A-Z][a-z0-9'-]+ te dice:)(.*)$",
-      "replace": "<span style=\"color: #00ffff;\">$1</span><span style=\"color: #ffffff;\">$2</span>"
-    },
-    {
       "id": "spell_chant",
       "category": "spell",
       "priority": 40,
@@ -657,59 +671,17 @@ window.COLORIZER_RULES = {
       "replace": "<span style=\"color: #008080;\">$1</span><span style=\"color: #00ffff; font-style: italic;\">$2</span>"
     },
     {
-      "id": "spell_cast_start",
-      "category": "spell",
-      "priority": 41,
-      "pattern": "^(?:[>\\]]\\s*)?(.*?(?:formular el hechizo|formular el cántico|obrar un hechizo|concentras en el hechizo|concentras en tu hechizo de)\\s*)('[^']+'\\.?)",
-      "replace": "<span style=\"color: #ffffff;\">$1</span><span style=\"color: #00ffff;\">$2</span>"
-    },
-    {
       "id": "spell_cast_enemy",
       "category": "spell",
       "priority": 42,
-      "pattern": "^(?:[>\\]]\\s*)?([A-ZÁÉÍÓÚ][\\w\\s'-]+?\\s+(?:empieza a formular un hechizo|mueve la boca mientras dice lo que para ti son palabras sin sentido)\\b.*)$",
-      "replace": "<span style=\"color: #ff00f3; font-weight: bold;\">$1</span>"
-    },
-    {
-      "id": "spell_cast_enemy_stop",
-      "category": "spell",
-      "priority": 43,
-      "pattern": "^(?:[>\\]]\\s*)?([A-Z][a-z0-9'-]+\\s+deja de formular\\..*)$",
-      "replace": "<span style=\"color: #808080;\">$1</span>"
-    },
-    {
-      "id": "spell_completion",
-      "category": "spell",
-      "priority": 44,
-      "pattern": "^(?:[>\\]]\\s*)?(Terminas tu hechizo\\s*.*|Tu hechizo (?:de '[^']+' )?termina\\s*.*|Finalizas el hechizo\\s*.*)$",
-      "type": "composite_spell_completion"
-    },
-    {
-      "id": "spell_projectiles_invocations",
-      "category": "spell",
-      "priority": 45,
-      "pattern": "^(?:([>\\]])\\s*)?(#\\s*)?(¡?El cielo ruge cuando invocas un relámpago\\b.*|\\d+\\s+misiles mágicos surgen de tus dedos e impactan\\b.*|¡?Invocas\\b.*|Conjuras\\b.*|Tu arco desaparece\\b.*|Las llamas de tu arco\\b.*|La flecha que lanzaste\\b.*|\\d+\\s+rayos caen desde el cielo\\b.*|Un rayo (?:de [^.]+ surge de|impacta (?:sobre|junto a))\\b.*|Alzas tu mano, y alrededor de la misma comienzan a formarse\\b.*|Trazas con ágiles movimientos en tus dedos\\b.*|Posas las manos en el suelo e invocas\\b.*|Tu hechizo termina a golpe de trompeta.*)$",
-      "type": "composite_magic_missiles"
-    },
-    {
-      "id": "spell_failed_distracted",
-      "category": "spell",
-      "priority": 46,
-      "pattern": "^(?:[>\\]]\\s*)?(.*?(?:pierde la concentración|arruinado|no eres capaz de concentrarte|Estás realizando los movimientos de un hechizo|Tus objetivos ya no están al alcance|Tu maniobra de \\w+ se ve interrumpida|resiste los efectos de tu hechizo|Has agotado la energía necesaria|El destino de tu hechizo).*)$",
-      "replace": "<span style=\"color: #ff8080;\">$1</span>"
-    },
-    {
-      "id": "spell_healing_effect",
-      "category": "spell",
-      "priority": 47,
-      "pattern": "^(?:[>\\]]\\s*)?(Curas\\s+(?:algunas|todas|gran parte)\\s+de\\s+(?:tus|las)\\s+heridas\\b.*?\\.?)\\s*$",
-      "replace": "<span style=\"color: #ff0000;\">$1</span>"
+      "pattern": "^(?:[>\\]]\\s*)?([A-ZÁÉÍÓÚ][\\w\\s'-]+?\\s+(?:empieza a formular un hechizo|mueve la boca mientras dice lo que para ti son palabras sin sentido)\\b[^¡]*?)(\\s*)(¡¡ HECHIZO !!)\\s*$",
+      "replace": "<span style=\"color: #ff00f3;\">$1</span>$2<span style=\"color: #ff0000;\">$3</span>"
     },
     {
       "id": "room_exits_inline",
       "category": "movement",
       "priority": 50,
-      "pattern": "^(?:([>\\]])\\s*)?(.+?)\\s+([\\[\\(](?:[|-]?[a-zA-ZáéíóúÁÉÍÓÚ]+[|-]?)(?:,(?:[|-]?[a-zA-ZáéíóúÁÉÍÓÚ]+[|-]?))*[\\]\\)])\\s*$",
+      "pattern": "^(?:([>\\]])\\s*)?(.+?)(\\s+)([\\[\\(](?:[|-]?[a-zA-ZáéíóúÁÉÍÓÚ]+[|-]?)(?:,(?:[|-]?[a-zA-ZáéíóúÁÉÍÓÚ]+[|-]?))*[\\]\\)])\\s*$",
       "type": "composite_room_exits"
     },
     {
@@ -723,7 +695,7 @@ window.COLORIZER_RULES = {
       "id": "movement_enter_exit",
       "category": "movement",
       "priority": 51,
-      "pattern": "^(?:([>\\]])\\s*)?((?:\\b(?:un|una|dos|tres|cuatro|cinco|seis|siete|ocho|nueve|diez)\\s+)?[*|\\-~/]*\\s*[A-Za-zÁÉÍÓÚáéíóúñÑ0-9\\x27_-]+(?:\\s+[|*\\-~/]+)?\\s*(?:\\((?:Hlag|Lag|Melf|Elf|S-e|Gob|Gno|Hum|Orc|S-o|Ena|Mdro|Drow|S-d|Hal|Hlf|Duer|Drg|Min|Mino|Gnl|Gnol|Kob|Org|Orgo|Drax|Ctd|Cent|Kuo|Ggt|S-g)\\)(?:es)?(?:\\s+\\([^)]+\\))?|(?:\\([^)]+\\))?)?(?:\\s*[|*\\-~/]+)?)\\s+(se va en dirección|se va hacia|huye hacia|se dirige a|llega nadando desde|llega de la superficie|llega de la|llega desde|se va|llega)\\s+(.*?)\\.?$",
+      "pattern": "^(?:([>\\]])\\s*)?((?:\\b(?:un|una|dos|tres|cuatro|cinco|seis|siete|ocho|nueve|diez)\\s+)?[*|\\-~/]*\\s*[A-Za-zÁÉÍÓÚáéíóúñÑ0-9\\x27_-]+(?:\\s+[|*\\-~/]+)?\\s*(?:\\((?:Hlag|Lag|Melf|Elf|S-e|Gob|Gno|Hum|Orc|S-o|Ena|Mdro|Drow|S-d|Hal|Hlf|Duer|Drg|Min|Mino|Gnl|Gnol|Kob|Org|Orgo|Drax|Ctd|Cent|Kuo|Ggt|S-g)\\)(?:es)?(?:\\s+\\([^)]+\\))?|(?:\\([^)]+\\))?)?(?:\\s*[|*\\-~/]+)?)\\s+(se va en dirección|se va hacia|huye hacia|se dirige a|llega nadando desde|llega de la superficie|llega de la|llega desde|se va|llega)\\s+(.*?)(\\.?)$",
       "type": "composite_movement"
     },
     {
@@ -731,49 +703,28 @@ window.COLORIZER_RULES = {
       "category": "movement",
       "priority": 52,
       "pattern": "^(?:[>\\]]\\s*)?(Puedes ver (?:una|dos|tres|cuatro|cinco|seis|[a-z]+) salidas?:\\s*)(.*)$",
-      "replace": "<span style=\"color: #c0c0c0;\">$1</span><span style=\"color: #ffff00;\">$2</span>"
+      "replace": "<span style=\"color: #c0c0c0;\">$1</span><span style=\"color: #808080;\">$2</span>"
+    },
+    {
+      "id": "follower_npc_shout",
+      "category": "movement",
+      "priority": 54,
+      "pattern": "^(?:[>\\]]\\s*)?([A-ZÁÉÍÓÚ][a-z0-9'-].*?\\s+(?:te sigue|te siguen)!)\\s*$",
+      "replace": "<span style=\"color: #00ffff;\">$1</span>"
     },
     {
       "id": "room_player_present",
       "category": "movement",
       "priority": 53,
-      "pattern": "^(?:([>\\]])\\s*)?([^.\\n]*?\\((?:Hlag|Lag|Melf|Elf|S-e|Gob|Gno|Hum|Orc|S-o|Ena|Mdro|Drow|S-d|Hal|Hlf|Duer|Drg|Min|Mino|Gnl|Gnol|Kob|Org|Orgo|Drax|Ctd|Cent|Kuo|Ggt|S-g)\\)[^.\\n]*?)\\s+(está aquí|están aquí|está allí|están allí)\\.\\s*$",
+      "pattern": "^(?:([>\\]])\\s*)?([^.\\n]*?\\((?:Hlag|Lag|Melf|Elf|S-e|Gob|Gno|Hum|Orc|S-o|Ena|Mdro|Drow|S-d|Hal|Hlf|Duer|Drg|Min|Mino|Gnl|Gnol|Kob|Org|Orgo|Drax|Ctd|Cent|Kuo|Ggt|S-g)\\)[^.\\n]*?)(\\s+)(está aquí|están aquí|está allí|están allí)\\.\\s*$",
       "type": "composite_room_player"
     },
     {
       "id": "room_npc_present",
       "category": "movement",
       "priority": 53,
-      "pattern": "^(?:([>\\]])\\s*)?([^.\\n]+?)\\s+(está aquí|están aquí|está allí|están allí)\\.\\s*$",
+      "pattern": "^(?:([>\\]])\\s*)?([^.\\n]+?)(\\s+)(está aquí|están aquí|está allí|están allí)\\.\\s*$",
       "type": "composite_room_npc"
-    },
-    {
-      "id": "follower_player_notification",
-      "category": "movement",
-      "priority": 54,
-      "pattern": "^(?:([>\\]])\\s*)?([A-ZÁÉÍÓÚ][a-z0-9'-].*?\\((?:Hlag|Lag|Melf|Elf|S-e|Gob|Gno|Hum|Orc|S-o|Ena|Mdro|Drow|S-d|Hal|Hlf|Duer|Drg|Min|Mino|Gnl|Gnol|Kob|Org|Orgo|Drax|Ctd|Cent|Kuo|Ggt|S-g)\\).*?)\\s+(te sigue|te siguen)\\.\\s*$",
-      "type": "composite_follower_player"
-    },
-    {
-      "id": "follower_npc_notification",
-      "category": "movement",
-      "priority": 54,
-      "pattern": "^(?:[>\\]]\\s*)?([A-Z][a-z0-9'-].*?)\\s+(te sigue|te siguen)\\.\\s*$",
-      "replace": "<span style=\"color: #c0c0c0;\">$1 $2.</span>"
-    },
-    {
-      "id": "corpse_room",
-      "category": "movement",
-      "priority": 55,
-      "pattern": "^(?:[>\\]]\\s*)?((?:Cuerpo|Restos putrefactos|Cadáver|Esqueleto) de [^.]+?\\.|(?:Charco|Charcos) de sangre\\.?)\\s*$",
-      "replace": "<span style=\"color: #aa0000; font-weight: bold;\">$1</span>"
-    },
-    {
-      "id": "combat_death_broadcast",
-      "category": "combat",
-      "priority": 60,
-      "pattern": "^(?:[>\\]]\\s*)?(.*?(?:ha muerto a manos de|ha muerto\\.|cae al suelo sin vida|da un grito desgarrador|orbita al Limbo).*)$",
-      "replace": "<span style=\"color: #ff0000; font-weight: bold;\">$1</span>"
     },
     {
       "id": "combat_under_attack",
@@ -783,109 +734,19 @@ window.COLORIZER_RULES = {
       "replace": "<span style=\"color: #c0c0c0;\">$1</span><span style=\"color: #ff0000; font-weight: bold;\">$2</span>"
     },
     {
-      "id": "combat_fatal_blow",
-      "category": "combat",
-      "priority": 61,
-      "pattern": "^(?:[>\\]]\\s*)?(Propinas el golpe mortal a\\s+.*)$",
-      "replace": "<span style=\"color: #00ff00; font-weight: bold;\">$1</span>"
-    },
-    {
-      "id": "combat_crit_eviscerate",
-      "category": "combat",
-      "priority": 62,
-      "pattern": "^(?:[>\\]]\\s*)?(.*?(?:eviscera|destriparte|un enorme boquete|sangre y carne triturada).*)$",
-      "replace": "<span style=\"color: #ff0000;\">$1</span>"
-    },
-    {
-      "id": "combat_skin_absorb",
-      "category": "combat",
-      "priority": 62,
-      "pattern": "^(?:[>\\]]\\s*)?(\\*?\\s*)(El ataque de\\s+.*?\\s+rebota en tu piel de piedra\\.)\\s*$",
-      "replace": "<span style=\"color: #ffff00;\">$1$2</span>"
-    },
-    {
-      "id": "combat_dodge_parry",
-      "category": "combat",
-      "priority": 63,
-      "pattern": "^(?:[>\\]]\\s*)?((?:#|\\*)?\\s*.*?(?:\\b(?:esquiva|esquivas|esquivar|para|paras|parar|bloquea|bloqueas|bloquear)\\b.*?(?:\\b(?:tu ataque|su ataque|el ataque|el impacto|el golpe|la maniobra|la embestida|una lluvia)\\b|mientras parpadea absorviendo)|fallas tu ataque|eludes la búsqueda|¡?Logras (?:esquivar|parar|bloquear)\\b.*?).*)$",
-      "replace": "<span style=\"color: #808080;\">$1</span>"
-    },
-    {
-      "id": "combat_enemy_attack",
-      "category": "combat",
-      "priority": 64,
-      "pattern": "^(?:[>\\]]\\s*)?(\\*?\\s*)(.*? te (?:intenta\\s+)?(?:golpea|corta|desgarra|lacera|fustiga|clava|rasguña|entierra|muerde|patea|raja|aplasta|arremete|abraza|sorbe|alcanza|fulmina|azota|electrocuta|castiga|purifica|perfora|corrompe|apuñalar|mutilar|desmembrar)\\b.*)$",
-      "replace": "<span style=\"color: #aa0000;\">*</span> <span style=\"color: #cc6666;\">$2</span>"
-    },
-    {
-      "id": "combat_enemy_maneuver",
-      "category": "combat",
-      "priority": 65,
-      "pattern": "^(?:([>\\]])\\s*)?(!\\s*)?([A-Za-zÁÉÍÓÚáéíóúñÑ0-9'|\\-/() ]+?)\\s+(se prepara para ejecutar|se prepara para|tensa sus músculos|se echa hacia atrás|empieza a centrar|comienza a serpentear|te examina|examina las defensas de|te mira fijamente)\\b(.*)$",
-      "type": "composite_enemy_maneuver"
-    },
-    {
-      "id": "combat_poison_effects",
-      "category": "combat",
-      "priority": 66,
-      "pattern": "^(?:[>\\]]\\s*)?(.*?(?:te envenena|ponzoña virulenta|garras contaminadas|saliva tóxica).*)$",
-      "replace": "<span style=\"color: #cc6666;\">$1</span>"
-    },
-    {
-      "id": "combat_player_attacks",
-      "category": "combat",
-      "priority": 67,
-      "pattern": "^(?:([>\\]])\\s*)?(?:(#\\s+)(.+)|(\\*\\s*)?(?:¡)?(Tu\\s+(?:ataque|estocada|golpe|flecha|corte|puñetazo|patada|mordisco|zarpazo|mandoble|hachazo|embestida)\\s+(?:desgarra|atraviesa|corta|raja|golpea|impacta|sorbe|alcanza|penetra|rebota|falla|choca)\\b|Tu\\s+[A-ZÁÉÍÓÚ][\\w\\s'-]+(?:se ilumina cuando|atraviesa|desgarra|golpea)\\b|(?:Muerdes|Pateas|Golpeas|Desgarras|Atraviesas|Clavas|Rajas|Rajás|Cortas|Aplastas|Cabeceas|Alcanzas|Perforas|Enfermas|Envenenas|Hundes|Laceras|Pinchas|Fustigas|Empalas|Trituras|Acoceas|Descargas una furia de golpes)\\b)(.*))$",
-      "type": "composite_player_combat"
-    },
-    {
-      "id": "system_buff_expire",
+      "id": "system_resistance_fade",
       "category": "system",
       "priority": 70,
-      "pattern": "^(?:[>\\]]\\s*)?(Tu armadura deja de estar expuesta\\b.*|Tu capa derrama parte de la sangre\\b.*|Tu resistencia de [a-z]+ se desvanece\\b.*|Tu capacidad de movimiento vuelve\\b.*|Tu poder mágico vuelve\\b.*)$",
-      "replace": "<span style=\"color: #808080;\">$1</span>"
-    },
-    {
-      "id": "system_equipment_action",
-      "category": "system",
-      "priority": 71,
-      "pattern": "^(?:[>\\]]\\s*)?((?:Dejas de sostener|Empuñas|Te pones|Te quitas|Estás intentando equilibrar|Finalmente equilibras)\\s+.*)$",
-      "replace": "<span style=\"color: #c0c0c0;\">$1</span>"
-    },
-    {
-      "id": "system_crafting_skinning",
-      "category": "system",
-      "priority": 72,
-      "pattern": "^(?:[>\\]]\\s*)?((?:Armado con tu|Continúas desollando|Continúas con tu sucio trabajo|Tras dedicar largos minutos desollando)\\s+.*)$",
-      "replace": "<span style=\"color: #c0c0c0;\">$1</span>"
-    },
-    {
-      "id": "system_actions_warning",
-      "category": "system",
-      "priority": 73,
-      "pattern": "^(?:[>\\]]\\s*)?(Ignorando\\s+.*|No puedes\\s+.*|No estás\\s+.*|No hay nadie\\s+.*|El objetivo\\s+.*|Parece que\\s+.*|Ese nombre\\s+.*|Has usado\\s+.*|No tienes\\s+.*)\\s*$",
-      "replace": "<span style=\"color: #808080;\">$1</span>"
-    },
-    {
-      "id": "skills_player_prep",
-      "category": "skill",
-      "priority": 74,
-      "pattern": "^(?:[>\\]]\\s*)?(\\+\\s*)(.*)$",
-      "replace": "<span style=\"color: #ffff00; font-weight: bold;\">+</span> <span style=\"color: #0800ff;\">$2</span>"
-    },
-    {
-      "id": "skills_actions",
-      "category": "skill",
-      "priority": 75,
-      "pattern": "^(?:[>\\]]\\s*)?(Empiezas a\\b.*|Intentas\\b.*|Preparas los componentes\\b.*|Logras\\b.*|Finalmente logras\\b.*|Consigues zafarte\\b.*|Te preparas para\\b.*|Te mueves en silencio\\b.*|Sufres cuando tus músculos\\b.*|Tras tu dolorosa conversi[oó]n\\b.*|Agotado, eres incapaz\\b.*)$",
-      "replace": "<span style=\"color: #0800ff;\">$1</span>"
+      "pattern": "^(?:[>\\]]\\s*)?(Tu resistencia de [a-z]+ se desvanece\\.?)\\s*$",
+      "replace": "<span style=\"color: #ff00ff;\">$1</span>"
     },
     {
       "id": "command_explicit_prompt",
       "category": "command",
       "priority": 80,
-      "pattern": "^(?:>|\\])\\s+([a-zA-Z0-9_'-]+.*)$",
-      "replace": "<span style=\"color: #c0c0c0;\">&gt; </span><span style=\"color: #717100;\">$1</span>"
+      "prompt_only": true,
+      "pattern": "^([a-zñáéíóú0-9_'-]+.*)$",
+      "replace": "<span style=\"color: #717100;\">$1</span>"
     },
     {
       "id": "command_standalone_short",

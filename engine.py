@@ -25,6 +25,7 @@ MUDLET_HEADER = (
     "  <body><div>"
 )
 MUDLET_FOOTER = " </div></body>\n</html>"
+PROMPT_PREFIX_RE = re.compile(r'^([>\]](?:[ \t]+|$))(.*)$')
 DEFAULT_MUDLET_STYLE = "color: rgb(192,192,192); background: rgb(0,0,0); "
 
 
@@ -166,7 +167,8 @@ class RLColorizer:
         for r in self.rules:
             self.compiled_rules.append({
                 **r,
-                '_regex': re.compile(r['pattern'])
+                '_regex': re.compile(r['pattern']),
+                '_categories': [{**c, '_regex': re.compile(c['pattern'])} for c in r.get('categories', [])],
             })
 
     def colorize_line(self, line):
@@ -175,10 +177,21 @@ class RLColorizer:
         
         if not raw_text.strip():
             return ""
-            
+
+        # A leading prompt symbol ("> " / "] ") is split off verbatim; rules see the rest.
+        prompt = ""
+        pm = PROMPT_PREFIX_RE.match(raw_text)
+        if pm:
+            prompt, raw_text = pm.group(1), pm.group(2)
+        prompt_html = f'<span style="color: #c0c0c0;">{html.escape(prompt)}</span>' if prompt else ""
+        if prompt and not raw_text:
+            return normalize_line_to_mudlet(prompt_html)
+
         line_html = None
         # Match rules in priority order
         for rule in self.compiled_rules:
+            if rule.get('prompt_only') and not prompt:
+                continue
             m = rule['_regex'].match(raw_text)
             if not m:
                 continue
@@ -188,6 +201,10 @@ class RLColorizer:
             # 1. Composite Prompt Handler
             if rule_type == 'composite_prompt_extended':
                 line_html = self._render_prompt_extended(m)
+                break
+
+            elif rule_type == 'composite_prompt_vitals':
+                line_html = self._render_prompt_vitals(m)
                 break
                 
             # 2. Composite HP Delta Handler
@@ -212,27 +229,9 @@ class RLColorizer:
                 line_html = self._render_info(m)
                 break
                 
-            # 6. Composite Spell Completion
-            elif rule_type == 'composite_spell_completion':
-                line_html = self._render_spell_completion(m)
-                break
-                
-            # 7. Composite Magic Missiles
-            elif rule_type == 'composite_magic_missiles':
-                prompt_sym, prefix_sym, rest = m.groups()
-                prompt_html = '<span style="color: #c0c0c0;">&gt; </span>' if prompt_sym else ''
-                p_html = '<span style="color: #0000ff;">#</span> ' if prefix_sym else ''
-                line_html = f'{prompt_html}{p_html}<span style="color: #8cc4ff;">{html.escape(rest)}</span>'
-                break
-                
-            # 8. Composite Enemy Maneuver
-            elif rule_type == 'composite_enemy_maneuver':
-                line_html = self._render_enemy_maneuver(m)
-                break
-
-            # 9. Composite Player Combat
-            elif rule_type == 'composite_player_combat':
-                line_html = self._render_player_combat(m)
+            # 6. Composite Marker Line
+            elif rule_type == 'composite_marker':
+                line_html = self._render_marker(m, rule)
                 break
 
             # 10. Composite Room Player
@@ -243,11 +242,6 @@ class RLColorizer:
             # 11. Composite Room NPC
             elif rule_type == 'composite_room_npc':
                 line_html = self._render_room_npc(m)
-                break
-
-            # 12. Composite Follower Player
-            elif rule_type == 'composite_follower_player':
-                line_html = self._render_follower_player(m)
                 break
 
             # 13. Composite Room Exits
@@ -273,31 +267,42 @@ class RLColorizer:
             escaped = html.escape(raw_text)
             line_html = f'<span style="color: {self.theme.get("default_fg", "#c0c0c0")};">{escaped}</span>'
             
-        return normalize_line_to_mudlet(line_html)
+        return normalize_line_to_mudlet(prompt_html + line_html)
+
+    @staticmethod
+    def _prompt_delta_html(ws, delta):
+        """` (+12)` after a stat: only the signed number is colored; a zero delta stays default."""
+        color = "#ff0000" if delta.startswith('-') else ("#00ff00" if delta.startswith('+') else None)
+        number = html.escape(delta)
+        if color and delta.lstrip('+-').strip('0'):
+            number = f'<span style="color: {color};">{number}</span>'
+        return f'{html.escape(ws)}(' + number + ')'
 
     def _render_prompt_extended(self, m):
-        pvs, pvs_delta, pe, pe_delta, extra = m.groups()
-        out = []
-        if pvs:
-            out.append(f'<span style="color: #008000; font-weight: bold;">{html.escape(pvs)}</span>')
-        
+        lead, pvs, pvs_ws, pvs_delta, pe, pe_ws, pe_delta, extra = m.groups()
+        out = [html.escape(lead or '')]
+        out.append(f'<span style="color: #008000;">{html.escape(pvs)}</span>')
         if pvs_delta:
-            color = "#ff0000" if pvs_delta.startswith('-') else ("#00ff00" if pvs_delta.startswith('+') else "#008000")
-            prefix_space = ' ' if pvs and not pvs.endswith(' ') else ''
-            out.append(f'{prefix_space}<span style="color: #008000;">(</span><span style="color: {color}; font-weight: bold;">{html.escape(pvs_delta)}</span><span style="color: #008000;">)</span>')
-            
+            out.append(self._prompt_delta_html(pvs_ws, pvs_delta))
         if pe:
             out.append(f'<span style="color: #008000;">{html.escape(pe)}</span>')
-            
         if pe_delta:
-            color = "#ff0000" if pe_delta.startswith('-') else ("#00ff00" if pe_delta.startswith('+') else "#008000")
-            prefix_space = ' ' if pe and not pe.endswith(' ') else ''
-            out.append(f'{prefix_space}<span style="color: #008000;">(</span><span style="color: {color}; font-weight: bold;">{html.escape(pe_delta)}</span><span style="color: #008000;">)</span>')
-            
+            out.append(self._prompt_delta_html(pe_ws, pe_delta))
         if extra:
             out.append(f'<span style="color: #008000;">{html.escape(extra)}</span>')
-            
         return "".join(out)
+
+    def _render_prompt_vitals(self, m):
+        """`Pvs: 4381(4381)  Pe: 550(980)  Fe: 67(220) ...`: numbers colored by health, Fe white."""
+        lead, label, cur, mid, mx, rest, fe, tail = m.groups()
+        ratio = int(cur) / int(mx) if int(mx) else 1
+        color = "#ff0000" if ratio < 0.3 else "#00ff00"
+        return (
+            f'{html.escape(lead)}{html.escape(label)}'
+            f'<span style="color: {color};">{html.escape(cur)}</span>{html.escape(mid)}'
+            f'<span style="color: {color};">{html.escape(mx)}</span>{html.escape(rest)}'
+            f'<span style="color: #ffffff;">{html.escape(fe)}</span>{html.escape(tail)}'
+        )
 
     def get_race_color(self, text):
         if not text:
@@ -327,7 +332,7 @@ class RLColorizer:
         return "".join(parts)
 
     def _render_movement(self, m):
-        prompt_sym, actor, verb, dest = m.groups()
+        prompt_sym, actor, verb, dest, period = m.groups()
         prompt_html = '<span style="color: #c0c0c0;">&gt; </span>' if prompt_sym else ''
         tag_m = self.race_tag_regex.search(actor)
         if tag_m:
@@ -335,56 +340,56 @@ class RLColorizer:
             actor_html = f'<span style="color: {actor_color}; font-weight: bold;">{html.escape(actor)}</span>'
         else:
             actor_html = f'<span style="color: #c0c0c0;">{html.escape(actor)}</span>'
-        verb_html = f'<span style="color: #ffffff;">{html.escape(verb)}</span>'
-        dest_html = f'<span style="color: #c0c0c0;">{html.escape(dest)}.</span>'
+        verb_html = f'<span style="color: #c0c0c0;">{html.escape(verb)}</span>'
+        dest_html = f'<span style="color: #c0c0c0;">{html.escape(dest + period)}</span>'
         return f'{prompt_html}{actor_html} {verb_html} {dest_html}'
 
-    def _render_follower_player(self, m):
-        prompt_sym, actor, verb = m.groups()
-        prompt_html = '<span style="color: #c0c0c0;">&gt; </span>' if prompt_sym else ''
-        actor_color = self.get_race_color(actor)
-        return f'{prompt_html}<span style="color: {actor_color}; font-weight: bold;">{html.escape(actor)}</span> <span style="color: #c0c0c0;">{html.escape(verb)}.</span>'
+    def get_room_color(self, room_title):
+        """(color, n) with the first n characters of the title to color, or None when unknown.
 
-    def get_room_color(self, room_title, fallback=None):
+        An exact catalog match colors the whole title; a zone match colors only the zone
+        prefix, up to the ":" or the first "-" (the reference leaves the rest default).
+        """
         if not room_title:
-            return fallback or "#008000"
+            return None
         clean_title = re.sub(r'\s+', ' ', re.sub(r'\s*-\s*', ' - ', room_title)).strip().lower()
         clean_title = re.sub(r'\s*:\s*', ': ', clean_title)
         if clean_title in self.room_colors:
-            return self.room_colors[clean_title]
+            return self.room_colors[clean_title], len(room_title)
         if ':' in clean_title:
             zone = clean_title.split(':')[0].strip()
             if zone in self.room_colors:
-                return self.room_colors[zone]
+                return self.room_colors[zone], room_title.index(':') + 1
         if ' - ' in clean_title:
             zone = clean_title.split(' - ')[0].strip()
             if zone in self.room_colors:
-                return self.room_colors[zone]
-        return fallback
+                return self.room_colors[zone], len(room_title[:room_title.index('-')].rstrip())
+        return None
+
+    def _room_title_html(self, room_title):
+        found = self.get_room_color(room_title)
+        if not found:
+            return html.escape(room_title)
+        color, n = found
+        return f'<span style="color: {color};">{html.escape(room_title[:n])}</span>{html.escape(room_title[n:])}'
 
     def _render_room_exits(self, m):
-        prompt_sym, room_title, exits = m.groups()
-        prompt_html = '<span style="color: #c0c0c0;">&gt; </span>' if prompt_sym else ''
-        color = self.get_room_color(room_title, "#008000")
-        return f'{prompt_html}<span style="color: {color}; font-weight: bold;">{html.escape(room_title)}</span> <span style="color: #00ffff;">{html.escape(exits)}</span>'
+        prompt_sym, room_title, sep, exits = m.groups()
+        return f'{self._room_title_html(room_title)}{html.escape(sep)}<span style="color: #00ffff;">{html.escape(exits)}</span>'
 
     def _render_room_title(self, m):
         prompt_sym, room_title = m.groups()
-        color = self.get_room_color(room_title, None)
-        if not color:
+        if not self.get_room_color(room_title):
             return None
-        prompt_html = '<span style="color: #c0c0c0;">&gt; </span>' if prompt_sym else ''
-        return f'{prompt_html}<span style="color: {color}; font-weight: bold;">{html.escape(room_title)}</span>'
+        return self._room_title_html(room_title)
 
     def _render_tirada(self, m):
         b1, tag, body, result, b2 = m.groups()
-        res_color = "#00ff00" if "Éxito" in result or "Exito" in result else "#ff0000"
         return (
             f'<span style="color: #c0c0c0;">[</span>'
             f'<span style="color: #ffff00; font-weight: bold;">{tag}</span>'
             f'<span style="color: #c0c0c0;">{html.escape(body)}</span>'
-            f'<span style="color: {res_color}; font-weight: bold;">{result}</span>'
-            f'<span style="color: #c0c0c0;">{b2}</span>'
+            f'<span style="color: #c0c0c0;">{html.escape(result)}{html.escape(b2)}</span>'
         )
 
     def _render_info(self, m):
@@ -402,88 +407,25 @@ class RLColorizer:
             f'<span style="color: #c0c0c0;">{sep}{html.escape(rest)}</span>'
         )
 
-    def _render_spell_completion(self, m):
-        line = m.group(0)
-        parts = []
-        pos = 0
-        for q_m in re.finditer(r"'[^']+'", line):
-            start, end = q_m.span()
-            if start > pos:
-                parts.append(f'<span style="color: #c0c0c0;">{html.escape(line[pos:start])}</span>')
-            parts.append(f'<span style="color: #00ffff;">{html.escape(q_m.group(0))}</span>')
-            pos = end
-        if pos < len(line):
-            parts.append(f'<span style="color: #c0c0c0;">{html.escape(line[pos:])}</span>')
-        return "".join(parts)
-
-    def _render_enemy_maneuver(self, m):
-        prompt_sym, alert_sym, actor, verb, rest = m.groups()
-        prompt_html = '<span style="color: #c0c0c0;">&gt; </span>' if prompt_sym else ''
-        alert_html = '<span style="color: #ff0000; font-weight: bold;">!</span> ' if alert_sym else ''
-        tag_m = self.race_tag_regex.search(actor)
-        if tag_m:
-            actor_color = self.get_race_color(actor)
-        else:
-            actor_color = "#ff4444"
-        actor_html = f'<span style="color: {actor_color}; font-weight: bold;">{html.escape(actor)}</span>'
-        action_html = f'<span style="color: #ff8080;">{html.escape(verb + (rest or ""))}</span>'
-        return f'{prompt_html}{alert_html}{actor_html} {action_html}'
-
     def _render_room_player(self, m):
-        prompt_sym, players, verb = m.groups()
+        prompt_sym, players, sep, verb = m.groups()
         prompt_html = '<span style="color: #c0c0c0;">&gt; </span>' if prompt_sym else ''
         colored_players = self._colorize_player_entities(players)
-        return f'{prompt_html}{colored_players}<span style="color: #c0c0c0;"> {html.escape(verb)}.</span>'
+        return f'{prompt_html}{colored_players}<span style="color: #c0c0c0;">{html.escape(sep)}{html.escape(verb)}.</span>'
 
     def _render_room_npc(self, m):
-        prompt_sym, npc, verb = m.groups()
+        prompt_sym, npc, sep, verb = m.groups()
         prompt_html = '<span style="color: #c0c0c0;">&gt; </span>' if prompt_sym else ''
-        return f'{prompt_html}<span style="color: #c0c0c0;">{html.escape(npc)} {html.escape(verb)}.</span>'
+        return f'{prompt_html}<span style="color: #c0c0c0;">{html.escape(npc)}{html.escape(sep)}{html.escape(verb)}.</span>'
 
-    def _render_player_combat(self, m):
-        prompt_sym, hash_prefix, hash_body, star_prefix, verb, rest = m.groups()
-        prompt_html = '<span style="color: #c0c0c0;">&gt; </span>' if prompt_sym else ''
-        
-        if hash_prefix:
-            prefix_sym = hash_prefix
-            body = hash_body or ""
-        else:
-            prefix_sym = star_prefix or ""
-            body = (verb or "") + (rest or "")
-            
-        full_line = prefix_sym + body
-        
-        # Check if dodge, parry or miss
-        if any(w in full_line.lower() for w in ['esquiva tu ataque', 'fallas tu ataque', 'bloquea tu', 'consigue parar', 'consigue esquivar']):
-            return f'{prompt_html}<span style="color: #808080;">{html.escape(full_line)}</span>'
-            
-        # Highlight damage ranges/brackets like (290-599) or [123]
-        parts = []
-        pos = 0
-        bracket_re = re.compile(r'(\()(\d+)(?:(-)(\d+))?(\))')
-        for b_m in bracket_re.finditer(body):
-            start, end = b_m.span()
-            if start > pos:
-                parts.append(f'<span style="color: #00ff00;">{html.escape(body[pos:start])}</span>')
-            b1, d1, sep, d2, b2 = b_m.groups()
-            parts.append(f'<span style="color: #ffff00;">{b1}</span><span style="color: #ff0000; font-weight: bold;">{d1}</span>')
-            if sep:
-                parts.append(f'<span style="color: #ffffff;">{sep}</span><span style="color: #ff0000; font-weight: bold;">{d2}</span>')
-            parts.append(f'<span style="color: #ffff00;">{b2}</span>')
-            pos = end
-        if pos < len(body):
-            parts.append(f'<span style="color: #00ff00;">{html.escape(body[pos:])}</span>')
-            
-        combat_html = "".join(parts)
-        
-        prefix_html = ""
-        if prefix_sym:
-            if '#' in prefix_sym:
-                prefix_html = '<span style="color: #008000;">#</span> '
-            elif '*' in prefix_sym:
-                prefix_html = '<span style="color: #008000;">*</span> '
-                
-        return f'{prompt_html}{prefix_html}{combat_html}'
+    def _render_marker(self, m, rule):
+        marker, rest = m.groups()
+        color = rule['color']
+        for cat in rule['_categories']:
+            if cat['_regex'].search(rest):
+                color = cat['color']
+                break
+        return f'<span style="color: {color};">{html.escape(marker)}</span>{html.escape(rest)}'
 
     def _apply_template(self, m, template):
         res = template

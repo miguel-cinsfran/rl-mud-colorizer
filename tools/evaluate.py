@@ -40,6 +40,21 @@ def normalize_color(value):
     return None
 
 
+# Colors that a sighted player cannot tell apart count as equal when scoring.
+# Each pair maps a shade to its canonical form; add a pair only if the shades are
+# visually near-identical on a black background.
+COLOR_EQUIVALENTS = {
+    # Mudlet's default foreground (204,204,204) vs the standard silver (192,192,192) we emit.
+    "#cccccc": "#c0c0c0",
+    # Pure blue (0,0,255) vs the (8,0,255) blue used by our rules: 8/255 on one channel.
+    "#0800ff": "#0000ff",
+}
+
+
+def canon(color):
+    return COLOR_EQUIVALENTS.get(color, color)
+
+
 def parse_html_log(text, default_color="#c0c0c0"):
     """Parse a Mudlet-style HTML log into lines; each line is a list of (char, color)."""
     start = 0
@@ -89,18 +104,24 @@ def line_has_content(line):
 
 
 def score_line(expected, got):
-    """Return (scored_chars, correct_chars, exact, confusion Counter), whitespace ignored."""
-    total = correct = 0
+    """Return (scored_chars, strict_correct, equivalent_correct, confusion Counter), whitespace ignored.
+
+    The confusion counter only holds mismatches that survive the color equivalences.
+    """
+    total = strict = equiv = 0
     confusion = Counter()
     for (ch, exp), (_, act) in zip(expected, got):
         if ch.isspace():
             continue
         total += 1
         if exp == act:
-            correct += 1
+            strict += 1
+            equiv += 1
+        elif canon(exp) == canon(act):
+            equiv += 1
         else:
             confusion[(exp, act)] += 1
-    return total, correct, total == correct, confusion
+    return total, strict, equiv, confusion
 
 
 def segments(line):
@@ -148,8 +169,8 @@ def evaluate_log(colorizer, ref_html):
 
 class Stats:
     def __init__(self):
-        self.chars = self.correct = 0
-        self.lines = self.exact = 0
+        self.chars = self.correct = self.eq_correct = 0
+        self.lines = self.exact = self.eq_exact = 0
         self.misaligned = 0
         self.logs = self.fallbacks = self.unaligned_logs = 0
         self.confusion = Counter()
@@ -173,13 +194,15 @@ class Stats:
                 continue
             if not line_has_content(r):
                 continue
-            total, correct, exact, conf = score_line(r, g)
+            total, strict, equiv, conf = score_line(r, g)
             self.chars += total
-            self.correct += correct
+            self.correct += strict
+            self.eq_correct += equiv
             self.lines += 1
-            self.exact += exact
+            self.exact += total == strict
+            self.eq_exact += total == equiv
             self.confusion.update(conf)
-            if not exact:
+            if total != equiv:
                 entry = self.shapes.setdefault(
                     line_shape(line_text(r)), {"count": 0, "example": (segments(r), segments(g))})
                 entry["count"] += 1
@@ -192,8 +215,10 @@ class Stats:
             "misaligned_lines": self.misaligned,
             "scored_lines": self.lines,
             "scored_chars": self.chars,
-            "char_accuracy": self.correct / self.chars if self.chars else 0.0,
-            "line_exact_rate": self.exact / self.lines if self.lines else 0.0,
+            "char_accuracy_strict": self.correct / self.chars if self.chars else 0.0,
+            "line_exact_rate_strict": self.exact / self.lines if self.lines else 0.0,
+            "char_accuracy": self.eq_correct / self.chars if self.chars else 0.0,
+            "line_exact_rate": self.eq_exact / self.lines if self.lines else 0.0,
         }
 
 
@@ -204,7 +229,8 @@ def pct(x):
 def print_summary(label, stats):
     s = stats.summary()
     print(f"{label}: logs={s['logs']} scored_lines={s['scored_lines']} scored_chars={s['scored_chars']} "
-          f"char_accuracy={pct(s['char_accuracy'])} line_exact_match={pct(s['line_exact_rate'])} "
+          f"char_accuracy={pct(s['char_accuracy'])} (strict {pct(s['char_accuracy_strict'])}) "
+          f"line_exact_match={pct(s['line_exact_rate'])} (strict {pct(s['line_exact_rate_strict'])}) "
           f"misaligned_lines={s['misaligned_lines']} unaligned_logs={s['unaligned_logs']} "
           f"preprocess_fallback_logs={s['fallback_logs']}")
 
@@ -239,7 +265,7 @@ def main(argv=None):
     for player, stats in per_player.items():
         print_summary(player, stats)
 
-    print(f"\nTop {args.top} color confusions (expected -> got, characters):")
+    print(f"\nTop {args.top} color confusions (expected -> got, characters; equivalent shades excluded):")
     for (exp, act), n in overall.confusion.most_common(args.top):
         print(f"{exp} -> {act}: {n}")
 

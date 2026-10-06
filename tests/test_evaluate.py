@@ -75,6 +75,17 @@ class ScoreTests(unittest.TestCase):
         self.assertEqual(stats.confusion[("#00ff00", "#010203")], 1)
         self.assertEqual(stats.confusion[("#0000ff", "#090909")], 1)
 
+    def test_equivalent_shades_count_in_equivalence_score_only(self):
+        ref = [[("a", "#cccccc"), ("b", "#0000ff"), ("c", "#ff0000")]]
+        got = [[("a", "#c0c0c0"), ("b", "#0800ff"), ("c", "#00ff00")]]
+        total, strict, equiv, conf = ev.score_line(ref[0], got[0])
+        self.assertEqual((total, strict, equiv), (3, 0, 2))
+        self.assertEqual(list(conf), [("#ff0000", "#00ff00")])
+        stats = ev.Stats()
+        stats.add_log({"ref": ref, "got": got, "fallback": False})
+        self.assertAlmostEqual(stats.summary()["char_accuracy_strict"], 0.0)
+        self.assertAlmostEqual(stats.summary()["char_accuracy"], 2 / 3)
+
     def test_misaligned_text_is_not_scored(self):
         ref = ev.parse_html_log(REFERENCE)
         got = ev.parse_html_log(OURS.replace("ab</span>", "aq</span>"))
