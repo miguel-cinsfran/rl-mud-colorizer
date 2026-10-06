@@ -1,0 +1,3459 @@
+Sufres cuando tus músculos crujen y los huesos se reforman al comenzar a polimorfarte.
+Tras tu dolorosa conversión, te levantas y miras extrañado a tu alrededor desde tu nuevo punto de vista, atónito, te das cuenta de que ahora eres un Pantera.
+gno
+Orilla oeste del río Iaurduin [se,n] 
+gn
+acechar n
+Orilla oeste del río Iaurduin [s,n] 
+ojear
+Puedes ver tres salidas: sur, este y norte.
+Charco de sangre.
+siete Timotivac (Gno)es está allí.
+pc
+Agotado, eres incapaz de continuar manteniendo tu polimorfismo y vuelves a tu raza original.
+formular terremoto:n
+Comienzas a formular el hechizo 'Terremoto'.
+Jazhreel te examina.
+Dices en adurn: 'terra firma venit'
+Posas las manos en el suelo e invocas una estela de destrucción sísmica que se dirige hacia norte, destrozándolo todo a su paso.
+[Obtienes 168 puntos de experiencia]
+pa
+siete Timotivac (Gno)es está aquí.
+Orilla oeste del río Iaurduin [s,e,n] 
+a
++ Te mueves en silencio alrededor de Timotivac, tensando los músculos de tus cuartos traseros para abalanzarte sobre él.
+* Logras esquivar el ataque de Timotivac.
+Timotivac empieza a formular un hechizo.
+# Lo que te pareció ser Timotivac desaparece al golpearlo.
+# ¡Te abalanzas sobre un costado de Timotivac, destrozándole con cuatro ataques de tus Garras y dientes!
+[Obtienes 58 puntos de experiencia]
+n
+Orilla oeste del río Iaurduin [s,ne] 
+ne
+Orilla oeste del río Iaurduin [so,no] 
+[El bloqueo 'sigilar' termina]
+[Arenvael Ler'Inen orbita al Limbo]
+no
+Orilla oeste del río Iaurduin [se,ne,no] 
+se
+gso
+tres Timotivac (Gno)es está aquí.
+gs
+tres Timotivac (Gno)es se va hacia noreste.
+tres Timotivac (Gno)es llega desde el noreste.
+tres Timotivac (Gno)es se va hacia sur.
+] Orilla oeste del río Iaurduin [s,n] 
+] [El bloqueo 'Retener persona' termina]
+tres Timotivac (Gno)es llega desde el norte.
+stop
+Cola de comandos borrada ('peleas parar' detendrá los ataques si es lo que querías).
+estado -b x
+tres Timotivac (Gno)es se va hacia sudeste.
+gse
+Orilla oeste del río Iaurduin [se,no] 
+Orilla oeste del río Iaurduin [s,no] 
+tres Timotivac (Gno)es llega desde el noroeste.
+Orilla oeste del río Iaurduin [o,n] 
+[El bloqueo 'abalanzarse' termina]
+tres Timotivac (Gno)es se va hacia oeste.
+go
+Orilla oeste del río Iaurduin [s,e] 
+Orilla oeste del río Iaurduin [so,n] 
+tres Timotivac (Gno)es se va hacia sudoeste.
+Timotivac pronuncia el cántico: 'nullo magius'
+Timotivac (Gno) se va hacia sudeste.
+Camino a los Cultivos de Maíz [ne,no] 
+Camino a los Cultivos de Maíz [se,o] 
+Cultivos Pantanosos [o,e] 
+Cultivos Pantanosos [no,o,e,so] 
+Cultivos Pantanosos [n,ne,o,s,se] 
+Cultivos Pantanosos [no,o] 
+Cultivos Pantanosos [n,o,e,so] 
+Cultivos Pantanosos [ne,o] 
+Cultivos Pantanosos [no,ne,o,e,so] 
+Cultivos Pantanosos [n,ne,o,e,se] 
+Cultivos Pantanosos [no,so,e] 
+Camino a los Cultivos de Maíz [o,ne] 
+gne
+Cultivos Pantanosos [n,o,e,s] 
+Cultivos Pantanosos [no,n,o,e,s,se] 
+Cultivos Pantanosos [no,n,ne,o,e,s,se] 
+ge
+Timotivac (Gno) está aquí.
+¡Timotivac pierde la concentración!
+# ¡Te abalanzas sobre un sorprendido Timotivac y le despedazas con dos ataques y un crítico de tus Garras y dientes!
+[Obtienes 182 puntos de experiencia]
+[Cruzada_eralie] Palafrenero de la Cruzada: ¡Enorthus ha asesinado a timotivac!
+[Obtienes 347376 puntos de experiencia]
+Propinas el golpe mortal a Timotivac.
+Timotivac ha muerto.
+Timotivac cae al suelo sin vida.
+Timotivac da un grito desgarrador antes de que su espíritu abandone Eirea.
+Ruinas [s,n] 
+Shkar (Hlag) está aquí.
+Ruinas [n,|so|,|s|,|se|] 
+Shkar (Hlag) se va hacia sudeste.
+Guarida Secreta [se,-no-] 
+Pasillo de acceso [s,no] 
+Shkar (Hlag) se va hacia sur.
+Sala en ruinas [so,se,s,n] 
+Sala en ruinas: Rampa de ascenso [se,so,s,n] 
+Estatua [n] 
+sigilar se
+sigliar s
+Parece que sigliar s no produjo efecto alguno.
+sigilar s
+Empiezas a descender por las escaleras que hay tras la estatua cuando de forma inesperada tropiezas y caes rodando golpeándote varias veces.
+Guarida oculta: Entrada [n,se] 
+Pvs: (-24) 
+Pvs: (+24) 
+Guarida oculta [e,no] 
+Guarida oculta [ne,se,e,o] 
+Portalón subterráneo [n,-s-] 
+Subterráneo: Rampa [ab,s] 
+desatar cuerda
+sigilar ab
+Subterráneo: Rampa [ab,ar] 
+Subterráneo [ar,n] 
+Charco de sangre
+Subterráneo [s,o] 
+Portalón de las Cobras [|o|,e] 
+ee
+Empiezas a buscar un buen escondite por la zona.
+Pvs: (0) 
+Shkar empieza a formular un hechizo.
+> Empiezas a buscar un buen escondite por la zona.
+estado -b todo
+Finalmente logras colocarte y te escondes perfectamente.
+sc
+ac
+Shkar (Hlag) llega desde el este.
+Shkar examina las defensas de Cobra gigante en busca de un hueco por donde hacer mucho daño con su Hacha Garra de Kraken.
+Shkar tensa sus músculos y golpea doblemente a Cobra gigante con un certero movimiento.
+Shkar (Hlag) se va hacia este.
+Cobra gigante cae al suelo sin vida.
+[Szeks orbita al Limbo]
+Shkar examina las defensas de Cobra gigante en busca de un hueco por donde hacer mucho daño con su Látigo del Fuego Imperecedero.
++ Te mueves en silencio alrededor de Shkar, tensando los músculos de tus cuartos traseros para abalanzarte sobre ella.
+agacharse
+levantarse
+¡Tu maniobra de abalanzarse se ve interrumpida!
+> Te reincorporas.
+d
+[Obtienes 13 puntos de experiencia]
+> Comienzas a formular el hechizo 'Retener persona'.
+Pvs: (-260) 
+[Obtienes 7037 puntos de experiencia]
+Pronuncias el cántico: 'amri xeno haltem'
+¡Shkar resiste los efectos de tu hechizo!
+co
+matar x
+Tras tu dolorosa conversión, te levantas y miras extrañado a tu alrededor desde tu nuevo punto de vista, atónito, te das cuenta de que ahora eres un Cocodrilo.
+> No existe el objetivo shkar,omogunkeji,eleanor,szeks,szylah,dirmahin o ya estás luchando con él.
+er
+Parece que er no produjo efecto alguno.
+Pvs: (+760) 
+e
+g
+* Shkar te lacera con mucha fuerza.
+* Shkar te raja con mucha fuerza.
+# Perforas con increíble potencia a Shkar.
+# Envenenas con poca intensidad a Shkar.
+[Obtienes 45 puntos de experiencia]
+# Hundes tus dientes en el débil cuerpo de Shkar, causándole un terrible dolor con tu mordisco crítico.
+[Obtienes 90 puntos de experiencia]
+Pvs: (0)
+c
+# ¡Alcanzas a Shkar con tu maniobra de zarandear!
+[Obtienes 89 puntos de experiencia]
+os
+Tras tu dolorosa conversión, te levantas y miras extrañado a tu alrededor desde tu nuevo punto de vista, atónito, te das cuenta de que ahora eres un Oso.
+z
+* Shkar te lacera con mucha fuerza y de forma superficial.
+* Shkar te raja con mucha fuerza y de forma superficial.
+# Rajas a Shkar.
+# Rajas con fuerza a Shkar.
+[Obtienes 44 puntos de experiencia]
+Pvs: (-100)
++ Te preparas para ejecutar zarpazo.
+Shkar empieza a centrar sus golpes sobre ti.
+! Shkar se prepara para ejecutar golpecertero sobre ti.
+x
+# ¡Las fauces de Nyel'phax se abren y pronuncian su blasfemia a través de ti, marcando a Shkar con su perniciosa afflicción!
+* Shkar te lacera con fuerza y de forma superficial.
+* ¡Shkar te alcanza con su maniobra de golpecertero!
+[Obtienes 35 puntos de experiencia]
+# ¡Alcanzas a Shkar con tu maniobra de zarpazo!
+[Obtienes 99 puntos de experiencia]
+Pvs: (-668)
+! Shkar se prepara para ejecutar doble golpe sobre ti.
+* Shkar te lacera violentamente.
+Pvs: (-648)
+hi
+dn
+Tras tu dolorosa conversión, te levantas y miras extrañado a tu alrededor desde tu nuevo punto de vista, atónito, te das cuenta de que ahora eres un Hiena.
+> # ¡Alcanzas a Shkar con tu maniobra de dentellada!
+* Shkar te lacera críticamente.
+* Shkar te raja violentamente.
+Shkar te examina.
+# Perforas críticamente a Shkar.
+Pvs: (-249)
+> + Comienzas a moverte tentativamente alrededor de Shkar, buscando un flanco vulnerable para abalanzarte sobre él.
+Pvs: (-320) 
+[El bloqueo 'zarpazo' termina]
+o
+¡Tus objetivos ya no están al alcance de tu abalanzarse!
+Pvs: (+596) 
+Shkar (Hlag) se va hacia oeste.
+Pvs: (+400) 
+* Shkar te aplasta con poca fuerza.
+# Rajas con mucha fuerza a Shkar.
+[Obtienes 52 puntos de experiencia]
+[Obtienes 116 puntos de experiencia]
+Pvs: (+443) 
+s
+> Shkar (Hlag) está aquí.
+[El bloqueo 'dentellada' termina]
+# ¡Alcanzas a Shkar con tu maniobra de dentellada!
+[Obtienes 64 puntos de experiencia]
+Shkar (Hlag) se va hacia arriba.
+Pvs: (+366) 
+[Obtienes 258612 puntos de experiencia]
+bando dies
+[Bueno] Enorthus: dies
+ar
+Cuerpo de Shkar.
+cmc
+Finalmente logras cargar Bolsa de monedas (ciento setenta y nueve monedas de sesiom).
+Empiezas a trepar por la rampa, pero acabas resbalando y caes de bruces contra el suelo.
+Pvs: (-716) 
+[El bloqueo 'mordisco' termina]
+Pvs: (+358) 
+decapitar cuerpo
+Clavas tus garras en el débil cuello de cuerpo de Shkar y con una proeza de fuerza le arrancas la cabeza con buena parte de su columna vertebral todavía unida.
+> Un aura rodeando a Iripza de Banagor brilla con fuerza abrasándote.
+# ¡Alcanzas a Iripza de Banagor con tu maniobra de dentellada!
+[Obtienes 36 puntos de experiencia]
+* Iripza de Banagor te raja con mucha fuerza.
+# Perforas con mucha fuerza a Iripza de Banagor.
+# Envenenas con poca intensidad a Iripza de Banagor.
+[Obtienes 37 puntos de experiencia]
+Pvs: (+506) 
+> * Iripza te golpea con su cola dejándote aturdido.
+Pvs: (-227) 
+gg
+] Un aura rodeando a Iripza de Banagor brilla con fuerza abrasándote.
+# Rajas con fuerza a Iripza de Banagor.
+[Obtienes 43 puntos de experiencia]
+# ¡Alcanzas a Iripza de Banagor con tu maniobra de zarpazo!
+[Obtienes 118 puntos de experiencia]
+Pvs: (-7) 
+# Envenenas a Iripza de Banagor.
+[Obtienes 49 puntos de experiencia]
+Pvs: (+282) 
+[Obtienes 48342 puntos de experiencia]
+Propinas el golpe mortal a Iripza de Banagor.
+Iripza de Banagor cae al suelo sin vida.
+Pvs: (-660) 
+Shkar (Hlag) llega desde el sudoeste.
+El objetivo jakrol no está aquí ahora mismo.
+# Aplastas a Shkar.
+# Laceras con mucha fuerza a Shkar.
+[Obtienes 21 puntos de experiencia]
+so
+Palacio: Pasillo hacia la capilla [-ne-,|s|] 
+Shkar (Hlag) llega desde el noreste.
+No estás afectado por el polimorfismo para necesitar terminarlo.
+> * Shkar te lacera con mucha fuerza.
+* Shkar te lacera con fuerza.
+Comienzas a formular el hechizo 'Retener persona'.
+Estás realizando los movimientos de un hechizo, tus manos están ocupadas.
+Pvs: (-1022) 
+Pvs: (-685) 
+Palacio: Capilla [-so-] 
+Pvs: (+478) 
+> ! Shkar se prepara para ejecutar golpecertero sobre ti.
+Pvs: (+660) 
+cn
+Empiezas a centrar tus golpes sobre Shkar.
+> + Te preparas para ejecutar zarpazo.
+* Logras parar el ataque de Shkar.
+# Envenenas críticamente a Shkar.
+[Obtienes 60 puntos de experiencia]
+[Obtienes 108 puntos de experiencia]
+Pvs: (-449) 
+Pvs: (-762) 
+> Comienzas a serpentear alrededor de Shkar, buscando puntos ciegos por donde puedas agarrarle con tus temibles fauces.
+* Shkar te raja críticamente.
+Tu poder mágico vuelve a su estado normal.
+[Obtienes 91 puntos de experiencia]
+Pvs: (+28) 
+# Perforas a Shkar.
+[Obtienes 33 puntos de experiencia]
+# ¡Te abalanzas sobre un costado de Shkar, destrozándole con tres ataques de tus Garras y dientes!
+[Obtienes 112 puntos de experiencia]
+Pvs: (-768) 
+* Shkar te lacera violentamente y de forma superficial.
+# Perforas violentamente a Shkar.
+Pvs: (-545) 
+[Cruzada_eralie] Palafrenero de la Cruzada: ¡Enorthus ha asesinado a shkar!
+[Obtienes 344117 puntos de experiencia]
+Propinas el golpe mortal a Shkar.
+Shkar ha muerto.
+Shkar cae al suelo sin vida.
+Shkar da un grito desgarrador antes de que su espíritu abandone Eirea.
+Finalmente logras cargar Bolsa de monedas (once monedas de plata).
+Linde Este del Bosque de Orgoth- Cruce de Ëarmen [o,so,e,no] 
+No hay nadie aquí reconocible como zhorkh,faethyra,rexythor,crayren,blanqespina,wyrmoor,grashk,opriktouj,jacobus,szysxs.
+Zhorkh (Hlag) llega desde el sudoeste seguido de Esqueleto Calcinado y Esqueleto.
+# Perforas violentamente a Zhorkh.
+# Envenenas a Zhorkh.
+Pvs: (+760) Pe: 767/1309 (0)
+Camino de Amonmen [se,no] 
+Camino de Amonmen [ne,se,no] 
+[El bloqueo 'Curar heridas ligeras' termina]
+Zhorkh (Hlag) está aquí.
+Linde Este del Bosque de Orgoth- Dinmen [o,e] 
+Senda del Alba [o,n,e] 
+Estás siendo atacado por Crayren.
+# Crayren consigue esquivar tu ataque.
+Pvs: (-639) Pe: 766/1309 (0)
+Zhorkh (Hlag) se va en dirección este seguido de Esqueleto Calcinado y Esqueleto.
+Zhorkh (Hlag) y Crayren (Gob) están aquí.
+* Crayren te raja con mucha fuerza.
+* Crayren te perfora críticamente.
+* Crayren te alcanza con varios tajos de su Espada Azul, hiriéndote superficialmente en hocico.
+* Te tambaleas cuando Crayren te alcanza con una serie de golpes consecutivos de su Espada Azul en hocico.
+* Crayren te alcanza con varios tajos de su Espada Azul, hiriéndote superficialmente en patas delanteras.
+* Te tambaleas cuando Crayren te alcanza con una serie de golpes consecutivos de su Espada Azul en patas traseras.
+* ¡La Espada Azul de Crayren te fustiga con energía con su magia de magico!
+Zhorkh tensa sus músculos y golpea doblemente a Crayren con un certero movimiento.
+Pvs: (-1675) Pe: 765/1309 (-1)
+Zhorkh (Hlag) llega desde el este seguido de Esqueleto Calcinado y Esqueleto.
+[Obtienes 39 puntos de experiencia]
+Pvs: (+326) Pe: 764/1309 (-1)
+* Zhorkh te lacera violentamente.
+* Zhorkh te perfora violentamente.
+Crayren (Gob) llega desde el este.
+] Pvs: (-625) Pe: 765/1309 (+1)
+Camino de Amonmen [se,n] 
+Pvs: (+259) Pe: 765/1309 (0)
+Camino de Amonmen [ne,s,no] 
+cme
+Comienzas a formular el hechizo 'Curar heridas moderadas'.
+Pvs: (-760) Pe: 765/1309 (0)
+Pronuncias el cántico: 'magius modus curis'
+Curas algunas de tus heridas más moderadas.
+[Obtienes 369 puntos de experiencia]
+Pvs: (+1602) Pe: 765/1309 (0)
+mnick x crayren
+! Zhorkh se prepara para ejecutar tajar sobre ti.
+] Pvs: (+222) Pe: 761/1309 (0)
+cle
+Comienzas a formular el hechizo 'Curar heridas ligeras'.
+Pronuncias el cántico: 'magius elis curis'
+Curas algunas de tus heridas más ligeras.
+[Obtienes 101 puntos de experiencia]
+Pvs: (+530) Pe: 762/1309 (+1)
+[El bloqueo 'Naturalizar' termina]
+[El bloqueo 'Curar heridas moderadas' termina]
+b
+Empiezas a inspeccionar la zona en busca de algo que no hayas visto.
+Crayren (Gob) se va hacia este.
+El objetivo crayren,zhorkh,faethyra,rexythor,blanqespina,wyrmoor,grashk,opriktouj,jacobus,szysxs no está aquí ahora mismo.
+Crayren (Gob) está aquí.
+Senda del Alba [ne,o] 
+Restos putrefactos de Humano.
+Pvs: (-652) Pe: 760/1309 (-1)
+* Crayren te raja con increíble potencia.
+Pvs: (+327) Pe: 760/1309 (0)
+Crayren (Gob) se va hacia oeste.
+> Estás persiguiendo a Crayren.
+No hay nadie aquí reconocible como crayren,zhorkh,faethyra,rexythor,blanqespina,wyrmoor,grashk,opriktouj,jacobus,szysxs.
+Pvs: (+306) Pe: 759/1309 (0)
+Has usado el poder del anillo recientemente y has de descansar antes de someterte de nuevo a sus influjos.
+Pvs: (+325) Pe: 758/1309 (-1)
+# Rajas con mucha fuerza a Crayren.
+# Envenenas con poca intensidad a Crayren.
+[Obtienes 31 puntos de experiencia]
+# ¡Alcanzas a Crayren con tu maniobra de zarpazo!
+Pvs: (+248) Pe: 751/1309 (-7)
+Pvs: (-335) Pe: 751/1309 (0)
+Senda del Alba [so,ne] 
+Pvs: (-366) Pe: 751/1309 (+1)
+Crayren (Gob) se va hacia noreste.
+Senda del Alba [so,e] 
+Cuerpo de Lancero y Lanza.
+Senda del Alba [se,ne,o] 
+* Logras esquivar el ataque de Crayren.
+Senda del Alba [so,n] 
+[Obtienes 87 puntos de experiencia]
+Pvs: (+147) Pe: 751/1309 (0)
+Empiezas a centrar tus golpes sobre Crayren.
+Pvs: (+260) Pe: 737/1309 (0)
+seguir crayren
+Intentas seguir a Crayren, pero te da esquinazo.
++ Comienzas a moverte tentativamente alrededor de Crayren, buscando un flanco vulnerable para abalanzarte sobre él.
+# Rajas con fuerza a Crayren.
+# Perforas con fuerza a Crayren.
+[Obtienes 47 puntos de experiencia]
+# ¡Te abalanzas sobre un costado de Crayren, destrozándole con un ataque y un crítico de tus Garras y dientes!
+bando senda sur coluna
+[Bueno] Enorthus: senda sur coluna
+# Rajas violentamente a Crayren.
+[El bloqueo 'Tentáculo tumefacto' termina]
+[Obtienes 68 puntos de experiencia]
+Pvs: (+400) Pe: 726/1309 (-11)
+[Cruzada_eralie] Palafrenero de la Cruzada: ¡Enorthus ha asesinado a crayren!
+[Obtienes 232069 puntos de experiencia]
+Propinas el golpe mortal a Crayren.
+Crayren ha muerto.
+Crayren cae al suelo sin vida.
+Crayren da un grito desgarrador antes de que su espíritu abandone Eirea.
+Finalmente logras cargar Bolsa de monedas (tres platas, dos sesioms, siete olotas y treinta monedas de platino).
+Clavas tus garras en el débil cuello de cuerpo de Crayren y con una proeza de fuerza le arrancas la cabeza con buena parte de su columna vertebral todavía unida.
+[Obtienes 2 puntos de experiencia]
+Cultivos Pantanosos [n,o,e] 
+Cultivos Pantanosos [n,e] 
+Cultivos Pantanosos [e,s] 
+Droock (Hlag) está aquí.
+Cultivos Pantanosos [n,o,e,so,s] 
+Esclavo Minotauro cae al suelo sin vida.
+Pvs: 4921/4921 (0) Pe: 1406/1408 (-2)
+Droock (Hlag) se va hacia oeste.
+cc
+[Chat] Enorthus: pero con alguna aplicacion para remapear teclas o como xd
+[Odihbyr Baelzhemon orbita al Limbo]
+[Chat] Enorthus: o bueno igual ni se entero
+chat xd
+[Chat] Enorthus: xd
+[Obtienes 20 puntos de experiencia]
+Cultivos Pantanosos [no,n,o,e,so] 
+[Chat] Zaycael: Acechando el Miedo:: si loco
+[Chat] Zaycael: Acechando el Miedo:: ahora ya puedo hasta sigilar xd
+[Chat] Trotix: total para jugar el barbaro q ni cabalga ni sigila
+Droock (Hlag) llega desde el este.
+Droock logra parar críticamente el ataque de Esclavo Minotauro.
+] Cultivos Pantanosos [n,e,s] 
+Cultivos Pantanosos [n,e,s,se] 
+] Cultivos Pantanosos [n,o,e,s] 
+Pvs: 4791/4791 (-130) Pe: 1407/1408 (-1)
+formular vigor natural
+Comienzas a formular el hechizo 'Vigor natural'.
+cobardia 0
+Reúnes las fuerzas del animal de tu interior para formular el hechizo 'Vigor natural'.
+[Chat] Zaycael: Acechando el Miedo:: cabron xd
+nick yy droock
+> Reúnes las fuerzas del animal de tu interior para formular el hechizo 'Vigor natural'.
+Dices en adurn: 'raalander natura temporis'
+Terminas tu hechizo 'Vigor natural' y te sientes lleno de una energía inagotable. Crees que podrías correr hasta el fin del mundo sin cansarte.
+formular sutileza del metamorfo
+Comienzas a formular el hechizo 'Sutileza del metamorfo'.
+[Chat] Droock: total para visitar soele que mas le da
+Reúnes las fuerzas del animal de tu interior para formular el hechizo 'Sutileza del metamorfo'.
+[Chat] Droock: XDDDD
+Dices en adurn: 'maxima corpuus inmander natura'
+Tu hechizo de 'Sutileza del metamorfo' termina y sientes al instante todas las sensaciones que recorren cada nervio, cada centímetro interno o externo de tu ser. Tanta
+formular canto:enorthus
+Comienzas a formular el hechizo 'Canto'.
+Pronuncias el cántico: 'acerbace unos baletis'
+[Obtienes 40 puntos de experiencia]
+gra
+ben
+Comienzas a formular el hechizo 'Bendicion'.
+Pronuncias el cántico: 'bleiso umanos'
+[Obtienes 42 puntos de experiencia]
+Pvs: 4921/4921 (+130) Pe: 1370/1408 (-38)
+quitarse nerbrad
+[El bloqueo 'Canto' termina]
+nick yy
+Cultivos Pantanosos [n,ne,o,e,s,se] 
+Cultivos Pantanosos [no,n,o,e,s] 
+Cultivos Pantanosos [n,o,e,s,se] 
+[El bloqueo 'Bendicion' termina]
+No estás equipado con nerbrad.
+> [El bloqueo 'Sutileza del metamorfo' termina]
+Droock (Hlag) llega desde el oeste.
+Cola de comandos borrada ('peleas parar' detendrá los combates si es lo que querías).
+Cultivos Pantanosos [n,ne,o,e,s] 
+] Cultivos Pantanosos [n,ne,o,e,so,s] 
+Parece que este no produjo efecto alguno.
+[El bloqueo 'Vigor natural' termina]
+enr
+Comienzas a formular el hechizo 'Enredar'.
+Pvs: 4791/4791 (-130) Pe: 1374/1408 (+4)
+Pronuncias el cántico: 'enredus ogjta'
+[Obtienes 306 puntos de experiencia]
+mo
+Tras tu dolorosa conversión, te levantas y miras extrañado a tu alrededor desde tu nuevo punto de vista, atónito, te das cuenta de que ahora eres un Mono.
+Pvs: 4661/4661 (-130) Pe: 1358/1408 (-16)
+Pvs: 4921/4921 (+260) Pe: 1386/1408 (+28)
+Parece que zarandear no produjo efecto alguno.
+i
+q
+Parece que q no produjo efecto alguno.
+Pvs: 4921(4921)  Pe: 1397(1408)  Fe: 95(210)  Po: 0  Xp: 15968598  Psoc: 1000
+acechar o
+Puedes ver tres salidas: norte, oeste y este.
+No estás suficientemente calmado.
++ Te mueves en silencio alrededor de Droock, tensando los músculos de tus cuartos traseros para abalanzarte sobre él.
+Droock logra esquivar el ataque de Esclava Minotauro.
+Esclava Minotauro cae al suelo sin vida.
+Estás siendo atacado por Guardia Lagarto.
+# ¡Te abalanzas sobre un costado de Droock, destrozándole con tres ataques de tus Garras y dientes!
+# Rajas con fuerza a Guardia Lagarto.
+# Perforas a Guardia Lagarto.
+# Enfermas con poca intensidad a Guardia Lagarto.
+! Droock se prepara para ejecutar destripar sobre ti.
+El destino de tu hechizo está fuera de alcance.
+Pvs: 4791/4791 (-130) Pe: 1382/1408 (-18)
+Parece que zarpazo x no produjo efecto alguno.
+Droock (Hlag) se va hacia norte.
+No hay nadie aquí reconocible como sslik,droock,trotix,temmins,ivash,sorz,borghild,myresh,kaluk,joisan,odihbyr.
+Pvs: 5321/5321 (+530) Pe: 1382/1408 (0)
+sg
+> Comienzas a serpentear alrededor de Droock, buscando puntos ciegos por donde puedas agarrarle con tus temibles fauces.
+Pvs: 5421/5421 (+100) Pe: 1382/1408 (0)
+Droock (Hlag) se va hacia sur.
+Droock (Hlag) se va hacia este.
+> Pvs: 4791/4791 (-630) Pe: 1380/1408 (+1)
+[El bloqueo 'Retener persona' termina]
+] Comienzas a seguir a Droock.
+> # Aplastas con poca fuerza a Droock.
+[Obtienes 14 puntos de experiencia]
+# Aplastas con poca fuerza a Droock.
+> + Comienzas a moverte tentativamente alrededor de Droock, buscando un flanco vulnerable para abalanzarte sobre él.
+> Droock te da esquinazo.
+# ¡Te abalanzas sobre un costado de Droock, destrozándole con cuatro ataques de tus Garras y dientes!
+Pvs: 4921/4921 (+130) Pe: 1370/1408 (-10)
+* Droock te raja de forma superficial.
+* Droock te raja violentamente.
+Droock (Hlag) llega desde el sur.
+* ¡Droock te alcanza criticamente con su maniobra de destripar!
+¡El golpe de Droock te eviscera el hocico!
+Pvs: 3895/5321 (-1026) Pe: 1360/1408 (0)
+¡Tus objetivos ya no están al alcance de tu zarpazo!
+Cultivos Pantanosos [n,o,e,so,s,se] 
+[Aetherius orbita al Limbo]
+# ¡Alcanzas a Droock con tu maniobra de zarpazo!
+[Obtienes 100 puntos de experiencia]
+> Te relames los dientes anticipando tu próximo mordisco, ¡que no será este!, ¡hace muy poco que has comido!
+Pvs: 3995/5421 (+100) Pe: 1346/1408 (-7)
+> + Te preparas para ejecutar dentellada.
+Pvs: 4215/5641 (+220) Pe: 1346/1408 (0)
+¡Tus objetivos ya no están al alcance de tu dentellada!
+* Droock te raja con mucha fuerza.
+* Droock te raja violentamente y de forma superficial.
+# Perforas violentamente a Droock.
+# Enfermas con poca intensidad a Droock.
+[Obtienes 54 puntos de experiencia]
+Pvs: 3790/5641 (-425) Pe: 1336/1408 (0)
++ Te preparas para ejecutar dentellada.
+# ¡Alcanzas a Droock con tu maniobra de dentellada!
+[Obtienes 28 puntos de experiencia]
+Ignorando 'dentellada x'. No puedes ejecutar más acciones de ese tipo durante este turno.
+Pvs: 3849/5641 (+59) Pe: 1327/1408 (-9)
+> Necesitarás acumular un poco más de fuerza para descargar otro zarpazo como el anterior.
+> Droock comienza a serpentear a tu alrededor mientras se relame, buscando puntos ciegos en tus defensas.
+* Droock te raja con mucha fuerza y de forma superficial.
+> Pvs: 3015/5191 (-834) Pe: 1327/1408 (0)
+[Obtienes 412 puntos de experiencia]
+Pvs: 3964/5191 (+949) Pe: 1327/1408 (0)
+Cultivos Pantanosos [no,o,s] 
+> Estás persiguiendo a Droock.
+Pvs: 4236/5721 (+272) Pe: 1324/1408 (0)
+] Intentas seguir a Droock, pero te da esquinazo.
+] + Te preparas para ejecutar zarpazo.
+* Droock te raja con fuerza y de forma superficial.
+* Droock te lacera con mucha fuerza.
+[Gudmair Throril Partepiedras orbita al Limbo]
+> Ignorando 'zarpazo x'. No puedes ejecutar más acciones de ese tipo durante este turno.
+Pvs: 3684/5721 (-552) Pe: 1317/1408 (-7)
+] Droock (Hlag) está aquí.
+] Agotado, eres incapaz de continuar manteniendo tu polimorfismo y vuelves a tu raza original.
+Pvs: 3154/5191 (-530) Pe: 1310/1408 (-7)
+[Obtienes 502 puntos de experiencia]
+Pvs: 4361/5191 (+1207) Pe: 1311/1408 (+1)
+cl
+Comienzas a formular el hechizo 'Columna de fuego'.
+ba
+Pronuncias el cántico: 'flamious os colus'
+¡Invocas una columna de fuego sobre Droock que le alcanza parcialmente!
+[Obtienes 130 puntos de experiencia]
+> # Aplastas a Droock.
+[Obtienes 16 puntos de experiencia]
+re
+El objetivo sslik,droock,trotix,temmins,ivash,sorz,borghild,myresh,kaluk,joisan,odihbyr no está aquí ahora mismo.
+> [El bloqueo 'Curar heridas ligeras' termina]
+Parece que noreste no produjo efecto alguno.
+Parece que sudeste no produjo efecto alguno.
+Parece que norte no produjo efecto alguno.
+[El bloqueo 'Columna de fuego' termina]
+Cultivos Pantanosos [n,o,s,se] 
+Cultivos Pantanosos [o,e,so,se] 
+> ¡El boquete que tienes en el hocico deja caer un chorro de sangre y carne triturada en el suelo!
+Pvs: 4282/5191 (-79) Pe: 1305/1408 (-5)
+Cultivos Pantanosos [no,n,o,so,s,se] 
+case
+Pvs: 4474/5381 (+192) Pe: 1290/1408 (-15)
+] Orilla oeste del río Iaurduin [s,e] 
+] Ya estás levantado.
+Pvs: 4299/5191 (-175) Pe: 1286/1408 (+1)
+] Comienzas a formular el hechizo 'Curar heridas ligeras'.
+vendar hocico
+[Obtienes 376 puntos de experiencia]
+Pvs: 5191/5191 (+892) Pe: 1286/1408 (0)
+cic enorthus
+] No tienes ninguna herida sangrante menor.
+] Camino a los Cultivos de Maíz [ne,no] 
+chat ] Comienzas a formular el hechizo 'Curar heridas ligeras'.
+[Chat] Enorthus: ] Comienzas a formular el hechizo 'Curar heridas ligeras'.
+chat uis
+[Chat] Enorthus: uis
+[Chat] Enorthus: Te vendas tu hocico.
+[Chat] Enorthus: en to la boca xd
+Cultivos Pantanosos [n,ne,o,e,so,s] 
+Pvs: 5721/5721 (+530) Pe: 1286/1408 (+1)
+> Pvs: 5191/5191 (-530) Pe: 1286/1408 (0)
+Pvs: 5191/5191 (0) Pe: 1286/1408 (0)
+> Cultivos Pantanosos [n,ne,o,e,se] 
+> Pvs: 5721/5721 (+530) Pe: 1286/1408 (+1)
+] Cultivos Pantanosos [ne,o] 
+> [El bloqueo 'carrera' termina]
+> Pvs: 5721/5721 (0) Pe: 1287/1408 (+1)
+Cultivos Pantanosos [no,n,ne,o,e,s] 
+Cultivos Pantanosos [o,e,s] 
+Cultivos Pantanosos [ne,e,se] 
+> Estás persiguiendo a Guardia Lagarto.
+Cultivos Pantanosos [ne,e,so] 
+Pvs: 5618/5721 (-103) Pe: 1288/1408 (+1)
+Parece que noroeste no produjo efecto alguno.
+Cultivos Pantanosos [n,e,so] 
+[Chat] Droock: podrias dejarme terminar digo yo
+Cultivos Pantanosos [ne,e,s] 
+Tu capa derrama parte de la sangre que la recubre sobre el suelo.
+[Chat] Enorthus: esto es como las pajas, si aguantas más luego el orgasmo es mejor
+chat xddd
+[Chat] Enorthus: xddd
+Parece que sur no produjo efecto alguno.
+Cultivos Pantanosos [no,n,e] 
+Zaycael te dice:   era instalando un probama
+Zaycael te dice:   karabiner elment
+[Chat] Kaluk: claro, aprietate los huevos y verás luego.
+[Chat] Borghild: ValKnut  contra quien te das mama osa
+[Chat] Kaluk: tírate del escroto lagartil
+Zaycael te dice:   me ha salvado la vida xd
+[Chat] Myresh: y el otro lame pijas xD
+[Chat] Enorthus: una lagartija sin cola
+Zaycael te dice:   yyo tambien le pregunte, y me descargue el karabiner, pero luego habia que configurarlo y cambiar unas cosas
+Zaycael te dice:   y e lo hizo jaja
+> # Rajas con fuerza a Guardia Lagarto.
+# Rajas con mucha fuerza a Guardia Lagarto.
+# Enfermas débilmente a Guardia Lagarto.
+[Obtienes 72 puntos de experiencia]
+Zaycael te dice:   si
+Camino a los Cultivos de Maíz [s,e] 
+Zaycael te dice:   creo que sabe hasta mi contraseña xd
+[Chat] Rength: me da un poco de miedo la misión espadas cortas para anduar
+[Chat] Borghild: ValKnut  va chapao? le haces algo?
+[Chat] Droock: lag
+[El bloqueo 'Enredar' termina]
+Zaycael te dice:   si luevo veis a un odhibyr muy bueno, a mejor es el xd
+[Chat] Borghild: ValKnut  si no va chapao imagino q come bien
+[Chat] Rength: no va a entregar por error espadas del inventario no?
+Zaycael te dice:   jajaja
+[Chat] Rength: tipo azul aire luna borgoña?
+[Chat] Myresh: metelas en mochila xD
+Pvs: 5233/5321 (-385) Pe: 1298/1408 (+10)
+peleas parar
+Empiezas a calmarte y reconsiderar a tus enemigos...
+Pvs: 4791/4791 (-442) Pe: 1299/1408 (+1)
+Zaycael te dice:   digo la del mud
+Finalmente logras calmarte y olvidas tus peleas con Droock y cuatro Guardias.
+[Chat] Rength: vale como provisional eso está bien, pero alguna certeza de que no va a suceder?
+Pvs: 5321/5321 (+530) Pe: 1298/1408 (0)
+[Chat] Rength: tipo identifica solo las armas conocidas como espada corta baseops?
+k x
+# Rajas a Droock.
+# Rajas con poca fuerza a Droock.
+[Obtienes 34 puntos de experiencia]
+Droock comienza a serpentear a tu alrededor mientras se relame, buscando puntos ciegos en tus defensas.
+[Obtienes 96 puntos de experiencia]
+> Droock (Hlag) está aquí.
++ Comienzas a moverte tentativamente alrededor de Droock, buscando un flanco vulnerable para abalanzarte sobre él.
+] Estás persiguiendo a Droock.
+> Pvs: 4921/4921 (-400) Pe: 1284/1408 (-14)
+# ¡Te abalanzas sobre un sorprendido Droock y le despedazas con tres ataques de tus Garras y dientes!
+[Obtienes 152 puntos de experiencia]
+* ¡Logras esquivar a Droock y su destripar!
+Droock empieza a centrar sus golpes sobre ti.
+> El objetivo sslik,droock,trotix,temmins,ivash,sorz,borghild,myresh,kaluk,joisan,odihbyr no está aquí ahora mismo.
+Ignorando 'formular retener persona:x'. No puedes ejecutar más acciones de ese tipo durante este turno.
+Pvs: 4791/4791 (-130) Pe: 1273/1408 (0)
+Has agotado la energía necesaria para formular 'Retener persona' y debes descansar antes de poder usar ese tipo de energía.
+> [El bloqueo 'zarpazo' termina]
+Intentas seguir a Droock, pero te da esquinazo.
+No hay nadie en tu entorno.
+> [El bloqueo 'Retener persona' termina]
+> [El bloqueo 'abalanzarse' termina]
+] Orilla oeste del río Iaurduin [se,n] 
+] Orilla oeste del río Iaurduin [so,n] 
+[Chat] Kaluk: dejalas en suelo todas las espadas, coge la azul y aire y mira a ver si te las cuenta en la libreta
+[Chat] Enorthus: no creo que las entregue
+[Chat] Rength: ya no va a contar, ya las he cogido todas
+[Chat] Droock: que pesaito
+> Cultivos Pantanosos [n,ne,o,e,so,s] 
+> Pvs: 4921/4921 (+130) Pe: 1280/1408 (+7)
+[Chat] Enorthus: podria seguir sigilando e
+[Chat] Enorthus: te estoy yendo a pecho descubierto
+chat encima xd
+[Chat] Enorthus: encima xd
+[Chat] Droock: pera que termine y te doy amor
+Parece que oeste no produjo efecto alguno.
+[Chat] Enorthus: me mola mas asi
+[Vaenes orbita al Limbo]
+on
+Parece que on no produjo efecto alguno.
+> Estás siendo atacado por Guardia Lagarto.
+Pvs: 5321/5321 (+400) Pe: 1287/1408 (+7)
+] No hay nadie aquí reconocible como sslik,droock,trotix,temmins,ivash,sorz,borghild,myresh,kaluk,joisan,odihbyr.
+] ! Droock se prepara para ejecutar destripar sobre ti.
+> # Rajas críticamente a Droock.
+[Obtienes 74 puntos de experiencia]
+Pvs: 5421/5421 (+100) Pe: 1283/1408 (-4)
+* Droock te raja con poca fuerza.
+[Obtienes 50 puntos de experiencia]
+# Perforas críticamente a Droock.
+Pvs: 5161/5241 (-260) Pe: 1273/1408 (-10)
+Pvs: 4841/4921 (-320) Pe: 1273/1408 (0)
+# ¡Te abalanzas sobre un sorprendido Droock y le despedazas con cuatro ataques de tus Garras y dientes!
+[Obtienes 134 puntos de experiencia]
+* Droock se abalanza sobre ti y te muerde con sus poderosas fauces.
+# Perforas débilmente a Droock.
+Pvs: 4311/4921 (-530) Pe: 1262/1408 (-1)
+Droock logra esquivar el ataque de Esclavo Goblin.
+Pvs: 4148/4921 (-163) Pe: 1262/1408 (0)
+Parece que polimorfarse acabar no produjo efecto alguno.
+* Droock te raja con increíble potencia.
+# Aplastas débilmente a Droock.
+[Obtienes 6 puntos de experiencia]
+Pvs: 3533/4791 (-615) Pe: 1262/1408 (0)
+Dices en adurn: 'amri xeno haltem'
+Logras zafarte del mordisco de Droock.
+Pvs: 3704/5191 (+171) Pe: 1262/1408 (0)
+Ignorando 'zarpazo x'. No puedes ejecutar más acciones de ese tipo durante este turno.
+[Obtienes 84 puntos de experiencia]
+# Rajas críticamente a Droock.
+Pvs: 4234/5721 (+530) Pe: 1252/1408 (0)
+Ignorando 'mordisco x'. No puedes ejecutar más acciones de ese tipo durante este turno.
+Pvs: 4334/5821 (+100) Pe: 1245/1408 (0)
+# Muerdes a Droock en una pierna, destrozándole carne y huesos.
++ Te preparas para ejecutar zarandear.
+Ignorando 'zarandear'. No puedes ejecutar más acciones de ese tipo durante este turno.
+# ¡Alcanzas a Droock con tu maniobra de zarandear!
+# Perforas con mucha fuerza a Droock.
+# Enfermas débilmente a Droock.
+# Laceras a Droock.
+[Obtienes 18 puntos de experiencia]
+Pvs: 4234/5721 (-100) Pe: 1224/1408 (-18)
+# Aplastas a Droock.
+Pvs: 3704/5191 (-530) Pe: 1224/1408 (0)
+Comienzas a formular el hechizo 'Relámpago'.
+Ignorando 'formular relampago:x'. No puedes ejecutar más acciones de ese tipo durante este turno.
+Pronuncias el cántico: 'elect xen cefit'
+# ¡El cielo ruge cuando invocas un relámpago que cae sobre Droock!
+[Obtienes 262 puntos de experiencia]
+Pvs: 4234/5721 (+530) Pe: 1204/1408 (-13)
+> * Droock te raja con mucha fuerza.
+Pvs: 3879/5721 (-355) Pe: 1191/1408 (-6)
+[Obtienes 138 puntos de experiencia]
+[Obtienes 46 puntos de experiencia]
+Pvs: 3483/5321 (-396) Pe: 1185/1408 (-6)
+# Perforas a Droock.
+[El bloqueo 'Relámpago' termina]
+> [El bloqueo 'mordisco' termina]
+# Rajas a Guardia Lagarto.
+[Obtienes 122 puntos de experiencia]
+> Pvs: 3885/5721 (+402) Pe: 1164/1408 (-21)
+Pvs: 3564/5721 (-321) Pe: 1164/1408 (0)
+> * Droock te raja violentamente y de forma superficial.
+* Droock te lacera de forma superficial.
+Pvs: 2831/5641 (-733) Pe: 1147/1408 (-17)
+] Comienzas a formular el hechizo 'Curar heridas moderadas'.
+> Pvs: 2381/5191 (-450) Pe: 1148/1408 (+1)
+[Chat] Rength: a ver si encuentro en el suelo un bastón del martirizador que darle a elrich
+[Obtienes 484 puntos de experiencia]
+> Pvs: 3510/5191 (+1129) Pe: 1148/1408 (0)
+[Chat] Rength: xdd
+can
+> Pvs: 3700/5381 (+190) Pe: 1132/1408 (-13)
+[Chat] Rength: lo peor es que vale lo mismo que el de chamdar
+> Pvs: 4040/5721 (+340) Pe: 1127/1408 (0)
+Pvs: 3510/5191 (-530) Pe: 1127/1408 (0)
+[Obtienes 438 puntos de experiencia]
+Pvs: 4524/5191 (+1014) Pe: 1127/1408 (0)
+[Chat] Droock: menudo retener mas largo
+[Obtienes 286 puntos de experiencia]
+Pvs: 5061/5061 (+537) Pe: 1124/1408 (0)
+[Chat] Enorthus: como mi...
+> [El bloqueo 'Curar heridas moderadas' termina]
+cgat
+Parece que cgat no produjo efecto alguno.
+[Chat] Grender: Subi a nivel 20!
+chat wooo
+[Chat] Enorthus: wooo
+Pvs: 5721/5721 (+660) Pe: 1127/1408 (+3)
+[Obtienes 110 puntos de experiencia]
+> # Rajas a Droock.
+Ignorando 'formular columna de fuego:x'. No puedes ejecutar más acciones de ese tipo durante este turno.
+Pvs: 5191/5191 (-530) Pe: 1121/1408 (+1)
+> Pvs: 4788/5191 (-403) Pe: 1121/1408 (0)
+te aqui
+] Comienzas a formular el hechizo 'Terremoto'.
+] No estás empuñando cetro.
+] No tienes manos libres para empuñar nada más.
+Pvs: 4449/5191 (-339) Pe: 1114/1408 (0)
+Posas las manos en el suelo e invocas fervientemente al poder de la piedra, creando un terrible terremoto contigo como epicentro.
+Estás siendo atacado por Esclava Humana.
+[Obtienes 250 puntos de experiencia]
+* ¡Droock te alcanza con su maniobra de destripar!
+¡El golpe de Droock te eviscera una mano!
+Pvs: 3505/5191 (-944) Pe: 1092/1408 (-22)
+No estás empuñando cetro.
+No tienes manos libres para empuñar nada más.
+[Obtienes 10 puntos de experiencia]
+Pvs: 3129/5191 (-376) Pe: 1092/1408 (0)
+Parece que polimorfarse oso no produjo efecto alguno.
+Pvs: 2684/5191 (-445) Pe: 1079/1408 (0)
+* Droock te raja críticamente.
+Droock te examina.
+Pvs: 1927/5191 (-757) Pe: 1079/1408 (0)
+¡El boquete que tienes en una mano deja caer un chorro de sangre y carne triturada en el suelo!
+Pvs: 2167/5721 (+240) Pe: 1073/1408 (-6)
+* Droock te raja.
+[Obtienes 32 puntos de experiencia]
+Pvs: 1861/5641 (-306) Pe: 1064/1408 (-9)
+> Ignorando 'abalanzarse x'. No puedes ejecutar más acciones de ese tipo durante este turno.
+[Zaycael orbita al Limbo]
+[Obtienes 126 puntos de experiencia]
+Pvs: 380/5321 (-1481) Pe: 1055/1408 (-9)
+[Balrek orbita al Limbo]
+# Rajas a Esclava Humana.
+# Perforas con fuerza a Esclava Humana.
+# Enfermas con poca intensidad a Esclava Humana.
+[Obtienes 56 puntos de experiencia]
+[Obtienes 4572 puntos de experiencia]
+Propinas el golpe mortal a Esclava Humana.
+Esclava Humana cae al suelo sin vida.
+stpo
+Parece que stpo no produjo efecto alguno.
+Droock (Hlag) llega desde el norte.
+Grender te dice: Nunca se me va el resfriado, ¿hay que hacer algo especial? jaja
+Pvs: 511/5191 (+131) Pe: 1055/1408 (0)
+[Obtienes 8 puntos de experiencia]
+Pvs: 235/5191 (-276) Pe: 1055/1408 (0)
+Cultivos Pantanosos [no,n,ne,o,e,so,s,se] 
+[Obtienes 238 puntos de experiencia]
+Pvs: 784/5191 (+549) Pe: 1056/1408 (+1)
+[Obtienes 526 puntos de experiencia]
+Pvs: 2019/5191 (+1235) Pe: 1055/1408 (0)
+[Chat] Droock: a cuanto
+¡Invocas una columna de fuego sobre Droock!
+* Logras esquivar el ataque de Droock.
+Pvs: 1870/5321 (-149) Pe: 1046/1408 (-6)
+[Cruzada_eralie] Palafrenero de la Cruzada: ¡Enorthus ha asesinado a droock!
+[Obtienes 402998 puntos de experiencia]
+Propinas el golpe mortal a Droock.
+Droock ha muerto.
+Droock cae al suelo sin vida.
+Droock da un grito desgarrador antes de que su espíritu abandone Eirea.
+[Obtienes 36 puntos de gloria]
+[Chat] Droock: ups
+[Chat] Droock: como te odio
+[Chat] Enorthus: dios que intenso xd
+chat a 300
+[Chat] Enorthus: a 300
+[Chat] Enorthus: y quede stun e
+[Chat] Droock: a cuanto te deje
+Grimoszk: Calles [se,n,no] 
+Grimoszk: Plaza Pública [ar,|o|,so,ne,no] 
+> [El bloqueo 'Resistir mal' termina]
+sigilar ar
+Entrada al Templo de Ozomatli [-e-,ab] 
+> Te acercas con pasos inquietos a la entrada franqueada por las estatuas.
+Pvs: 4661/4661 (-260) Pe: 1403/1408 (+1)
+* Guardián del Templo te aplasta débilmente y de forma superficial.
+* Logras esquivar el ataque de Guardián del Templo.
+Pvs: 4641/4661 (-20) Pe: 1404/1408 (+1)
+! Guardián del Templo se prepara para ejecutar embestir sobre ti.
+! Guardián del Templo se prepara para ejecutar aplastar sobre ti.
+ab
+Pvs: 4791/4791 (+150) Pe: 1404/1408 (0)
+ga
+> Parece que ga no produjo efecto alguno.
+Pvs: 4921/4921 (+130) Pe: 1403/1408 (0)
+unick x guardias
+gar
+nickear x matar
+unick x guardianes
+No estás empuñando espolon.
++ Te mueves en silencio alrededor de Guardián del Templo, tensando los músculos de tus cuartos traseros para abalanzarte sobre él.
+# ¡Te abalanzas sobre un sorprendido Guardián del Templo y le despedazas con cuatro ataques de tus Garras y dientes!
+[Obtienes 191 puntos de experiencia]
+# Rajas violentamente a Guardián del Templo.
+# Perforas con mucha fuerza a Guardián del Templo.
+> * Guardián del Templo te aplasta con fuerza y de forma superficial.
+Pvs: 5187/5321 (+266) Pe: 1394/1408 (-9)
+# ¡Alcanzas a Guardián del Templo con tu maniobra de zarpazo!
+[Obtienes 114 puntos de experiencia]
+Greszhx (Hlag) llega desde el sudoeste.
+Estás siendo atacado por Greszhx.
+Greszhx empieza a centrar sus golpes sobre ti.
+Greszhx comienza a serpentear a tu alrededor mientras se relame, buscando puntos ciegos en tus defensas.
+# ¡Alcanzas a Greszhx con tu maniobra de dentellada!
+Estás siendo atacado por Soldado lagarto.
+Grimoszk: Calles [se,ne] 
+Estás siendo atacado por Chamán.
+Grimoszk: Calles [no,e,o] 
+Pvs: 5241/5241 (+54) Pe: 1377/1408 (-10)
+si
+Parece que si no produjo efecto alguno.
+Entrada al Templo de Ozomatli [|e|,ab] 
+Pvs: 4921/4921 (-320) Pe: 1378/1408 (+1)
+[Obtienes 210 puntos de experiencia]
+# Rajas con mucha fuerza a Guardián del Templo.
+# Rajas a Guardián del Templo.
+# Enfermas débilmente a Guardián del Templo.
+Pvs: 5321/5321 (+400) Pe: 1367/1408 (-10)
+[Obtienes 213 puntos de experiencia]
+[Obtienes 6030 puntos de experiencia]
+Propinas el golpe mortal a Guardián del Templo.
+Pvs: 4791/4791 (-530) Pe: 1361/1408 (+1)
+[Obtienes 22 puntos de experiencia]
+Pvs: 5241/5241 (+450) Pe: 1359/1408 (-2)
+# ¡Alcanzas a Guardián del Templo con tu maniobra de dentellada!
+* Guardián del Templo te aplasta con mucha fuerza y de forma superficial.
+# Perforas violentamente a Guardián del Templo.
+Pvs: 5046/5241 (-195) Pe: 1349/1408 (0)
+# Rajas críticamente a Guardián del Templo.
+[Obtienes 98 puntos de experiencia]
+Pvs: 5126/5321 (+80) Pe: 1349/1408 (0)
+[Obtienes 128 puntos de experiencia]
+Pvs: 4726/4921 (-400) Pe: 1342/1408 (0)
+[Obtienes 206 puntos de experiencia]
+[Obtienes 141 puntos de experiencia]
+# Perforas con increíble potencia a Guardián del Templo.
+[Obtienes 67 puntos de experiencia]
+Pvs: 5241/5241 (+515) Pe: 1321/1408 (-21)
+ent
+> Pvs: 4791/4791 (-450) Pe: 1322/1408 (+1)
+Pvs: 4791/4791 (0) Pe: 1323/1408 (+1)
+mgen enorthus
+Inicias una grandiosa plegaria mientras alzas tus brazos abiertos al cielo. Todo tu ser se ilumina para obrar un hechizo 'Milagro' de magnitud unico mientras Eralie se personifica
+Comienzas a formular el hechizo 'Regeneracion'.
+Dices en adurn: 'divina tempus haelos'
+> Parece que este no produjo efecto alguno.
+Pvs: 5321/5321 (+530) Pe: 1293/1408 (-29)
+abrir e
+Greszhx (Hlag) está aquí.
+Templo de Ozomatli: Explanada de Oración [se,s,-o-] 
+* Greszhx te raja con poca fuerza y de forma superficial.
+* Greszhx te raja violentamente.
+* Greszhx te lacera con mucha fuerza y de forma superficial.
+Pvs: 4710/5321 (-611) Pe: 1287/1408 (-6)
+# ¡Alcanzas a Greszhx con tu maniobra de zarpazo!
+[Obtienes 121 puntos de experiencia]
+# Rajas con poca fuerza a Soldado laureado de Greszhx.
+# Perforas a Soldado laureado de Greszhx.
+# Enfermas con poca intensidad a Soldado laureado de Greszhx.
+Pvs: 4874/4921 (+164) Pe: 1287/1408 (0)
+[El bloqueo 'Descarga (sufrido)' termina]
+Templo de Ozomatli: Sala de Acceso [no] 
++ Te mueves en silencio alrededor de Greszhx, tensando los músculos de tus cuartos traseros para abalanzarte sobre él.
+Greszhx (Hlag) se va en dirección sudeste seguido de dos Soldado laureado de Greszhxes.
+Pvs: 4604/4921 (-270) Pe: 1286/1408 (-1)
+Greszhx (Hlag) se va en dirección noroeste seguido de dos Soldado laureado de Greszhxes.
+Pvs: 4921/4921 (+317) Pe: 1276/1408 (0)
+No hay nadie aquí reconocible como greszhx,trotix,balrek,guardianes.
+Templo de Ozomatli: Altar [n] 
+] + Te mueves en silencio alrededor de Greszhx, tensando los músculos de tus cuartos traseros para abalanzarte sobre él.
+> Pvs: 4612/4921 (-309) Pe: 1274/1408 (-2)
+Estás siendo atacado por Gran Chamán Kravockh.
+Gran Chamán Kravockh pronuncia el cántico: 'magius elis curis'
+# ¡Te abalanzas sobre un costado de Greszhx, destrozándole con cuatro ataques de tus Garras y dientes!
+Gran Chamán Kravockh empieza a formular un hechizo.
+Greszhx (Hlag) se va en dirección norte seguido de dos Soldado laureado de Greszhxes.
+> Estás persiguiendo a Gran Chamán Kravockh.
+# Rajas a Soldado laureado de Greszhx.
+Pvs: 4921/4921 (+309) Pe: 1264/1408 (0)
+Greszhx (Hlag) llega desde el noroeste seguido de dos Soldado laureado de Greszhxes.
+* Greszhx te raja con fuerza.
+Pvs: 4248/4791 (-673) Pe: 1265/1408 (+1)
+[Obtienes 159 puntos de experiencia]
+# Rajas con fuerza a Greszhx.
+# Enfermas con poca intensidad a Greszhx.
+[Obtienes 41 puntos de experiencia]
+Pvs: 5321/5321 (+1073) Pe: 1257/1408 (-8)
+Estás siendo atacado por Soldado laureado de Greszhx.
+* Soldado laureado de Greszhx te golpea en el pecho sin producir ningún daño.
+* Soldado laureado de Greszhx te lacera con fuerza.
+Pvs: 4950/5241 (-371) Pe: 1257/1408 (0)
+[El bloqueo 'Regeneracion' termina]
+[Obtienes 55 puntos de experiencia]
+Greszhx (Hlag) se va en dirección sur seguido de dos Soldado laureado de Greszhxes.
+Pvs: 5241/5241 (+291) Pe: 1247/1408 (-10)
+> Altar de Ceremonias.
+Pvs: 4809/4921 (-432) Pe: 1247/1408 (0)
+] No hay nadie aquí reconocible como greszhx,trotix,balrek,guardianes.
+> Pvs: 4921/4921 (+112) Pe: 1248/1408 (+1)
+Pvs: 4921/4921 (0) Pe: 1238/1408 (-10)
+# ¡Te abalanzas sobre un sorprendido Greszhx y le despedazas con tres ataques de tus Garras y dientes!
+* Logras esquivar el ataque de Soldado laureado de Greszhx.
+Pvs: 4462/4921 (-459) Pe: 1238/1408 (0)
+Pvs: 4921/4921 (+459) Pe: 1237/1408 (-1)
+nick x chaman
+Greszhx (Hlag) llega desde el sur seguido de dos Soldado laureado de Greszhxes.
+> Pvs: 5137/5321 (+216) Pe: 1236/1408 (-1)
+# ¡Alcanzas a Gran Chamán Kravockh con tu maniobra de zarpazo!
+[Obtienes 145 puntos de experiencia]
+* Gran Chamán Kravockh te aplasta débilmente y de forma superficial.
+# Rajas violentamente a Gran Chamán Kravockh.
+[Obtienes 66 puntos de experiencia]
+Pvs: 5321/5321 (+184) Pe: 1229/1408 (-7)
+> Comienzas a serpentear alrededor de Gran Chamán Kravockh, buscando puntos ciegos por donde puedas agarrarle con tus temibles fauces.
+Pvs: 5421/5421 (+100) Pe: 1229/1408 (0)
+# Muerdes a Gran Chamán Kravockh en un brazo, destrozándole carne y huesos.
+[Obtienes 82 puntos de experiencia]
+# ¡Alcanzas a Gran Chamán Kravockh con tu maniobra de zarandear!
+[Obtienes 143 puntos de experiencia]
+* Logras esquivar el ataque de Gran Chamán Kravockh.
+# Perforas con increíble potencia a Gran Chamán Kravockh.
+Pvs: 5421/5421 (0) Pe: 1208/1408 (-18)
+# ¡Alcanzas a Gran Chamán Kravockh con tu maniobra de dentellada!
+[Obtienes 8365 puntos de experiencia]
+Propinas el golpe mortal a Gran Chamán Kravockh.
+Gran Chamán Kravockh cae al suelo sin vida.
+Pvs: 5241/5241 (-180) Pe: 1208/1408 (0)
+Pvs: 4921/4921 (-320) Pe: 1198/1408 (0)
+Greszhx (Hlag) llega desde el norte seguido de dos Soldado laureado de Greszhxes.
+# Rajas a Greszhx.
+# Perforas con fuerza a Greszhx.
+# Enfermas débilmente a Greszhx.
+Pvs: 4921/4921 (0) Pe: 1198/1408 (0)
+Pvs: 5321/5321 (+400) Pe: 1198/1408 (0)
+¡Tu maniobra de zarpazo se ve interrumpida!
+> ! Greszhx se prepara para ejecutar destripar sobre ti.
+Pvs: 5321/5321 (0) Pe: 1184/1408 (-7)
+* ¡Greszhx te alcanza con su maniobra de destripar!
+¡El golpe de Greszhx te eviscera el pecho!
+* Greszhx te raja con mucha fuerza y de forma superficial.
+* Greszhx te lacera con fuerza y de forma superficial.
+Pvs: 4237/5721 (-1084) Pe: 1177/1408 (-7)
+> Pvs: 3895/5321 (-342) Pe: 1165/1408 (-12)
+# ¡Te abalanzas sobre un sorprendido Greszhx y le despedazas con cuatro ataques de tus Garras y dientes!
+[Obtienes 120 puntos de experiencia]
+* Greszhx te raja con increíble potencia.
+* Greszhx te raja críticamente.
+¡El boquete que tienes en el pecho deja caer un chorro de sangre y carne triturada en el suelo!
+Pvs: 3005/5321 (-890) Pe: 1165/1408 (0)
+Greszhx (Hlag) se va en dirección oeste seguido de dos Soldado laureado de Greszhxes.
+> El objetivo trotix,greszhx,balrek no está aquí ahora mismo.
+> En el exterior está lloviendo.
+# Aplastas a Greszhx.
+Pvs: 3220/5191 (+215) Pe: 1165/1408 (0)
+Greszhx (Hlag) se va en dirección abajo seguido de dos Soldado laureado de Greszhxes.
+Greszhx (Hlag) se va en dirección noreste seguido de dos Soldado laureado de Greszhxes.
+El objetivo trotix,greszhx,balrek no está aquí ahora mismo.
+Grimoszk: Calles [e,so] 
+* Greszhx te raja violentamente y de forma superficial.
+El rezumante limo de las garras de Greszhx te envenena.
+Pvs: 2689/5191 (-531) Pe: 1165/1408 (0)
+Greszhx (Hlag) se va en dirección este seguido de dos Soldado laureado de Greszhxes.
+Grimoszk: Calles [o,se] 
+Estás siendo atacado por Guardia de Élite.
+Grimoszk: Calles [e,n,no] 
+No puedes ejecutar esa habilidad mientras formulas.
+Pvs: 3198/5191 (+509) Pe: 1165/1408 (0)
+* Logras esquivar el ataque de Guardia de Élite.
+Grimoszk: Entrada al Zigurat [s,n] 
+k anciana
+# Guardia de Élite consigue parar tu ataque.
+Pvs: 3700/5191 (+502) Pe: 1165/1408 (0)
+[Obtienes 275 puntos de experiencia]
+nick x anciana
+# Aplastas con fuerza a Sshryssta, la anciana Chamán.
+Pvs: 5191/5191 (+1491) Pe: 1163/1408 (-2)
+Pvs: 5721/5721 (+530) Pe: 1163/1408 (0)
+# ¡Alcanzas a Sshryssta, la anciana Chamán con tu maniobra de zarpazo!
+[Obtienes 149 puntos de experiencia]
+* Sshryssta, la anciana Chamán te aplasta con poca fuerza.
+pr
+Parece que pr no produjo efecto alguno.
+lr
+# Rajas con mucha fuerza a Sshryssta, la anciana Chamán.
+# Rajas violentamente a Sshryssta, la anciana Chamán.
+[Obtienes 59 puntos de experiencia]
+Pvs: 5721/5721 (0) Pe: 1156/1408 (0)
+Comienzas a formular el hechizo 'Llamar rayos'.
+> Pvs: 5191/5191 (-530) Pe: 1156/1408 (0)
+* Logras esquivar el ataque de Sshryssta, la anciana Chamán.
+vendar pecho
+> Estás realizando los movimientos de un hechizo, tus manos están ocupadas.
+6 rayos caen desde el cielo envolviéndolo todo en un caos.
+Un rayo impacta sobre Sshryssta, la anciana Chamán.
+Un rayo impacta sobre Ciudadana.
+Un rayo impacta sobre Ciudadano.
+[Obtienes 117 puntos de experiencia]
+[Obtienes 3015 puntos de experiencia]
+Propinas el golpe mortal a Ciudadana.
+Ciudadana cae al suelo sin vida.
+[Obtienes 2363 puntos de experiencia]
+Propinas el golpe mortal a Ciudadano.
+Ciudadano cae al suelo sin vida.
+> * Logras esquivar el ataque de Sshryssta, la anciana Chamán.
+# Rajas críticamente a Sshryssta, la anciana Chamán.
+Pvs: 5721/5721 (+530) Pe: 1151/1408 (-5)
+zarpazo anciana
+[Obtienes 7865 puntos de experiencia]
+Propinas el golpe mortal a Sshryssta, la anciana Chamán.
+Sshryssta, la anciana Chamán cae al suelo sin vida.
+Finalmente logras cargar Bolsa de monedas (ocho monedas de maiz).
+] Entrada del Zigurat [s,e,n] 
+] Pasadizo en el interior del Zigurat [e,o] 
+Escalera al nivel superior del Zigurat [ab,e,ar,o] 
+Escalera principal [ar,ab,n] 
+Pvs: 5321/5321 (-400) Pe: 1144/1408 (-7)
+Sala del Consejo de Zulk [o,no,so,n,s,ne,e,se] 
+Puedes ver una salida: sur.
+Greszhx (Hlag) está allí.
+Estás siendo atacado por Guardia lagarto.
+Sala de espera [ab,ne,e] 
+Trono de Zulk [s,so,o] 
+nick x
+[El bloqueo 'Llamar rayos' termina]
+Habitación del patriarca Greszhx [n,o,ar,e] 
+Antiguo Templo de Ozomatli [ab] 
+Pvs: 5321/5321 (0) Pe: 1141/1408 (-3)
+sigilar n
+abalanzarse guardia
++ Te mueves en silencio alrededor de Guardia lagarto, tensando los músculos de tus cuartos traseros para abalanzarte sobre él.
+# ¡Te abalanzas sobre un sorprendido Guardia lagarto y le despedazas con cuatro ataques de tus Garras y dientes!
+[Obtienes 211 puntos de experiencia]
+Trotix (Hlag) llega desde el sur.
+Trotix (Hlag) se va hacia norte.
+acec
+Parece que acec no produjo efecto alguno.
+[El bloqueo 'Gracia felina' termina]
+Pasadizo en el interior del Zigurat [e,o] 
+Entrada del Zigurat [s,e,n] 
+> Pvs: 5191/5191 (-130) Pe: 1133/1408 (-8)
+te n
+Greszhx (Hlag) llega desde el norte.
+* Greszhx te raja de forma superficial.
+Pvs: 4715/5191 (-476) Pe: 1133/1408 (0)
+Trotix (Hlag) llega desde el norte.
+¡Tu movimiento rompe tu concentración y tu hechizo de Terremoto queda arruinado!
+Pvs: 5191/5191 (+476) Pe: 1110/1408 (-23)
+Greszhx (Hlag) llega desde el este.
+! Greszhx se prepara para ejecutar destripar sobre ti.
+Pvs: 4343/5321 (-848) Pe: 1110/1408 (0)
+Pasadizo en el interior del Zigurat [s,n] 
+Trotix (Hlag) llega desde el este.
+> Pvs: 3794/5321 (-549) Pe: 1109/1408 (-1)
+> Tu resistencia de mal se desvanece.
+Pvs: 3664/5191 (-130) Pe: 1109/1408 (0)
+[Obtienes 156 puntos de experiencia]
+* Soldado lagarto te raja débilmente y de forma superficial.
+Santuario Albinez'Rak || Entrada || [|s|,o] 
+Pvs: 4191/5191 (+527) Pe: 1109/1408 (0)
+[Obtienes 290 puntos de experiencia]
+abrir s
+Santuario Albinez'Rak || Columnata || [-n-,so,s,se] 
+Pvs: 5191/5191 (+1000) Pe: 1109/1408 (0)
+cerrar n
+Parece que esconderse no produjo efecto alguno.
+Pvs: 5321/5321 (+130) Pe: 1107/1408 (+1)
+incapacidades
+Finalmente logras calmarte y olvidas tus peleas con Guardia lagarto, dos Soldados lagartos, Greszhx, Guardia de Élite, Chamán y Soldado laureado de Greszhx.
+No estás peleándote con nadie.
+Santuario Albinez'Rak || Columnata || [|n|,so,s,se] 
+[Bueno] Phanturqz: The FaLLen Order -|--- piro a sobar
+Pvs: 5321/5321 (0) Pe: 1146/1408 (+41)
+[La Legendaria Phanturqz Orenl'fadlen orbita al Limbo]
+[El bloqueo 'Regeneracion (objetivo)' termina]
+Pvs: 4921/4921 (-400) Pe: 1162/1408 (+2)
+Pvs: 4921/4921 (0) Pe: 1191/1408 (+29)
+Pvs: 4921/4921 (0) Pe: 1236/1408 (+31)
+Pvs: 4921/4921 (0) Pe: 1283/1408 (+33)
+formular carne a piedra
+quien
+Pvs: 4921/4921 (0) Pe: 1331/1408 (+34)
+abrir n
+Santuario Albinez'Rak || Entrada || [-s-,o] 
+acechar ne
+Puedes ver cinco salidas: arriba, |oeste|, sudoeste, noreste y noroeste.
+salvar
+Pvs: 4807/4921 (-114) Pe: 1344/1408 (-1)
+> Pvs: 4280/4921 (-527) Pe: 1344/1408 (0)
+[Obtienes 186 puntos de experiencia]
+Pvs: 4791/4791 (+511) Pe: 1344/1408 (0)
+> Pvs: 4921/4921 (+130) Pe: 1343/1408 (0)
+qutiarse nerb
+Parece que qutiarse nerb no produjo efecto alguno.
+Puedes ver ocho salidas: oeste, noroeste, sudoeste, norte, sur, noreste, este y sudeste.
+> Pvs: 4921/4921 (0) Pe: 1368/1408 (+25)
+acechar ar
+Puedes ver una salida: abajo.
+Pvs: 4805/4921 (-116) Pe: 1381/1408 (-1)
+Habitación de Gobierno del Patriarca  [e] 
+Tesoreria del Consejo [s] 
+Trotix (Hlag) y Greszhx (Hlag) están aquí.
+Greszhx (Hlag) llega desde arriba seguido de dos Soldado laureado de Greszhxes.
+[El bloqueo 'Milagro' termina]
+Puedes ver tres salidas: arriba, abajo y norte.
+sigilar o
+> El ambiente está bastante frío aquí fuera.
+finger trotix
+Pvs: 4921/4921 (+116) Pe: 1408/1408 (+27)
+finger greszhx
+peleas
+No estás en lucha con nadie en este momento.
+Puedes ver dos salidas: -este- y abajo.
+finger troxi
+Pvs: 4734/4921 (-187) Pe: 1407/1408 (-1)
+Pvs: 4550/4921 (-184) Pe: 1407/1408 (0)
+] Entrada al Templo de Ozomatli [-e-,ab] 
+> Pvs: 3955/4791 (-595) Pe: 1408/1408 (+1)
+Pvs: 4791/4791 (+836) Pe: 1408/1408 (0)
+Pvs: 4921/4921 (+130) Pe: 1407/1408 (0)
+sigilar e
+Trotix (Hlag) está allí.
+abalznarse guardia
+Parece que abalznarse guardia no produjo efecto alguno.
+# ¡Te abalanzas sobre un sorprendido Guardia lagarto y le despedazas con tres ataques y un crítico de tus Garras y dientes!
+* Logras esquivar el ataque de Guardia lagarto.
+[Obtienes 217 puntos de experiencia]
+[Obtienes 3470 puntos de experiencia]
+Propinas el golpe mortal a Guardia lagarto.
+Guardia lagarto cae al suelo sin vida.
+Cámara privada [e] 
+Pvs: 4791/4791 (-130) Pe: 1396/1408 (-11)
+[Obtienes 27 puntos de experiencia]
+Finalmente logras cargar Bolsa de monedas (trescientos dos monedas de maiz).
+> Pvs: 4921/4921 (+130) Pe: 1389/1408 (-7)
+Trotix (Hlag) se va hacia sur.
+Pvs: 5321/5321 (+400) Pe: 1401/1408 (+12)
+acechar so
+> Pvs: 5086/5321 (-235) Pe: 1404/1408 (-4)
+> Pvs: 4689/5321 (-397) Pe: 1404/1408 (0)
+Pvs: 4474/5321 (-215) Pe: 1404/1408 (0)
+Pvs: 4344/5191 (-130) Pe: 1404/1408 (0)
+[Obtienes 241 puntos de experiencia]
+Pvs: 5321/5321 (+977) Pe: 1403/1408 (-1)
+Grimoszk: Calles [e,o] 
+Grimoszk: Calles [s,e,|n|] 
+Grimoszk: Calles [s,n] 
+Grimoszk: Calles [se,n] 
+Grimoszk: Calles [e,no,o] 
+] Solares de Grimoszk [e] 
+Grimoszk: Calles [s,e,o] 
+Grimoszk: Calles [e,se,o] 
+Solares de Grimoszk [o] 
+Grimoszk: Murallas [no,se,so] 
+> Pvs: 5321/5321 (0) Pe: 1401/1408 (-2)
+No puedes sigilar en dirección sudoeste: Intentas avanzar, pero es inútil, el lodo es demasiado denso y te retiene.
+No puedes sigilar en dirección sudoeste: Todos tus esfuerzos son inútiles, agotado, te hundes en el lodo.
+Pvs: 5297/5321 (-24) Pe: 1408/1408 (+1)
+Grimoszk: Murallas [ne,o] 
+No puedes sigilar en dirección oeste: Intentas avanzar, pero es inútil, el lodo es demasiado denso y te retiene.
+Grimoszk: Murallas [e,o] 
+goj
+Parece que goj no produjo efecto alguno.
+Grimoszk: Murallas [e,no] 
+No puedes sigilar en dirección noroeste: Intentas avanzar, pero es inútil, el lodo es demasiado denso y te retiene.
+Grimoszk: Murallas [so,se] 
+> Pvs: 5278/5321 (-19) Pe: 1408/1408 (0)
+> Pvs: 5280/5321 (+2) Pe: 1408/1408 (0)
+No puedes sigilar en dirección noroeste: Todos tus esfuerzos son inútiles, agotado, te hundes en el lodo.
+> Pvs: 5256/5321 (-24) Pe: 1408/1408 (0)
+Grimoszk: Murallas [se,o] 
+> Pvs: 5242/5321 (-14) Pe: 1407/1408 (-1)
+No puedes sigilar en dirección oeste: Todos tus esfuerzos son inútiles, agotado, te hundes en el lodo.
+> Pvs: 5221/5321 (-21) Pe: 1408/1408 (+1)
+Grimoszk: Murallas [o,e,no] 
+Entrada en obras [|s|,e] 
+> Pvs: 5207/5321 (-14) Pe: 1408/1408 (0)
+Pvs: 5321/5321 (+114) Pe: 1408/1408 (0)
+Clan Drasharg: Recibidor [-n-,s] 
+Clan Drasharg: Sala de equipamiento [n,no] 
+Clan Drasharg: Templo de Seldar [o,s,se] 
+Clan Drasharg: Almacén de despojos textiles [s,se,e] 
+Clan Drasharg: Arcas [n] 
+] Clan Drasharg: Almacén de despojos textiles [s,se,e] 
+Clan Drasharg: Almacén de minerales [n,no] 
+Clan Drasharg: Recibidor [|n|,s] 
+Entrada en obras [-s-,e] 
+cerrar s
+No puedes sigilar en dirección este: Intentas avanzar, pero es inútil, el lodo es demasiado denso y te retiene.
+gge
+Parece que gge no produjo efecto alguno.
+> Pvs: 5307/5321 (-14) Pe: 1408/1408 (0)
+> Empieza a llover.
+No puedes sigilar en dirección este: Todos tus esfuerzos son inútiles, agotado, te hundes en el lodo.
+Pvs: 5286/5321 (-21) Pe: 1408/1408 (0)
+Entrada en obras [|de|,n] 
+abrir de
+sigilar de
+Clan Zsysrak'oû: Salón central. [-fu-,e,ne,n] 
+sigilar fu
+Entrada en obras [-de-,n] 
+cerrar de
+Pvs: 5321/5321 (+35) Pe: 1408/1408 (0)
+finger
+> Pvs: 5821/5821 (+500) Pe: 1408/1408 (0)
+> Estás persiguiendo a Guardia de Élite.
+# Perforas con increíble potencia a Soldado lagarto.
+# Enfermas con poca intensidad a Soldado lagarto.
+# Enfermas críticamente a Soldado lagarto.
+> Estás persiguiendo a Soldado lagarto.
+# Perforas con increíble potencia a Guardia lagarto.
+# Enfermas con poca intensidad a Guardia lagarto.
+[Obtienes 102 puntos de experiencia]
+] Estás siendo atacado por Guardia lagarto.
+> Estás persiguiendo a dos Guardia lagartos.
+# Laceras con increíble potencia a Guardia lagarto.
+[Obtienes 51 puntos de experiencia]
+Grimoszk: Murallas [se,n] 
+Grimoszk: Murallas [s,n] 
+# Enfermas débilmente a Guardia lagarto.
+Grimoszk: Murallas [s,ne] 
+Grimoszk: Murallas [so,no] 
+Grimoszk: Murallas [se,e] 
+Grimoszk: Murallas [n,o] 
+> Estás persiguiendo a Guardia lagarto.
+[Obtienes 48 puntos de experiencia]
+Grimoszk: Murallas [s,e,no] 
+Entrada en obras [-s-,n] 
+Pvs: 5421/5421 (-400) Pe: 1408/1408 (0)
+> No puedes sigilar en dirección sur: La puerta sur está cerrada.
+Pvs: 4921/4921 (-500) Pe: 1408/1408 (0)
+Camino a la pirámide de los Dragones [-n-,s] 
+Delante de las escaleras de la pirámide de los Dragones [s,n] 
+Escaleras de la pirámide de los Dragones [s,n] 
+Entrada a la piramide [s,n] 
+Nivel inferior: Recibidor de los Dragones [ne,n] 
+Nivel inferior: Pasillo de la pirámide [so,s,se,e,n] 
+Nivel inferior: Taller de trabajo [e,n] 
+Nivel inferior: Sala de los gritos [o,no] 
+Finalmente logras calmarte y olvidas tus peleas con nueve Guardias lagarto, dos Soldados lagartos, Chamán y Guardia de Élite.
+Nivel inferior: Fosa de entrenamiento [o] 
+Nivel medio: Pasillo de la pirámide [s,e,ne,n] 
+Nivel superior: Pasadizo de la piramide [s,ne,n] 
+Nivel superior:Sala del Tesoro [s] 
+Pvs: 4921/4921 (0) Pe: 1407/1408 (-1)
+Nivel superior: Sala del Dragón Azul [so] 
+Nivel medio: Salón de recepciones [o,n] 
+Nivel medio: Capilla de Ozomatli [so,s] 
+> * Logras esquivar el ataque de Guardia lagarto.
+# Perforas críticamente a Guardia lagarto.
+Pvs: 5421/5421 (+500) Pe: 1406/1408 (-2)
+> Estás persiguiendo a Chamán, Soldado lagarto y Guardia lagarto.
+Estás siendo atacado por Lady Stamos.
+Grimoszk: Taberna de Lady Stamos [ab,-s-] 
+La Cueva del pantano [|n|,|e|,ar] 
+> Pvs: 5821/5821 (+400) Pe: 1406/1408 (0)
+Grimoszk: Calles [s,e,-n-] 
+> Estás persiguiendo a Lady Stamos.
+* Logras esquivar el ataque de Soldado lagarto.
+Grimoszk: Calles [s,n,e] 
+# Perforas con increíble potencia a Chamán.
+# Enfermas débilmente a Chamán.
+Ruinas Arach'Tinilith -Entrada- [|ne|,o] 
+# Laceras críticamente a Soldado lagarto.
+* Guardia de Élite te perfora débilmente y de forma superficial.
+# Perforas con increíble potencia a Guardia de Élite.
+# Enfermas débilmente a Guardia de Élite.
+Pvs: 5815/5821 (-6) Pe: 1408/1408 (+2)
+[Chat] Greszhx:  no
+Pvs: 5321/5321 (-494) Pe: 1408/1408 (0)
+Finalmente logras calmarte y olvidas tus peleas con cuatro Soldados lagartos, Guardia lagarto, dos Guardias de Elite, dos Chamanes y Lady Stamos.
+Greszhx (Hlag) llega desde el sur.
+Greszhx (Hlag) se va hacia este.
+Greszhx (Hlag) se va hacia sur.
+No hay nadie aquí reconocible como balrek,greszhx,trotix.
+> # Rajas a Guardia de Élite.
+# Perforas a Guardia de Élite.
+# Enfermas con poca intensidad a Guardia de Élite.
+> Estás persiguiendo a Chamán.
+> * Logras esquivar el ataque de Soldado lagarto.
+# Rajas a Soldado lagarto.
+# Perforas a Soldado lagarto.
+[Trotix Szeiryü orbita al Limbo]
+[Elerlin ArcodeIris orbita al Limbo]
+Pvs: 5191/5191 (-130) Pe: 1397/1408 (-9)
+Estás siendo atacado por General Ssratz.
+[El Legendario Szylah Al'jhtar orbita al Limbo]
+Finalmente logras calmarte y olvidas tus peleas con dos Soldados lagartos, dos Chamanes, tres Guardias de Elite y General Ssratz.
+Pvs: 5721/5721 (+530) Pe: 1375/1408 (-22)
+# Rajas con fuerza a Soldado lagarto.
+Estás siendo atacado por Guardián del Templo.
+Grimoszk: Calles [so,e,n] 
+# Rajas con mucha fuerza a Soldado lagarto.
+Grimoszk: Calles [ne,|n|,o,s] 
+Grimoszk: Calles [-n-,so,e] 
+* Guardia de Élite te perfora.
+# Rajas con fuerza a Guardia de Élite.
+# Rajas críticamente a Guardia de Élite.
+Pvs: 5638/5721 (-83) Pe: 1379/1408 (+4)
+Grimoszk: Calles [so,|n|,o] 
+# Enfermas débilmente a Soldado lagarto.
+Estás siendo atacado por Contratista Lagarto.
+Grimoszk: Constructora de Grimoszk [-s-] 
+Pvs: 5634/5721 (-4) Pe: 1380/1408 (+1)
+* Logras esquivar el ataque de Contratista Lagarto.
+# Rajas con mucha fuerza a Contratista Lagarto.
+# Rajas con fuerza a Contratista Lagarto.
+# Enfermas críticamente a Contratista Lagarto.
+[Obtienes 247 puntos de experiencia]
+Propinas el golpe mortal a Contratista Lagarto.
+Contratista Lagarto cae al suelo sin vida.
+Grimoszk: Calles [so,-n-,o] 
+Grimoszk: Calles [ne,o] 
+Grimoszk: Calles [s,|no|,e] 
+Grimoszk: Calles [-s-,e,n] 
+Grimoszk: Calles [|s|,ne,o] 
+Estás siendo atacado por Copsst, el Maestro Forjador.
+Grimoszk: Herrería [|s|,-n-] 
+# Rajas críticamente a Copsst, el Maestro Forjador.
+# Rajas con fuerza a Copsst, el Maestro Forjador.
+# Enfermas con poca intensidad a Copsst, el Maestro Forjador.
+# Rajas con mucha fuerza a Copsst, el Maestro Forjador.
+Propinas el golpe mortal a Copsst, el Maestro Forjador.
+Copsst, el Maestro Forjador cae al suelo sin vida.
+Grimoszk: Calles [so,s] 
+Grimoszk: Calles [|ne|,e,n] 
+Grimoszk: Calles [e,o,so,|s|] 
+Criadero de Karbobos [ne] 
+No puedes devolver los golpes.
+* Guardián del Templo te aplasta con mucha fuerza.
+* Guardián del Templo te aplasta.
+# Rajas con fuerza a Guardián del Templo.
+# Enfermas con poca intensidad a Guardián del Templo.
+# Enfermas críticamente a Guardián del Templo.
+Pvs: 5384/5721 (-250) Pe: 1384/1408 (+4)
+[El bloqueo 'Terremoto' termina]
+nick x guardianes
+# Rajas con poca fuerza a Guardián del Templo.
+[Obtienes 24 puntos de experiencia]
+* Guardián del Templo te aplasta con fuerza y de forma superficial.
+Pvs: 4959/5721 (-425) Pe: 1377/1408 (-7)
+Pvs: 4564/5321 (-395) Pe: 1378/1408 (+1)
+[Obtienes 174 puntos de experiencia]
+Pvs: 4434/5191 (-130) Pe: 1367/1408 (0)
+[Obtienes 226 puntos de experiencia]
+Pvs: 5191/5191 (+757) Pe: 1367/1408 (0)
+Pvs: 5821/5821 (+630) Pe: 1364/1408 (0)
+# Muerdes a Guardián del Templo en la rodilla, destrozándole carne y huesos.
+# Perforas con fuerza a Guardián del Templo.
+# ¡Alcanzas a Guardián del Templo con tu maniobra de zarandear!
+Pvs: 5721/5721 (-100) Pe: 1343/1408 (-18)
+# ¡Alcanzas criticamente a Guardián del Templo con tu maniobra de zarpazo!
+[Obtienes 225 puntos de experiencia]
+Pvs: 5321/5321 (-400) Pe: 1337/1408 (+1)
+[Obtienes 260 puntos de experiencia]
+* Guardián del Templo te aplasta violentamente y de forma superficial.
+> Pvs: 5415/5641 (+94) Pe: 1327/1408 (0)
+Pvs: 5533/5641 (+118) Pe: 1317/1408 (-10)
+Pvs: 5648/5721 (+115) Pe: 1317/1408 (0)
+> # Rajas con mucha fuerza a Gran Chamán Kravockh.
+# Rajas con mucha fuerza a Gran Chamán Kravockh.
+Pvs: 5195/5721 (-453) Pe: 1310/1408 (-7)
+Pvs: 5081/5721 (-114) Pe: 1311/1408 (+1)
+Pvs: 5081(5721)  Pe: 1311(1408)  Fe: 187(210)  Po: 0  Xp: 17268637  Psoc: 1000
+zarpazo chaman
+Pvs: 4946/5721 (-135) Pe: 1312/1408 (+1)
+¡Gran Chamán Kravockh pierde la concentración!
+# ¡Alcanzas criticamente a Gran Chamán Kravockh con tu maniobra de zarpazo!
+[Obtienes 228 puntos de experiencia]
+# Rajas críticamente a Gran Chamán Kravockh.
+[Obtienes 93 puntos de experiencia]
+Gran Chamán Kravockh pronuncia el cántico: 'magius selirs curis'
+* Gran Chamán Kravockh te aplasta con poca fuerza.
++ Comienzas a moverte tentativamente alrededor de Gran Chamán Kravockh, buscando un flanco vulnerable para abalanzarte sobre él.
+Pvs: 4165/5321 (-781) Pe: 1296/1408 (-9)
+# ¡Te abalanzas sobre un sorprendido Gran Chamán Kravockh y le despedazas con tres ataques y un crítico de tus Garras y dientes!
+[Obtienes 240 puntos de experiencia]
+[Obtienes 9394 puntos de experiencia]
+Pvs: 3765/4921 (-400) Pe: 1296/1408 (0)
+Pvs: 3295/4791 (-470) Pe: 1296/1408 (0)
+Pvs: 4144/4791 (+849) Pe: 1296/1408 (0)
+Pvs: 3968/4791 (-176) Pe: 1295/1408 (0)
+[Chat] Enorthus: Estás inquieto, te encuentras como si estuvieras en la guarida de un dragón.
+[Obtienes 244 puntos de experiencia]
+chat jajajajajajajaja
+[Chat] Enorthus: jajajajajajajaja
+Pvs: 4791/4791 (+823) Pe: 1296/1408 (+1)
+Pvs: 4921/4921 (+130) Pe: 1294/1408 (+1)
+[Chat] Enorthus: q chiste mas bueno xd
+Finalmente logras calmarte y olvidas tus peleas con cinco Soldados lagartos y dos Guardias de Elite.
+[Chat] Ninqacl | Se busca capa wargo | pero... estas en la guarida de un dragon? :d
+[Chat] Enorthus: estoy en el templo de ozomatli xddd
+Greszhx (Hlag) se va en dirección arriba seguido de dos Soldado laureado de Greszhxes.
+Pvs: 4921/4921 (0) Pe: 1316/1408 (+24)
+> Pvs: 4730/4921 (-191) Pe: 1329/1408 (-1)
+Greszhx (Hlag) llega desde el sudeste seguido de dos Soldado laureado de Greszhxes.
+[Obtienes 125 puntos de experiencia]
+> Soldado laureado de Greszhx consigue escurrirse entre ti y Greszhx, protegiéndole.
+> Greszhx comienza a serpentear a tu alrededor mientras se relame, buscando puntos ciegos en tus defensas.
+Pvs: 5130/5321 (+400) Pe: 1309/1408 (-20)
+Pvs: 4770/5321 (-360) Pe: 1302/1408 (0)
+# Laceras con mucha fuerza a Greszhx.
+[Obtienes 25 puntos de experiencia]
+Pvs: 4698/5321 (-72) Pe: 1288/1408 (-7)
+] Estás persiguiendo a Greszhx.
+No hay nadie aquí reconocible como greszhx.
+> Pvs: 4375/5321 (-323) Pe: 1288/1408 (0)
+] Estás siendo atacado por Soldado lagarto.
+] No hay nadie aquí reconocible como greszhx.
+> * Logras parar críticamente el ataque de Soldado lagarto.
+# Rajas críticamente a Soldado lagarto.
+[Obtienes 63 puntos de experiencia]
+cae
+] Estás persiguiendo a Guardia de Élite y Soldado lagarto.
+] Sueltas tus armas para echar a correr.
+Intentas pasar por una salida por la que no te es posible y cambias de rumbo.
+> # Perforas violentamente a Guardia lagarto.
+Pvs: 4037/4981 (-338) Pe: 1273/1408 (-15)
+Pvs: 3561/4981 (-476) Pe: 1268/1408 (0)
+Pvs: 3501/4921 (-60) Pe: 1268/1408 (0)
+[Obtienes 170 puntos de experiencia]
+zarpazo guardia
+# Rajas con mucha fuerza a Guardia lagarto.
+Pvs: 3901/5321 (+400) Pe: 1258/1408 (-9)
+# ¡Alcanzas a Guardia lagarto con tu maniobra de zarpazo!
+Pvs: 4301/5721 (+400) Pe: 1251/1408 (0)
+Finalmente logras cargar Bolsa de monedas (doscientos ochenta y seis monedas de maiz).
+] Escalera principal [ar,ab,n] 
+nickear xmatar
+Pvs: 3771/5191 (-530) Pe: 1251/1408 (0)
+[Obtienes 338 puntos de experiencia]
+Pvs: 4980(5191)  Pe: 1250(1408)  Fe: 187(210)  Po: 0  Xp: 17283200  Psoc: 1000
+Pvs: 4980/5191 (+1209) Pe: 1251/1408 (0)
+Finalmente logras calmarte y olvidas tus peleas con Soldado lagarto, Greszhx y Guardia de Élite.
+Comienzas a formular el hechizo 'Gracia felina'.
+Pronuncias el cántico: 'felinus est gratia'
+[Obtienes 70 puntos de experiencia]
+# Aplastas con fuerza a Soldado laureado de Greszhx.
+[Obtienes 17 puntos de experiencia]
+Pvs: 5191/5191 (+211) Pe: 1247/1408 (-3)
+[El bloqueo 'carrera' termina]
+Pvs: 5721/5721 (+530) Pe: 1247/1408 (+1)
+> Pvs: 5191/5191 (-530) Pe: 1234/1408 (-13)
+des baculo
+emp cetro
+Has agotado la energía necesaria para formular 'Gracia felina' y debes descansar antes de poder usar ese tipo de energía.
+Ignorando 'formular gracia felina:enorthus'. No puedes ejecutar más acciones de ese tipo durante este turno.
+tp
+Pvs: 5321/5321 (+130) Pe: 1176/1408 (-58)
+Estudio del General Ssratz [s] 
+No hay nadie aquí reconocible como greszhx,balrek.
+Chamán empieza a formular un hechizo.
+> [El bloqueo 'Canto' termina]
+] Greszhx (Hlag) está aquí.
+> + Te mueves en silencio alrededor de Greszhx, tensando los músculos de tus cuartos traseros para abalanzarte sobre él.
+* Soldado laureado de Greszhx te raja con poca fuerza.
+* Soldado laureado de Greszhx te raja débilmente y de forma superficial.
+* Logras esquivar el ataque de Chamán.
+# Rajas a Chamán.
+# Perforas a Chamán.
+# Enfermas con poca intensidad a Chamán.
+Pvs: 5321/5321 (0) Pe: 1143/1408 (-33)
+> Sala del Consejo de Zulk [o,no,so,n,s,ne,e,se] 
+Pvs: 5191/5191 (-130) Pe: 1144/1408 (+1)
+Pvs: 5191/5191 (0) Pe: 1144/1408 (0)
+Pvs: 5641/5641 (+450) Pe: 1141/1408 (0)
+Pvs: 5321/5321 (-320) Pe: 1141/1408 (0)
+> * Soldado laureado de Greszhx te raja débilmente y de forma superficial.
+# Perforas con mucha fuerza a Soldado laureado de Greszhx.
+# Enfermas débilmente a Soldado laureado de Greszhx.
+Pvs: 5641/5641 (+320) Pe: 1120/1408 (-21)
+Pvs: 5721/5721 (+80) Pe: 1120/1408 (0)
+Pvs: 5191/5191 (-530) Pe: 1113/1408 (-7)
+> General Ssratz desciende su cola de manera relampagueante con un movimiento vertical aplastándote con brutalidad.
+Pvs: 3627/5191 (-1564) Pe: 1113/1408 (0)
+Chamán pronuncia el cántico: 'magius modus curis'
+* General Ssratz te perfora con poca fuerza y de forma superficial.
+* Chamán te aplasta con poca fuerza.
+centrar x
+Empiezas a centrar tus golpes sobre Greszhx.
+# Rajas críticamente a Greszhx.
+Pvs: 4726/5721 (+1099) Pe: 1096/1408 (-17)
+! General Ssratz se prepara para ejecutar empalar sobre ti.
+! Guardia de Élite se prepara para ejecutar golpecertero sobre ti.
+* ¡Logras esquivar a General Ssratz y su empalar!
+Chamán pronuncia el cántico: 'flamious os colus'
+Pvs: 3098/5721 (-1628) Pe: 1096/1408 (0)
+> Greszhx (Hlag) (Retenido) está aquí.
+] Comienzas a serpentear alrededor de Greszhx, buscando puntos ciegos por donde puedas agarrarle con tus temibles fauces.
+] De un fugaz vistazo, examinas el estado de los que te rodean.
+> # Perforas con increíble potencia a Greszhx.
+Pvs: 3735/5821 (+637) Pe: 1092/1408 (-4)
+General Ssratz comienza a serpentear a tu alrededor mientras se relame, buscando puntos ciegos en tus defensas.
+# Muerdes a Greszhx en la cola, destrozándole carne y huesos.
+> Ves como Chamán cierra con furia su puño, y lo alinea con tu corazón sumido en la más profunda y perversa de las concentraciones. ¡Nada bueno puede suceder!
+* ¡Guardia de Élite te alcanza con su maniobra de golpecertero!
+* Logras esquivar el ataque de General Ssratz.
+# ¡Alcanzas a Greszhx con tu maniobra de zarandear!
+* Logras parar críticamente el ataque de Soldado laureado de Greszhx.
+# Perforas con increíble potencia a Soldado laureado de Greszhx.
+Pvs: 3501/5821 (-234) Pe: 1074/1408 (-18)
+> ! Guardia de Élite se prepara para ejecutar hender sobre ti.
+Pvs: 3302/5821 (-199) Pe: 1075/1408 (+1)
+Pvs: 3426/5321 (+124) Pe: 1064/1408 (-11)
+* Greszhx te raja con mucha fuerza.
+Pvs: 2692/5191 (-734) Pe: 1065/1408 (+1)
+¡Invocas una columna de fuego sobre Greszhx que le alcanza parcialmente!
+* Guardia de Élite te raja débilmente y de forma superficial.
+> Estás persiguiendo a Guardia de Élite, dos Soldado laureado de Greszhxes, General Ssratz, Chamán y Greszhx.
+Pvs: 3299/5191 (+607) Pe: 1058/1408 (-7)
+Pvs: 4703/5191 (+1404) Pe: 1055/1408 (-3)
+[Obtienes 144 puntos de experiencia]
+Pvs: 5191/5191 (+488) Pe: 1055/1408 (0)
+Pvs: 5321/5321 (+130) Pe: 1054/1408 (0)
+# ¡Te abalanzas sobre un costado de Greszhx, destrozándole con tres ataques de tus Garras y dientes!
+[Obtienes 106 puntos de experiencia]
+* General Ssratz te perfora con increíble potencia.
+> Estás persiguiendo a Guardia de Élite, General Ssratz, Chamán y Greszhx.
+Pvs: 5721/5721 (+400) Pe: 1043/1408 (-11)
+* Greszhx te raja.
+Pvs: 5231/5721 (-490) Pe: 1036/1408 (-7)
+> ¡Tus objetivos ya no están al alcance de tu zarpazo!
+> Estás persiguiendo a Guardia de Élite, General Ssratz y Chamán.
+# Rajas con mucha fuerza a Greszhx.
+Pvs: 5721/5721 (+490) Pe: 1036/1408 (0)
+Pvs: 5126/5721 (-595) Pe: 1028/1408 (-8)
+> Comienzas a serpentear alrededor de Greszhx, buscando puntos ciegos por donde puedas agarrarle con tus temibles fauces.
+¡El golpe de Greszhx te eviscera hocico!
+# Muerdes a Greszhx en un brazo, destrozándole carne y huesos.
+# Perforas con increíble potencia a Greszhx.
+Pvs: 4797/5821 (-329) Pe: 1021/1408 (-7)
+> Guardia de Élite te ataca realizando una serie de movimientos precisos y estudiados.
+*  Guardia de Élite te corta en hocico con salvaje precisión usando su Espada de Grimoszk.
+> Pvs: 1678/5821 (-3119) Pe: 1021/1408 (0)
+] Trono de Zulk [s,so,o] 
+Pvs: 2020/5821 (+342) Pe: 1022/1408 (+1)
+Pvs: 1390/5191 (-630) Pe: 1022/1408 (0)
+[Obtienes 341 puntos de experiencia]
+cse
+Comienzas a formular el hechizo 'Curar heridas serias'.
+Ignorando 'formular curar heridas serias:enorthus'. No puedes ejecutar más acciones de ese tipo durante este turno.
+Pvs: 3231/5191 (+1841) Pe: 1019/1408 (-3)
+Pronuncias el cántico: 'magius selirs curis'
+Curas algunas de tus heridas más serias.
+[Obtienes 469 puntos de experiencia]
+Pvs: 4845/5191 (+1614) Pe: 1019/1408 (0)
+> Pvs: 5191/5191 (+346) Pe: 1008/1408 (0)
+Pvs: 5321/5321 (+130) Pe: 984/1408 (-23)
+> # Rajas con fuerza a Greszhx.
+Pvs: 5721/5721 (+400) Pe: 973/1408 (0)
+[El bloqueo 'Curar heridas serias' termina]
+* Greszhx se abalanza sobre ti y te muerde el vientre, envenenándote con su saliva tóxica.
+¡Greszhx pierde la concentración!
+[Cruzada_eralie] Palafrenero de la Cruzada: ¡Enorthus ha asesinado a greszhx!
+[Obtienes 354260 puntos de experiencia]
+Propinas el golpe mortal a Greszhx.
+Greszhx ha muerto.
+Greszhx cae al suelo sin vida.
+Greszhx da un grito desgarrador antes de que su espíritu abandone Eirea.
+[Obtienes 58 puntos de gloria]
+Logras zafarte del mordisco de Greszhx.
+Pvs: 3572/5721 (-2149) Pe: 965/1408 (0)
+Finalmente logras cargar Bolsa de monedas (cuatro oros, ciento cuarenta y ocho sesioms, ochenta y tres platinos, ciento noventa y tres cobres, un montón de maizs y ocho monedas de
+# Rajas con fuerza y de forma superficial a Chamán.
+# Rajas críticamente a Chamán.
+# Enfermas críticamente a Chamán.
+[Obtienes 83 puntos de experiencia]
+Pvs: 4110/5721 (+538) Pe: 965/1408 (0)
+! Guardia de Élite se prepara para ejecutar hender sobre ti.
+Clavas tus garras en el débil cuello de cuerpo de Greszhx y con una proeza de fuerza le arrancas la cabeza con buena parte de su columna vertebral todavía unida.
+> Pvs: 3450/5061 (-660) Pe: 966/1408 (+1)
+Pvs: 4257/5191 (+807) Pe: 966/1408 (0)
+[Obtienes 267 puntos de experiencia]
+Meseta Oriental [se,o] 
+Meseta Oriental [e,no] 
+Meseta Oriental [e,n] 
+Meseta Oriental [s,no] 
+Meseta Oriental [se,no] 
+Ghalhugg (Gob) está aquí.
+Meseta Oriental [so,e] 
+Empiezas a centrar tus golpes sobre Ghalhugg.
+Ghalhugg (Gob) se va en dirección este seguido de Gorila (Dominada) y Grahs, Ancestro Bárbaro.
+Ghalhugg (Gob) se va en dirección oeste seguido de Gorila (Dominada) y Grahs, Ancestro Bárbaro.
+# ¡Alcanzas a Ghalhugg con tu maniobra de zarpazo!
+Ghalhugg empieza a formular un hechizo.
+Parece que abalanzarse x no produjo efecto alguno.
+> + Comienzas a moverte tentativamente alrededor de Ghalhugg, buscando un flanco vulnerable para abalanzarte sobre él.
+> # Rajas a Ghalhugg.
+# Perforas a Ghalhugg.
+# Enfermas débilmente a Ghalhugg.
+Pvs: 5061/5061 (-800) Pe: 1401/1408 (-7)
+Ghalhugg (Gob) llega desde el oeste seguido de Gorila (Dominada) y Grahs, Ancestro Bárbaro.
+No hay nadie aquí reconocible como nizigg,ghalhugg,kimmura,notza,trotix,rugrak,suka.
++ Te mueves en silencio alrededor de Ghalhugg, tensando los músculos de tus cuartos traseros para abalanzarte sobre él.
+# ¡Te abalanzas sobre un sorprendido Ghalhugg y le despedazas con tres ataques de tus Garras y dientes!
+Pvs: 5191/5191 (+130) Pe: 1379/1408 (-11)
+No puedes formular otro hechizo hasta que transcurra algún tiempo.
+Ghalhugg pronuncia el cántico: 'flamious os colus'
+¡Logras esquivar parte de la columna de fuego que Ghalhugg invoca sobre ti!
+¡Tu movimiento rompe tu concentración y tu hechizo de Retener persona queda arruinado!
+] El objetivo nizigg,ghalhugg,kimmura,notza,trotix,rugrak,suka no está aquí ahora mismo.
+] Ignorando 'formular retener persona:x'. No puedes ejecutar más acciones de ese tipo durante este turno.
+> Estás persiguiendo a Ghalhugg.
+Pvs: 5019/5191 (-172) Pe: 1379/1408 (0)
+Ghalhugg pronuncia el cántico: 'magius elis curis'
+* Ghalhugg te aplasta.
+Pvs: 4934/5191 (-85) Pe: 1369/1408 (0)
+* ¡Grahs, Ancestro Bárbaro te alcanza con su maniobra de cabezazo!
+Estás siendo atacado por Grahs, Ancestro Bárbaro.
+Pvs: 4477/5191 (-457) Pe: 1369/1408 (0)
+Pvs: 5147/5861 (+670) Pe: 1369/1408 (0)
+Ghalhugg (Gob) llega desde el este seguido de Gorila (Dominada) y Grahs, Ancestro Bárbaro.
+Ghalhugg pronuncia el cántico: 'aedrhus impotem nazxia'
+La mano de Ghalhugg se transforma en una letal víbora que te muerde, provocándote un agudo dolor.
+> * Grahs, Ancestro Bárbaro te aplasta con increíble potencia.
+Ghalhugg te examina.
+# Rajas con mucha fuerza a Ghalhugg.
+# Rajas con fuerza a Ghalhugg.
+Pvs: 3835/5861 (-1312) Pe: 1362/1408 (-7)
+* Ghalhugg te aplasta con poca fuerza.
+Pvs: 2542/5191 (-1293) Pe: 1361/1408 (0)
+[Obtienes 328 puntos de experiencia]
+* ¡El cielo ruge y un fugaz relámpago invocado por Ghalhugg te electrocuta!
+Meseta Oriental [ne,o] 
+Pvs: 3474/5191 (+932) Pe: 1358/1408 (-3)
+Ghalhugg (Gob) llega desde el noreste seguido de Gorila (Dominada) y Grahs, Ancestro Bárbaro.
+[Obtienes 140 puntos de experiencia]
+> Pvs: 3945/5191 (+471) Pe: 1358/1408 (0)
+] Comienzas a formular el hechizo 'Curar heridas serias'.
+Ghalhugg (Gob) llega desde el noroeste seguido de Gorila (Dominada) y Grahs, Ancestro Bárbaro.
+* Grahs, Ancestro Bárbaro te aplasta con increíble potencia y de forma superficial.
+> Pvs: 4340/5191 (+395) Pe: 1347/1408 (-10)
+* Ghalhugg te aplasta débilmente y de forma superficial.
+Pvs: 5004/5861 (+664) Pe: 1347/1408 (0)
+Ghalhugg (Gob) se va en dirección sudoeste seguido de Gorila (Dominada) y Grahs, Ancestro Bárbaro.
+* Grahs, Ancestro Bárbaro te aplasta con poca fuerza y de forma superficial.
+Ghalhugg (Gob) se va en dirección noreste seguido de Gorila (Dominada) y Grahs, Ancestro Bárbaro.
+Ignorando 'centrar x'. No puedes ejecutar más acciones de ese tipo durante este turno.
+# Enfermas con poca intensidad a Ghalhugg.
+Pvs: 4926/5861 (-78) Pe: 1340/1408 (-7)
+[Obtienes 9 puntos de experiencia]
+Pvs: 5026/5961 (+100) Pe: 1339/1408 (0)
+Ghalhugg (Gob) llega desde el sudoeste seguido de Gorila (Dominada) y Grahs, Ancestro Bárbaro.
+* Logras parar críticamente el ataque de Grahs, Ancestro Bárbaro.
+# Perforas con fuerza a Ghalhugg.
+# Muerdes a Ghalhugg en un brazo, destrozándole carne y huesos.
+# ¡Alcanzas a Ghalhugg con tu maniobra de zarandear!
+* Logras esquivar el ataque de Grahs, Ancestro Bárbaro.
+> Grahs, Ancestro Bárbaro consigue escurrirse entre ti y Ghalhugg, protegiéndole.
++ Comienzas a moverte tentativamente alrededor de Grahs, Ancestro Bárbaro, buscando un flanco vulnerable para abalanzarte sobre él.
+# Rajas con fuerza a Grahs, Ancestro Bárbaro.
+# Perforas con fuerza a Grahs, Ancestro Bárbaro.
+# Enfermas con poca intensidad a Grahs, Ancestro Bárbaro.
+Pvs: 3724/5061 (-1302) Pe: 1318/1408 (-21)
+Ghalhugg (Gob) se va en dirección sudeste seguido de Gorila (Dominada) y Grahs, Ancestro Bárbaro.
++ Comienzas a moverte tentativamente alrededor de Ghalhugg, buscando un flanco vulnerable para abalanzarte sobre él.
+# ¡Te abalanzas sobre un costado de Ghalhugg, destrozándole con tres ataques de tus Garras y dientes!
+Ghalhugg (Gob) se va en dirección noroeste seguido de Gorila (Dominada) y Grahs, Ancestro Bárbaro.
+> Estás persiguiendo a Ghalhugg y Grahs, Ancestro Bárbaro.
+Pvs: 3287/5061 (-437) Pe: 1297/1408 (-10)
+> No hay nadie aquí reconocible como nizigg,ghalhugg,kimmura,notza,trotix,rugrak,suka.
+Intentas seguir a Grahs, Ancestro Bárbaro, pero te da esquinazo.
+> Pvs: 4087/5861 (+800) Pe: 1298/1408 (+1)
+Ghalhugg pronuncia el cántico: 'magius modus curis'
+] Parece que abalanzarse x no produjo efecto alguno.
+# Rajas con mucha fuerza a Grahs, Ancestro Bárbaro.
+# Enfermas débilmente a Grahs, Ancestro Bárbaro.
+Parece que so´ no produjo efecto alguno.
+] ¡Tus objetivos ya no están al alcance de tu zarpazo!
+Ghalhugg (Gob) llega desde el sudeste seguido de Gorila (Dominada) y Grahs, Ancestro Bárbaro.
+] No veo a ancestro por aquí.
+> Pvs: 4081/5861 (-6) Pe: 1277/1408 (-14)
+* Grahs, Ancestro Bárbaro te aplasta con increíble potencia.
+# Rajas violentamente a Grahs, Ancestro Bárbaro.
+Pvs: 3703/5861 (-378) Pe: 1277/1408 (0)
+Pvs: 3339/5861 (-364) Pe: 1263/1408 (-6)
+# Laceras con fuerza a Ghalhugg.
+Pvs: 2638/5861 (-701) Pe: 1256/1408 (-7)
+> * Logras esquivar el ataque de Ghalhugg.
+Ghalhugg (Gob) se va en dirección sur seguido de Gorila (Dominada) y Grahs, Ancestro Bárbaro.
+Pvs: 1840/5061 (-798) Pe: 1248/1408 (0)
+# ¡Te abalanzas sobre un sorprendido Ghalhugg y le despedazas con un ataque y un crítico de tus Garras y dientes!
+> Pvs: 2742/5961 (+902) Pe: 1227/1408 (-11)
+bg
+Parece que bg no produjo efecto alguno.
+Pvs: 2676/5961 (-66) Pe: 1224/1408 (-3)
+Parece que O no produjo efecto alguno.
+Parece que N no produjo efecto alguno.
+Parece que PC no produjo efecto alguno.
+Parece que CLE no produjo efecto alguno.
+> Pvs: 1906/5191 (-770) Pe: 1224/1408 (0)
+[Obtienes 299 puntos de experiencia]
+Páramos Orientales [no,e] 
+> Pvs: 2969/5191 (+1063) Pe: 1224/1408 (0)
+Páramos Orientales [se,o] 
+Páramos Orientales [e,no] 
+[Obtienes 378 puntos de experiencia]
+Páramos Orientales [ne,o] 
+Pvs: 4955/5861 (+1986) Pe: 1220/1408 (-3)
+Páramos Orientales [so,e,ne] 
+Páramos Orientales [e,o] 
+Pvs: 4579/5861 (-376) Pe: 1220/1408 (0)
+] En tu estado polimorfado te es imposible formular el hechizo Curar heridas ligeras.
+> Pvs: 3911/5191 (-668) Pe: 1215/1408 (+2)
+Páramos Orientales [so,n] 
+[Obtienes 368 puntos de experiencia]
+Pvs: 5191/5191 (+1280) Pe: 1215/1408 (0)
+] Sufres cuando tus músculos crujen y los huesos se reforman al comenzar a polimorfarte.
+> Pvs: 5781/5781 (+590) Pe: 1212/1408 (0)
+cano
+Pvs: 5521/5521 (-260) Pe: 1197/1408 (-15)
+Pvs: 5191/5191 (-330) Pe: 1192/1408 (0)
+] Ghalhugg (Gob) está aquí.
+> # Rajas con fuerza a Ghalhugg.
+# Rajas a Ghalhugg.
+Pvs: 5861/5861 (+670) Pe: 1193/1408 (+1)
+* ¡Logras parar críticamente a Grahs, Ancestro Bárbaro y su cabezazo!
+Cuerpo de Liebre.
+oe
+Parece que oe no produjo efecto alguno.
+Pvs: 5461/5461 (-400) Pe: 1178/1408 (-14)
+# ¡Alcanzas criticamente a Ghalhugg con tu maniobra de zarpazo!
+* Logras esquivar el ataque de Ghalhugg.
+Pvs: 4518/5461 (-943) Pe: 1171/1408 (-7)
+# Perforas con fuerza y de forma superficial a Grahs, Ancestro Bárbaro.
+Pvs: 3718/4661 (-800) Pe: 1171/1408 (0)
+Páramos Orientales [e,so] 
+Pvs: 3512/4661 (-206) Pe: 1149/1408 (-11)
+Puente sobre la Grieta de Lhoin [o,e] 
+] Páramos Orientales [ne,o] 
+> ¡Tus objetivos ya no están al alcance de tu abalanzarse!
+] Grahs, Ancestro Bárbaro consigue escurrirse entre ti y Ghalhugg, protegiéndole.
+# ¡Te abalanzas sobre un costado de Grahs, Ancestro Bárbaro, destrozándole con tres ataques y un crítico de tus Garras y dientes!
+] Parece que oeste no produjo efecto alguno.
+> # Rajas con fuerza y de forma superficial a Ghalhugg.
+# Rajas de forma superficial a Ghalhugg.
+Pvs: 4312/5461 (+800) Pe: 1125/1408 (-23)
+Pvs: 4097/5561 (-215) Pe: 1118/1408 (+1)
+> Comienzas a serpentear alrededor de Ghalhugg, buscando puntos ciegos por donde puedas agarrarle con tus temibles fauces.
+# Muerdes a Ghalhugg en una pierna, destrozándole carne y huesos.
+* Grahs, Ancestro Bárbaro te aplasta con fuerza.
+# Perforas con increíble potencia a Ghalhugg.
+# Enfermas críticamente a Ghalhugg.
+[Obtienes 71 puntos de experiencia]
+Pvs: 3984/5561 (-113) Pe: 1098/1408 (-20)
+ndn
+Parece que ndn no produjo efecto alguno.
+Pvs: 3804/5381 (-180) Pe: 1098/1408 (+1)
+Rugrak (Gno) y Ghalhugg (Gob) están aquí.
+Estás siendo atacado por Rugrak.
+# ¡Alcanzas a Rugrak con tu maniobra de dentellada!
+Rugrak (Gno) se va hacia oeste.
+Rugrak (Gno) está aquí.
+[Cruzada_eralie] Palafrenero de la Cruzada: ¡Enorthus ha asesinado a ghalhugg!
+[Obtienes 357833 puntos de experiencia]
+Propinas el golpe mortal a Ghalhugg.
+[Obtienes 18 puntos de gloria]
+> Pvs: 3943/5381 (+139) Pe: 1077/1408 (-11)
+[Chat] Ghalhugg: jajajaja
+Pvs: 3353/4791 (-590) Pe: 1077/1408 (0)
+[Obtienes 135 puntos de experiencia]
+Rugrak (Gno) llega desde el este.
+> Pvs: 4476/5461 (+1123) Pe: 1077/1408 (0)
+# Rajas con mucha fuerza a Rugrak.
+# Enfermas con poca intensidad a Rugrak.
+# ¡Alcanzas criticamente a Rugrak con tu maniobra de zarpazo!
+Rugrak (Gno) se va hacia este.
+* Rugrak te aplasta con mucha fuerza y de forma superficial.
+* Rugrak te aplasta con mucha fuerza.
+! Rugrak se prepara para ejecutar arremeter sobre ti.
+Pvs: 4081/5461 (-395) Pe: 1070/1408 (-7)
+# Aplastas a Rugrak.
+Pvs: 3411/4791 (-670) Pe: 1070/1408 (0)
+> Páramos Orientales [so,e,ne] 
+[Chat] Ithilrohir: se metio?
+Rugrak (Gno) (Retenido) está aquí.
+> + Te mueves en silencio alrededor de Rugrak, tensando los músculos de tus cuartos traseros para abalanzarte sobre él.
+# ¡Te abalanzas sobre un sorprendido Rugrak y le despedazas con tres ataques de tus Garras y dientes!
+Pvs: 3283/4661 (-128) Pe: 1060/1408 (0)
+# Rajas violentamente a Rugrak.
+[Obtienes 62 puntos de experiencia]
+Pvs: 4083/5461 (+800) Pe: 1049/1408 (0)
+[Chat] Suka:  XDDDDD
+> Ignorando 'mordisco x'. No puedes ejecutar más acciones de ese tipo durante este turno.
+> Pvs: 4183/5561 (+100) Pe: 1049/1408 (0)
+# Muerdes a Rugrak en un brazo, destrozándole carne y huesos.
+Rugrak (Gno) (Mordido) se va hacia oeste.
+Rugrak (Gno) (Mordido) está aquí.
+# Perforas con increíble potencia a Rugrak.
+Rugrak (Gno) (Mordido) se va hacia este.
+[Chat] Suka:  Horda_negra Lutaum, Ojo de los Crebain: ¡Rugrak ha ayudado a enorthus a derrotar a ghalhugg!
+# Retienes a Rugrak con tu mordisco, haciéndole más daño.
+Pvs: 3792/5561 (-391) Pe: 1025/1408 (-21)
+[Chat] Ithilrohir: si juega rugrak juego yo
+[Chat] Suka:  buena ehh xDDD
+Rugrak (Gno) (Mordido) llega desde el oeste.
+> Pvs: 3022/4791 (-770) Pe: 1025/1408 (0)
+chat uis xd
+[Chat] Enorthus: uis xd
+[Obtienes 321 puntos de experiencia]
+Pvs: 4130/4791 (+1108) Pe: 1025/1408 (0)
+> Pvs: 4800/5461 (+670) Pe: 1023/1408 (+1)
+Rugrak (Gno) llega desde el oeste.
+* Rugrak te aplasta violentamente.
+Pvs: 4274/5461 (-526) Pe: 1018/1408 (-5)
+[Chat] Ghalhugg 20:00): [Anarquico] Rugrak:  no me zurreis
+# ¡Alcanzas a Rugrak con tu maniobra de zarpazo!
+[Chat] Ithilrohir: XDDD
+nick yy rugrak
+> Páramos Orientales [ne,o] 
++ Comienzas a moverte tentativamente alrededor de Rugrak, buscando un flanco vulnerable para abalanzarte sobre él.
+# Rajas con fuerza a Rugrak.
+# Perforas con fuerza a Rugrak.
+Pvs: 3474/4661 (-800) Pe: 1004/1408 (-14)
+[Chat] Ithilrohir: xDDDDDDDDD
++ Te mueves en silencio alrededor de Rugrak, tensando los músculos de tus cuartos traseros para abalanzarte sobre él.
+] + Comienzas a moverte tentativamente alrededor de Rugrak, buscando un flanco vulnerable para abalanzarte sobre él.
+> # Rajas a Rugrak.
+Rugrak (Gno) se va hacia sudoeste.
+] ¡Tus objetivos ya no están al alcance de tu abalanzarse!
+> # Rajas con fuerza a Rugrak.
+# Enfermas críticamente a Rugrak.
+# Rajas a Rugrak.
+# Perforas críticamente a Rugrak.
+# ¡Te abalanzas sobre un costado de Rugrak, destrozándole con tres ataques de tus Garras y dientes!
+* Rugrak te aplasta con fuerza y de forma superficial.
+Pvs: 3882/5461 (+408) Pe: 951/1408 (-43)
+* ¡Rugrak te alcanza criticamente con su maniobra de arremeter!
+No puedes luchar estando agachado.
+Pvs: 2419/5461 (-1463) Pe: 944/1408 (0)
+de
+Parece que dentro no produjo efecto alguno.
+] Estás persiguiendo a Rugrak.
+> Pvs: 1749/4791 (-670) Pe: 944/1408 (0)
+[Obtienes 319 puntos de experiencia]
+# Rugrak consigue esquivar tu ataque.
+Pvs: 2851/4791 (+1102) Pe: 944/1408 (0)
+> El poder de tu Anillo del Héroe de la Luz inunda tu cuerpo y te sientes mucho más fuerte.
+Pvs: 3704/5191 (+853) Pe: 940/1408 (-1)
+Rugrak (Gno) llega desde el noreste.
+[Obtienes 395 puntos de experiencia]
+> Pvs: 5277/5861 (+1573) Pe: 929/1408 (-11)
+Rugrak (Gno) se va hacia noreste.
+[Obtienes 85 puntos de experiencia]
+Pvs: 4477/5061 (-800) Pe: 922/1408 (0)
+Ignorando 'abalanzarse x'. No puedes ejecutar más acciones de ese tipo durante este turno.
+[Chat] Suka:  fuiste sukhado XDDD
+Rugrak se prepara para ejecutar arremeter sobre .
+> Pvs: 4607/5191 (+130) Pe: 902/1408 (-19)
+Pvs: 5191/5191 (+584) Pe: 903/1408 (+1)
+# Enfermas débilmente a Rugrak.
+Pvs: 5861/5861 (+670) Pe: 902/1408 (0)
+Intentas seguir a Rugrak, pero te da esquinazo.
+] Puente sobre la Grieta de Lhoin [o,e] 
+# Laceras con fuerza a Rugrak.
+> * Rugrak te aplasta con mucha fuerza y de forma superficial.
+* Rugrak te aplasta con increíble potencia.
+Pvs: 5386/5861 (-475) Pe: 888/1408 (-7)
+[Chat] Elerlin: ahora voy a andu
+> Comienzas a serpentear alrededor de Rugrak, buscando puntos ciegos por donde puedas agarrarle con tus temibles fauces.
+Pvs: 5486/5961 (+100) Pe: 888/1408 (0)
+> Tu capa derrama parte de la sangre que la recubre sobre el suelo.
+> Revuelves tu cabeza ferozmente con énfasis feroz en lo que, indiscutiblemente, es toda una demostración de salvajismo. Dicho esto, si pretendías desgarrar algo será mejor que
+# Perforas violentamente a Rugrak.
+¡Rugrak pierde la concentración!
+[Cruzada_eralie] Palafrenero de la Cruzada: ¡Enorthus ha asesinado a rugrak!
+[Obtienes 380876 puntos de experiencia]
+Propinas el golpe mortal a Rugrak.
+Rugrak ha muerto.
+Rugrak cae al suelo sin vida.
+Rugrak da un grito desgarrador antes de que su espíritu abandone Eirea.
+[Obtienes 20 puntos de gloria]
+chat dies
+[Chat] Enorthus: dies
+Pvs: 5306/5781 (-180) Pe: 882/1408 (-3)
+[Chat] Ithilrohir: xDDDD
+[Chat] Suka:  premio a raton de la semana
+Finalmente logras cargar Bolsa de monedas (diez oros, dieciseis belas, un sesiom, veintiseis cobres, veinte platinos, dos olotas, un plata y seis monedas de safrio).
+Pvs: 4716/5191 (-590) Pe: 882/1408 (0)
+[Chat] Suka:  jajajaja
+[Chat] Suka:  Horda_negra Lutaum, Ojo de los Crebain: ¡Ghalhugg ha ayudado a enorthus a derrotar a rugrak!
+[Chat] Suka:  me meo xDDD
+chat jajajaja
+[Chat] Enorthus: jajajaja
+[El bloqueo 'Interruptor (sufrido)' termina]
+Camino Empedrado de Takome [s,n] 
+> [El bloqueo 'Vigor natural' termina]
+] Lancero de Takome está aquí
+> Pvs: 4661/4661 (0) Pe: 1398/1408 (+29)
+[Cruzada_eralie] Sacerdote Cruzado de élite: ¡Los infieles nos atacan en Caminos!, ¡a mi, mis hermanos!, ¡a la batalla por Eralie!
+Camino Empedrado de Takome [e,s,o,n] 
+Puedes ver dos salidas: sur y norte.
+Greszhx (Hlag) (Mordiendo) y Gorel (Hum) (Mordido) están allí.
+w m
+Greszhx (Hlag) (Mordiendo) y Gorel (Hum) (Mordido) están aquí.
+Gorel empieza a formular un hechizo.
+Greszhx se prepara para ejecutar destripar sobre Gorel.
+Gorel pronuncia el cántico: 'magius modus curis'
+Gorel (Hum) se va en dirección norte seguido de Greszhx (Hlag).
+Camino Empedrado de Takome [n,s] 
+Puerta Sur de Takome [s,n] 
+Greszhx logra esquivar el ataque de Sacerdote Cruzado de élite.
+Intentas seguir a Greszhx, pero te da esquinazo.
+> Greszhx te examina.
+Pvs: 5461/5461 (+800) Pe: 1394/1408 (-14)
+No hay nadie aquí reconocible como naglazh,skrazbur,indre,ejarn,greszhx.
+> No hay nadie aquí reconocible como naglazh,skrazbur,indre,ejarn,greszhx.
+# Enfermas críticamente a Greszhx.
+[Chat] Gorel:  bien cinto fuera xD
+Pvs: 5638/5861 (+177) Pe: 1388/1408 (-6)
+> Pvs: 5738/5961 (+100) Pe: 1381/1408 (0)
+* Greszhx te raja con fuerza y de forma superficial.
+* Greszhx te lacera con fuerza.
+Pvs: 5119/5961 (-619) Pe: 1378/1408 (-3)
+] + Te preparas para ejecutar dentellada.
+Pvs: 4939/5781 (-180) Pe: 1372/1408 (-3)
+# ¡Alcanzas críticamente a Greszhx con tu maniobra de dentellada!
+[Obtienes 97 puntos de experiencia]
+Viejo Puesto Fronterizo del Sur de Takome [s,n] 
+Senda del Alba [s,n] 
+] + Comienzas a moverte tentativamente alrededor de Greszhx, buscando un flanco vulnerable para abalanzarte sobre él.
+> Pvs: 4509/5061 (-430) Pe: 1362/1408 (0)
+[Obtienes 105 puntos de experiencia]
+# Perforas críticamente a Greszhx.
+Senda del Alba [s,n,o] 
+# ¡Alcanzas críticamente a Greszhx con tu maniobra de zarpazo!
+Pvs: 5309/5861 (+800) Pe: 1353/1408 (+1)
+[Cruzada_eralie] Palafrenero de la Cruzada: ¡Gorel ha ayudado a enorthus a derrotar a greszhx!
+[Obtienes 145019 puntos de experiencia]
+[Obtienes 11 puntos de gloria]
+abndo dies
+Parece que abndo dies no produjo efecto alguno.
+[Unnduan orbita al Limbo]
+[Chat] Greszhx:  pero que haces atontao
+[Bueno] Gorel:  ahora escuchas el has hecho trampas xD
+] Camino de Amonmen [se,no] 
+[Tu fe en Eralie ha disminuido en 3 puntos]
+Ese nombre corto no existe.
+mnick x zeh
+nick yy zeh
+Pvs: 4791/4791 (0) Pe: 1405/1408 (-3)
+[Grorgh orbita al Limbo]
+pfu
+Comienzas a formular el hechizo 'Proteccion fuego'.
+Pronuncias el cántico: 'major fogos rissas'
+pel
+Comienzas a formular el hechizo 'Proteccion electrico'.
+[El bloqueo 'Sutileza del metamorfo' termina]
+Pronuncias el cántico: 'major relampagum rissas'
+rac
+Comienzas a formular el hechizo 'Resistir acido'.
+Pronuncias el cántico: 'minor acid resit'
+rve
+Comienzas a formular el hechizo 'Resistir veneno'.
+Pronuncias el cántico: 'minor posonae resit'
+pfr
+Comienzas a formular el hechizo 'Proteccion frio'.
+Pronuncias el cántico: 'major hielum rissas'
+[El bloqueo 'Proteccion fuego' termina]
+> Pvs: 5191/5191 (+400) Pe: 1332/1408 (-76)
+[El bloqueo 'Proteccion electrico' termina]
+] Zeh (Mdro) y Sowy (Melf) están aquí.
+> Pvs: 5061/5061 (-130) Pe: 1332/1408 (0)
+[El bloqueo 'Resistir acido' termina]
+[El bloqueo 'Resistir veneno' termina]
++ Te mueves en silencio alrededor de Zeh, tensando los músculos de tus cuartos traseros para abalanzarte sobre él.
+# Tu ataque rebota en la piel de piedra de Zeh.
+# ¡Descargas una furia de golpes contra Zeh, pero éste consigue protegerse mágicamente de tres!
+> Pvs: 5861/5861 (+800) Pe: 1322/1408 (-10)
+[El bloqueo 'Proteccion frio' termina]
+Zeh (Mdro) y Sowy (Melf) están aquí.
+* Logras esquivar el ataque de Zeh.
+! Sowy se prepara para ejecutar estocada sobre ti.
+Tierras Húmedas [no,e] 
+Pvs: 5781/5781 (-80) Pe: 1316/1408 (+1)
+Tierras Húmedas [se,o] 
+Zeh (Mdro) llega desde el noroeste seguido de Mano espectral.
+Zeh empieza a formular un hechizo.
+Sowy (Melf) llega desde el noroeste.
+] Un muro de fuego en dirección noreste.
+> Estás persiguiendo a Zeh.
+Zeh (Mdro) está aquí.
+# Enfermas con poca intensidad a Zeh.
+Pvs: 5061/5061 (-720) Pe: 1306/1408 (0)
+Zeh (Mdro) se va en dirección este seguido de Mano espectral.
+Sowy (Melf) se va hacia oeste.
+Zeh (Mdro) se va en dirección sudeste seguido de Mano espectral.
+Sowy (Melf) llega desde el oeste.
+! Sowy se prepara para ejecutar ataque doble sobre ti.
+soz
+Parece que soz no produjo efecto alguno.
+> [El bloqueo 'dentellada' termina]
+No hay nadie aquí reconocible como zeh,bladarro,rength,sowy,grorgh,ghuv.
+Pvs: 5861/5861 (+800) Pe: 1298/1408 (-7)
+Zeh (Mdro) se va en dirección oeste seguido de Mano espectral.
+No estás luchando contra Sowy.
+Estás siendo atacado por Sowy.
+* Sowy te lacera con poca fuerza.
+* Sowy te purifica con poca intensidad.
+* Sowy te perfora críticamente.
+Sowy (Melf) llega desde el noreste.
+> Estás persiguiendo a Sowy.
+Pvs: 5497/5861 (-364) Pe: 1292/1408 (-6)
+Sowy (Melf) llega desde el este.
+! Sowy se prepara para ejecutar tajar sobre ti.
+Pvs: 4827/5191 (-670) Pe: 1292/1408 (0)
+¡Sowy te golpea con cólera de verdugo!
+* Sowy te raja con fuerza.
+* Sowy te corrompe.
+[Obtienes 175 puntos de experiencia]
+Sowy (Melf) se va hacia este.
+Sowy (Melf) está aquí.
+Sowy (Melf) llega desde el sudoeste.
+Zeh (Mdro) llega desde el noreste seguido de Mano espectral.
+* ¡Sowy te alcanza con su maniobra de tajar!
+# Zeh consigue esquivar tu ataque.
+Pvs: 3961/5191 (-866) Pe: 1291/1408 (-1)
+! Sowy se prepara para ejecutar golpecertero sobre ti.
+Templo de la Luz: Entrada [|de|,s] 
+Pvs: 5145/5191 (+1184) Pe: 1291/1408 (0)
+Sowy (Melf) llega desde el sur.
+! Sowy se prepara para ejecutar aplastar sobre ti.
+* Sowy te aplasta con mucha fuerza.
+vendar pie
+No tienes ninguna herida en pie.
+Sowy (Melf) se va hacia sur.
+Pvs: 5191/5191 (+46) Pe: 1288/1408 (0)
+> * Zeh te aplasta.
+* Zeh te fulmina con poca intensidad.
+> ! Sowy se prepara para ejecutar aplastar sobre ti.
+> Pvs: 5011/5191 (-180) Pe: 1277/1408 (0)
+Camino de Ëarmen- Puente sobre el Iaurduin [so,ne] 
+] Camino de Ëarmen- Puente sobre el Iaurduin [so,ne] 
+¡Tu movimiento rompe tu concentración y tu hechizo de Curar heridas ligeras queda arruinado!
+Camino de Ëarmen- Bosque de Orgoth [o,se,s,ne] 
+] Te desvias del camino del puente para llegar a un pequeño camino semi-paralelo al mismo.
+Desvío hacia el Iaurduin [ab,e] 
+] No tienes ninguna herida en pie.
+vendar pierna
+No tienes ninguna herida en pierna.
+No tienes ninguna herida en pecho.
+vendar patas
+No tienes ninguna herida en patas.
+vender cab
+Parece que vender cab no produjo efecto alguno.
+vendar cabeza
+No tienes ninguna herida en cabeza.
+vendar mano
+No tienes ninguna herida en mano.
+No tienes ninguna herida en hocico.
+vendar cola
+No tienes ninguna herida en cola.
+nick fau sowy
+> Pvs: 4885/5061 (-126) Pe: 1277/1408 (0)
+Pvs: 5015/5191 (+130) Pe: 1278/1408 (+1)
+> Pvs: 5061/5061 (+46) Pe: 1277/1408 (-1)
+Sowy logra esquivar el ataque de Lancero de Takome.
++ Comienzas a moverte tentativamente alrededor de Sowy, buscando un flanco vulnerable para abalanzarte sobre él.
+Sowy (Melf) se va hacia sudoeste.
+] Senda del Alba [se,ne,o] 
+] El objetivo zeh,bladarro,rength,sowy,grorgh,ghuv no está aquí ahora mismo.
+> Pvs: 5191/5191 (+130) Pe: 1267/1408 (-9)
+Sowy (Melf) se va hacia noreste.
+# Sowy consigue esquivar tu ataque.
+> Salvando...
+* Sowy te aplasta violentamente.
+* ¡Sowy te alcanza con su maniobra de aplastar!
+Pvs: 3998/5191 (-1193) Pe: 1268/1408 (+1)
+[Obtienes 252 puntos de experiencia]
+> Pvs: 4887/5191 (+889) Pe: 1269/1408 (+1)
+[Obtienes 103 puntos de experiencia]
+# Aplastas a Sowy.
+Pvs: 5191/5191 (+304) Pe: 1270/1408 (+2)
+El objetivo zeh,bladarro,rength,sowy,grorgh,ghuv no está aquí ahora mismo.
+li
+Ignorando 'formular limo toxico:x'. No puedes ejecutar más acciones de ese tipo durante este turno.
+Sowy se prepara para ejecutar golpecertero sobre Lancero de Takome.
+Sowy logra parar críticamente el ataque de Lancero de Takome.
+Comienzas a formular el hechizo 'Limo toxico'.
+Pronuncias el cántico: 'toxika flagrat'
+# ¡Juntas tus manos y expulsas un chorro de limo tóxico a los pies de Sowy, envolviéndola en vapores venenosos!
+[Obtienes 176 puntos de experiencia]
+¡Tu movimiento rompe tu concentración y tu hechizo de Relámpago queda arruinado!
+gl
+Comienzas a formular el hechizo 'Disipar magia'.
+* Sowy te perfora con poca fuerza.
+Pvs: 4955/5191 (-236) Pe: 1241/1408 (-26)
+Márgenes del Iaurduin [se,no] 
+[Bladarro orbita al Limbo]
+[Obtienes 76 puntos de experiencia]
+Camino de Ëarmen [so,n] 
+Pvs: 5191/5191 (+236) Pe: 1241/1408 (0)
+Sowy (Melf) se va hacia norte.
+> Pvs: 5961/5961 (+770) Pe: 1240/1408 (0)
+# Perforas con increíble potencia a Sowy.
+# Enfermas con poca intensidad a Sowy.
+Camino de Ëarmen [s,ne] 
+[El bloqueo 'Disipar magia' termina]
+Sowy (Melf) se va hacia sudeste.
+* Sowy te raja con poca fuerza y de forma superficial.
+* Sowy te corrompe con poca intensidad.
+Sowy (Melf) se va hacia noroeste.
+Márgenes del Iaurduin [se,e,no] 
+Puente sobre el Iaurduin [e,o] 
+> Pvs: 5854/5961 (-107) Pe: 1242/1408 (+2)
+> ! Sowy se prepara para ejecutar golpecertero sobre ti.
+* ¡Sowy te alcanza con su maniobra de golpecertero!
+Pvs: 5535/5961 (-319) Pe: 1240/1408 (-2)
+> ¡Sowy te golpea con cólera de verdugo!
+> Chasqueas los dientes en el aire cuando Sowy escapa al alcance de tus mandíbulas.
+Márgenes del Iaurduin [se,o] 
+> # Perforas con increíble potencia a Sowy.
+Pvs: 5309/5961 (-226) Pe: 1240/1408 (0)
+[El bloqueo 'Iluminacion (sufrido)' termina]
+[Obtienes 189 puntos de experiencia]
+Márgenes del Iaurduin [e,no] 
+> Pvs: 5191/5191 (-118) Pe: 1240/1408 (0)
+[El bloqueo 'Limo toxico' termina]
+l ar
+Árbol: Entre las ramas
+Zeh (Mdro) está allí.
+Tu armadura deja de estar expuesta.
+Pvs: 5061/5061 (-130) Pe: 1235/1408 (-4)
+sacudir arbol
+Sowy te dice:  em cur oalg oxdd
+Pvs: 5201/5201 (+140) Pe: 1233/1408 (-2)
+trepar arbol
+No puedes trepar teniendo las manos ocupadas.
+des todo
+Empiezas a trepar el árbol perdiéndote entre las ramas.
+Árbol: Entre las ramas (o,so,e,no) 
+saltar so
+Árbol: Entre las ramas (so,ne) 
+Estás siendo atacado por Das'shuz.
+Árbol: Entre las ramas (se,ne) 
+] En tu estado polimorfado te es imposible formular el hechizo Retener persona.
+> # Das'shuz consigue parar tu ataque.
+Das'shuz comienza a serpentear a tu alrededor mientras se relame, buscando puntos ciegos en tus defensas.
+* Das'shuz te raja críticamente.
+* Logras esquivar el ataque de Das'shuz.
+saltar ab
+> Pvs: 5143/5201 (-58) Pe: 1233/1408 (0)
+> Estás persiguiendo a Das'shuz.
+Pvs: 5139/5191 (-4) Pe: 1232/1408 (0)
+> Pvs: 5961/5961 (+822) Pe: 1231/1408 (-1)
+Bosque de Orgoth: Linde Noreste [so,se,e,ne] 
+> Pvs: 5191/5191 (-770) Pe: 1231/1408 (0)
+Bosque de Orgoth: Linde Noreste [ne,n,no] 
+Bosque de Orgoth: Linde Noreste [so,o] 
+Bosque de Orgoth: Linde Noreste [e,s,o,n] 
+Bosque de Orgoth: Linde Noreste [s,so,ne] 
+Bosque de Orgoth: Linde Noreste [so,no,n] 
+Comienzas a formular el hechizo 'Cicatrizar'.
+Empiezas a formular una tranquila plegaria.
+Pronuncias el cántico: 'sagnat curis'
+Bosque de Orgoth: Linde Noreste [s,e,n,no,o] 
+Bosque de Orgoth: Linde Noreste [n,no,o] 
+Pvs: 5961/5961 (+770) Pe: 1228/1408 (-3)
+Bosque de Orgoth: Linde Noreste [s,o] 
+Bosque de Orgoth: Linde Noreste [e,se,s,o] 
+Bosque de Orgoth: Linde Noreste [so,s,se,e,n,no] 
+Tu resistencia de veneno se desvanece.
+Bosque de Orgoth: Linde Noreste [se,e] 
+Bosque de Orgoth: Linde Noreste [e,ne,so] 
+* Sowy te aplasta con fuerza.
+Sowy logra esquivar el ataque de Cierva.
+Bosque de Orgoth: Linde Noreste [se,e,n,o] 
+Pvs: 5834/5961 (-127) Pe: 1229/1408 (+1)
+[El bloqueo 'Cicatrizar' termina]
+eo
+Parece que eo no produjo efecto alguno.
+] Linde Este del Bosque de Orgoth- Cruce de Ëarmen [o,so,e,no] 
+[El bloqueo 'trepar' termina]
+Pvs: 5155/5201 (-679) Pe: 1229/1408 (+3)
+saltar ne
+Pvs: 5147/5191 (-8) Pe: 1231/1408 (+2)
+# ¡El cielo ruge cuando invocas un relámpago que cae sobre Zeh!
+2 rayos caen desde el cielo envolviéndolo todo en un caos.
+Un rayo impacta sobre Zeh.
+Un rayo impacta junto a Zeh.
+¡Invocas una columna de fuego sobre Zeh que le alcanza parcialmente!
+> Saltas al suelo dándote un buen porrazo.
+Pvs: 5071/5191 (-76) Pe: 1194/1408 (-27)
+Zeh (Mdro) se va hacia este.
+Sowy (Melf) llega desde el oeste seguido de Esqueleto del Túmulo.
+# ¡Juntas tus manos y expulsas un chorro de limo tóxico a los pies de Zeh, envolviéndolo en vapores venenosos!
+Zeh (Mdro) se va hacia oeste.
+Sowy (Melf) se va en dirección este seguido de Esqueleto del Túmulo.
+Sowy (Melf) llega desde el este seguido de Esqueleto del Túmulo.
+> [El bloqueo 'Llamar rayos' termina]
+Zeh (Mdro) se va hacia sudoeste.
+] No estás afectado por el polimorfismo para necesitar terminarlo.
+] [El bloqueo 'Columna de fuego' termina]
+Sowy (Melf) llega desde el noreste seguido de Esqueleto del Túmulo.
+[Cruzada_eralie] Palafrenero de la Cruzada: ¡Enorthus ha asesinado a zeh!
+[Obtienes 227311 puntos de experiencia]
+Propinas el golpe mortal a Zeh.
+[Obtienes 37 puntos de gloria]
+] Camino de Ëarmen- Bosque de Orgoth [o,se,s,ne] 
+Cuerpo de Zeh y Cartel.
+Finalmente logras cargar Bolsa de monedas (doscientos ochenta y ocho sesioms, dos cobres, tres olotas y diez monedas de platino).
+-Kahan (Hum)- llega desde el noreste.
+Kahan empieza a formular un hechizo.
+Camino de Ëarmen- Bosque de Orgoth [oeste,sudeste,sur,noreste] 
+Pv:2145 Pe:457 Xp:1921710
+SL: [o,se,s,ne]
+Imágenes:0
+Pieles:0
+[Tiradas] Tirada de salvación de conjuro(desintegrar) % de éxito: 18 (34-16). Tirada: 77 (Fallo).
+* Una de tus Espadas Guardianas bloquea el impacto de Kahan mientras parpadea absorviendo el daño y desaparece.
+Una de las espadas que rodeaban a Genlae bloquea el ataque de Kahan mientras parpadea absorviendo el daño y desaparece.
+Márgenes del Iaurduin [sudeste,noroeste] 
+SL: [se,no]
+Márgenes del Iaurduin [sudeste,este,noroeste] 
+SL: [se,e,no]
+st
+Camino de Ëarmen- Puente sobre el Iaurduin [sudoeste,noreste] 
+SL: [so,ne]
+Kahan (Hum) está aquí.
+Linde Este del Bosque de Orgoth- Cruce de Ëarmen [oeste,sudoeste,este,noroeste] 
+SL: [o,so,e,no]
+NM:Kahan (Hum)
+LD:Kahan (Hum)
+car
+Comienzas a formular el hechizo 'Piedra a carne'.
+Pronuncias el cántico: 'past carnale'
+4
+Pv:2145 Pe:436 Xp:1921799
+PL:Kahan (Hum)
+# Una de tus Espadas Guardianas golpea a Kahan mientras gira a tu alrededor.
+Pv:2145 Pe:429 Xp:1921799
+# Tu ataque rebota en la piel de piedra de Kahan.
+# Mojas a Kahan.
+# Pronuncias unas palabras mágicas y tu Espada Azul empieza a vibrar y se ilumina deshaciendo los tejidos de Kahan.
+[Obtienes 326 puntos de experiencia]
+-Kahan (Hum)- se va hacia sudoeste.
+No puedes avanzar de nivel sin un Registro de Nivel I. Consulta ayuda registrarse para más información.
+Pv:2145 Pe:429 Xp:1922134
+Linde Este del Bosque de Orgoth- Dinmen [oeste,este] 
+SL: [o,e]
+-Kahan (Hum)- llega desde el sudoeste.
+Has agotado la energía necesaria para formular 'Piedra a carne' y debes descansar antes de poder usar ese tipo de energía.
+Pv:2145 Pe:430 Xp:1922134
+-Kahan (Hum)- se va hacia noreste.
+Pv:2145 Pe:423 Xp:1922134
+# Rajas con mucha fuerza a Kahan.
+Tu ataque sorbe parte de la resistencia contra fuego de Kahan.
+¡Kahan pierde la concentración!
+# Rajas violentamente a Kahan.
+Tu ataque sorbe parte de la resistencia contra frio de Kahan.
+[Obtienes 367 puntos de experiencia]
+[El bloqueo 'Piedra a carne' termina]
+[Obtienes 189550 puntos de experiencia]
+Propinas el golpe mortal a Kahan.
+Kahan ha muerto.
+Kahan cae al suelo sin vida.
+Kahan da un grito desgarrador antes de que su espíritu abandone Eirea.
+Harath (Melf) está aquí.
+Desvío hacia el Iaurduin [abajo,este] 
+Estás siendo atacada por Harath.
+* Una de tus Espadas Guardianas bloquea el impacto de Harath mientras parpadea absorviendo el daño y desaparece.
+Una de las espadas que rodeaban a Genlae bloquea el ataque de Harath mientras parpadea absorviendo el daño y desaparece.
+> Tu movimiento ha interrumpido la búsqueda.
+Desvío hacia el Iaurduin [oeste,arriba] 
+* Harath te perfora con fuerza sobrehumana.
+Harath (Melf) llega desde el sudoeste.
+# Rajas violentamente a Harath.
+Tu ataque sorbe parte de la resistencia contra veneno de Harath.
+Pvs: 15372145 Pe: 526534
+Comienzas a formular el hechizo 'Desintegrar'.
+# Rajas con mucha fuerza a Harath.
+Tu ataque sorbe parte de la resistencia contra fuego de Harath.
+[Obtienes 19 puntos de experiencia]
+Preparas los componentes del hechizo.
+Pronuncias el cántico: 'bellum destruct corpore'
+# Extiendes las palmas de tus manos formando un triángulo hacia Harath y un mortal rayo de energía le golpea de lleno, disgregando sus átomos y esparciéndolos en el aire.
+[Obtienes 239 puntos de experiencia]
+Pvs: 16572145 Pe: 527534
+# Una de tus Espadas Guardianas golpea a Harath mientras gira a tu alrededor.
+] El objetivo jandem,satyena,seinna,temmins,ylzhiam,invergath,bylider,harath,virdamer,athelbald,egmer,testeckol,aplexius,bradila no está aquí ahora mismo.
+] # Una de tus Espadas Guardianas golpea a Harath mientras gira a tu alrededor.
+* Harath te perfora con poca fuerza.
+* ¡Harath te acribilla con una salva de 4 dardos de fuego que te alcanza con 4 impactos!
+Pvs: 14512145 Pe: 497534
+[Tiradas] Tirada de salvación de aliento(nube dañadora) % de éxito: 43. Tirada: 49 (Fallo).
+# La Nube incendiaria de Harath te fulmina  con poca intensidad con una furiosa llamarada.
+Tu ataque sorbe parte de la resistencia contra enfermedad de Harath.
+# 11 misiles mágicos surgen de tus dedos e impactan infaliblemente sobre Harath.
+Pvs: 14542145 Pe: 497534
+Harath (Melf) se va hacia sudoeste.
+Parece que el objetivo no existe o no es válido para esta runa. Son objetos válidos para esta runa, otros jugadores o personajes no jugadores.
+] [Tiradas] Tirada de salvación de aliento(nube dañadora) % de éxito: 43. Tirada: 95 (Fallo).
+* Logras esquivar el ataque de Harath.
+Pvs: 14422145 Pe: 497534
+Trazas con ágiles movimientos en tus dedos la representación rúnica de azuneu y clavas tu mirada en Harath.
+[Tiradas] Tirada de salvación de aliento(nube dañadora) % de éxito: 43. Tirada: 56 (Fallo).
+Alzas tu mano, y alrededor de la misma comienzan a formarse 4 esferas que crepitan energía arcana y las lanzas contra Harath.
+# Una esfera de energía golpea a Harath con violencia mágica.
+Pvs: 7012145 Pe: 491534
+[Obtienes 91250 puntos de experiencia]
+Propinas el golpe mortal a Harath.
+Harath ha muerto.
+Harath cae al suelo sin vida.
+Harath da un grito desgarrador antes de que su espíritu abandone Eirea.
+Bylider (Melf) está aquí.
+Puerta Sur de Takome [sur,norte] 
+Camino Empedrado de Takome [norte,sur] 
+-|Stalos|/- llega desde el norte.
+> Estás persiguiendo a Caballero Cruzado de Élite, Sacerdote Cruzado de Élite y Soldado Cruzado de Élite.
+# Extiendes las palmas de tus manos formando un triángulo hacia Stalos y un mortal rayo de energía le golpea de lleno, disgregando sus átomos y esparciéndolos en el aire.
+Stalos empieza a formular un hechizo.
+Trazas con ágiles movimientos en tus dedos la representación rúnica de azuneu y clavas tu mirada en Stalos.
+Stalos pronuncia el cántico: 'bellum destruct corpore'
+¡Stalos pierde la concentración!
+Estás siendo atacada por Stalos.
+Stalos extiende las palmas de sus manos, formando un triángulo, hacia ti y un mortal rayo de energía te golpea de lleno, desintegrando parte de tu cuerpo y causándote un dolor
+# Tu ataque rebota en la piel de piedra de Stalos.
+Alzas tu mano, y alrededor de la misma comienzan a formarse 5 esferas que crepitan energía arcana y las lanzas contra Stalos.
+# Una esfera de energía golpea a Stalos con violencia mágica.
+Pvs: 5872531 Pe: 276618
+[Obtienes 609732 puntos de experiencia]
+Propinas el golpe mortal a Stalos.
+Stalos ha muerto.
+Stalos cae al suelo sin vida.
+Stalos da un grito desgarrador antes de que su espíritu abandone Eirea.
+[Obtienes 30 puntos de gloria]
+Muelle de Alandaen [norte] 
+[El bloqueo 'Neruandi' termina]
+Artel (Ena) llega desde el norte.
+Artel (Ena) se va hacia norte.
+No tienes permiso para acceder al Barco de Faeir.
+[El bloqueo 'Maeglin' termina]
+Costas de Anduar [ninguna] 
+] Si quieres desplazarte en dirección sur, tendrá que ser nadando.
+Parece que después de haber recorrido todos los barcos que has pedido no hemos encontrado el que buscas. ¿Tal vez quieras mejorar el patrón de tu búsqueda?
+Mar de Loereth [ninguna] 
+Parece que fnger fae no produjo efecto alguno.
+No puedes acceder al Barco de Faeir. No tiene la escalera soltada. ¿De verdad eres tan necia como para haberte zambullido en el agua sin haber soltado la escalera antes?
+Artel (Ena) llega nadando desde el norte.
+Faeir (Melf) está aquí.
+Barco de Faeir: Puente de Gobierno [este,oeste] 
+# Extiendes las palmas de tus manos formando un triángulo hacia Faeir y un mortal rayo de energía le golpea de lleno, disgregando sus átomos y esparciéndolos en el aire.
+Artel (Ena) llega de la superficie.
+No puedes lanzas esferas estándo rodeada por tus Espadas Guardianas.
+# Una de tus Espadas Guardianas golpea a Faeir mientras gira a tu alrededor.
+Estás siendo atacada por Faeir.
+* Logras esquivar el ataque de Faeir.
+Comienzas a formular el hechizo 'Golpe de rayo'.
+# Rajas con mucha fuerza a Faeir.
+Tu ataque sorbe parte de la resistencia contra veneno de Faeir.
+Pronuncias el cántico: 'xilyx de gadrum'
+# Un rayo surge de tus manos impactando sobre Faeir electrocutándole.
+* Una de tus Espadas Guardianas bloquea el impacto de Faeir mientras parpadea absorviendo el daño y desaparece.
+Una de las espadas que rodeaban a Genlae bloquea el ataque de Faeir mientras parpadea absorviendo el daño y desaparece.
+Faeir (Melf) se va hacia oeste.
+Barco de Faeir: Cubierta [abajo,oeste,este] 
+Tu ataque sorbe parte de la resistencia contra electrico de Faeir.
+Tu ataque sorbe parte de la resistencia contra frio de Faeir.
+# Pronuncias unas palabras mágicas y tu Espada Azul vibra mientras brotan de ella poderosos haces de luz que desmembran los tejidos externos de Faeir alcanzando órganos internos.
+[Obtienes 393 puntos de experiencia]
+[Obtienes 129964 puntos de experiencia]
+Propinas el golpe mortal a Faeir.
+Faeir ha muerto.
+Faeir cae al suelo sin vida.
+Faeir da un grito desgarrador antes de que su espíritu abandone Eirea.
+[Obtienes 16 puntos de gloria]
+Selmaer (Hlag) llega desde el sudeste.
+Selmaer (Hlag) llega desde el sudeste seguido de Szyecko (Hlag).
+Estás siendo atacada por Szyecko.
+Camino de Amonmen [sudeste,noroeste] 
+[Renegado] Genlae: dios
+[Renegado] Meliam Afortunador: TOTAL: 51 muertes y 7990593 puntos de experiencia.
+[Renegado] Genlae: selmaer sceco
+[Renegado] Meliam Afortunador: ya tengo unos pocos XD
+# Rajas con mucha fuerza a Selmaer.
+Tu ataque sorbe parte de la resistencia contra fuego de Selmaer.
+# Mojas a Selmaer.
+Selmaer (Hlag) llega desde el noreste.
+Selmaer (Hlag) llega desde el noreste seguido de Szyecko (Hlag).
+Selmaer (Hlag) y Szyecko (Hlag) están aquí.
+] ! Szyecko se prepara para ejecutar destripar sobre ti.
+* El ataque de Szyecko rebota en tu piel de piedra.
+* El ataque de Selmaer rebota en tu piel de piedra.
+! Selmaer se prepara para ejecutar destripar sobre ti.
+Tu ataque sorbe parte de la resistencia contra bien de Selmaer.
+# Rajas críticamente a Szyecko.
+Tu ataque sorbe parte de la resistencia contra aire de Szyecko.
+# Mojas a Szyecko.
+# Pronuncias unas palabras mágicas y tu Espada Azul empieza a vibrar y se ilumina deshaciendo los tejidos de Szyecko.
+[Obtienes 187 puntos de experiencia]
+Selmaer (Hlag) se va hacia sudoeste.
+Selmaer (Hlag) se va en dirección sudoeste seguido de Szyecko (Hlag).
+Selmaer (Hlag) llega desde el sudoeste.
+Selmaer (Hlag) llega desde el sudoeste seguido de Szyecko (Hlag).
+# Rajas violentamente a Szyecko.
+Tu ataque sorbe parte de la resistencia contra electrico de Szyecko.
+# 11 misiles mágicos surgen de tus dedos e impactan infaliblemente sobre Szyecko.
+Selmaer dice en lagarto: Ssh bobrerss irnrernradogss...
+Camino de Amonmen [noreste,sudeste,noroeste] 
+Selmaer dice en lagarto: Wss bobrerss irnrernradogss...
+Selmaer comienza a serpentear a tu alrededor mientras se relame, buscando puntos ciegos en tus defensas.
+Tu ataque sorbe parte de la resistencia contra bien de Szyecko.
+# Extiendes las palmas de tus manos formando un triángulo hacia Szyecko y un mortal rayo de energía le golpea de lleno, disgregando sus átomos y esparciéndolos en el aire.
+Senda del Alba [oeste,norte,este] 
+] Estás persiguiendo a Szyecko y Selmaer.
+] [El bloqueo 'Proyectil magico mayor' termina]
+Trazas con ágiles movimientos en tus dedos la representación rúnica de azuneu y clavas tu mirada en Szyecko.
+Alzas tu mano, y alrededor de la misma comienzan a formarse 4 esferas que crepitan energía arcana y las lanzas contra Szyecko.
+# Una esfera de energía golpea a Szyecko con violencia mágica.
+[Renegado] Ylzhiam NeCrO: voy a ducharme
+] [El bloqueo 'Desintegrar' termina]
+Szyecko (Hlag) llega desde el sudoeste.
+Szyecko (Hlag) se va hacia noreste.
+Selmaer (Hlag) está aquí.
+] # Rajas con fuerza a Selmaer.
+Tu ataque sorbe parte de la resistencia contra electrico de Selmaer.
+[Obtienes 26 puntos de experiencia]
+* ¡Selmaer te alcanza criticamente con su maniobra de destripar!
+[Tiradas] Tirada de salvación de aliento(descarga) % de éxito: 47. Tirada: 63 (Fallo).
+El rezumante limo de las garras de Selmaer te envenena.
+¡El golpe de Selmaer te eviscera el pecho!
+[Marguleitor orbita al Limbo]
+Pvs: 13412551 Pe: 598640
+No estás suficientemente calmada.
+# Rajas con fuerza a Selmaer.
+Tu ataque sorbe parte de la resistencia contra magico de Selmaer.
+Tu ataque sorbe parte de la resistencia contra veneno de Selmaer.
+# Mojas críticamente a Selmaer.
+# Pronuncias unas palabras mágicas y tu Espada Azul vibra mientras brotan de ella poderosos haces de luz que desmembran los tejidos externos de Selmaer alcanzando órganos internos.
+[Obtienes 397 puntos de experiencia]
+Pvs: 14612551 Pe: 591640
+Szyecko (Hlag) está aquí.
+Pvs: 14052551 Pe: 591640
+Selmaer (Hlag) y Agbaz (Hum) están aquí.
+Selmaer (Hlag) se va hacia noreste.
+Agbaz (Hum) se va hacia noreste.
+[Zirax orbita al Limbo]
+[Atzok orbita al Limbo]
+Parece que sudoeste no produjo efecto alguno.
+Puente sobre el Iaurduin [este,oeste] 
+Márgenes del Iaurduin [sudeste,oeste] 
+[Renegado] Meliam Afortunador: me cruce al nibbla
+] # Rajas críticamente a Szyecko.
+Tu ataque sorbe parte de la resistencia contra fuego de Szyecko.
+Pvs: 14652551 Pe: 591640
+Szyecko (Hlag) se va hacia este.
+El objetivo agbaz,szyecko,nayth,selmaer,esheit,yrant no está aquí ahora mismo.
+Márgenes del Iaurduin [este,noroeste] 
+Márgenes del Iaurduin [sudeste,este,oeste] 
+[Renegado] Margull:  mmm
+Márgenes del Iaurduin [este,noreste,noroeste] 
+[Ylzhiam orbita al Limbo]
+Szyecko (Hlag) se va hacia noroeste.
+Szyecko (Hlag) llega desde el noroeste.
+* Szyecko te raja con fuerza.
+* Szyecko te raja con mucha fuerza.
+[Tiradas] Tirada de salvación de aliento(descarga) % de éxito: 47. Tirada: 45 (Éxito).
+Pvs: 11482551 Pe: 592640
+# Una esfera de energía es esquivada por Szyecko antes del impacto.
+[El bloqueo 'Descarga' termina]
+[Obtienes 392197 puntos de experiencia]
+Propinas el golpe mortal a Szyecko.
+|| Sinafae (Melf) ||||| llega desde el norte.
+# Rajas con fuerza a Sinafae.
+Tu ataque sorbe parte de la resistencia contra mal de Sinafae.
+# Mojas a Sinafae.
+[Obtienes 23 puntos de experiencia]
+Senda del Alba [sur,norte] 
+||||| Sinafae (Melf) ||||| llega desde el norte.
+||||| Sinafae (Melf) ||||| llega desde el sur.
+] Estás persiguiendo a Sinafae.
+Viejo Puesto Fronterizo del Sur de Takome [sur,norte] 
+Camino Empedrado de Takome [sur,norte] 
+[Renegado] Egmer: no lo veo el rastro
+Camino Empedrado de Takome [este,sur,oeste,norte] 
+Camino Empedrado: Antiguos Arrabales [noreste,oeste] 
+[Renegado] Gtyarya LaQueIlusiona: sal por puerta este xD
+Estás siendo atacada por Lancero de Takome.
+Camino Empedrado: Antiguos Arrabales [sudoeste,este] 
+Camino Empedrado: Antiguos Arrabales [sudeste,oeste] 
+Tu resistencia de mental se desvanece.
+Comienzas a formular el hechizo 'Proteccion bien'.
+Tu resistencia de mal se desvanece.
+Pronuncias el cántico: 'major benevola rissas'
+Finalmente logras cargar Cinturón Robacuraciones.
+] Comienzas a ponerte tu Cinturón Robacuraciones.
+> Pvs: 23012301 Pe: 495651
+Tu resistencia de enfermedad se desvanece.
+||||| Sinafae (Melf) ||||| llega desde el oeste.
+Comienzas a formular el hechizo 'Globo mayor de invulnerabilidad'.
+Pronuncias el cántico: 'maior secry sphyre'
+[Obtienes 107 puntos de experiencia]
+[El bloqueo 'Proteccion bien' termina]
+[Renegado] Gtyarya LaQueIlusiona: comedor
+[Renegado] Gtyarya LaQueIlusiona: posada
+[Renegado] Gtyarya LaQueIlusiona: ven corre
+Sinafae (Melf) está aquí.
+[Tiradas] Tirada de salvación de conjuro(bien) % de éxito: 53 (39+14). Tirada: 33 (Éxito).
+Pvs: 22052301 Pe: 467651
+||||| Sinafae (Melf) ||||| se va hacia sur.
+Tu ataque sorbe parte de la resistencia contra electrico de Sinafae.
+Pvs: 22652301 Pe: 467651
+[Renegado] Egmer: voy
+* El ataque de Sinafae rebota en tu piel de piedra.
+* Sinafae te castiga intensamente.
+Pvs: 21242301 Pe: 469651
+] # Rajas con fuerza a Sinafae.
+Tu ataque sorbe parte de la resistencia contra fuego de Sinafae.
+# Rajas a Sinafae.
+# Lresisah se interpone para detener parte del ataque a Sinafae.
+# Pronuncias unas palabras mágicas y tu Espada Azul empieza a vibrar y se ilumina deshaciendo los tejidos de Sinafae.
+[Obtienes 259 puntos de experiencia]
+Pvs: 22442301 Pe: 463651
+[Chat] Greys: saben como se carga el martillo del trueno? es decir, una vez llegado a los alcantilados del trueno, que hay que hacer?
+[Renegado] Gtyarya LaQueIlusiona: cierra al entrar y le damos
+Pvs: 23012301 Pe: 463651
+[Renegado] Egmer: estoy
+* Sinafae te castiga críticamente.
+Pvs: 19032301 Pe: 463651
+Sinafae empieza a formular un hechizo.
+Tu ataque sorbe parte de la resistencia contra magico de Sinafae.
+# Mojas con poca intensidad a Sinafae.
+# Cathedal se interpone para detener parte del ataque a Sinafae.
+¡Sinafae pierde la concentración!
+# Extiendes las palmas de tus manos formando un triángulo hacia Sinafae y un mortal rayo de energía le golpea de lleno, disgregando sus átomos y esparciéndolos en el aire.
+Pvs: 19632301 Pe: 463651
+[Renegado] Gtyarya LaQueIlusiona: cierra y go
+||||| Sinafae (Melf) ||||| se va hacia norte.
+Parece que cure no produjo efecto alguno.
+Parece que s1 no produjo efecto alguno.
+Senda del Alba [sur,norte,oeste] 
+[El bloqueo 'Desintegrar' termina]
+Senda del Alba [este,oeste] 
+Senda del Alba [este,noroeste] 
+] # Rajas violentamente a Lancero de Takome.
+# Mojas a Lancero de Takome.
+Pvs: 20232301 Pe: 436651
+* Logras esquivar el ataque de Lancero de Takome.
+[Renegado] Egmer: xD
+Tu resistencia de electrico se desvanece.
+] # Rajas a Sinafae.
+# Pronuncias unas palabras mágicas y tu Espada Azul vibra mientras brotan de ella poderosos haces de luz que desmembran los tejidos externos de Sinafae alcanzando órganos internos.
+[Obtienes 242 puntos de experiencia]
+Pvs: 21432301 Pe: 431651
+Pvs: 20172301 Pe: 431651
+Pvs: 21372301 Pe: 431651
+Trazas con ágiles movimientos en tus dedos la representación rúnica de azuneu y clavas tu mirada en Sinafae.
+[Chat] Greys: xD
+* Sinafae te castiga muy intensamente.
+Pvs: 19752301 Pe: 426651
+Sinafae te examina.
+Alzas tu mano, y alrededor de la misma comienzan a formarse 5 esferas que crepitan energía arcana y las lanzas contra Sinafae.
+# Una esfera de energía golpea a Sinafae con violencia mágica.
+# Una esfera de energía es esquivada por Sinafae antes del impacto.
+Pvs: 17682301 Pe: 426651
+Has agotado la energía necesaria para formular 'Desintegrar' y debes descansar antes de poder usar ese tipo de energía.
+Pvs: 18282301 Pe: 427651
+Sinafae pronuncia el cántico: 'ken olatid sancrit'
+[Tiradas] Tirada de salvación de conjuro(bien) % de éxito: 53 (39+14). Tirada: 4 (Éxito).
+Pvs: 16292301 Pe: 428651
+Tu ataque sorbe parte de la resistencia contra frio de Sinafae.
+# Un rayo surge de tus manos impactando sobre Sinafae electrocutándola.
+Pvs: 16892301 Pe: 428651
+[Chat] Bradila:  Un martillo del trueno y un prisma? pero eres dueño de telecinco greys? o como haces para comprar cosas tan caras xDD
+[Tiradas] Tirada de salvación de conjuro(bien) % de éxito: 53 (39+14). Tirada: 2 (Éxito).
+Pvs: 15482301 Pe: 408651
+[Chat] Bradila:  dime tu secreto
+Sinafae pronuncia el cántico: 'magius modus curis'
+Pvs: 23012301 Pe: 409651
+] [El bloqueo 'Golpe de rayo' termina]
+Sinafae pronuncia el cántico: 'maleus benevola rissas'
+Tu resistencia de bien se desvanece.
+] * El ataque de Sinafae rebota en tu piel de piedra.
+Pvs: 21262301 Pe: 404651
+Tu ataque sorbe parte de la resistencia contra mental de Sinafae.
+# Extiendes las palmas de tus manos bruscamente hacia adelante y lanzas una ráfaga de energía mágica que desintegra por completo el cuerpo de Sinafae, arrancándole la carne de los
+Pvs: 21862301 Pe: 405651
+[Obtienes 625627 puntos de experiencia]
+Propinas el golpe mortal a Sinafae.
+Sinafae ha muerto.
+Sinafae cae al suelo sin vida.
+Sinafae da un grito desgarrador antes de que su espíritu abandone Eirea.
+[Obtienes 26 puntos de gloria]
+Esheit (Hum) llega desde el sur.
+Esheit empieza a formular un hechizo.
+Estás siendo atacada por Esheit.
+Ruinas de la Muralla Este de Anduar [sur,norte] 
+Esheit (Hum)
+Esheit (Hum) te sigue.
+Exterior de Anduar: Puerta Este [oeste,sur,este,norte] 
+Pvs: 21672581 Pe: 541673
+Campos de Cultivo [oeste,este] 
+Esheit deja de formular.
+Campos de Cultivo [sudeste,noreste,oeste] 
+] # Rajas con fuerza a Esheit.
+Tu ataque sorbe parte de la resistencia contra frio de Esheit.
+# Mojas a Esheit.
+Pvs: 22572581 Pe: 543673
+* El ataque de Esheit rebota en tu piel de piedra.
+Campos de Cultivo [sudoeste,norte,este] 
+Parece que 14 no produjo efecto alguno.
+Camino al Cementerio de Anduar [norte,sur] 
+# Rajas con mucha fuerza a Esheit.
+Tu ataque sorbe parte de la resistencia contra mental de Esheit.
+# Mojas con poca intensidad a Esheit.
+Pvs: 23172581 Pe: 544673
+Esheit (Hum) se va hacia norte.
+Esheit (Hum) llega desde el norte.
+Tu ataque sorbe parte de la resistencia contra fuego de Esheit.
+Tu ataque sorbe parte de la resistencia contra mal de Esheit.
+# Pronuncias unas palabras mágicas y tu Espada Azul empieza a vibrar y se ilumina deshaciendo los tejidos de Esheit.
+Pvs: 24672581 Pe: 538673
+> # Rajas con fuerza a Esheit.
+Tu ataque sorbe parte de la resistencia contra divino de Esheit.
+# Mojas críticamente a Esheit.
+[Obtienes 30 puntos de experiencia]
+Pvs: 25272581 Pe: 538673
+Tu ataque sorbe parte de la resistencia contra enfermedad de Esheit.
+# Extiendes las palmas de tus manos formando un triángulo hacia Esheit y un mortal rayo de energía le golpea de lleno, disgregando sus átomos y esparciéndolos en el aire.
+Pvs: 25812581 Pe: 539673
+Trazas con ágiles movimientos en tus dedos la representación rúnica de azuneu y clavas tu mirada en Esheit.
+Pvs: 21032581 Pe: 511673
+Esheit (Hum) se va hacia noreste.
+Alzas tu mano, y alrededor de la misma comienzan a formarse 4 esferas que crepitan energía arcana y las lanzas contra Esheit.
+# Una esfera de energía golpea a Esheit con violencia mágica.
+Esheit (Hum) está aquí.
+# Rajas con fuerza a Esheit.
+Tu ataque sorbe parte de la resistencia contra magico de Esheit.
+# 11 misiles mágicos surgen de tus dedos e impactan infaliblemente sobre Esheit.
+¡Esheit pierde la concentración!
+[Obtienes 113 puntos de experiencia]
+Pvs: 21632581 Pe: 505673
+[Obtienes 356934 puntos de experiencia]
+Propinas el golpe mortal a Esheit.
+Esheit ha muerto.
+Esheit cae al suelo sin vida.
+Esheit da un grito desgarrador antes de que su espíritu abandone Eirea.
+[Obtienes 34 puntos de gloria]
+-Kahan (Hum)- llega desde el norte.
+[El bloqueo 'Toque vampirico' termina]
+-Kahan (Hum)- se va hacia sur.
+Trazas con ágiles movimientos en tus dedos la representación rúnica de azuneu y clavas tu mirada en Kahan.
+-Kahan (Hum)- se va hacia norte.
+Alzas tu mano, y alrededor de la misma comienzan a formarse 4 esferas que crepitan energía arcana y las lanzas contra Kahan.
+# Una esfera de energía golpea a Kahan con violencia mágica.
+# Una esfera de energía es esquivada por Kahan antes del impacto.
+# Rajas con mucha fuerza a Caballero Cruzado de Élite.
+# Mojas a Caballero Cruzado de Élite.
+[Tiradas] Tirada de salvación de conjuro % de éxito: 18 (39-21). Tirada: 8 (Éxito).
+[Tiradas] Tirada de salvación de conjuro % de éxito: 18 (39-21). Tirada: 97 (Fallo).
+* Una esfera de energía te golpea con violencia mágica mientras notas crujir toda tu musculatura.
+[Tiradas] Tirada de salvación de conjuro % de éxito: 18 (39-21). Tirada: 69 (Fallo).
+[Tiradas] Tirada de salvación de conjuro % de éxito: 18 (39-21). Tirada: 99 (Fallo).
+[Tiradas] Tirada de salvación de conjuro % de éxito: 18 (39-21). Tirada: 61 (Fallo).
+Pvs: 20092809 Pe: 345684
+* Kahan te raja con fuerza.
+# Extiendes las palmas de tus manos formando un triángulo hacia Kahan y un mortal rayo de energía le golpea parcialmente, disgregando sus átomos y esparciéndolos en el aire.
+[Obtienes 235 puntos de experiencia]
+Pvs: 18582809 Pe: 347684
+Alzas tu mano, y alrededor de la misma comienzan a formarse 5 esferas que crepitan energía arcana y las lanzas contra Kahan.
+Pvs: 17212809 Pe: 311684
+[Obtienes 660906 puntos de experiencia]
+Estás siendo atacada por Gurlen.
+[Renegado] Genlae: dies
+# Gurlen consigue esquivar tu ataque.
+Pvs: 15602809 Pe: 313684
+-|Gurlen (Hal)|/- llega desde el norte.
+[Renegado] Crisrothe:   xDDD ole 
+Camino Empedrado: Antiguos Arrabales [este,noroeste] 
+# Extiendes las palmas de tus manos formando un triángulo hacia Sphynx y un mortal rayo de energía le golpea de lleno, disgregando sus átomos y esparciéndolos en el aire.
+Sphynx (Hlag) llega desde el este.
+Sphynx (Hlag) llega desde el oeste.
+# Sphynx consigue parar críticamente tu ataque.
+Sphynx (Hlag) se va hacia oeste.
+Sphynx (Hlag) está aquí.
+Sphynx (Hlag) se va hacia este.
+! Sphynx se prepara para ejecutar destripar sobre ti.
+# Rajas con fuerza a Sphynx.
+Tu ataque sorbe parte de la resistencia contra fuego de Sphynx.
+# Congelas a Sphynx.
+# Rajas con mucha fuerza a Sphynx.
+Tu ataque sorbe parte de la resistencia contra magico de Sphynx.
+# Pronuncias unas palabras mágicas y tu Espada Azul empieza a vibrar y se ilumina deshaciendo los tejidos de Sphynx.
+[Obtienes 303 puntos de experiencia]
+Pvs: 26112611 Pe: 612706
+* El ataque de Sphynx rebota en tu piel de piedra.
+Senda del Alba [noreste,oeste] 
+# Congelas a Lancero de Takome.
+> * El ataque de Lancero de Takome rebota en tu piel de piedra.
+Sphynx (Hlag) llega desde el noreste.
+Senda del Alba [sudoeste,noreste] 
+Bandido llega desde el oeste.
+No hay nadie aquí reconocible como greys,erwf,seowen,zazme,sphynx,sirix.
+] * El ataque de Sphynx rebota en tu piel de piedra.
+Trazas con ágiles movimientos en tus dedos la representación rúnica de azuneu y clavas tu mirada en Sphynx.
+Alzas tu mano, y alrededor de la misma comienzan a formarse 4 esferas que crepitan energía arcana y las lanzas contra Sphynx.
+# Una esfera de energía golpea a Sphynx con violencia mágica.
+Pvs: 26002611 Pe: 580706
+[Obtienes 793 puntos de experiencia]
+# Rajas violentamente a Sphynx.
+Tu ataque sorbe parte de la resistencia contra bien de Sphynx.
+# 11 misiles mágicos surgen de tus dedos e impactan infaliblemente sobre Sphynx.
+[Obtienes 136 puntos de experiencia]
+Pvs: 26112611 Pe: 579706
+* ¡Sphynx te alcanza con su maniobra de destripar!
+[Tiradas] Tirada de salvación de aliento(descarga) % de éxito: 50. Tirada: 50 (Éxito).
+¡El golpe de Sphynx te eviscera una pierna!
+Pvs: 16492611 Pe: 572706
+Sphynx empieza a centrar sus golpes sobre ti.
+Sphynx comienza a serpentear a tu alrededor mientras se relame, buscando puntos ciegos en tus defensas.
+* Sphynx se abalanza sobre ti y te muerde el pecho, envenenándote con su saliva tóxica.
+Pvs: 11812611 Pe: 572706
+[Tiradas] Tirada de salvación de fuerza bruta(zafarse del mordisco) % de éxito: 10 (30-20). Tirada: 60 (Fallo).
+> Pvs: 15102611 Pe: 572706
+Tu ataque sorbe parte de la resistencia contra electrico de Sphynx.
+Alzas tu mano, y alrededor de la misma comienzan a formarse 5 esferas que crepitan energía arcana y las lanzas contra Sphynx.
+Pvs: 15702611 Pe: 566706
+* Sphynx te raja con mucha fuerza.
+* Sphynx te raja violentamente.
+[Tiradas] Tirada de salvación de aliento(descarga) % de éxito: 50. Tirada: 18 (Éxito).
+Pvs: 8452611 Pe: 567706
+[El bloqueo 'Proyectil magico mayor' termina]
+Tu ataque sorbe parte de la resistencia contra veneno de Sphynx.
+Pvs: 9052611 Pe: 569706
+] Esqueleto Calcinado te protege valientemente.
+Sphynx se echa hacia atrás y mira fijamente a Esqueleto Calcinado mientras sus Garras óseas comienzan a rezumar veneno.
+Tu ataque sorbe parte de la resistencia contra frio de Sphynx.
+Pvs: 10252611 Pe: 562706
+Esqueleto Calcinado cae al suelo sin vida.
+> # Rajas con mucha fuerza a Sphynx.
+# Extiendes las palmas de tus manos bruscamente hacia adelante y lanzas una ráfaga de energía mágica que desintegra por completo el cuerpo de Sphynx, arrancándole la carne de los
+Pvs: 10932611 Pe: 562706
+[Obtienes 275599 puntos de experiencia]
+Propinas el golpe mortal a Sphynx.
+Sphynx ha muerto.
+Sphynx cae al suelo sin vida.
+Sphynx da un grito desgarrador antes de que su espíritu abandone Eirea.
+[Obtienes 7 puntos de gloria]
+Siky (Ena) y Elnaer (Hum) (protegido por 8 ángeles guardianes) están allí.
+Árbol: Entre las ramas (sudeste,noreste) 
+[Ryland Tyr'laein orbita al Limbo]
+Guuhazh te dice: |  toy en vele  |
+2
+Estás siendo atacada por Sirix.
+* El ataque de Sirix rebota en tu piel de piedra.
+# Rajas críticamente a Sirix.
+Tu ataque sorbe parte de la resistencia contra aire de Sirix.
+# Extiendes las palmas de tus manos formando un triángulo hacia Sirix y un mortal rayo de energía le golpea de lleno, disgregando sus átomos y esparciéndolos en el aire.
+Pvs: 21262621 Pe: 373715
+1
+Trazas con ágiles movimientos en tus dedos la representación rúnica de azuneu y clavas tu mirada en Sirix.
+# Rajas con mucha fuerza a Sirix.
+Tu ataque sorbe parte de la resistencia contra fuego de Sirix.
+Alzas tu mano, y alrededor de la misma comienzan a formarse 5 esferas que crepitan energía arcana y las lanzas contra Sirix.
+# Una esfera de energía golpea a Sirix con violencia mágica.
+Pvs: 21862621 Pe: 340715
+mnick x sirix
+3
+Tu ataque sorbe parte de la resistencia contra mal de Sirix.
+# Un rayo surge de tus manos impactando sobre Sirix electrocutándole.
+Pvs: 22462621 Pe: 340715
+[Obtienes 292489 puntos de experiencia]
+Propinas el golpe mortal a Sirix.
+Sirix ha muerto.
+Sirix cae al suelo sin vida.
+Sirix da un grito desgarrador antes de que su espíritu abandone Eirea.
+[Obtienes 15 puntos de gloria]
+Thraarth (Ena) llega desde el noreste.
+Thraarth enarbola sus Tridente de Gladiador y Tridente del Rey Tritón y te examina con expresión ceñuda y mirada fria.
+# Rajas con mucha fuerza a Thraarth.
+Tu ataque sorbe parte de la resistencia contra fuego de Thraarth.
+Tu resistencia de frio se desvanece.
+Pvs: 15872631 Pe: 136726
+Thraarth (Ena) llega desde el noroeste.
+* El ataque de Thraarth rebota en tu piel de piedra.
+Thraarth (Ena) se va hacia sudeste.
+Pvs: 15342631 Pe: 137726
+[El bloqueo 'Piel de piedra' termina]
+[Gunomu orbita al Limbo]
+Thraarth (Ena) llega desde el sudeste.
+Thraarth (Ena) se va hacia noreste.
+# Extiendes las palmas de tus manos formando un triángulo hacia Thraarth y un mortal rayo de energía le golpea parcialmente, disgregando sus átomos y esparciéndolos en el aire.
+Thraarth (Ena) está aquí.
+] Pvs: 14852631 Pe: 114726
+Thraarth (Ena) se va hacia este.
+] Pvs: 14422631 Pe: 114726
+Estás siendo atacada por Mercader.
+* Logras esquivar el ataque de Mercader.
+# Rajas violentamente a Mercader.
+Pvs: 15022631 Pe: 114726
+Estás siendo atacada por Viajero.
+Senda del Alba [sudoeste,este] 
+Pvs: 14422631 Pe: 115726
+Senda del Alba [sudeste,noreste,oeste] 
+Trazas con ágiles movimientos en tus dedos la representación rúnica de azuneu y clavas tu mirada en Thraarth.
+# Rajas con fuerza a Thraarth.
+Tu ataque sorbe parte de la resistencia contra frio de Thraarth.
+[Obtienes 15 puntos de experiencia]
+Alzas tu mano, y alrededor de la misma comienzan a formarse 4 esferas que crepitan energía arcana y las lanzas contra Thraarth.
+# Una esfera de energía golpea a Thraarth con violencia mágica.
+# Una esfera de energía es esquivada por Thraarth antes del impacto.
+Pvs: 15022631 Pe: 109726
+* Thraarth te entierra su Tridente de Gladiador en una pierna, ignorando tus defensas.
+Pvs: 9172631 Pe: 110726
+[El bloqueo 'Antimagia' termina]
+] # Rajas con mucha fuerza a Thraarth.
+Tu ataque sorbe parte de la resistencia contra magico de Thraarth.
+# 11 misiles mágicos surgen de tus dedos e impactan infaliblemente sobre Thraarth.
+[Obtienes 177 puntos de experiencia]
+Pvs: 9772631 Pe: 108726
+] Estás persiguiendo a Thraarth.
+Thraarth (Ena) llega desde el este.
+[Ysgan orbita al Limbo]
+* ¡Thraarth te alcanza con su maniobra de estocada!
+* Thraarth te perfora violentamente.
+Pvs: 992631 Pe: 101726
+Thraarth (Ena) se va hacia sudoeste.
+[Obtienes 486381 puntos de experiencia]
+Propinas el golpe mortal a Thraarth.
+[Obtienes 10 puntos de gloria]
+Cuerpo de Thraarth.
+Comienzas a formular el hechizo 'Presa sacudidora'.
+Su maligna Señoría empieza a formular un hechizo.
+# Rajas con mucha fuerza a Su maligna Señoría.
+# Mojas a Su maligna Señoría.
+Pronuncias el cántico: 'hanz ow xlxyx'
+# El cuerpo de Su maligna Señoría sufre terribles sacudidas debido a una potente descarga eléctrica.
+Wurtt (Hum) llega desde el sur.
+Wurtt (Hum) llega desde el sur seguido de Sumo Cadáver y dos Araña gigantes.
+Comienzas a formular el hechizo 'Toque vampirico'.
+Wurtt empieza a formular un hechizo.
+Wurtt (Hum) está aquí.
+Garganta de los Lamentos: Trono de Su maligna Señoría [sur] 
+# Su maligna Señoría consigue parar críticamente tu ataque.
+Pronuncias el cántico: 'omeander oloferj tiorodaelah olotheren'
+# Tu mano se ilumina mientras le arrancas a Su maligna Señoría parte de su esencia vital y la haces tuya.
+[Obtienes 94 puntos de experiencia]
+Pvs: 28942894 Pe: 439759
+Wurtt (Hum) se va hacia sur.
+Wurtt (Hum) se va en dirección sur seguido de Sumo Cadáver y dos Araña gigantes.
+* El ataque de Su maligna Señoría rebota en tu piel de piedra.
+Garganta de los Lamentos: Caverna Principal [arriba,oeste,norte] 
+> Estás siendo atacada por Sumo Cadáver.
+* El ataque de Sumo Cadáver rebota en tu piel de piedra.
+Estás siendo atacada por Araña gigante.
+Estás siendo atacada por Wurtt.
+# Rajas con mucha fuerza a Sumo Cadáver.
+Tu ataque sorbe parte de la resistencia contra mental de Sumo Cadáver.
+# Mojas a Sumo Cadáver.
+[Obtienes 29 puntos de experiencia]
+# Extiendes las palmas de tus manos formando un triángulo hacia Wurtt y un mortal rayo de energía le golpea parcialmente, disgregando sus átomos y esparciéndolos en el aire.
+* Logras esquivar el ataque de Araña gigante.
+Trazas con ágiles movimientos en tus dedos la representación rúnica de azuneu y clavas tu mirada en Wurtt.
+[El bloqueo 'Presa sacudidora' termina]
+[Renegado] Thildarg DrUiD Puntos de Experiencia :  (5062547/4885497) (100%) Tienes 2099770 puntos de experiencia acumulados por morir.
+# Rajas críticamente a Sumo Cadáver.
+Tu ataque sorbe parte de la resistencia contra mal de Sumo Cadáver.
+Alzas tu mano, y alrededor de la misma comienzan a formarse 5 esferas que crepitan energía arcana y las lanzas contra Wurtt.
+# Una esfera de energía golpea a Wurtt con violencia mágica.
+Pvs: 28802894 Pe: 390759
+* El ataque de Wurtt rebota en tu piel de piedra.
+# Rajas violentamente a Araña gigante.
+# Mojas a Araña gigante.
+Pvs: 28942894 Pe: 392759
+Tu ataque sorbe parte de la resistencia contra enfermedad de Sumo Cadáver.
+* Wurtt te aplasta con fuerza.
+Pvs: 27372894 Pe: 393759
+* Sumo Cadáver te lacera con increíble potencia.
+Pvs: 24932894 Pe: 393759
+Pvs: 19132894 Pe: 393759
+* Sumo Cadáver te lacera violentamente.
+[Aldamare Oiolossë orbita al Limbo]
+# Rajas críticamente a Araña gigante.
+¡Wurtt pierde la concentración!
+# Extiendes las palmas de tus manos formando un triángulo hacia Wurtt y un mortal rayo de energía le golpea de lleno, disgregando sus átomos y esparciéndolos en el aire.
+Pvs: 17302894 Pe: 393759
+Wurtt te examina.
+* Wurtt te aplasta.
+Pvs: 16312894 Pe: 359759
+# Rajas violentamente a Sumo Cadáver.
+Tu ataque sorbe parte de la resistencia contra veneno de Sumo Cadáver.
+# Una esfera de energía es esquivada por Wurtt antes del impacto.
+Pvs: 13692894 Pe: 359759
+[Obtienes 278216 puntos de experiencia]
+Propinas el golpe mortal a Wurtt.
+Wurtt ha muerto.
+Wurtt cae al suelo sin vida.
+Wurtt da un grito desgarrador antes de que su espíritu abandone Eirea.
+[Obtienes 17 puntos de gloria]
+Árbol: Entre las ramas (oeste,sudoeste,este,noroeste) 
+No tienes nada que envainar.
+Árbol: Entre las ramas (oeste,este) 
+# Rajas con mucha fuerza a Siky.
+Tu ataque sorbe parte de la resistencia contra frio de Siky.
+# Mojas a Siky.
+Pvs: 22882661 Pe: 378759
+> * El ataque de Siky rebota en tu piel de piedra.
+* Siky te castiga intensamente.
+! Siky se prepara para ejecutar embestir sobre ti.
+Comienzas a formular el hechizo 'Bola de Agua'.
+Finfin empieza a formular un hechizo.
+Pvs: 21902661 Pe: 379759
+Finfin pronuncia el cántico: 'bellum destruct corpore'
+Finfin extiende las palmas de sus manos, formando un triángulo, hacia ti y un mortal rayo de energía te golpea de lleno, desintegrando parte de tu cuerpo y causándote un dolor
+# Lo que te pareció ser Finfin desaparece al golpearlo.
+Pronuncias el cántico: 'majos areos aqua'
+[Obtienes 227 puntos de experiencia]
+Pvs: 12382661 Pe: 379759
+* El ataque de Siky rebota en tu piel de piedra.
+! Siky se prepara para ejecutar pulverizar sobre ti.
+Pvs: 10812661 Pe: 354759
+Finfin (Gno) se va hacia este.
+# Rajas con fuerza a Siky.
+Tu ataque sorbe parte de la resistencia contra magico de Siky.
+Pvs: 11412661 Pe: 354759
+* Siky te castiga críticamente.
+Pvs: 8952661 Pe: 354759
+Cuerpo de Viajero y Bastón.
+Templo de la Luz: Entrada [|dentro|,sur] 
+] Estás persiguiendo a Siky.
+Siky (Ena) llega desde el sur.
+] Hace algo de frío en el ambiente.
+Siky (Ena) llega desde el norte.
+] # Rajas con fuerza a Siky.
+Tu ataque sorbe parte de la resistencia contra veneno de Siky.
+Tu ataque sorbe parte de la resistencia contra mental de Siky.
+# Pronuncias unas palabras mágicas y tu Espada Azul empieza a vibrar y se ilumina deshaciendo los tejidos de Siky.
+[Obtienes 337 puntos de experiencia]
+Pvs: 10152661 Pe: 348759
+* ¡Siky te alcanza con su maniobra de instigar!
+Pvs: 7282661 Pe: 348759
+[El bloqueo 'Bola de Agua' termina]
+Tu ataque sorbe parte de la resistencia contra enfermedad de Siky.
+Pvs: 7882661 Pe: 348759
+Pvs: 6292661 Pe: 348759
+Siky (Ena) está aquí.
+> Hace algo de frío en el ambiente.
+Siky (Ena) se va hacia oeste.
+Siky (Ena) llega desde el oeste.
+Tu ataque sorbe parte de la resistencia contra fuego de Siky.
+# Extiendes las palmas de tus manos formando un triángulo hacia Siky y un mortal rayo de energía le golpea parcialmente, disgregando sus átomos y esparciéndolos en el aire.
+Pvs: 6892661 Pe: 348759
+Siky (Ena) llega desde el este.
+Finfin (Gno) llega desde el este.
+* Logras esquivar el ataque de Finfin.
+Siky te examina.
+Siky (Ena) se va hacia este.
+> # Rajas con mucha fuerza a Siky.
+# Rajas críticamente a Siky.
+# Pronuncias unas palabras mágicas y tu Espada Azul vibra mientras brotan de ella poderosos haces de luz que desmembran los tejidos externos de Siky alcanzando órganos internos.
+[Obtienes 302 puntos de experiencia]
+Pvs: 8392661 Pe: 314759
+] Pvs: 6962661 Pe: 314759
+Siky (Ena) se va hacia noreste.
+Pvs: 7562661 Pe: 314759
+[Obtienes 471996 puntos de experiencia]
+Propinas el golpe mortal a Siky.
+Siky ha muerto.
+Siky cae al suelo sin vida.
+Siky da un grito desgarrador antes de que su espíritu abandone Eirea.
+[Obtienes 21 puntos de gloria]
+Dragaula (Melf) (protegido por 9 ángeles guardianes) está aquí.
+Desfiladero Leherdavel [sudoeste,este] 
+|||| Dragaula (Melf) ||||| se va hacia este.
+Desfiladero Leherdavel: Bifurcación de caminos [oeste,sur,este] 
+|||| Dragaula (Melf) ||||| se va hacia oeste.
+|||| Dragaula (Melf) ||||| llega desde el sudoeste.
+Dragaula deja de formular.
+|||| Dragaula (Melf) ||||| llega desde el oeste.
+|||| Dragaula (Melf) ||||| está aquí.
+Desfiladero Leherdavel [oeste,sudeste] 
+# Rajas con mucha fuerza a Dragaula.
+Tu ataque sorbe parte de la resistencia contra mal de Dragaula.
+# Mojas a Dragaula.
+Dragaula empieza a formular un hechizo.
+# Dragaula consigue parar críticamente tu ataque.
+# Una de tus Espadas Guardianas golpea a Dragaula mientras gira a tu alrededor.
+Tu ataque sorbe parte de la resistencia contra electrico de Dragaula.
+Pvs: 17372661 Pe: 699759
+> # Rajas con mucha fuerza a Dragaula.
+Tu ataque sorbe parte de la resistencia contra magico de Dragaula.
+Pvs: 17972661 Pe: 699759
+Dragaula pronuncia el cántico: 'flamious os colus'
+> Dragaula te examina.
+Pvs: 18872661 Pe: 700759
+Dragaula pronuncia el cántico: 'destruct malevoli spiritus'
+* Una de tus Espadas Guardianas bloquea el impacto de Dragaula mientras parpadea absorviendo el daño y desaparece.
+Una de las espadas que rodeaban a Genlae bloquea el ataque de Dragaula mientras parpadea absorviendo el daño y desaparece.
+¡Tu movimiento rompe tu concentración y tu hechizo de Desintegrar queda arruinado!
+|||| Dragaula (Melf) ||||| se va hacia sudoeste.
+Desfiladero Leherdavel [noroeste,noreste] 
+] # Rajas con fuerza a Dragaula.
+Tu ataque sorbe parte de la resistencia contra mental de Dragaula.
+# Pronuncias unas palabras mágicas y tu Espada Azul vibra mientras brotan de ella poderosos haces de luz que desmembran los tejidos externos de Dragaula alcanzando órganos
+Pvs: 20072661 Pe: 665759
+|||| Dragaula (Melf) ||||| se va hacia noroeste.
+# Extiendes las palmas de tus manos bruscamente hacia adelante y lanzas una ráfaga de energía mágica que desintegra por completo el cuerpo de Dragaula, arrancándole la carne de los
+[Obtienes 330872 puntos de experiencia]
+Propinas el golpe mortal a Dragaula.
+Kelshsil (Melf) está aquí.
+* El ataque de Kelshsil rebota en tu piel de piedra.
+Pvs: 24592661 Pe: 637759
+Kelshsil (Melf) se va hacia sudoeste.
+# Extiendes las palmas de tus manos formando un triángulo hacia Kelshsil y un mortal rayo de energía le golpea de lleno, disgregando sus átomos y esparciéndolos en el aire.
+# Tu ataque rebota en la piel de piedra de Kelshsil.
+Trazas con ágiles movimientos en tus dedos la representación rúnica de azuneu y clavas tu mirada en Kelshsil.
+Pvs: 23742661 Pe: 604759
+Kelshsil (Melf) se va hacia noreste.
+Alzas tu mano, y alrededor de la misma comienzan a formarse 5 esferas que crepitan energía arcana y las lanzas contra Kelshsil.
+# Una esfera de energía golpea a Kelshsil con violencia mágica.
+[El bloqueo 'Sangre a acido' termina]
+Kelshsil (Melf) llega desde el sudoeste.
+Kelshsil (Melf) se va hacia este.
+Pvs: 23082661 Pe: 605759
+Kelshsil (Melf) llega desde el oeste.
+# Kelshsil consigue esquivar tu ataque.
+Pvs: 21412661 Pe: 605759
+# Rajas críticamente a Mercader.
+# Una esfera de energía es esquivada por Kelshsil antes del impacto.
+Pvs: 22012661 Pe: 601759
+Senda del Alba [sudoeste,norte] 
+Kelshsil (Melf) se va hacia norte.
+Pvs: 20822661 Pe: 602759
+Kelshsil (Melf) llega desde el sur.
+] * El ataque de Kelshsil rebota en tu piel de piedra.
+] # Tu ataque rebota en la piel de piedra de Kelshsil.
+] * Kelshsil te golpea con mucha fuerza.
+Pvs: 17892661 Pe: 603759
+! Kelshsil se prepara para ejecutar doble golpe sobre ti.
+* Kelshsil te golpea violentamente.
+* Kelshsil te golpea críticamente.
+Pvs: 8402661 Pe: 600759
+[Obtienes 326635 puntos de experiencia]
+Propinas el golpe mortal a Kelshsil.
+Kelshsil ha muerto.
+Kelshsil cae al suelo sin vida.
+Kelshsil da un grito desgarrador antes de que su espíritu abandone Eirea.
+Campos de Cultivo [sudoeste,este,noroeste] 
+Pieles:12
+  Pe:597759 Xp:2258502
+Campos de Cultivo [noreste,oeste] 
+Campos de Cultivo [sudoeste,este] 
+  Pe:599759 Xp:2258502
+Meseta Oriental [sudoeste,norte] 
+Meseta Oriental [sur,noreste] 
+Meseta Oriental [noroeste,sudoeste,este] 
+  Pe:598759 Xp:2258502
+alias q seguir tlakzek
+buscar
+ Tlakzek (Gob)
+nick x tlakzek
+f3
+> Tlakzek agarra con fuerza su Espada Azul, haciendo que sus nudillos se vuelvan blancos.
+# Rajas con increíble potencia a Tlakzek.
+Tu ataque sorbe parte de la resistencia contra electrico de Tlakzek.
+# Mojas a Tlakzek.
+# Un rayo surge de tus manos impactando sobre Tlakzek electrocutándole.
+[Obtienes 95 puntos de experiencia]
+  Pe:584759 Xp:2258638
+Meseta Oriental [noreste,oeste] 
+f1
+  Pe:583759 Xp:2258638
+  Pe:582759 Xp:2258638
+  Pe:581759 Xp:2258638
+  Pe:580759 Xp:2258638
+[El bloqueo 'Golpe de rayo' termina]
+  Pe:579759 Xp:2258638
+Tlakzek te dice:  lol
+  Pe:578759 Xp:2258638
+Antigua senda Orgoth-Anduar [norte,sudeste] 
+  Pe:577759 Xp:2258638
+SL: [n,se]
+> Empiezas a inspeccionar la zona en busca de algo que no hayas visto.
+Antigua senda Orgoth-Anduar [sur,noroeste] 
+SL: [s,no]
+  Pe:576759 Xp:2258638
+  Pe:570759 Xp:2258638
+Tlakzek (Gob) llega desde el sudoeste.
+# Tlakzek consigue esquivar tu ataque.
+  Pe:572759 Xp:2258638
+Tlakzek (Gob) llega desde el noreste.
+* El ataque de Tlakzek rebota en tu piel de piedra.
+* ¡La Espada Azul de Tlakzek te fustiga con poca fuerza con su magia de magico!
+Pv:27652831 Pe:572759 Xp:2258638
+Pieles:7
+Pvs: 27652831 Pe: 572759
+Tlakzek (Gob) llega desde el oeste.
+Pv:27672831 Pe:572759 Xp:2258638
+Pv:27672831 Pe:571759 Xp:2258638
+Pv:27672831 Pe:570759 Xp:2258638
+Pv:27672831 Pe:569759 Xp:2258638
+Pv:27672831 Pe:568759 Xp:2258638
+Pv:27672831 Pe:567759 Xp:2258638
+Pv:27692831 Pe:567759 Xp:2258638
+Pv:27692831 Pe:566759 Xp:2258638
+> Tlakzek te examina.
+Tlakzek te examina.
+[Obtienes 92 puntos de experiencia]
+Trazas con ágiles movimientos en tus dedos la representación rúnica de azuneu y clavas tu mirada en Tlakzek.
+Pv:27692831 Pe:546759 Xp:2258730
+f2
+Tlakzek (Gob) se va hacia sudoeste.
+Alzas tu mano, y alrededor de la misma comienzan a formarse 4 esferas que crepitan energía arcana y las lanzas contra Tlakzek.
+# Una esfera de energía golpea a Tlakzek con violencia mágica.
+# Una esfera de energía es esquivada por Tlakzek antes del impacto.
+Pvs: 25992661 Pe: 546759
+El objetivo tlakzek no está aquí ahora mismo.
+Pv:25992661 Pe:546759 Xp:2258752
+Pv:26012661 Pe:546759 Xp:2258752
+Tlakzek te dice:  woo xd
+Pv:26012661 Pe:545759 Xp:2258752
+Pv:26012661 Pe:544759 Xp:2258752
+Pv:26012661 Pe:543759 Xp:2258752
+Pv:26012661 Pe:542759 Xp:2258752
+Tlakzek te dice:  me ortaste el frene
+Pv:26012661 Pe:541759 Xp:2258752
+# Tlakzek consigue esquivar críticamente tu ataque.
+Pv:26012661 Pe:540759 Xp:2258752
+Tlakzek deja de formular.
+Tlakzek (Gob) está aquí.
+Pv:26032661 Pe:540759 Xp:2258752
+¡Tu movimiento rompe tu concentración y tu hechizo de Golpe de rayo queda arruinado!
+Pv:26032661 Pe:526759 Xp:2258752
+Pv:26032661 Pe:527759 Xp:2258752
+Pv:26052661 Pe:527759 Xp:2258752
+Pv:26052661 Pe:526759 Xp:2258752
+Pv:26052661 Pe:525759 Xp:2258752
+Pv:26052661 Pe:524759 Xp:2258752
+Pv:26052661 Pe:523759 Xp:2258752
+Pv:26052661 Pe:522759 Xp:2258752
+Pv:26052661 Pe:521759 Xp:2258752
+Pv:26052661 Pe:520759 Xp:2258752
+Pv:26072661 Pe:519759 Xp:2258752
+Pv:26092661 Pe:518759 Xp:2258752
+Pv:26092661 Pe:517759 Xp:2258752
+f12
+# No logras tocar a Cervatillo perdiendo así el hechizo.
+cetro
+Pv:26122661 Pe:516759 Xp:2258752
+matar xp
+ Cervatillo (Rum)
+# Aplastas con increíble potencia a Cervatillo.
+Pvs: 26222661 Pe: 516759
+[Obtienes 465 puntos de experiencia]
+Propinas el golpe mortal a Cervatillo.
+Cervatillo cae al suelo sin vida.
+Pv:26252661 Pe:517759 Xp:2259252
+op
+Pv:26252661 Pe:516759 Xp:2259252
+m1
+eg
+Pv:26252661 Pe:515759 Xp:2259252
+> Tu armadura espiritual se desvanece.
+Pvs: 26102661 Pe: 515759
+Pv:26132661 Pe:515759 Xp:2259252
+Pv:26132661 Pe:514759 Xp:2259252
+* ¡La Espada Azul de Tlakzek te fustiga débilmente con su magia de magico!
+f4
+Tlakzek empieza a centrar sus golpes sobre ti.
+Pv:25592661 Pe:506759 Xp:2259252
+Pieles:2
+Tu ataque sorbe parte de la resistencia contra enfermedad de Tlakzek.
+# Pronuncias unas palabras mágicas y tu Espada Azul empieza a vibrar y se ilumina deshaciendo los tejidos de Tlakzek.
+[Obtienes 207 puntos de experiencia]
+Pvs: 25992661 Pe: 507759
+Pv:25992661 Pe:507759 Xp:2259498
+* Tlakzek, entre carcajadas homicidas, te golpea repetidas veces con su Espada Azul en una pierna envuelto en un sadismo frenético.
+* Tlakzek te propina un buen golpe de su Espada Azul que te alcanza en el pecho, causándote una pequeña y dolorosa herida.
+Pv:15862661 Pe:507759 Xp:2259498
+Pvs: 15862661 Pe: 507759
+Tlakzek (Gob) llega desde el norte.
+Tlakzek (Gob) llega desde el sur.
+Pv:15862661 Pe:508759 Xp:2259498
+* Tlakzek te raja con increíble potencia.
+Pv:11752661 Pe:507759 Xp:2259498
+Tu ataque sorbe parte de la resistencia contra magico de Tlakzek.
+Pvs: 11952661 Pe: 507759
+Pv:11952661 Pe:507759 Xp:2259541
+* Tlakzek te raja violentamente.
+Tu ataque sorbe parte de la resistencia contra magico de Tlakzek. (Devuélveme lo que me quitaste)
+¡Tlakzek pierde la concentración!
+# Extiendes las palmas de tus manos bruscamente hacia adelante y lanzas una ráfaga de energía mágica que desintegra por completo el cuerpo de Tlakzek, arrancándole la carne de los
+[Obtienes 232 puntos de experiencia]
+Pvs: 9992661 Pe: 506759
+[Obtienes 241238 puntos de experiencia]
+Propinas el golpe mortal a Tlakzek.
+Tlakzek ha muerto.
+Tlakzek cae al suelo sin vida.
+Tlakzek da un grito desgarrador antes de que su espíritu abandone Eirea.
+[Obtienes 14 puntos de gloria]
+Sphynx te dice:  llegando
+Sphynx te dice:  en cuanto te vea te meto
+[Thivha orbita al Limbo]
+Camino de Ëarmen- Senda del cauce oeste [sur,norte] 
+Camino de Ëarmen [sur,oeste,noreste] 
+Camino de Ëarmen [sudoeste,este] 
+[Thrakorgh orbita al Limbo]
+Sphynx (Hlag) llega desde el sur.
+Estás siendo atacada por Sphynx.
+Sphynx se echa hacia atrás y mira fijamente a Esqueleto del Túmulo mientras sus Garras óseas comienzan a rezumar veneno.
+Sphynx (Hlag) llega desde el norte.
+# Aplastas con mucha fuerza a Sphynx.
+# Mojas a Sphynx.
+Sphynx (Hlag) se va hacia sur.
+# Mojas intensamente a Sphynx.
+# Mojas críticamente a Sphynx.
+# Pronuncias unas palabras mágicas y tu Gran Almádena de Burk-Kharod empieza a vibrar y se ilumina deshaciendo los tejidos de Sphynx.
+[Obtienes 192 puntos de experiencia]
+Sphynx (Hlag) se va hacia norte.
+Intentas seguir a Sphynx, pero te da esquinazo.
+[Obtienes 285 puntos de experiencia]
+Camino de Ëarmen- Senda del cauce oeste [norte,oeste] 
+Camino de Ëarmen- Senda del cauce oeste [este,oeste] 
+Camino de Ëarmen- Senda del cauce oeste [este,sudoeste] 
+Camino de Ëarmen- Senda del cauce oeste [noreste,oeste] 
+# Aplastas críticamente a Sphynx.
+El objetivo krozziu,maltos,karnilla,blombum,saymar,anthara,didrian,ghraoll,thrakorgh,sphynx,gurlen,yaina no está aquí ahora mismo.
+Sphynx (Hlag) se va hacia noreste.
+# Una esfera de energía es esquivada por Sphynx antes del impacto.
+> Esqueleto del Túmulo te protege valientemente.
+Sphynx salta sobre Esqueleto del Túmulo y le muerde el pecho, envenenándole con su saliva tóxica.
+[Obtienes 312 puntos de experiencia]
+Sphynx (Hlag) se va hacia sudoeste.
+Camino de Ëarmen- Senda del cauce oeste [noreste,sudoeste] 
+Camino de Ëarmen- Senda del cauce oeste [noreste,sur] 
+Camino de Ëarmen- Senda del cauce oeste [norte,sudoeste] 
+Camino de Ëarmen- Senda del cauce oeste [norte,sur] 
+> [El bloqueo 'Desintegrar' termina]
+Camino de Ëarmen- Senda del cauce oeste [norte,sudeste] 
+[Obtienes 151 puntos de experiencia]
+Pvs: 24812661 Pe: 672759
+[Obtienes 231888 puntos de experiencia]
+[Obtienes 19 puntos de gloria]
+Sphynx te dice:  dios macho
+Sphynx te dice:  xdD
+Sphynx te dice:  no te podre vencer jamas xD
+Kroms (Orc) está aquí.
+Carretera Comercial Norte [s,n]
+> * El ataque de Soldado laureado de Kroms rebota en tu piel de piedra.
+Trazas con ágiles movimientos en tus dedos la representación rúnica de azuneu y clavas tu mirada en Kroms.
+Kroms (Orc) se va en dirección sur seguido de dos Soldado laureado de Kromses.
+Kroms (Orc) llega desde el sur seguido de dos Soldado laureado de Kromses.
+Carretera Comercial Norte [se,n]
+* El ataque de Kroms rebota en tu piel de piedra.
+! Kroms se prepara para ejecutar arremeter sobre ti.
+* El ataque de Soldado laureado de Kroms rebota en tu piel de piedra.
+No puedes pronunciar varias Runas a la vez.
+# Rajas con fuerza a Kroms.
+# Mojas con poca intensidad a Kroms.
+Alzas tu mano, y alrededor de la misma comienzan a formarse 5 esferas que crepitan energía arcana y las lanzas contra Kroms.
+# Una esfera de energía golpea a Kroms con violencia mágica.
+Carretera Comercial Norte [s,no]
+Carretera Comercial Norte [se,no]
+Cuerpo de Esqueleto.
+Kroms (Orc) se va en dirección noroeste seguido de dos Soldado laureado de Kromses.
+Ignorando 'pronunciar kalfue:x'. No puedes ejecutar más acciones de ese tipo durante este turno.
+Carretera Comercial Norte [s,ne]
+Carretera Comercial Norte [e,so,n]
+Kroms (Orc) se va en dirección noreste seguido de dos Soldado laureado de Kromses.
+Ignorando 'pronunciar azuneu:x'. No puedes ejecutar más acciones de ese tipo durante este turno.
+Carretera Comercial Norte [so,n]
+No hay nadie aquí reconocible como kroms.
++ Te preparas para ejecutar golpearcano.
+Kroms (Orc) se va en dirección norte seguido de dos Soldado laureado de Kromses.
+] Kroms (Orc) está aquí.
+Carretera Comercial Norte [se,o]
+¡Tus objetivos ya no están al alcance de tu golpearcano!
+> Estás persiguiendo a Kroms y Soldado laureado de Kroms.
+] No hay nadie aquí reconocible como kroms.
+# Rajas con fuerza a Soldado laureado de Kroms.
+# Mojas con poca intensidad a Soldado laureado de Kroms.
+# Rajas a Kroms.
+# ¡Alcanzas a Kroms con tu maniobra de golpearcano!
+! Kroms se prepara para ejecutar cabezazo sobre ti.
+Alzas tu mano, y alrededor de la misma comienzan a formarse 4 esferas que crepitan energía arcana y las lanzas contra Kroms.
+] Pronuncias kalfue y alzas con fuerza tu Espada Arcana señalando a Kroms.
+> * El ataque de Kroms rebota en tu piel de piedra.
+* Kroms te aplasta con increíble potencia.
+* Soldado laureado de Kroms te raja.
+# Sesgas con mucha fuerza a Kroms.
+# Las lenguas de fuego rúnico de tu Espada Arcana queman a Kroms.
+# Las capas de hielo arcano de tu Espada Arcana congelan a Kroms.
+# Las rocas arcanas de tu Espada Arcana hieren a Kroms.
+# El líquido acuoso de tu Espada Arcana daña a Kroms.
+Pvs: 2183/2701 (-483) Pe: 807/891 (-53)
+] Comienzas a formular el hechizo 'Caída de pluma'.
+> [El bloqueo 'golpearcano' termina]
+Pronuncias el cántico: 'pes iu flumbe'
+Kroms (Orc) se va en dirección sudoeste seguido de dos Soldado laureado de Kromses.
+Sendero Empedrado [o,ne]
+> ! Kroms se prepara para ejecutar arremeter sobre ti.
+Pvs: 1287/2701 (-896) Pe: 792/891 (-7)
+Pvs: 1260/2701 (-27) Pe: 792/891 (0)
+# No logras tocar a Bandido con tu Mano espectral perdiendo así el hechizo.
+> Carretera Comercial Norte [se,no] 
+Parece que activar anillo no produjo efecto alguno.
+Kroms (Orc) llega desde el norte seguido de dos Soldado laureado de Kromses.
+> Memorizas la pronunciación exacta de la ilerae y proclamas el poder para crear un arma ilusoria.
+Exterior de Anduar: Puerta Norte [n,s,e,o]
+# Kroms consigue esquivar tu ataque.
+Ruinas de la Muralla Norte de Anduar [e,o]
+] Ruinas de la Muralla Norte de Anduar [e,o]
+Ruinas de la Muralla Norte de Anduar [e,s]
+Ruinas de la Muralla Oeste de Anduar [s,n]
+Ruinas de la Muralla Oeste de Anduar: Cruce de la Cantera [o,s,n]
+] Ruinas de la Muralla Oeste de Anduar [s,n]
+> # Rajas con mucha fuerza a Soldado laureado de Kroms.
+> + Te preparas para ejecutar golpearcano.
+> Kroms te mira mientras comprime toda su musculatura.
+# Una de tus Espadas Guardianas golpea a Kroms mientras gira a tu alrededor.
+* Una de tus Espadas Guardianas bloquea el impacto de Kroms mientras parpadea absorviendo el daño y desaparece.
+* Una de tus Espadas Guardianas bloquea el impacto de Soldado laureado de Kroms mientras parpadea absorviendo el daño y desaparece.
+* ¡Kroms te alcanza con su maniobra de cabezazo!
+# De la palma de tu mano brota una esquirla de hielo arcano que golpea brutalmente a Kroms en el pecho.
+Pvs: 688/2701 (-572) Pe: 773/891 (-19)
+[El bloqueo 'golpearcano' termina]
+] Ruinas de la Muralla Oeste de Anduar: Cruce de la Cantera [o,s,n]
+] + Te preparas para ejecutar golpearcano.
+> Soldado laureado de Kroms consigue escurrirse entre ti y Kroms, protegiéndole.
+# Rajas a Soldado laureado de Kroms.
+Pvs: 669/2701 (-19) Pe: 760/891 (-13)
+[Congregacion_runica] Portavoz de la Congregación Rúnica: ¡Genlae ha asesinado a kroms!
+[Obtienes 312338 puntos de experiencia]
+Propinas el golpe mortal a Kroms.
+Imágenes:9
+# Enjambre Espectral consigue esquivar tu ataque.
+Estás siendo atacada por Fantasma.
+Estás siendo atacada por Cometa de piel.
+Estás siendo atacada por Momia.
+Y502: Salina abrasada [o,e,so] 
+Pv:2841\2841 Pe:884\904 Xp:1643412
+Y502: Salina abrasada [ne,e,no] 
+Zeh (Mdro), Koch (Org) y Zrunk (Org) están aquí.
+Anduar: Plaza Mayor [|so|,s,e,n,o]
+Pv:2841\2841 Pe:904\904 Xp:1643293
+[Chat] Eldhana: hola
+Pv:2611\2611 Pe:625\688 Xp:1231367
+Estás siendo atacada por Agricultora.
+Pv:2611\2611 Pe:398\688 Xp:1503156
+Pronuncias el cántico: 'majos areos corrosiv'
+[Tiradas] Tirada de salvación de mental(desconcentrar) % de éxito: 46 (77-31). Tirada: 66 (Fallo).
+[Obtienes 355 puntos de experiencia]
+Comienzas a formular el hechizo 'Defenestrar'.
+Pv:1676\2611 Pe:368\688 Xp:1503511
+Mortas (Hum) se va hacia norte.
+Pvs: 1676/2611 (-935) Pe: 398/688 (-18)
+Puerto de Alandaen [s,|e|,ne,n] 
+Mortas (Hum) está aquí.
+Barrio del Puerto [s,e,n] 
+Y502: Salina abrasada [o,e,s] 
+Restos putrefactos de Muerto-viviente.

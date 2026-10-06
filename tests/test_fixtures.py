@@ -8,7 +8,9 @@ from engine import decode_log_bytes
 
 RED = "color: rgb(255,0,0)"
 OLIVE = "color: rgb(113,113,0)"
-DEFAULT = "color: rgb(192,192,192)"
+SALMON = "color: rgb(255,128,128)"
+LIGHT_BLUE = "color: rgb(140,196,255)"
+BLUE = "color: rgb(8,0,255)"
 STATUS_PREFIXES = ("SL:", "PL:", "Jgd:")
 LONE_PROMPT = re.compile(r"^[>\]]\s*$")
 
@@ -190,8 +192,7 @@ class PvpCombatFixtureTest(unittest.TestCase):
 
     def test_spell_messages(self):
         self.assertIn("Pronuncias el cántico: 'majos areos corrosiv'", self.visible)
-        # The reference logs leave this message uncolored.
-        self.assertIn(DEFAULT + "; background: rgb(0,0,0); \">El destino de tu hechizo está fuera de alcance.", self.out)
+        self.assertIn(SALMON + "; background: rgb(0,0,0); \">El destino de tu hechizo está fuera de alcance.", self.out)
 
     def test_echoed_commands_are_command_colored(self):
         for cmd in ("f1", "n", "ne", "e"):
@@ -209,32 +210,36 @@ class NewColorizingRulesTest(unittest.TestCase):
         for text in ("Estás siendo atacada por Ahogada.", "Estás siendo atacado por Ahogado."):
             self.assertIn(RED, self.line(text))
 
-    def test_messages_the_reference_leaves_uncolored_stay_default(self):
+    def test_projectile_conjuring_messages(self):
         for text in (
             "Conjuras un arco envuelto en llamas, y las bocanadas ígneas que de él brotan dan forma a una flecha.",
             "Tu arco desaparece en una nube de humo sulfuroso.",
-            "Preparas los componentes del hechizo.",
-            "Has agotado la energía necesaria para formular 'Toque vampirico' y debes descansar.",
-            "Finalizas el hechizo 'disipar magia' y destruyes los hechizos que te afectaban.",
-            "Te concentras en el hechizo 'armadura espiritual'.",
-            "Empiezas a inspeccionar la zona en busca de algo que no hayas visto.",
-            "No hay nadie aquí reconocible como zerkar,kunkh.",
-            "[Obtienes 66 puntos de experiencia]",
+            "La flecha que lanzaste a Momia se desmaterializa.",
         ):
-            out = self.line(text)
-            self.assertEqual(out.count("<span"), 1, text)
-            self.assertIn(DEFAULT, out, text)
+            self.assertIn(LIGHT_BLUE, self.line(text), text)
 
-    def test_marker_lines_color_only_the_marker(self):
-        hit = self.line("# Pinchas con fuerza en el pecho a Redrich.")
-        self.assertEqual(hit.count("<span"), 2)
+    def test_spell_preparation(self):
+        self.assertIn(BLUE, self.line("Preparas los componentes del hechizo."))
+        self.assertIn("rgb(0,255,255)", self.line("Te concentras en el hechizo 'armadura espiritual'."))
+
+    def test_spell_failure_messages(self):
+        self.assertIn(SALMON, self.line("Has agotado la energía necesaria para formular 'Toque vampirico' y debes descansar."))
+
+    def test_spell_completion_quotes(self):
+        out = self.line("Finalizas el hechizo 'disipar magia' y destruyes los hechizos que te afectaban.")
+        self.assertIn("rgb(0,255,255)", out)
+
+    def test_marker_symbol_is_colored_by_kind_and_body_keeps_its_rule_colors(self):
+        hit = self.line("# Pinchas con fuerza en el pecho a Redrich (120-159)")
         self.assertIn('rgb(0,128,0); background: rgb(0,0,0); ">#</span>', hit)
+        self.assertIn("rgb(0,255,0)", hit)  # body keeps the combat green
+        self.assertIn("rgb(255,0,0)", hit)  # and the damage number highlight
         miss = self.line("# Zhobirat esquiva tu ataque con un rápido giro del cuerpo.")
         self.assertIn('rgb(128,0,128); background: rgb(0,0,0); ">#</span>', miss)
-        incoming = self.line("* Greszhx te cercena una pierna con sus garras.")
+        self.assertIn("rgb(128,128,128)", miss)  # dodge body keeps the gray
+        incoming = self.line("* Greszhx te golpea con sus garras.")
         self.assertIn('rgb(128,0,0); background: rgb(0,0,0); ">*</span>', incoming)
-        self.assertEqual(incoming.count("<span"), 2)
-        self.assertEqual(self.line("¡Kunkh te golpea con un ataque rápido!").count("<span"), 1)
+        self.assertIn("rgb(204,102,102)", incoming)
 
     def test_imagenes_counter_like_pieles(self):
         out = self.line("Imágenes:9")

@@ -26,11 +26,11 @@ Colorizador de logs de combate y rol para **[Reinos de Leyenda (RL)](https://rei
   * No colorea NPCs genéricos como si fueran jugadores.
 * **Catálogo de Habitaciones (Rooms):**
   * Más de 280 habitaciones catalogadas con su color exacto minado a partir de logs reales de jugadores videntes (zonas urbanas en plata, bosques en verde, templos en blanco, caminos de agua en cian, mesetas en oliva, etc.).
-  * Si solo se reconoce la zona (antes de `:` o `-`), se colorea únicamente ese prefijo; el resto del título y las habitaciones no catalogadas quedan en el color por defecto.
+  * Si solo se reconoce la zona (antes de `:` o `-`), se colorea únicamente ese prefijo. Las habitaciones no catalogadas usan el verde por defecto (`#008000`).
 * **Soporte Completo de Combate y Magia:**
-  * Igual que los logs de referencia, solo se colorea el marcador de la línea y el texto queda en el color por defecto: `#` (ataques propios) en verde `#008000` o en púrpura `#800080` si el ataque falla (esquiva, parada, rebote); `*` (ataques recibidos) en granate `#800000`, púrpura si los esquivas, rojo en golpes críticos y azul/verde azulado en hechizos; `+` (preparación de habilidades) en amarillo.
-  * El prompt `Pvs: N/N (±N) Pe: N/N (±N)` colorea solo la etiqueta y los números en verde `#008000`; los paréntesis quedan por defecto y la variación va en rojo (pérdida) o verde brillante (ganancia). Un delta `(0)` queda sin color. El prompt de VIPMud (`Pv:A\B Pe:C\D Xp:N`) mantiene el verde `#008000`.
-  * Los mensajes que la referencia deja sin color (canales y `dice`, `[Obtienes N puntos de experiencia]`, muertes, equipamiento, avisos del sistema, maniobras de enemigos...) se muestran en el color por defecto.
+  * En las líneas que empiezan por `#`, `*` o `+`, el símbolo se colorea según el tipo de evento, como en los logs de referencia: `#` verde `#008000` (o púrpura `#800080` si el ataque falla), `*` granate `#800000` (púrpura si lo esquivas, rojo en críticos, azul/verde azulado en hechizos) y `+` amarillo. El resto de la línea conserva los colores de siempre (cuerpo verde con daños resaltados en los ataques propios, `#cc6666` en los recibidos, gris en esquivas, etc.).
+  * El prompt `Pvs: N/N (±N) Pe: N/N (±N)` colorea la etiqueta y los números en verde `#008000`; los paréntesis quedan por defecto y la variación va en rojo (pérdida) o verde brillante (ganancia); un delta `(0)` queda sin color. El prompt de VIPMud (`Pv:A\B Pe:C\D Xp:N`) mantiene el verde `#008000`.
+  * Ninguna línea que antes tenía color puede quedar sin color: lo vigilan `tests/test_stays_colored.py` y los ficheros `must_stay_colored.txt` y `marker_line_masks.tsv`.
   * El texto visible de cada línea nunca se modifica (el prompt `]` o `>` se conserva tal cual).
 
 ---

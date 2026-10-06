@@ -182,11 +182,13 @@ class RLColorizerJS {
         this._initPreprocess(this.config.preprocess || {});
 
         const sortedRules = [...this.config.rules].sort((a, b) => (a.priority || 100) - (b.priority || 100));
-        this.compiledRules = sortedRules.map(r => ({
+        const compiled = sortedRules.map(r => ({
             ...r,
             _regex: toSharedRegex(r.pattern),
             _categories: (r.categories || []).map(c => ({ ...c, _regex: toSharedRegex(c.pattern) }))
         }));
+        this.markerRules = compiled.filter(r => r.type === 'composite_marker');
+        this.compiledRules = compiled.filter(r => r.type !== 'composite_marker');
     }
 
     colorizeLine(line) {
@@ -249,9 +251,34 @@ class RLColorizerJS {
                 lineHtml = this._renderInfo(m);
                 break;
             }
-            // 6. Composite Marker Line
-            else if (type === 'composite_marker') {
-                lineHtml = this._renderMarker(m, rule);
+            // 6. Composite Spell Completion
+            else if (type === 'composite_spell_completion') {
+                lineHtml = this._renderSpellCompletion(m);
+                break;
+            }
+            // 7. Composite Magic Missiles
+            else if (type === 'composite_magic_missiles') {
+                const promptSym = m[1];
+                const prefixSym = m[2];
+                const rest = m[3];
+                const promptHtml = promptSym ? '<span style="color: #c0c0c0;">&gt; </span>' : '';
+                const pHtml = prefixSym ? '<span style="color: #0000ff;">#</span> ' : '';
+                lineHtml = `${promptHtml}${pHtml}<span style="color: #8cc4ff;">${escapeHtml(rest)}</span>`;
+                break;
+            }
+            // 8. Composite Enemy Maneuver
+            else if (type === 'composite_enemy_maneuver') {
+                lineHtml = this._renderEnemyManeuver(m);
+                break;
+            }
+            // 9. Composite Player Combat
+            else if (type === 'composite_player_combat') {
+                lineHtml = this._renderPlayerCombat(m);
+                break;
+            }
+            // 12. Composite Follower Player
+            else if (type === 'composite_follower_player') {
+                lineHtml = this._renderFollowerPlayer(m);
                 break;
             }
             // 10. Composite Room Player
@@ -293,6 +320,8 @@ class RLColorizerJS {
             lineHtml = `<span style="color: ${defaultFg};">${escaped}</span>`;
         }
 
+        const marker = this._markerColor(rawText);
+        if (marker) lineHtml = this._applyMarker(lineHtml, marker[0], marker[1]);
         return normalizeLineToMudlet(promptHtml + lineHtml);
     }
 
@@ -378,7 +407,7 @@ class RLColorizerJS {
         const actorHtml = tagM
             ? `<span style="color: ${actorColor}; font-weight: bold;">${escapeHtml(actor)}</span>`
             : `<span style="color: #c0c0c0;">${escapeHtml(actor)}</span>`;
-        const verbHtml = `<span style="color: #c0c0c0;">${escapeHtml(verb)}</span>`;
+        const verbHtml = `<span style="color: #ffffff;">${escapeHtml(verb)}</span>`;
         const destHtml = `<span style="color: #c0c0c0;">${escapeHtml(dest + period)}</span>`;
         return `${promptHtml}${actorHtml} ${verbHtml} ${destHtml}`;
     }
@@ -413,7 +442,11 @@ class RLColorizerJS {
         const roomTitle = m[2];
         const sep = m[3];
         const exits = m[4];
-        return `${this._roomTitleHtml(roomTitle)}${escapeHtml(sep)}<span style="color: #00ffff;">${escapeHtml(exits)}</span>`;
+        let titleHtml = this._roomTitleHtml(roomTitle);
+        if (!this.getRoomColor(roomTitle)) {
+            titleHtml = `<span style="color: #008000; font-weight: bold;">${escapeHtml(roomTitle)}</span>`;
+        }
+        return `${titleHtml}${escapeHtml(sep)}<span style="color: #00ffff;">${escapeHtml(exits)}</span>`;
     }
 
     _renderRoomTitle(m) {
@@ -428,12 +461,14 @@ class RLColorizerJS {
         const body = m[3];
         const result = m[4];
         const b2 = m[5];
+        const resColor = (result.includes('Éxito') || result.includes('Exito')) ? "#00ff00" : "#ff0000";
 
         return (
             `<span style="color: #c0c0c0;">[</span>` +
             `<span style="color: #ffff00; font-weight: bold;">${escapeHtml(tag)}</span>` +
             `<span style="color: #c0c0c0;">${escapeHtml(body)}</span>` +
-            `<span style="color: #c0c0c0;">${escapeHtml(result)}${escapeHtml(b2)}</span>`
+            `<span style="color: ${resColor}; font-weight: bold;">${escapeHtml(result)}</span>` +
+            `<span style="color: #c0c0c0;">${escapeHtml(b2)}</span>`
         );
     }
 
@@ -476,17 +511,146 @@ class RLColorizerJS {
         return `${promptHtml}<span style="color: #c0c0c0;">${escapeHtml(npc)}${escapeHtml(sep)}${escapeHtml(verb)}.</span>`;
     }
 
-    _renderMarker(m, rule) {
-        const marker = m[1];
-        const rest = m[2];
-        let color = rule.color;
-        for (const cat of rule._categories) {
-            if (cat._regex.test(rest)) {
-                color = cat.color;
-                break;
+    _renderFollowerPlayer(m) {
+        const promptSym = m[1];
+        const actor = m[2];
+        const verb = m[3];
+        const promptHtml = promptSym ? '<span style="color: #c0c0c0;">&gt; </span>' : '';
+        const actorColor = this.getRaceColor(actor);
+        return `${promptHtml}<span style="color: ${actorColor}; font-weight: bold;">${escapeHtml(actor)}</span> <span style="color: #c0c0c0;">${escapeHtml(verb)}.</span>`;
+    }
+
+    _renderSpellCompletion(m) {
+        const line = m[0];
+        const parts = [];
+        let pos = 0;
+        const qRegex = /'[^']+'/g;
+        let qM;
+        while ((qM = qRegex.exec(line)) !== null) {
+            const start = qM.index;
+            const end = qRegex.lastIndex;
+            if (start > pos) {
+                parts.push(`<span style="color: #c0c0c0;">${escapeHtml(line.slice(pos, start))}</span>`);
+            }
+            parts.push(`<span style="color: #00ffff;">${escapeHtml(qM[0])}</span>`);
+            pos = end;
+        }
+        if (pos < line.length) {
+            parts.push(`<span style="color: #c0c0c0;">${escapeHtml(line.slice(pos))}</span>`);
+        }
+        return parts.join('');
+    }
+
+    _renderEnemyManeuver(m) {
+        const promptSym = m[1];
+        const alertSym = m[2];
+        const actor = m[3];
+        const sep = m[4];
+        const verb = m[5];
+        const rest = m[6] || "";
+        const promptHtml = promptSym ? '<span style="color: #c0c0c0;">&gt; </span>' : '';
+        const alertHtml = alertSym ? `<span style="color: #ff0000; font-weight: bold;">${escapeHtml(alertSym)}</span>` : '';
+        const tagM = this.raceTagRegex.exec(actor);
+        const actorColor = tagM ? this.getRaceColor(actor) : "#ff4444";
+        const actorHtml = `<span style="color: ${actorColor}; font-weight: bold;">${escapeHtml(actor)}</span>`;
+        const actionHtml = `<span style="color: #ff8080;">${escapeHtml(verb + rest)}</span>`;
+        return `${promptHtml}${alertHtml}${actorHtml}${escapeHtml(sep)}${actionHtml}`;
+    }
+
+    _renderPlayerCombat(m) {
+        const promptSym = m[1];
+        const hashPrefix = m[2];
+        const hashBody = m[3];
+        const starPrefix = m[4];
+        const verb = m[5];
+        const rest = m[6];
+
+        const promptHtml = promptSym ? '<span style="color: #c0c0c0;">&gt; </span>' : '';
+
+        let prefixSym = "";
+        let body = "";
+        if (hashPrefix) {
+            prefixSym = hashPrefix;
+            body = hashBody || "";
+        } else {
+            prefixSym = starPrefix || "";
+            body = (verb || "") + (rest || "");
+        }
+
+        const fullLine = prefixSym + body;
+
+        const lower = fullLine.toLowerCase();
+        if (lower.includes('esquiva tu ataque') ||
+            lower.includes('fallas tu ataque') ||
+            lower.includes('bloquea tu') ||
+            lower.includes('consigue parar') ||
+            lower.includes('consigue esquivar')) {
+            return `${promptHtml}<span style="color: #808080;">${escapeHtml(fullLine)}</span>`;
+        }
+
+        const parts = [];
+        let pos = 0;
+        const bracketRe = /(\()(\d+)(?:(-)(\d+))?(\))/g;
+        let bM;
+        while ((bM = bracketRe.exec(body)) !== null) {
+            const start = bM.index;
+            const end = bracketRe.lastIndex;
+            if (start > pos) {
+                parts.push(`<span style="color: #00ff00;">${escapeHtml(body.slice(pos, start))}</span>`);
+            }
+            const b1 = bM[1];
+            const d1 = bM[2];
+            const sep = bM[3];
+            const d2 = bM[4];
+            const b2 = bM[5];
+            parts.push(`<span style="color: #ffff00;">${b1}</span><span style="color: #ff0000; font-weight: bold;">${d1}</span>`);
+            if (sep) {
+                parts.push(`<span style="color: #ffffff;">${sep}</span><span style="color: #ff0000; font-weight: bold;">${d2}</span>`);
+            }
+            parts.push(`<span style="color: #ffff00;">${b2}</span>`);
+            pos = end;
+        }
+        if (pos < body.length) {
+            parts.push(`<span style="color: #00ff00;">${escapeHtml(body.slice(pos))}</span>`);
+        }
+
+        const combatHtml = parts.join('');
+
+        let prefixHtml = "";
+        if (prefixSym) {
+            if (prefixSym.includes('#')) {
+                prefixHtml = '<span style="color: #008000;">#</span>' + escapeHtml(prefixSym.slice(1));
+            } else if (prefixSym.includes('*')) {
+                prefixHtml = '<span style="color: #008000;">*</span>' + escapeHtml(prefixSym.slice(1));
             }
         }
-        return `<span style="color: ${color};">${escapeHtml(marker)}</span>${escapeHtml(rest)}`;
+
+        return `${promptHtml}${prefixHtml}${combatHtml}`;
+    }
+
+    // Color of the leading `#` / `*` / `+` marker, or null when the line has no marker.
+    _markerColor(text) {
+        for (const rule of this.markerRules) {
+            const m = rule._regex.exec(text);
+            if (!m) continue;
+            for (const cat of rule._categories) {
+                if (cat._regex.test(m[2])) return [m[1], cat.color];
+            }
+            return [m[1], rule.color];
+        }
+        return null;
+    }
+
+    // Recolor the first visible character (the marker); the rest of the line is untouched.
+    _applyMarker(lineHtml, ch, color) {
+        const h = lineHtml.replace(/<span style="[^"]*"><\/span>/g, '');
+        const mark = `<span style="color: ${color};">${ch}</span>`;
+        const m = /^<span style="([^"]*)">/.exec(h);
+        if (m && h.slice(m[0].length).startsWith(ch)) {
+            return mark + `<span style="${m[1]}">` + h.slice(m[0].length + ch.length);
+        }
+        if (h.startsWith(ch)) return mark + h.slice(ch.length);
+        return lineHtml;
     }
 
     _applyTemplate(m, template) {

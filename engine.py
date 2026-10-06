@@ -164,8 +164,9 @@ class RLColorizer:
 
         # Precompile regular expressions
         self.compiled_rules = []
+        self.marker_rules = []
         for r in self.rules:
-            self.compiled_rules.append({
+            (self.marker_rules if r.get('type') == 'composite_marker' else self.compiled_rules).append({
                 **r,
                 '_regex': re.compile(r['pattern']),
                 '_categories': [{**c, '_regex': re.compile(c['pattern'])} for c in r.get('categories', [])],
@@ -229,9 +230,32 @@ class RLColorizer:
                 line_html = self._render_info(m)
                 break
                 
-            # 6. Composite Marker Line
-            elif rule_type == 'composite_marker':
-                line_html = self._render_marker(m, rule)
+            # 6. Composite Spell Completion
+            elif rule_type == 'composite_spell_completion':
+                line_html = self._render_spell_completion(m)
+                break
+                
+            # 7. Composite Magic Missiles
+            elif rule_type == 'composite_magic_missiles':
+                prompt_sym, prefix_sym, rest = m.groups()
+                lead_html = '<span style="color: #c0c0c0;">&gt; </span>' if prompt_sym else ''
+                p_html = '<span style="color: #0000ff;">#</span> ' if prefix_sym else ''
+                line_html = f'{lead_html}{p_html}<span style="color: #8cc4ff;">{html.escape(rest)}</span>'
+                break
+                
+            # 8. Composite Enemy Maneuver
+            elif rule_type == 'composite_enemy_maneuver':
+                line_html = self._render_enemy_maneuver(m)
+                break
+
+            # 9. Composite Player Combat
+            elif rule_type == 'composite_player_combat':
+                line_html = self._render_player_combat(m)
+                break
+
+            # 12. Composite Follower Player
+            elif rule_type == 'composite_follower_player':
+                line_html = self._render_follower_player(m)
                 break
 
             # 10. Composite Room Player
@@ -267,6 +291,9 @@ class RLColorizer:
             escaped = html.escape(raw_text)
             line_html = f'<span style="color: {self.theme.get("default_fg", "#c0c0c0")};">{escaped}</span>'
             
+        marker = self._marker_color(raw_text)
+        if marker:
+            line_html = self._apply_marker(line_html, *marker)
         return normalize_line_to_mudlet(prompt_html + line_html)
 
     @staticmethod
@@ -340,7 +367,7 @@ class RLColorizer:
             actor_html = f'<span style="color: {actor_color}; font-weight: bold;">{html.escape(actor)}</span>'
         else:
             actor_html = f'<span style="color: #c0c0c0;">{html.escape(actor)}</span>'
-        verb_html = f'<span style="color: #c0c0c0;">{html.escape(verb)}</span>'
+        verb_html = f'<span style="color: #ffffff;">{html.escape(verb)}</span>'
         dest_html = f'<span style="color: #c0c0c0;">{html.escape(dest + period)}</span>'
         return f'{prompt_html}{actor_html} {verb_html} {dest_html}'
 
@@ -375,7 +402,10 @@ class RLColorizer:
 
     def _render_room_exits(self, m):
         prompt_sym, room_title, sep, exits = m.groups()
-        return f'{self._room_title_html(room_title)}{html.escape(sep)}<span style="color: #00ffff;">{html.escape(exits)}</span>'
+        title_html = self._room_title_html(room_title)
+        if not self.get_room_color(room_title):
+            title_html = f'<span style="color: #008000; font-weight: bold;">{html.escape(room_title)}</span>'
+        return f'{title_html}{html.escape(sep)}<span style="color: #00ffff;">{html.escape(exits)}</span>'
 
     def _render_room_title(self, m):
         prompt_sym, room_title = m.groups()
@@ -385,11 +415,13 @@ class RLColorizer:
 
     def _render_tirada(self, m):
         b1, tag, body, result, b2 = m.groups()
+        res_color = "#00ff00" if "Éxito" in result or "Exito" in result else "#ff0000"
         return (
             f'<span style="color: #c0c0c0;">[</span>'
             f'<span style="color: #ffff00; font-weight: bold;">{tag}</span>'
             f'<span style="color: #c0c0c0;">{html.escape(body)}</span>'
-            f'<span style="color: #c0c0c0;">{html.escape(result)}{html.escape(b2)}</span>'
+            f'<span style="color: {res_color}; font-weight: bold;">{html.escape(result)}</span>'
+            f'<span style="color: #c0c0c0;">{html.escape(b2)}</span>'
         )
 
     def _render_info(self, m):
@@ -418,14 +450,107 @@ class RLColorizer:
         prompt_html = '<span style="color: #c0c0c0;">&gt; </span>' if prompt_sym else ''
         return f'{prompt_html}<span style="color: #c0c0c0;">{html.escape(npc)}{html.escape(sep)}{html.escape(verb)}.</span>'
 
-    def _render_marker(self, m, rule):
-        marker, rest = m.groups()
-        color = rule['color']
-        for cat in rule['_categories']:
-            if cat['_regex'].search(rest):
-                color = cat['color']
-                break
-        return f'<span style="color: {color};">{html.escape(marker)}</span>{html.escape(rest)}'
+    def _render_follower_player(self, m):
+        prompt_sym, actor, verb = m.groups()
+        prompt_html = '<span style="color: #c0c0c0;">&gt; </span>' if prompt_sym else ''
+        actor_color = self.get_race_color(actor)
+        return f'{prompt_html}<span style="color: {actor_color}; font-weight: bold;">{html.escape(actor)}</span> <span style="color: #c0c0c0;">{html.escape(verb)}.</span>'
+
+    def _render_spell_completion(self, m):
+        line = m.group(0)
+        parts = []
+        pos = 0
+        for q_m in re.finditer(r"'[^']+'", line):
+            start, end = q_m.span()
+            if start > pos:
+                parts.append(f'<span style="color: #c0c0c0;">{html.escape(line[pos:start])}</span>')
+            parts.append(f'<span style="color: #00ffff;">{html.escape(q_m.group(0))}</span>')
+            pos = end
+        if pos < len(line):
+            parts.append(f'<span style="color: #c0c0c0;">{html.escape(line[pos:])}</span>')
+        return "".join(parts)
+
+    def _render_enemy_maneuver(self, m):
+        prompt_sym, alert_sym, actor, sep, verb, rest = m.groups()
+        prompt_html = '<span style="color: #c0c0c0;">&gt; </span>' if prompt_sym else ''
+        alert_html = f'<span style="color: #ff0000; font-weight: bold;">{html.escape(alert_sym)}</span>' if alert_sym else ''
+        tag_m = self.race_tag_regex.search(actor)
+        if tag_m:
+            actor_color = self.get_race_color(actor)
+        else:
+            actor_color = "#ff4444"
+        actor_html = f'<span style="color: {actor_color}; font-weight: bold;">{html.escape(actor)}</span>'
+        action_html = f'<span style="color: #ff8080;">{html.escape(verb + (rest or ""))}</span>'
+        return f'{prompt_html}{alert_html}{actor_html}{html.escape(sep)}{action_html}'
+
+    def _render_player_combat(self, m):
+        prompt_sym, hash_prefix, hash_body, star_prefix, verb, rest = m.groups()
+        prompt_html = '<span style="color: #c0c0c0;">&gt; </span>' if prompt_sym else ''
+        
+        if hash_prefix:
+            prefix_sym = hash_prefix
+            body = hash_body or ""
+        else:
+            prefix_sym = star_prefix or ""
+            body = (verb or "") + (rest or "")
+            
+        full_line = prefix_sym + body
+        
+        # Check if dodge, parry or miss
+        if any(w in full_line.lower() for w in ['esquiva tu ataque', 'fallas tu ataque', 'bloquea tu', 'consigue parar', 'consigue esquivar']):
+            return f'{prompt_html}<span style="color: #808080;">{html.escape(full_line)}</span>'
+            
+        # Highlight damage ranges/brackets like (290-599) or [123]
+        parts = []
+        pos = 0
+        bracket_re = re.compile(r'(\()(\d+)(?:(-)(\d+))?(\))')
+        for b_m in bracket_re.finditer(body):
+            start, end = b_m.span()
+            if start > pos:
+                parts.append(f'<span style="color: #00ff00;">{html.escape(body[pos:start])}</span>')
+            b1, d1, sep, d2, b2 = b_m.groups()
+            parts.append(f'<span style="color: #ffff00;">{b1}</span><span style="color: #ff0000; font-weight: bold;">{d1}</span>')
+            if sep:
+                parts.append(f'<span style="color: #ffffff;">{sep}</span><span style="color: #ff0000; font-weight: bold;">{d2}</span>')
+            parts.append(f'<span style="color: #ffff00;">{b2}</span>')
+            pos = end
+        if pos < len(body):
+            parts.append(f'<span style="color: #00ff00;">{html.escape(body[pos:])}</span>')
+            
+        combat_html = "".join(parts)
+        
+        prefix_html = ""
+        if prefix_sym:
+            if '#' in prefix_sym:
+                prefix_html = '<span style="color: #008000;">#</span>' + html.escape(prefix_sym[1:])
+            elif '*' in prefix_sym:
+                prefix_html = '<span style="color: #008000;">*</span>' + html.escape(prefix_sym[1:])
+                
+        return f'{prompt_html}{prefix_html}{combat_html}'
+
+    def _marker_color(self, text):
+        """Color of the leading `#` / `*` / `+` marker, or None when the line has no marker."""
+        for rule in self.marker_rules:
+            m = rule['_regex'].match(text)
+            if not m:
+                continue
+            for cat in rule['_categories']:
+                if cat['_regex'].search(m.group(2)):
+                    return m.group(1), cat['color']
+            return m.group(1), rule['color']
+        return None
+
+    @staticmethod
+    def _apply_marker(line_html, ch, color):
+        """Recolor the first visible character (the marker); the rest of the line is untouched."""
+        h = re.sub(r'<span style="[^"]*"></span>', '', line_html)
+        mark = f'<span style="color: {color};">{ch}</span>'
+        m = re.match(r'<span style="([^"]*)">', h)
+        if m and h[m.end():].startswith(ch):
+            return mark + f'<span style="{m.group(1)}">' + h[m.end() + len(ch):]
+        if h.startswith(ch):
+            return mark + h[len(ch):]
+        return line_html
 
     def _apply_template(self, m, template):
         res = template
