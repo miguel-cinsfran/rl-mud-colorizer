@@ -1,0 +1,54 @@
+LPmud version: fluffos 063a160d RLII.
+Mudlib version: Pusa-v2.1
+Si tienes dificultades de vision, ignora los caracteres que se mostraran a continuacion y dinos con que nombre quieres ser conocido.
+                      ________
+                 .v~   MM    `Mb         Y89
+                        (8),P          E l    R e n a c i m i e n t o       :
+    Administradores
+    Servidor: Oskuro, Satyr.
+Introduce el nombre de tu personaje:<VERSION>
+
+fakeuser
+fakepass123
+Escribe "recuperar clave" si has olvidado tu clave.
+Introduce la clave de tu ficha o de tu cuenta:
+fakepass123
+
+            Los Dioses te dan la bienvenida a sus Reinos de Leyenda, Fakechar.
+                      ~ Son las 22:19 del 12 de Sayelie del 203 Era 4M ~
+
+Este MUD está ambientado en el multiverso de Eirea. Consulta la Eireapedia para conocer la historia.
+
+  Normas
+
+Lee 'ayuda normas' para conocer el reglamento del MUD.
+
+  Comunidad y recursos
+
+- Página web:    http://www.reinosdeleyenda.es
+- Foro oficial:  http://www.reinosdeleyenda.es/foro
+
+  Notificaciones
+
+- Tu última conexión fue el 24-Sep-26 (1:25) desde la IP 192.0.2.1
+- Tienes 1 correo sin leer. Consúltalo en cualquier oficina de correos.
+
+ Últimas noticias de Ejército de Dendra:
+  - 27-Sep-26 (12:03) Ondrik ha ganado el derecho a ostentar el cargo de Oficial Condecorado.
+Notas como te rodea la mística aura de un Dragón.
+
+[Fakechar orbita a Eirea]
+]
+Actualizando título...
+Zeh (Mdro), Koch (Org) y Zrunk (Org) están aquí.
+Anduar: Plaza Mayor [|so|,s,e,n,o]
+Bayas buenas [18], Letrero y cuatro Portales
+
+Pv:2841\2841 Pe:904\904 Xp:1643293
+SL: [|so|,s,e,n,o]
+PL:
+Jgd:Zeh (Mdro), Koch (Org) y Zrunk (Org)
+Imágenes:0
+Pieles:0
+]
+[Chat] Eldhana: hola

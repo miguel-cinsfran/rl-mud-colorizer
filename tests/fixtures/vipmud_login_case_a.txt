@@ -1,0 +1,26 @@
+fakeuser
+fakepass123
+Escribe "recuperar clave" si has olvidado tu clave.
+Introduce la clave de tu ficha o de tu cuenta:
+
+            Los Dioses te dan la bienvenida a sus Reinos de Leyenda, Fakechar.
+                      ~ Son las 3:43 del 4 de June del 203 Era 4M ~
+
+Este MUD está ambientado en el multiverso de Eirea.
+
+  Normas
+
+Lee 'ayuda normas' para conocer el reglamento del MUD.
+
+[Fakechar orbita a Eirea]
+]
+Anduar: Plaza Mayor [|so|,s,e,n,o]
+
+Pv:2841\2841 Pe:904\904 Xp:1643293
+SL: [|so|,s,e,n,o]
+PL:
+Jgd:
+Imágenes:0
+Pieles:0
+]
+n

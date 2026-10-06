@@ -2,7 +2,7 @@ import re
 from pathlib import Path
 from engine import RLColorizer
 
-BASE_DIR = Path(r"C:\Users\Compumar\mud_colorizer")
+BASE_DIR = Path(__file__).resolve().parent
 ACC_DIR = BASE_DIR / "accessibility_logs"
 OUT_DIR = BASE_DIR / "output_accessibility"
 OUT_DIR.mkdir(parents=True, exist_ok=True)

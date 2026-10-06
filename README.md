@@ -6,7 +6,7 @@ Colorizador de logs de combate y rol para **[Reinos de Leyenda (RL)](https://rei
 
 ## 🌐 Probar en vivo (GitHub Pages)
 
-👉 **[Abrir RL Log Colorizer en vivo](https://FrancoMPaniagua.github.io/rl-mud-colorizer/)**
+👉 **[Abrir RL Log Colorizer en vivo](https://miguel-cinsfran.github.io/rl-mud-colorizer/)**
 
 ---
 
@@ -18,6 +18,9 @@ Colorizador de logs de combate y rol para **[Reinos de Leyenda (RL)](https://rei
   * Botón de copiado directo con un solo clic listo para pegar en el formulario de envío.
 * **100% Paridad entre Python y JavaScript:**
   * Motor dual: [`engine.py`](engine.py) y [`webapp/engine.js`](webapp/engine.js) ejecutan exactamente la misma lógica y producen resultados carácter a carácter idénticos.
+* **Soporte de logs de VIPMud (y Mudlet):**
+  * Detecta el cliente automáticamente y limpia lo que no es salida del juego: el inicio de sesión (banner, **usuario y clave**, MOTD) se elimina siempre y el bloque de estado repetido (`Pv:`, `SL:`, `PL:`, `Jgd:`, `Imágenes:`, `Pieles:` y el `> ` de cierre) se reduce a los valores que cambian.
+  * Los archivos subidos o arrastrados a la web se leen como UTF-8 y, si no lo son, como Windows-1252 (VIPMud).
 * **Colores Oficiales por Raza de Jugador:**
   * Identificación precisa de jugadores mediante sufijos de raza (`(Elf)`, `(Melf)`, `(Orc)`, `(Mdro)`, `(Gob)`, etc.).
   * No colorea NPCs genéricos como si fueran jugadores.
@@ -56,7 +59,7 @@ Colorizador de logs de combate y rol para **[Reinos de Leyenda (RL)](https://rei
 ## 🚀 Uso Rápido
 
 ### Opción 1: Aplicación Web (Navegador)
-1. Entra a la web en **[GitHub Pages](https://FrancoMPaniagua.github.io/rl-mud-colorizer/)**.
+1. Entra a la web en **[GitHub Pages](https://miguel-cinsfran.github.io/rl-mud-colorizer/)**.
 2. Pega tu log en el panel izquierdo (o arrastra un archivo `.txt`).
 3. Haz clic en **Copiar para Deathlogs**.
 4. Pega el contenido directamente en el formulario de subida de [Deathlogs.com](https://deathlogs.com/).
@@ -64,21 +67,52 @@ Colorizador de logs de combate y rol para **[Reinos de Leyenda (RL)](https://rei
 ### Opción 2: Línea de comandos (Python)
 
 ```bash
-# Colorizar un log desde un archivo de texto
-python -c "from engine import RLColorizer; from pathlib import Path; c = RLColorizer(); print(c.colorize_text(Path('tu_log.txt').read_text(encoding='utf-8')))" > log_colorizado.html
+# Colorizar un log (UTF-8 o Windows-1252) y guardar el HTML
+python engine.py tu_log.txt -o log_colorizado.html
+
+# Sin -o escribe el HTML por la salida estándar.
+# --client fuerza el cliente (vipmud, mudlet); --no-preprocess omite la limpieza
+python engine.py tu_log.txt --client vipmud -o log_colorizado.html
 ```
+
+---
+
+## 🧹 Preprocesado (VIPMud / Mudlet)
+
+Antes de colorizar, el texto pasa por una capa **guiada por datos**: la sección `preprocess` de [`build_rules.py`](build_rules.py), compilada a `rules.json` y `webapp/rules.js`, de modo que Python y JavaScript comparten exactamente las mismas reglas.
+
+* **Detección de cliente:** gana el cliente cuyas firmas (`signatures`) coinciden con más líneas; si ninguna coincide solo se aplican las reglas sin `clients`.
+  * `vipmud`: el prompt `Pv:N\N Pe:N\N Xp:N` (con barra invertida), `Jgd:` y `LPmud version:`.
+  * `mudlet`: el prompt `Pv: N Pe: N` / `Pvs: N Pe: N` (sin barras).
+  * `SL:`, `PL:`, `Pieles:` e `Imágenes:` también aparecen en logs de Mudlet con prompt personalizado, por eso **no** disparan la detección (los logs de Mudlet se conservan intactos).
+* **Tipos de regla** (se evalúan en orden; todos aceptan un `clients: [...]` opcional):
+
+| `kind` | Campos | Qué hace |
+| :--- | :--- | :--- |
+| `drop` | `pattern` | Elimina la línea. |
+| `drop_block` | `start`, `end`, `include_end`, `max_lines` | Elimina desde `start` hasta `end`; solo actúa si encuentra `end` (un fragmento cortado nunca se traga). |
+| `drop_after` | `pattern`, `until`, `include_until`, `max_lines` | Elimina la línea y las siguientes hasta una línea del servidor (`until`): lo escrito tras un prompt (usuario/clave). |
+| `dedupe_on_change` | `pattern`, `scope_id`, `key_group` o `key` | Conserva la línea solo si su clave cambia respecto a la última conservada del mismo `scope_id` (por defecto, la línea entera). |
+| `rewrite` | `pattern`, `replace` | Reescribe la línea (`$1`..`$9`); las reglas siguientes ven el resultado. |
+| `drop_closer` | `group`, `pattern` | Elimina el prompt `> ` que cierra un bloque de estado (`group`) que no conservó ninguna línea. |
+| `drop_before` | `pattern`, `candidate`, `max_lines` | Al coincidir `pattern`, elimina hasta `max_lines` líneas anteriores que cumplan `candidate` (usuario/clave escritos por adelantado, antes de su prompt). |
+| `drop_secret` | `window` | Defensa extra: elimina una línea igual a un token ya eliminado como eco de login, solo dentro de `window` líneas tras una regla de login. |
+
+* Los patrones usan solo el subconjunto de regex idéntico en Python `re` y JavaScript (sin lookbehind, sin `\Z`, sin flags en línea) y se aplican con *search*: ancla con `^`.
+* El estado de `dedupe_on_change` empieza vacío en cada entrada, así que pegar un fragmento (sin banner, o a mitad de un bloque de estado) funciona igual.
 
 ---
 
 ## 🛠️ Estructura del Proyecto
 
 ```text
-├── engine.py              # Motor principal en Python
-├── build_rules.py         # Compilador de reglas a JSON y JS
+├── engine.py              # Motor principal en Python (+ CLI: python engine.py log.txt)
+├── build_rules.py         # Compilador de reglas (colorizado + preprocess) a JSON y JS
 ├── mine_rooms.py          # Extractor de habitaciones desde logs videntes
 ├── rooms.json             # Catálogo de 280+ rooms y sus colores
-├── rules.json             # Reglas compiladas de colorizado
-├── test_parity_diff.py    # Test de paridad 100% entre Python y JS
+├── rules.json             # Reglas compiladas
+├── run_all_tests.py       # Atajo para ejecutar toda la suite
+├── tests/                 # Suite unittest (fixtures cortos, preprocesado, paridad Python/JS)
 ├── webapp/                # Aplicación Web estática
 │   ├── index.html         # Interfaz de usuario
 │   ├── style.css          # Estilos MUD terminal
@@ -93,18 +127,11 @@ python -c "from engine import RLColorizer; from pathlib import Path; c = RLColor
 
 ## 🧪 Pruebas y Validación de Paridad
 
-Para verificar que los motores de Python y JavaScript producen exactamente la misma salida sin discrepancias:
-
 ```bash
-python test_parity_diff.py
+python -m unittest discover -s tests -v
 ```
 
-Resultado esperado:
-```text
-Total Python lines: 2475
-Total Node.js lines: 2475
->>> SUCCESS! PERFECT 100% PARITY BETWEEN PYTHON AND JAVASCRIPT! <<<
-```
+Incluye pruebas de cada tipo de regla de preprocesado, de la detección de cliente, fixtures cortos de VIPMud/Mudlet (con credenciales falsas) y la **paridad exacta Python == JavaScript** (`tests/test_parity.py`; requiere `node` en el PATH, si no está se omite con un aviso).
 
 ---
 
@@ -116,7 +143,7 @@ Si eres un jugador de RL o desarrollador y quieres agregar nuevas reglas, colore
 2. Si agregas o modificas reglas en `build_rules.py` o habitaciones en `rooms.json`, ejecuta:
    ```bash
    python build_rules.py
-   python test_parity_diff.py
+   python -m unittest discover -s tests
    ```
 3. Envía tu **Pull Request**.
 

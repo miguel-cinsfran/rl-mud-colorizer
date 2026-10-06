@@ -34,10 +34,50 @@ document.addEventListener('DOMContentLoaded', () => {
     const statOutputLines = document.getElementById('stat-output-lines');
     const statOutputTags = document.getElementById('stat-output-tags');
 
+    const statClient = document.getElementById('stat-client');
+
     const toast = document.getElementById('toast');
     const inputPanel = document.getElementById('input-panel');
 
     let currentHtmlOutput = '';
+    let lastAnnouncedClient = null;
+    let suppressClientAnnounce = false;
+
+    // Decode a file's bytes: strict UTF-8 first (Mudlet), Windows-1252 fallback (VIPMud).
+    function decodeLogBuffer(buffer) {
+        let bytes = new Uint8Array(buffer);
+        if (bytes.length >= 3 && bytes[0] === 0xef && bytes[1] === 0xbb && bytes[2] === 0xbf) {
+            bytes = bytes.subarray(3);
+        }
+        try {
+            return { text: new TextDecoder('utf-8', { fatal: true }).decode(bytes), encoding: 'UTF-8' };
+        } catch (e) {
+            return { text: new TextDecoder('windows-1252').decode(bytes), encoding: 'Windows-1252' };
+        }
+    }
+
+    function clientLabelText(clientId) {
+        return (clientId && colorizer.clientLabel(clientId)) || null;
+    }
+
+    function readLogFile(file) {
+        const reader = new FileReader();
+        reader.onload = (evt) => {
+            const { text, encoding } = decodeLogBuffer(evt.target.result);
+            inputTextarea.value = text;
+            suppressClientAnnounce = true; // the file announcement below already reports the client
+            processLog();
+            suppressClientAnnounce = false;
+            const label = clientLabelText(colorizer.detectedClient);
+            lastAnnouncedClient = colorizer.detectedClient;
+            announce(
+                `Archivo "${file.name}" cargado con éxito (codificación ${encoding}). ` +
+                (label ? `Cliente detectado: ${label}.` : 'Cliente no reconocido, se aplican solo las reglas generales.')
+            );
+        };
+        reader.onerror = () => announce(`No se pudo leer el archivo "${file.name}".`, true);
+        reader.readAsArrayBuffer(file);
+    }
 
     // Sample RL Demo Log
     const SAMPLE_LOG = `> ojear
@@ -88,11 +128,23 @@ Propinas el golpe mortal a Sowy.
             rawHtmlTextarea.value = '';
             currentHtmlOutput = '';
             updateOutputStats(0, 0);
+            statClient.textContent = '—';
             return;
         }
 
         const htmlResult = colorizer.colorizeText(text);
         currentHtmlOutput = htmlResult;
+
+        // Client detection (VIPMud / Mudlet): show it, and announce it when it changes
+        const clientId = colorizer.detectedClient;
+        const clientLabel = clientLabelText(clientId);
+        statClient.textContent = clientLabel || 'No reconocido';
+        if (clientId !== lastAnnouncedClient) {
+            lastAnnouncedClient = clientId;
+            if (clientLabel && !suppressClientAnnounce) {
+                announce(`Cliente detectado: ${clientLabel}.`);
+            }
+        }
 
         // Extract inner terminal content for the visual preview container to avoid global body style bleed
         const startTag = '<body><div>';
@@ -291,13 +343,7 @@ Propinas el golpe mortal a Sowy.
         const file = e.target.files[0];
         if (!file) return;
 
-        const reader = new FileReader();
-        reader.onload = (evt) => {
-            inputTextarea.value = evt.target.result;
-            processLog();
-                announce(`Archivo "${file.name}" cargado con éxito.`);
-        };
-        reader.readAsText(file);
+        readLogFile(file);
     });
 
     // Drag and Drop support
@@ -321,13 +367,7 @@ Propinas el golpe mortal a Sowy.
         const dt = e.dataTransfer;
         const file = dt.files[0];
         if (file) {
-            const reader = new FileReader();
-            reader.onload = (evt) => {
-                inputTextarea.value = evt.target.result;
-                processLog();
-                    announce(`Archivo "${file.name}" cargado con éxito.`);
-            };
-            reader.readAsText(file);
+            readLogFile(file);
         }
     });
 

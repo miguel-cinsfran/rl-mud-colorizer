@@ -8,7 +8,7 @@ import json
 from pathlib import Path
 from collections import Counter
 
-BASE_DIR = Path(r"C:\Users\Compumar\mud_colorizer")
+BASE_DIR = Path(__file__).resolve().parent
 COLORED_DIR = BASE_DIR / "cache_colored"
 ACC_DIR = BASE_DIR / "accessibility_logs"
 

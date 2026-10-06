@@ -1,0 +1,60 @@
+no
+
+] 
+Linde Este del Bosque de Orgoth- Cruce de Ëarmen [o,so,e,no] 
+Poste.
+
+] Camino de Amonmen [se,no] 
+
+formular vigor natural
+Comienzas a formular el hechizo 'Vigor natural'.
+
+cobardia 0
+Estás en modo valiente, ¡Dispuesto a enfrentarte a cualquier reto hasta la muerte!
+
+Reúnes las fuerzas del animal de tu interior para formular el hechizo 'Vigor natural'.
+[Tu fe en Eralie ha disminuido en 3 puntos]
+
+nick yy
+Ese nombre corto no existe.
+
+nickear x matar
+Nombre corto x cambiado de zeh,sowy,ghuv,grorgh,rength,suka a zeh,bladarro,rength,sowy,grorgh,ghuv.
+
+Reúnes las fuerzas del animal de tu interior para formular el hechizo 'Vigor natural'.
+
+mnick x zeh
+El nombre zeh ya es el primero del nick x.
+
+nick yy zeh
+Añadiendo nombre corto yy como zeh.
+
+nick yy zeh
+Nombre corto yy cambiado de zeh a zeh.
+
+Reúnes las fuerzas del animal de tu interior para formular el hechizo 'Vigor natural'.
+
+Dices en adurn: 'raalander natura temporis'
+Terminas tu hechizo 'Vigor natural' y te sientes lleno de una energía inagotable. Crees que podrías correr hasta el fin del mundo sin cansarte.
+
+Pvs: 4791/4791 (0) Pe: 1405/1408 (-3)
+
+formular sutileza del metamorfo
+Comienzas a formular el hechizo 'Sutileza del metamorfo'.
+
+Reúnes las fuerzas del animal de tu interior para formular el hechizo 'Sutileza del metamorfo'.
+
+Dices en adurn: 'maxima corpuus inmander natura'
+Tu hechizo de 'Sutileza del metamorfo' termina y sientes al instante todas las sensaciones que recorren cada nervio, cada centímetro interno o externo de tu ser. Tanta
+información te abruma por unos momentos, pero pronto eres capaz de dominarla.
+
+[Grorgh orbita al Limbo]
+
+gra
+Comienzas a formular el hechizo 'Gracia felina'.
+
+Pronuncias el cántico: 'felinus est gratia'
+Sólo acabar tu cántico inicias una serie de rápidos y fugaces movimientos de tus brazos, intentando atraer la gracia de Eralie.
+Cuando finalizas tu cántico, notas como el divino Don de la gracia divina invade tu cuerpo.
+De repente, tus músculos pierden masa muscular pero se vuelven fibrosos y más elásticos. Tienes la sensación de sentirte más ligero, pero a la vez, más letal y ágil que
+nunca. ¡Te sientes estupendamente bien!

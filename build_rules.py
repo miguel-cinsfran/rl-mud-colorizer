@@ -7,8 +7,221 @@ and community standard RL color formatting.
 import json
 from pathlib import Path
 
-BASE_DIR = Path(r"C:\Users\Compumar\mud_colorizer")
+BASE_DIR = Path(__file__).resolve().parent
 RULES_FILE = BASE_DIR / "rules.json"
+
+# ---------------------------------------------------------------------------
+# PREPROCESS LAYER (shared by engine.py and webapp/engine.js)
+#
+# Runs on the raw text BEFORE colorizing: removes login/credentials and
+# client-specific status noise so the colorizing rules only see game output.
+# Patterns use the regex subset that behaves identically in Python `re` and
+# JavaScript RegExp: anchors ^ $, classes, groups, alternation, quantifiers.
+# No lookbehind, no \Z, no inline flags; prefer [ \t] over \s. They are applied
+# with "search" semantics (always anchor with ^ when you mean line start).
+#
+# Rule kinds (evaluated in list order; the first rule that consumes a line wins,
+# except `rewrite`, which edits the line and lets later rules see the result):
+#   drop             {pattern}                          drop one matching line
+#   drop_block       {start, end, include_end, max_lines}
+#                    drop from a `start` line through the `end` line (end kept
+#                    unless include_end). Only fires when `end` is found within
+#                    max_lines lines, so a truncated fragment is never swallowed.
+#   drop_after       {pattern, until, include_until, max_lines}
+#                    drop the matching line and every following line up to (not
+#                    including, unless include_until) a line matching `until`;
+#                    at most max_lines (default 8) lines. Used for echoed input.
+#   dedupe_on_change {pattern, scope_id, key_group | key}
+#                    keep the line only when its key differs from the last kept
+#                    line of the same scope_id. Key = capture group N
+#                    (key_group), a template such as "$1|$2" (key), or the whole
+#                    line by default. Trailing blanks are ignored. State starts
+#                    empty for every input.
+#   rewrite          {pattern, replace}                 replace uses $1..$9
+#   drop_closer      {group, pattern}
+#                    drop `pattern` (e.g. the lone prompt) when it immediately
+#                    follows a run of lines of `group` (drop/dedupe rules with
+#                    the same "group") that kept nothing.
+#   drop_before      {pattern, candidate, max_lines, login}
+#                    when `pattern` matches, remove up to max_lines already-emitted
+#                    lines right before it (blank lines skipped) that match
+#                    `candidate`; the matching line itself is processed normally.
+#                    Catches type-ahead credentials that precede their own prompt.
+#                    Skipped when a login rule fired on the 2 previous lines (those
+#                    lines were already consumed).
+#   drop_secret      {window}
+#                    defense in depth: drop a line exactly equal to a token that was
+#                    removed as a login echo (drop_after `record`, drop_before
+#                    candidates) but only within `window` lines after a rule flagged
+#                    "login": true fired, so gameplay commands elsewhere are safe.
+# Any rule may carry "clients": [...]; without it the rule is client-agnostic.
+# Client detection: the client whose "signatures" match the most lines wins
+# (ties: first declared); no match -> only client-agnostic rules apply.
+# ---------------------------------------------------------------------------
+PREPROCESS_DATA = {
+    "clients": [
+        {
+            "id": "vipmud",
+            "label": "VIPMud",
+            "signatures": [
+                # Only signatures exclusive to VIPMud logs. "SL:", "PL:", "Pieles:" and
+                # "Imágenes:" also appear in Mudlet logs (custom prompts), so they must
+                # not trigger detection or Mudlet output would lose those lines.
+                r"^Pv:\d+\\\d+ Pe:\d+\\\d+",
+                r"^Jgd:",
+                r"^LPmud version:",
+            ],
+        },
+        {
+            "id": "mudlet",
+            "label": "Mudlet",
+            "signatures": [
+                r"^Pvs?:[ \t]*\d+[ \t]+Pe:[ \t]*\d+",
+            ],
+        },
+    ],
+    "rules": [
+        # --- Login region: credentials must never reach the output (client-agnostic) ---
+        # Type-ahead: echoed name/password can appear BEFORE the prompt that reveals
+        # them (log starts mid-login, or typed ahead of the banner). Look backwards.
+        {
+            "id": "login_echo_before_recover_hint",
+            "kind": "drop_before",
+            "pattern": r"^Escribe \"recuperar clave\"",
+            "candidate": r"^\S{1,40}$",
+            "max_lines": 3,
+            "login": True,
+        },
+        {
+            "id": "login_echo_before_banner",
+            "kind": "drop_before",
+            "pattern": r"^LPmud version:",
+            "candidate": r"^\S{1,40}$",
+            "max_lines": 3,
+            "login": True,
+        },
+        {
+            "id": "login_echo_before_name_prompt",
+            "kind": "drop_before",
+            "pattern": r"^Introduce el nombre de tu personaje:",
+            "candidate": r"^\S{1,40}$",
+            "max_lines": 2,
+            "login": True,
+        },
+        {
+            "id": "login_banner",
+            "login": True,
+            "kind": "drop_block",
+            "start": r"^LPmud version:",
+            "end": r"^Introduce el nombre de tu personaje:",
+            "include_end": False,
+            "max_lines": 90,
+        },
+        {
+            "id": "login_name_prompt",
+            "login": True,
+            "kind": "drop_after",
+            "pattern": r"^Introduce el nombre de tu personaje:",
+            "until": r"^(?:Escribe \"recuperar clave\"|Introduce la clave de tu ficha)",
+            "include_until": False,
+            "record": r"^\S{1,40}$",
+            "max_lines": 8,
+        },
+        {
+            "id": "login_recover_hint",
+            "login": True,
+            "kind": "drop",
+            "pattern": r"^Escribe \"recuperar clave\"",
+        },
+        {
+            "id": "login_password_prompt",
+            "login": True,
+            "kind": "drop_after",
+            "pattern": r"^Introduce la clave de tu ficha o de tu cuenta",
+            "until": r"^(?:[ \t]*Los Dioses te dan la bienvenida|Tu personaje ya se encuentra|LPmud version:|Introduce el nombre de tu personaje:)",
+            "include_until": False,
+            "record": r"^\S{1,40}$",
+            "max_lines": 6,
+        },
+        {
+            "id": "login_motd",
+            "login": True,
+            "kind": "drop_block",
+            "start": r"^[ \t]*Los Dioses te dan la bienvenida a sus Reinos de Leyenda",
+            "end": r"^\[.+ orbita a Eirea.*\][ \t]*$",
+            "include_end": True,
+            "max_lines": 150,
+        },
+        {
+            "id": "login_secret_echo",
+            "kind": "drop_secret",
+            "window": 6,
+        },
+        {
+            "id": "login_last_connection",
+            "login": True,
+            "kind": "drop",
+            "pattern": r"^- Tu última conexión fue el .* desde la IP ",
+        },
+
+        # --- VIPMud status block (Pv/SL/PL/Jgd/Imágenes/Pieles + closing prompt) ---
+        {
+            "id": "vip_status_pv",
+            "kind": "dedupe_on_change",
+            "clients": ["vipmud"],
+            "group": "status",
+            "scope_id": "pv",
+            "pattern": r"^Pv:\d+\\\d+ Pe:\d+\\\d+ Xp:\d+",
+        },
+        {
+            "id": "vip_status_sl",
+            "kind": "drop",
+            "clients": ["vipmud"],
+            "group": "status",
+            "pattern": r"^SL:",
+        },
+        {
+            "id": "vip_status_pl",
+            "kind": "drop",
+            "clients": ["vipmud"],
+            "group": "status",
+            "pattern": r"^PL:",
+        },
+        {
+            "id": "vip_status_jgd",
+            "kind": "drop",
+            "clients": ["vipmud"],
+            "group": "status",
+            "pattern": r"^Jgd:",
+        },
+        {
+            "id": "vip_status_imagenes",
+            "kind": "dedupe_on_change",
+            "clients": ["vipmud"],
+            "group": "status",
+            "scope_id": "imagenes",
+            "pattern": r"^Imágenes:(\d+)[ \t]*$",
+            "key_group": 1,
+        },
+        {
+            "id": "vip_status_pieles",
+            "kind": "dedupe_on_change",
+            "clients": ["vipmud"],
+            "group": "status",
+            "scope_id": "pieles",
+            "pattern": r"^Pieles:(\d+)[ \t]*$",
+            "key_group": 1,
+        },
+        {
+            "id": "vip_status_closer",
+            "kind": "drop_closer",
+            "clients": ["vipmud"],
+            "group": "status",
+            "pattern": r"^[>\]][ \t]*$",
+        },
+    ],
+}
+
 
 RULES_DATA = {
     "theme": {
@@ -80,20 +293,21 @@ RULES_DATA = {
         "orgo": "#008080"
     },
     "room_colors": {},
+    "preprocess": PREPROCESS_DATA,
     "rules": [
         # --- 1. PROMPTS & HEALTH DELTAS ---
         {
             "id": "prompt_full",
             "category": "prompt",
             "priority": 10,
-            "pattern": r"^(?:>|\])?\s*(Pvs?:\s*(?:\d+(?:[/(]\d+\)?)?)?)(?:\s*\(([+-]?\d+)\))?(\s*Pe:\s*\d+(?:[/(]\d+\)?)?)?(?:\s*\(([+-]?\d+)\))?(.*)$",
+            "pattern": r"^(?:>|\])?\s*(Pvs?:\s*(?:\d+(?:[/(\\]\d+\)?)?)?)(?:\s*\(([+-]?\d+)\))?(\s*Pe:\s*\d+(?:[/(\\]\d+\)?)?)?(?:\s*\(([+-]?\d+)\))?(.*)$",
             "type": "composite_prompt_extended"
         },
         {
             "id": "prompt_pe_xp",
             "category": "prompt",
             "priority": 10,
-            "pattern": r"^(?:>|\])?\s*(Pe:\s*\d+(?:[/(]\d+\)?)?)(?:\s*\(([+-]?\d+)\))?(.*)$",
+            "pattern": r"^(?:>|\])?\s*(Pe:\s*\d+(?:[/(\\]\d+\)?)?)(?:\s*\(([+-]?\d+)\))?(.*)$",
             "replace": r'<span style="color: #008000; font-weight: bold;">$1</span><span style="color: #008000;">$2$3</span>'
         },
         {
@@ -179,7 +393,7 @@ RULES_DATA = {
             "id": "system_buff_tracker",
             "category": "system",
             "priority": 29,
-            "pattern": r"^(?:[>\]]\s*)?(Pieles:)(\d+)\s*$",
+            "pattern": r"^(?:[>\]]\s*)?(Pieles:|Imágenes:)(\d+)\s*$",
             "replace": r'<span style="color: #008000;">$1</span><span style="color: #ffff00; font-weight: bold;">$2</span>'
         },
 
@@ -225,7 +439,7 @@ RULES_DATA = {
             "id": "spell_cast_start",
             "category": "spell",
             "priority": 41,
-            "pattern": r"^(?:[>\]]\s*)?(.*?(?:formular el hechizo|formular el cántico|obrar un hechizo)\s*)('[^']+'\.?)",
+            "pattern": r"^(?:[>\]]\s*)?(.*?(?:formular el hechizo|formular el cántico|obrar un hechizo|concentras en el hechizo|concentras en tu hechizo de)\s*)('[^']+'\.?)",
             "replace": r'<span style="color: #ffffff;">$1</span><span style="color: #00ffff;">$2</span>'
         },
         {
@@ -246,21 +460,21 @@ RULES_DATA = {
             "id": "spell_completion",
             "category": "spell",
             "priority": 44,
-            "pattern": r"^(?:[>\]]\s*)?(Terminas tu hechizo\s*.*|Tu hechizo (?:de '[^']+' )?termina\s*.*)$",
+            "pattern": r"^(?:[>\]]\s*)?(Terminas tu hechizo\s*.*|Tu hechizo (?:de '[^']+' )?termina\s*.*|Finalizas el hechizo\s*.*)$",
             "type": "composite_spell_completion"
         },
         {
             "id": "spell_projectiles_invocations",
             "category": "spell",
             "priority": 45,
-            "pattern": r"^(?:([>\]])\s*)?(#\s*)?(¡?El cielo ruge cuando invocas un relámpago\b.*|\d+\s+misiles mágicos surgen de tus dedos e impactan\b.*|¡?Invocas\b.*|\d+\s+rayos caen desde el cielo\b.*|Un rayo (?:de [^.]+ surge de|impacta (?:sobre|junto a))\b.*|Alzas tu mano, y alrededor de la misma comienzan a formarse\b.*|Trazas con ágiles movimientos en tus dedos\b.*|Posas las manos en el suelo e invocas\b.*|Tu hechizo termina a golpe de trompeta.*)$",
+            "pattern": r"^(?:([>\]])\s*)?(#\s*)?(¡?El cielo ruge cuando invocas un relámpago\b.*|\d+\s+misiles mágicos surgen de tus dedos e impactan\b.*|¡?Invocas\b.*|Conjuras\b.*|Tu arco desaparece\b.*|Las llamas de tu arco\b.*|La flecha que lanzaste\b.*|\d+\s+rayos caen desde el cielo\b.*|Un rayo (?:de [^.]+ surge de|impacta (?:sobre|junto a))\b.*|Alzas tu mano, y alrededor de la misma comienzan a formarse\b.*|Trazas con ágiles movimientos en tus dedos\b.*|Posas las manos en el suelo e invocas\b.*|Tu hechizo termina a golpe de trompeta.*)$",
             "type": "composite_magic_missiles"
         },
         {
             "id": "spell_failed_distracted",
             "category": "spell",
             "priority": 46,
-            "pattern": r"^(?:[>\]]\s*)?(.*?(?:pierde la concentración|arruinado|no eres capaz de concentrarte|Estás realizando los movimientos de un hechizo|Tus objetivos ya no están al alcance|Tu maniobra de \w+ se ve interrumpida|resiste los efectos de tu hechizo).*)$",
+            "pattern": r"^(?:[>\]]\s*)?(.*?(?:pierde la concentración|arruinado|no eres capaz de concentrarte|Estás realizando los movimientos de un hechizo|Tus objetivos ya no están al alcance|Tu maniobra de \w+ se ve interrumpida|resiste los efectos de tu hechizo|Has agotado la energía necesaria|El destino de tu hechizo).*)$",
             "replace": r'<span style="color: #ff8080;">$1</span>'
         },
         {
@@ -276,7 +490,7 @@ RULES_DATA = {
             "id": "room_exits_inline",
             "category": "movement",
             "priority": 50,
-            "pattern": r"^(?:([>\]])\s*)?(.+?)\s+([\[\(](?:\|?[a-zA-ZáéíóúÁÉÍÓÚ]+\|?)(?:,(?:\|?[a-zA-ZáéíóúÁÉÍÓÚ]+\|?))*[\]\)])\s*$",
+            "pattern": r"^(?:([>\]])\s*)?(.+?)\s+([\[\(](?:[|-]?[a-zA-ZáéíóúÁÉÍÓÚ]+[|-]?)(?:,(?:[|-]?[a-zA-ZáéíóúÁÉÍÓÚ]+[|-]?))*[\]\)])\s*$",
             "type": "composite_room_exits"
         },
         {
@@ -348,8 +562,8 @@ RULES_DATA = {
             "id": "combat_under_attack",
             "category": "combat",
             "priority": 60,
-            "pattern": r"^(?:[>\]]\s*)?(Est[áa]s siendo atacado por\s+.*?\.)\s*$",
-            "replace": r'<span style="color: #ff0000; font-weight: bold;">$1</span>'
+            "pattern": r"^([>\]]\s*)?(Est[áa]s siendo atacad[ao] por\s+.*?\.)\s*$",
+            "replace": r'<span style="color: #c0c0c0;">$1</span><span style="color: #ff0000; font-weight: bold;">$2</span>'
         },
         {
             "id": "combat_fatal_blow",
@@ -383,7 +597,7 @@ RULES_DATA = {
             "id": "combat_enemy_attack",
             "category": "combat",
             "priority": 64,
-            "pattern": r"^(?:[>\]]\s*)?(\*?\s*)(.*? te (?:intenta\s+)?(?:golpea|corta|desgarra|lacera|fustiga|clava|rasguña|entierra|muerde|patea|raja|aplasta|arremete|abraza|sorbe|alcanza|fulmina|purifica|perfora|corrompe|apuñalar|mutilar|desmembrar)\b.*)$",
+            "pattern": r"^(?:[>\]]\s*)?(\*?\s*)(.*? te (?:intenta\s+)?(?:golpea|corta|desgarra|lacera|fustiga|clava|rasguña|entierra|muerde|patea|raja|aplasta|arremete|abraza|sorbe|alcanza|fulmina|azota|electrocuta|castiga|purifica|perfora|corrompe|apuñalar|mutilar|desmembrar)\b.*)$",
             "replace": r'<span style="color: #aa0000;">*</span> <span style="color: #cc6666;">$2</span>'
         },
         {
@@ -448,7 +662,7 @@ RULES_DATA = {
             "id": "skills_actions",
             "category": "skill",
             "priority": 75,
-            "pattern": r"^(?:[>\]]\s*)?(Empiezas a\b.*|Intentas\b.*|Logras\b.*|Finalmente logras\b.*|Consigues zafarte\b.*|Te preparas para\b.*|Te mueves en silencio\b.*|Sufres cuando tus músculos\b.*|Tras tu dolorosa conversi[oó]n\b.*|Agotado, eres incapaz\b.*)$",
+            "pattern": r"^(?:[>\]]\s*)?(Empiezas a\b.*|Intentas\b.*|Preparas los componentes\b.*|Logras\b.*|Finalmente logras\b.*|Consigues zafarte\b.*|Te preparas para\b.*|Te mueves en silencio\b.*|Sufres cuando tus músculos\b.*|Tras tu dolorosa conversi[oó]n\b.*|Agotado, eres incapaz\b.*)$",
             "replace": r'<span style="color: #0800ff;">$1</span>'
         },
 
@@ -466,6 +680,13 @@ RULES_DATA = {
             "priority": 81,
             "pattern": r"^(ojear|mirar|w|si\s+[a-z]+|no|se|so|ne|n|s|e|o|d|arriba|abajo|norte|sur|este|oeste|noreste|noroeste|sudeste|sudoeste|esc|buscar|deso|desollar|sigilar|esconderse|quitar\s+.*|poner\s+.*|coger\s+.*|dejar\s+.*|F\d+|1|2|3|4|5|11|111|cc|int|l|l\s+.*|q|r|pa|co|mo|dn|os|hi|z|a|ge|gne|cn|re|li|gl|lr|cme|cse|cle|cic\s+.*|formular\s+.*|cobardia\s+\d+|vendar\s+.*|nick\s+.*|mnick\s+.*|nickear\s+.*|estado\s+.*|des\s+.*|trepar\s+.*|saltar\s+.*|sacudir\s+.*|peleas\s+.*|stop|parar|pc|go|gn|gs|c|ab|gar|sg|ac|abalanzarse(?:\s+.*)?|desgarrar(?:\s+.*)?|morder(?:\s+.*)?|tajar(?:\s+.*)?|aplastar(?:\s+.*)?|golpecertero(?:\s+.*)?|corte(?:\s+.*)?|estocada(?:\s+.*)?|furia(?:\s+.*)?|concentraci[oó]n)$",
             "replace": r'<span style="color: #717100;">$1</span>'
+        },
+        {
+            "id": "command_echo_bare",
+            "category": "command",
+            "priority": 82,
+            "pattern": r"^(?=.{1,30}$)([a-zñáéíóú][a-zñáéíóú0-9]*(?: [a-zñáéíóú0-9:#-]+){0,3})$",
+            "replace": r'<span style="color: #717100;">$1</span>'
         }
     ]
 }
@@ -473,24 +694,37 @@ RULES_DATA = {
 ROOMS_FILE = BASE_DIR / "rooms.json"
 WEBAPP_RULES_FILE = BASE_DIR / "webapp" / "rules.js"
 
-def save_rules():
+def build_rules_data(verbose=False):
+    """Return the full compiled rules dict (RULES_DATA + room colors from rooms.json)."""
     if ROOMS_FILE.exists():
         with open(ROOMS_FILE, 'r', encoding='utf-8') as rf:
             rooms_catalog = json.load(rf)
         RULES_DATA["room_colors"] = {k.lower(): v for k, v in rooms_catalog.items()}
-        print(f"Loaded {len(RULES_DATA['room_colors'])} room colors from rooms.json")
-    else:
+        if verbose:
+            print(f"Loaded {len(RULES_DATA['room_colors'])} room colors from rooms.json")
+    elif verbose:
         print("Warning: rooms.json not found!")
+    return RULES_DATA
 
-    with open(RULES_FILE, 'w', encoding='utf-8') as f:
-        json.dump(RULES_DATA, f, indent=2, ensure_ascii=False)
+
+def render_rules_json(data):
+    return json.dumps(data, indent=2, ensure_ascii=False)
+
+
+def render_rules_js(data):
+    return "// Auto-generated from build_rules.py\nwindow.COLORIZER_RULES = " + render_rules_json(data) + ";\n"
+
+
+def save_rules():
+    data = build_rules_data(verbose=True)
+
+    with open(RULES_FILE, 'w', encoding='utf-8', newline='\n') as f:
+        f.write(render_rules_json(data))
     print(f"Generated v5 rules.json at: {RULES_FILE}")
-    
+
     WEBAPP_RULES_FILE.parent.mkdir(parents=True, exist_ok=True)
-    with open(WEBAPP_RULES_FILE, 'w', encoding='utf-8') as f:
-        f.write("// Auto-generated from build_rules.py\nwindow.COLORIZER_RULES = ")
-        json.dump(RULES_DATA, f, indent=2, ensure_ascii=False)
-        f.write(";\n")
+    with open(WEBAPP_RULES_FILE, 'w', encoding='utf-8', newline='\n') as f:
+        f.write(render_rules_js(data))
     print(f"Generated webapp/rules.js at: {WEBAPP_RULES_FILE}")
 
 if __name__ == '__main__':

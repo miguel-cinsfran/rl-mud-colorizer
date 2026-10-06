@@ -1,0 +1,26 @@
+         Y por supuesto a todos los creadores que día tras día hacen
+                    posible que el MUD siga mejorando.
+
+
+fakeuser
+fakepass123
+LPmud version: fluffos 063a160d RLII.
+Mudlib version: Pusa-v2.1
+Si tienes dificultades de vision, ignora los caracteres que se mostraran a continuacion.
+                      ________
+Introduce el nombre de tu personaje:<VERSION>
+
+fakeuser
+fakepass123
+Escribe "recuperar clave" si has olvidado tu clave.
+Introduce la clave de tu ficha o de tu cuenta:
+fakepass123
+
+            Los Dioses te dan la bienvenida a sus Reinos de Leyenda, Fakechar.
+
+Este MUD está ambientado en el multiverso de Eirea.
+
+[Fakechar orbita a Eirea]
+]
+Anduar: Plaza Mayor [|so|,s,e,n,o]
+s

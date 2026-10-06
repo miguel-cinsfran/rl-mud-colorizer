@@ -8,7 +8,7 @@ import json
 import html
 from pathlib import Path
 
-BASE_DIR = Path(r"C:\Users\Compumar\mud_colorizer")
+BASE_DIR = Path(__file__).resolve().parent
 RULES_FILE = BASE_DIR / "rules.json"
 
 MUDLET_HEADER = (
@@ -26,6 +26,25 @@ MUDLET_HEADER = (
 )
 MUDLET_FOOTER = " </div></body>\n</html>"
 DEFAULT_MUDLET_STYLE = "color: rgb(192,192,192); background: rgb(0,0,0); "
+
+
+def decode_log_bytes(raw):
+    """Decode log bytes: strict UTF-8 first, windows-1252 fallback.
+
+    Mudlet logs are UTF-8; VIPMud logs are windows-1252. Mirrors the webapp
+    (TextDecoder utf-8 fatal -> windows-1252).
+    """
+    if raw.startswith(b"\xef\xbb\xbf"):
+        raw = raw[3:]
+    try:
+        return raw.decode("utf-8")
+    except UnicodeDecodeError:
+        return raw.decode("cp1252", errors="replace")
+
+
+def read_text_file(path):
+    """Read a log file with the utf-8 -> cp1252 fallback."""
+    return decode_log_bytes(Path(path).read_bytes())
 
 
 def hex_to_rgb(hex_str):
@@ -118,10 +137,13 @@ def normalize_line_to_mudlet(line_html):
 
 
 class RLColorizer:
-    def __init__(self, rules_path=RULES_FILE):
-        with open(rules_path, 'r', encoding='utf-8') as f:
-            self.config = json.load(f)
-            
+    def __init__(self, rules_path=RULES_FILE, config=None):
+        if config is not None:
+            self.config = config
+        else:
+            with open(rules_path, 'r', encoding='utf-8') as f:
+                self.config = json.load(f)
+
         self.rules = sorted(self.config['rules'], key=lambda r: r.get('priority', 100))
         self.colors = self.config.get('colors', {})
         self.race_colors = self.config.get('race_colors', {})
@@ -136,6 +158,9 @@ class RLColorizer:
         )
         self.cardinal_regex = re.compile(r'\b(norte|sur|este|oeste|noreste|noroeste|sudeste|sudoeste|arriba|abajo|n|s|e|o|ne|no|se|so)\b', re.IGNORECASE)
         
+        self.detected_client = None
+        self._init_preprocess(self.config.get('preprocess') or {})
+
         # Precompile regular expressions
         self.compiled_rules = []
         for r in self.rules:
@@ -467,7 +492,220 @@ class RLColorizer:
             res = res.replace(f"${i}", escaped_val)
         return res
 
-    def colorize_text(self, plain_text):
+    # ------------------------------------------------------------------
+    # Preprocess layer: data-driven sanitization (see "preprocess" in rules.json)
+    # ------------------------------------------------------------------
+    def _init_preprocess(self, cfg):
+        self.pre_clients = []
+        for c in cfg.get('clients', []):
+            self.pre_clients.append({
+                'id': c['id'],
+                'label': c.get('label', c['id']),
+                'signatures': [re.compile(p) for p in c.get('signatures', [])],
+            })
+        self.pre_rules = []
+        for r in cfg.get('rules', []):
+            comp = dict(r)
+            for key in ('pattern', 'start', 'end', 'until', 'candidate', 'record'):
+                if key in r:
+                    comp['_' + key] = re.compile(r[key])
+            self.pre_rules.append(comp)
+
+    def client_label(self, client_id):
+        for c in self.pre_clients:
+            if c['id'] == client_id:
+                return c['label']
+        return None
+
+    def detect_client(self, text_or_lines):
+        """Id of the client whose signatures match the most lines (ties: first declared), or None."""
+        if isinstance(text_or_lines, str):
+            lines = text_or_lines.replace('\r\n', '\n').split('\n')
+        else:
+            lines = text_or_lines
+        best_id, best_hits = None, 0
+        for c in self.pre_clients:
+            hits = 0
+            for line in lines:
+                for sig in c['signatures']:
+                    if sig.search(line):
+                        hits += 1
+                        break
+            if hits > best_hits:
+                best_id, best_hits = c['id'], hits
+        return best_id
+
+    @staticmethod
+    def _expand_template(template, m):
+        def sub(t):
+            idx = int(t.group(1))
+            if idx > m.re.groups:
+                return ''
+            g = m.group(idx)
+            return g if g is not None else ''
+        return re.sub(r'\$(\d)', sub, template)
+
+    def preprocess_text(self, text, client=None):
+        """Sanitize a raw log (login/credentials, client status blocks) before colorizing.
+
+        client: explicit client id, or None to auto-detect. Rules with a "clients"
+        list only run when the client is in that list; rules without it are
+        client-agnostic. Sets self.detected_client. Returns the cleaned text.
+        """
+        lines = (text or '').replace('\r\n', '\n').split('\n')
+        if client is None:
+            client = self.detect_client(lines)
+        self.detected_client = client
+        rules = [r for r in self.pre_rules if not r.get('clients') or client in r['clients']]
+        if not rules:
+            return '\n'.join(lines)
+
+        out = []
+        changed = False
+        last_keys = {}
+        secrets = set()   # tokens removed as login echoes in this input
+        last_login = None  # input index of the last line handled by a login rule
+        run = None  # status-block run ending right before the current line: {'group', 'kept'}
+        n = len(lines)
+        i = 0
+        while i < n:
+            line = lines[i]
+            handled = False
+            for r in rules:
+                kind = r['kind']
+                if kind == 'rewrite':
+                    m = r['_pattern'].search(line)
+                    if m:
+                        new_line = self._expand_template(r['replace'], m)
+                        if new_line != line:
+                            line = new_line
+                            changed = True
+                    continue
+                if kind == 'drop_before':
+                    if not r['_pattern'].search(line):
+                        continue
+                    found = []
+                    k = len(out) - 1
+                    if last_login is not None and i - last_login <= 2:
+                        k = -1  # lines before were already handled by the login rule that just fired
+                    while k >= 0 and len(found) < r.get('max_lines', 3):
+                        if re.match(r'^[ \t]*$', out[k]):
+                            k -= 1
+                            continue
+                        if not r['_candidate'].search(out[k]):
+                            break
+                        found.append(k)
+                        k -= 1
+                    if found:
+                        for k in found:
+                            secrets.add(re.sub(r'[ \t]+$', '', out[k]))
+                        gone = set(found)
+                        out = [x for idx, x in enumerate(out) if idx not in gone]
+                        changed = True
+                    if r.get('login'):
+                        last_login = i
+                    continue
+                if kind == 'drop_secret':
+                    if not (last_login is not None and i - last_login <= r.get('window', 6)
+                            and re.sub(r'[ \t]+$', '', line) in secrets):
+                        continue
+                    i += 1
+                    changed = True
+                    run = None
+                    handled = True
+                    break
+                if kind == 'drop_block':
+                    if not r['_start'].search(line):
+                        continue
+                    limit = n - 1 if r.get('max_lines') is None else min(n - 1, i + r['max_lines'])
+                    end_idx = None
+                    for j in range(i + 1, limit + 1):
+                        if r['_end'].search(lines[j]):
+                            end_idx = j
+                            break
+                    if end_idx is None:
+                        continue
+                    i = end_idx + 1 if r.get('include_end') else end_idx
+                elif kind == 'drop_after':
+                    if not r['_pattern'].search(line):
+                        continue
+                    limit = min(n, i + 1 + r.get('max_lines', 8))
+                    j = i + 1
+                    while j < limit and not r['_until'].search(lines[j]):
+                        j += 1
+                    if '_record' in r:
+                        for k in range(i + 1, j):
+                            if r['_record'].search(lines[k]):
+                                secrets.add(re.sub(r'[ \t]+$', '', lines[k]))
+                    if j < limit and r.get('include_until'):
+                        j += 1
+                    i = j
+                elif kind == 'drop_closer':
+                    if not (run is not None and run['group'] == r.get('group') and run['kept'] == 0
+                            and r['_pattern'].search(line)):
+                        continue
+                    i += 1
+                else:
+                    m = r['_pattern'].search(line)
+                    if not m:
+                        continue
+                    if kind == 'drop':
+                        keep = False
+                        if r.get('login'):
+                            last_login = i
+                    elif kind == 'dedupe_on_change':
+                        if 'key' in r:
+                            key = self._expand_template(r['key'], m)
+                        elif 'key_group' in r:
+                            key = m.group(r['key_group']) or ''
+                        else:
+                            key = line
+                        key = re.sub(r'[ \t]+$', '', key)
+                        scope = r.get('scope_id', r['id'])
+                        keep = last_keys.get(scope) != key
+                        last_keys[scope] = key
+                    else:
+                        continue
+                    group = r.get('group')
+                    if group:
+                        if run is None or run['group'] != group:
+                            run = {'group': group, 'kept': 0}
+                        if keep:
+                            run['kept'] += 1
+                    else:
+                        run = None
+                    if keep:
+                        out.append(line)
+                    else:
+                        changed = True
+                    i += 1
+                    handled = True
+                    break
+                # drop_block / drop_after / drop_closer: lines consumed
+                if r.get('login'):
+                    last_login = i - 1
+                changed = True
+                run = None
+                handled = True
+                break
+            if handled:
+                continue
+            out.append(line)
+            run = None
+            i += 1
+
+        if changed:
+            collapsed = []
+            for line in out:
+                if re.match(r'^[ \t]*$', line) and (not collapsed or re.match(r'^[ \t]*$', collapsed[-1])):
+                    continue
+                collapsed.append(line)
+            out = collapsed
+        return '\n'.join(out)
+
+    def colorize_text(self, plain_text, preprocess=True, client=None):
+        if preprocess:
+            plain_text = self.preprocess_text(plain_text, client)
         trimmed = (plain_text or "").replace('\r\n', '\n').rstrip('\n')
         normalized = re.sub(r'\n{3,}', '\n\n', trimmed)
         if not normalized:
@@ -480,6 +718,29 @@ class RLColorizer:
         return f"{MUDLET_HEADER}{body_content}\n </div></body>\n</html>"
 
 
+def main(argv=None):
+    import argparse
+    import sys
+
+    ap = argparse.ArgumentParser(description="Colorize a Reinos de Leyenda text log into Mudlet-style HTML.")
+    ap.add_argument("input", help="plain-text log (UTF-8 or windows-1252)")
+    ap.add_argument("-o", "--output", help="output HTML file (default: stdout)")
+    ap.add_argument("--client", help="force a client id (e.g. vipmud, mudlet) instead of auto-detection")
+    ap.add_argument("--no-preprocess", action="store_true", help="skip login/status sanitization")
+    args = ap.parse_args(argv)
+
+    colorizer = RLColorizer()
+    text = read_text_file(args.input)
+    result = colorizer.colorize_text(text, preprocess=not args.no_preprocess, client=args.client)
+    if args.output:
+        Path(args.output).write_text(result, encoding="utf-8", newline="")
+    else:
+        sys.stdout.buffer.write(result.encode("utf-8"))
+    if not args.no_preprocess:
+        label = colorizer.client_label(colorizer.detected_client)
+        print(f"Detected client: {label or 'unknown'}", file=sys.stderr)
+    return 0
+
+
 if __name__ == '__main__':
-    from build_rules import save_rules
-    save_rules()
+    raise SystemExit(main())

@@ -1,0 +1,32 @@
+SL: [o,e,s]
+PL:Enjambre Espectral (Mue)
+Jgd:
+Imágenes:9
+Pieles:0
+> 
+o
+# Enjambre Espectral consigue esquivar tu ataque.
+[El bloqueo 'Piel de piedra' termina]
+
+Estás siendo atacada por Fantasma.
+Estás siendo atacada por Cometa de piel.
+Estás siendo atacada por Momia.
+Momia, Cometa de piel y Fantasma están aquí.
+Y502: Salina abrasada [o,e,so] 
+
+Pv:2841\2841 Pe:884\904 Xp:1643412
+SL: [o,e,so]
+PL:Fantasma (Mue), Cometa de piel (Mue) y Momia (Mue)
+Jgd:
+Imágenes:9
+Pieles:0
+> 
+o
+Y502: Salina abrasada [ne,e,no] 
+
+Pv:2841\2841 Pe:884\904 Xp:1643412
+SL: [ne,e,no]
+PL:
+Jgd:
+Imágenes:9
+Pieles:0

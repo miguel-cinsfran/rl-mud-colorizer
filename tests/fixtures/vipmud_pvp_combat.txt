@@ -1,0 +1,70 @@
+
+Pv:2611\2611 Pe:398\688 Xp:1503156
+SL: [n]
+PL:
+Jgd:Mortas (Hum)
+Imágenes:9
+Pieles:0
+> 
+Pronuncias el cántico: 'majos areos corrosiv'
+Un aura rodeando a Mortas brilla con fuerza abrasándote.
+[Tiradas] Tirada de salvación de mental(desconcentrar) % de éxito: 46 (77-31). Tirada: 66 (Fallo).
+¡Te estremeces y pierdes la concentración!
+
+Las imágenes de Mortas se desvanecen.
+¡Envuelves a Mortas en tu Tormenta Ácida!
+
+[Obtienes 355 puntos de experiencia]
+
+f1
+Comienzas a formular el hechizo 'Defenestrar'.
+
+Pv:1676\2611 Pe:368\688 Xp:1503511
+SL: [n]
+PL:Mortas (Hum)
+Jgd:Mortas (Hum)
+Imágenes:9
+Pieles:0
+> 
+Mortas (Hum) se va hacia norte.
+
+n
+Pvs: 1676/2611 (-935) Pe: 398/688 (-18)
+
+n
+Dos pescadores, Elmer, el Anciano Pescador y Aldeano están aquí.
+Puerto de Alandaen [s,|e|,ne,n] 
+
+Pv:1676\2611 Pe:368\688 Xp:1503511
+SL: [s,|e|,ne,n]
+PL:
+Jgd:
+Imágenes:9
+Pieles:0
+> 
+Mortas (Hum) está aquí.
+Barrio del Puerto [s,e,n] 
+
+Pv:1676\2611 Pe:368\688 Xp:1503511
+SL: [s,e,n]
+PL:Mortas (Hum)
+Jgd:Mortas (Hum)
+Imágenes:9
+Pieles:0
+> 
+Mortas (Hum) se va hacia norte.
+El destino de tu hechizo está fuera de alcance.
+
+n
+ne
+
+Pv:1676\2611 Pe:368\688 Xp:1503511
+SL: [s,e,n]
+PL:
+Jgd:
+Imágenes:9
+Pieles:0
+] 
+e
+
+Pv:1676\2611 Pe:368\688 Xp:1503511

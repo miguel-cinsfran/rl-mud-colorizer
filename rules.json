@@ -350,19 +350,188 @@
     "desfiladero leherdavel": "#008000",
     "desfiladero leherdavel: bifurcación de caminos": "#008000"
   },
+  "preprocess": {
+    "clients": [
+      {
+        "id": "vipmud",
+        "label": "VIPMud",
+        "signatures": [
+          "^Pv:\\d+\\\\\\d+ Pe:\\d+\\\\\\d+",
+          "^Jgd:",
+          "^LPmud version:"
+        ]
+      },
+      {
+        "id": "mudlet",
+        "label": "Mudlet",
+        "signatures": [
+          "^Pvs?:[ \\t]*\\d+[ \\t]+Pe:[ \\t]*\\d+"
+        ]
+      }
+    ],
+    "rules": [
+      {
+        "id": "login_echo_before_recover_hint",
+        "kind": "drop_before",
+        "pattern": "^Escribe \\\"recuperar clave\\\"",
+        "candidate": "^\\S{1,40}$",
+        "max_lines": 3,
+        "login": true
+      },
+      {
+        "id": "login_echo_before_banner",
+        "kind": "drop_before",
+        "pattern": "^LPmud version:",
+        "candidate": "^\\S{1,40}$",
+        "max_lines": 3,
+        "login": true
+      },
+      {
+        "id": "login_echo_before_name_prompt",
+        "kind": "drop_before",
+        "pattern": "^Introduce el nombre de tu personaje:",
+        "candidate": "^\\S{1,40}$",
+        "max_lines": 2,
+        "login": true
+      },
+      {
+        "id": "login_banner",
+        "login": true,
+        "kind": "drop_block",
+        "start": "^LPmud version:",
+        "end": "^Introduce el nombre de tu personaje:",
+        "include_end": false,
+        "max_lines": 90
+      },
+      {
+        "id": "login_name_prompt",
+        "login": true,
+        "kind": "drop_after",
+        "pattern": "^Introduce el nombre de tu personaje:",
+        "until": "^(?:Escribe \\\"recuperar clave\\\"|Introduce la clave de tu ficha)",
+        "include_until": false,
+        "record": "^\\S{1,40}$",
+        "max_lines": 8
+      },
+      {
+        "id": "login_recover_hint",
+        "login": true,
+        "kind": "drop",
+        "pattern": "^Escribe \\\"recuperar clave\\\""
+      },
+      {
+        "id": "login_password_prompt",
+        "login": true,
+        "kind": "drop_after",
+        "pattern": "^Introduce la clave de tu ficha o de tu cuenta",
+        "until": "^(?:[ \\t]*Los Dioses te dan la bienvenida|Tu personaje ya se encuentra|LPmud version:|Introduce el nombre de tu personaje:)",
+        "include_until": false,
+        "record": "^\\S{1,40}$",
+        "max_lines": 6
+      },
+      {
+        "id": "login_motd",
+        "login": true,
+        "kind": "drop_block",
+        "start": "^[ \\t]*Los Dioses te dan la bienvenida a sus Reinos de Leyenda",
+        "end": "^\\[.+ orbita a Eirea.*\\][ \\t]*$",
+        "include_end": true,
+        "max_lines": 150
+      },
+      {
+        "id": "login_secret_echo",
+        "kind": "drop_secret",
+        "window": 6
+      },
+      {
+        "id": "login_last_connection",
+        "login": true,
+        "kind": "drop",
+        "pattern": "^- Tu última conexión fue el .* desde la IP "
+      },
+      {
+        "id": "vip_status_pv",
+        "kind": "dedupe_on_change",
+        "clients": [
+          "vipmud"
+        ],
+        "group": "status",
+        "scope_id": "pv",
+        "pattern": "^Pv:\\d+\\\\\\d+ Pe:\\d+\\\\\\d+ Xp:\\d+"
+      },
+      {
+        "id": "vip_status_sl",
+        "kind": "drop",
+        "clients": [
+          "vipmud"
+        ],
+        "group": "status",
+        "pattern": "^SL:"
+      },
+      {
+        "id": "vip_status_pl",
+        "kind": "drop",
+        "clients": [
+          "vipmud"
+        ],
+        "group": "status",
+        "pattern": "^PL:"
+      },
+      {
+        "id": "vip_status_jgd",
+        "kind": "drop",
+        "clients": [
+          "vipmud"
+        ],
+        "group": "status",
+        "pattern": "^Jgd:"
+      },
+      {
+        "id": "vip_status_imagenes",
+        "kind": "dedupe_on_change",
+        "clients": [
+          "vipmud"
+        ],
+        "group": "status",
+        "scope_id": "imagenes",
+        "pattern": "^Imágenes:(\\d+)[ \\t]*$",
+        "key_group": 1
+      },
+      {
+        "id": "vip_status_pieles",
+        "kind": "dedupe_on_change",
+        "clients": [
+          "vipmud"
+        ],
+        "group": "status",
+        "scope_id": "pieles",
+        "pattern": "^Pieles:(\\d+)[ \\t]*$",
+        "key_group": 1
+      },
+      {
+        "id": "vip_status_closer",
+        "kind": "drop_closer",
+        "clients": [
+          "vipmud"
+        ],
+        "group": "status",
+        "pattern": "^[>\\]][ \\t]*$"
+      }
+    ]
+  },
   "rules": [
     {
       "id": "prompt_full",
       "category": "prompt",
       "priority": 10,
-      "pattern": "^(?:>|\\])?\\s*(Pvs?:\\s*(?:\\d+(?:[/(]\\d+\\)?)?)?)(?:\\s*\\(([+-]?\\d+)\\))?(\\s*Pe:\\s*\\d+(?:[/(]\\d+\\)?)?)?(?:\\s*\\(([+-]?\\d+)\\))?(.*)$",
+      "pattern": "^(?:>|\\])?\\s*(Pvs?:\\s*(?:\\d+(?:[/(\\\\]\\d+\\)?)?)?)(?:\\s*\\(([+-]?\\d+)\\))?(\\s*Pe:\\s*\\d+(?:[/(\\\\]\\d+\\)?)?)?(?:\\s*\\(([+-]?\\d+)\\))?(.*)$",
       "type": "composite_prompt_extended"
     },
     {
       "id": "prompt_pe_xp",
       "category": "prompt",
       "priority": 10,
-      "pattern": "^(?:>|\\])?\\s*(Pe:\\s*\\d+(?:[/(]\\d+\\)?)?)(?:\\s*\\(([+-]?\\d+)\\))?(.*)$",
+      "pattern": "^(?:>|\\])?\\s*(Pe:\\s*\\d+(?:[/(\\\\]\\d+\\)?)?)(?:\\s*\\(([+-]?\\d+)\\))?(.*)$",
       "replace": "<span style=\"color: #008000; font-weight: bold;\">$1</span><span style=\"color: #008000;\">$2$3</span>"
     },
     {
@@ -446,7 +615,7 @@
       "id": "system_buff_tracker",
       "category": "system",
       "priority": 29,
-      "pattern": "^(?:[>\\]]\\s*)?(Pieles:)(\\d+)\\s*$",
+      "pattern": "^(?:[>\\]]\\s*)?(Pieles:|Imágenes:)(\\d+)\\s*$",
       "replace": "<span style=\"color: #008000;\">$1</span><span style=\"color: #ffff00; font-weight: bold;\">$2</span>"
     },
     {
@@ -488,7 +657,7 @@
       "id": "spell_cast_start",
       "category": "spell",
       "priority": 41,
-      "pattern": "^(?:[>\\]]\\s*)?(.*?(?:formular el hechizo|formular el cántico|obrar un hechizo)\\s*)('[^']+'\\.?)",
+      "pattern": "^(?:[>\\]]\\s*)?(.*?(?:formular el hechizo|formular el cántico|obrar un hechizo|concentras en el hechizo|concentras en tu hechizo de)\\s*)('[^']+'\\.?)",
       "replace": "<span style=\"color: #ffffff;\">$1</span><span style=\"color: #00ffff;\">$2</span>"
     },
     {
@@ -509,21 +678,21 @@
       "id": "spell_completion",
       "category": "spell",
       "priority": 44,
-      "pattern": "^(?:[>\\]]\\s*)?(Terminas tu hechizo\\s*.*|Tu hechizo (?:de '[^']+' )?termina\\s*.*)$",
+      "pattern": "^(?:[>\\]]\\s*)?(Terminas tu hechizo\\s*.*|Tu hechizo (?:de '[^']+' )?termina\\s*.*|Finalizas el hechizo\\s*.*)$",
       "type": "composite_spell_completion"
     },
     {
       "id": "spell_projectiles_invocations",
       "category": "spell",
       "priority": 45,
-      "pattern": "^(?:([>\\]])\\s*)?(#\\s*)?(¡?El cielo ruge cuando invocas un relámpago\\b.*|\\d+\\s+misiles mágicos surgen de tus dedos e impactan\\b.*|¡?Invocas\\b.*|\\d+\\s+rayos caen desde el cielo\\b.*|Un rayo (?:de [^.]+ surge de|impacta (?:sobre|junto a))\\b.*|Alzas tu mano, y alrededor de la misma comienzan a formarse\\b.*|Trazas con ágiles movimientos en tus dedos\\b.*|Posas las manos en el suelo e invocas\\b.*|Tu hechizo termina a golpe de trompeta.*)$",
+      "pattern": "^(?:([>\\]])\\s*)?(#\\s*)?(¡?El cielo ruge cuando invocas un relámpago\\b.*|\\d+\\s+misiles mágicos surgen de tus dedos e impactan\\b.*|¡?Invocas\\b.*|Conjuras\\b.*|Tu arco desaparece\\b.*|Las llamas de tu arco\\b.*|La flecha que lanzaste\\b.*|\\d+\\s+rayos caen desde el cielo\\b.*|Un rayo (?:de [^.]+ surge de|impacta (?:sobre|junto a))\\b.*|Alzas tu mano, y alrededor de la misma comienzan a formarse\\b.*|Trazas con ágiles movimientos en tus dedos\\b.*|Posas las manos en el suelo e invocas\\b.*|Tu hechizo termina a golpe de trompeta.*)$",
       "type": "composite_magic_missiles"
     },
     {
       "id": "spell_failed_distracted",
       "category": "spell",
       "priority": 46,
-      "pattern": "^(?:[>\\]]\\s*)?(.*?(?:pierde la concentración|arruinado|no eres capaz de concentrarte|Estás realizando los movimientos de un hechizo|Tus objetivos ya no están al alcance|Tu maniobra de \\w+ se ve interrumpida|resiste los efectos de tu hechizo).*)$",
+      "pattern": "^(?:[>\\]]\\s*)?(.*?(?:pierde la concentración|arruinado|no eres capaz de concentrarte|Estás realizando los movimientos de un hechizo|Tus objetivos ya no están al alcance|Tu maniobra de \\w+ se ve interrumpida|resiste los efectos de tu hechizo|Has agotado la energía necesaria|El destino de tu hechizo).*)$",
       "replace": "<span style=\"color: #ff8080;\">$1</span>"
     },
     {
@@ -537,7 +706,7 @@
       "id": "room_exits_inline",
       "category": "movement",
       "priority": 50,
-      "pattern": "^(?:([>\\]])\\s*)?(.+?)\\s+([\\[\\(](?:\\|?[a-zA-ZáéíóúÁÉÍÓÚ]+\\|?)(?:,(?:\\|?[a-zA-ZáéíóúÁÉÍÓÚ]+\\|?))*[\\]\\)])\\s*$",
+      "pattern": "^(?:([>\\]])\\s*)?(.+?)\\s+([\\[\\(](?:[|-]?[a-zA-ZáéíóúÁÉÍÓÚ]+[|-]?)(?:,(?:[|-]?[a-zA-ZáéíóúÁÉÍÓÚ]+[|-]?))*[\\]\\)])\\s*$",
       "type": "composite_room_exits"
     },
     {
@@ -607,8 +776,8 @@
       "id": "combat_under_attack",
       "category": "combat",
       "priority": 60,
-      "pattern": "^(?:[>\\]]\\s*)?(Est[áa]s siendo atacado por\\s+.*?\\.)\\s*$",
-      "replace": "<span style=\"color: #ff0000; font-weight: bold;\">$1</span>"
+      "pattern": "^([>\\]]\\s*)?(Est[áa]s siendo atacad[ao] por\\s+.*?\\.)\\s*$",
+      "replace": "<span style=\"color: #c0c0c0;\">$1</span><span style=\"color: #ff0000; font-weight: bold;\">$2</span>"
     },
     {
       "id": "combat_fatal_blow",
@@ -642,7 +811,7 @@
       "id": "combat_enemy_attack",
       "category": "combat",
       "priority": 64,
-      "pattern": "^(?:[>\\]]\\s*)?(\\*?\\s*)(.*? te (?:intenta\\s+)?(?:golpea|corta|desgarra|lacera|fustiga|clava|rasguña|entierra|muerde|patea|raja|aplasta|arremete|abraza|sorbe|alcanza|fulmina|purifica|perfora|corrompe|apuñalar|mutilar|desmembrar)\\b.*)$",
+      "pattern": "^(?:[>\\]]\\s*)?(\\*?\\s*)(.*? te (?:intenta\\s+)?(?:golpea|corta|desgarra|lacera|fustiga|clava|rasguña|entierra|muerde|patea|raja|aplasta|arremete|abraza|sorbe|alcanza|fulmina|azota|electrocuta|castiga|purifica|perfora|corrompe|apuñalar|mutilar|desmembrar)\\b.*)$",
       "replace": "<span style=\"color: #aa0000;\">*</span> <span style=\"color: #cc6666;\">$2</span>"
     },
     {
@@ -705,7 +874,7 @@
       "id": "skills_actions",
       "category": "skill",
       "priority": 75,
-      "pattern": "^(?:[>\\]]\\s*)?(Empiezas a\\b.*|Intentas\\b.*|Logras\\b.*|Finalmente logras\\b.*|Consigues zafarte\\b.*|Te preparas para\\b.*|Te mueves en silencio\\b.*|Sufres cuando tus músculos\\b.*|Tras tu dolorosa conversi[oó]n\\b.*|Agotado, eres incapaz\\b.*)$",
+      "pattern": "^(?:[>\\]]\\s*)?(Empiezas a\\b.*|Intentas\\b.*|Preparas los componentes\\b.*|Logras\\b.*|Finalmente logras\\b.*|Consigues zafarte\\b.*|Te preparas para\\b.*|Te mueves en silencio\\b.*|Sufres cuando tus músculos\\b.*|Tras tu dolorosa conversi[oó]n\\b.*|Agotado, eres incapaz\\b.*)$",
       "replace": "<span style=\"color: #0800ff;\">$1</span>"
     },
     {
@@ -720,6 +889,13 @@
       "category": "command",
       "priority": 81,
       "pattern": "^(ojear|mirar|w|si\\s+[a-z]+|no|se|so|ne|n|s|e|o|d|arriba|abajo|norte|sur|este|oeste|noreste|noroeste|sudeste|sudoeste|esc|buscar|deso|desollar|sigilar|esconderse|quitar\\s+.*|poner\\s+.*|coger\\s+.*|dejar\\s+.*|F\\d+|1|2|3|4|5|11|111|cc|int|l|l\\s+.*|q|r|pa|co|mo|dn|os|hi|z|a|ge|gne|cn|re|li|gl|lr|cme|cse|cle|cic\\s+.*|formular\\s+.*|cobardia\\s+\\d+|vendar\\s+.*|nick\\s+.*|mnick\\s+.*|nickear\\s+.*|estado\\s+.*|des\\s+.*|trepar\\s+.*|saltar\\s+.*|sacudir\\s+.*|peleas\\s+.*|stop|parar|pc|go|gn|gs|c|ab|gar|sg|ac|abalanzarse(?:\\s+.*)?|desgarrar(?:\\s+.*)?|morder(?:\\s+.*)?|tajar(?:\\s+.*)?|aplastar(?:\\s+.*)?|golpecertero(?:\\s+.*)?|corte(?:\\s+.*)?|estocada(?:\\s+.*)?|furia(?:\\s+.*)?|concentraci[oó]n)$",
+      "replace": "<span style=\"color: #717100;\">$1</span>"
+    },
+    {
+      "id": "command_echo_bare",
+      "category": "command",
+      "priority": 82,
+      "pattern": "^(?=.{1,30}$)([a-zñáéíóú][a-zñáéíóú0-9]*(?: [a-zñáéíóú0-9:#-]+){0,3})$",
       "replace": "<span style=\"color: #717100;\">$1</span>"
     }
   ]

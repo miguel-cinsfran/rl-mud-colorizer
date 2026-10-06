@@ -1,0 +1,4 @@
+fakeuser
+fakepass123
+Escribe "recuperar clave" si has olvidado tu clave.
+Introduce la clave de tu ficha o de tu cuenta:

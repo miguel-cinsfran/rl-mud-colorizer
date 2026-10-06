@@ -13,6 +13,33 @@ function escapeHtml(str) {
         .replace(/'/g, '&#x27;');
 }
 
+// Python's `\w` is Unicode-aware (matches "é", "ñ"...); JavaScript's is ASCII-only.
+// Rules are authored once for both engines, so `\w` is expanded to an explicit
+// Latin-script class (ASCII + Latin-1 + Latin Extended-A/B) to keep parity.
+const PY_WORD_CHARS = 'A-Za-z0-9_ªµºÀ-ÖØ-öø-ɏ';
+
+function toSharedRegex(pattern) {
+    let out = '';
+    let inClass = false;
+    for (let i = 0; i < pattern.length; i++) {
+        const ch = pattern[i];
+        if (ch === '\\') {
+            const next = pattern[i + 1];
+            if (next === 'w') {
+                out += inClass ? PY_WORD_CHARS : '[' + PY_WORD_CHARS + ']';
+            } else {
+                out += ch + (next === undefined ? '' : next);
+            }
+            i++;
+        } else {
+            if (ch === '[') inClass = true;
+            else if (ch === ']') inClass = false;
+            out += ch;
+        }
+    }
+    return new RegExp(out);
+}
+
 const MUDLET_HEADER = `<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01//EN' 'http://www.w3.org/TR/html4/strict.dtd'>
 <html>
  <head>
@@ -150,10 +177,13 @@ class RLColorizerJS {
         this.playerEntityPattern = `((?:\\b(?:un|una|dos|tres|cuatro|cinco|seis|siete|ocho|nueve|diez)\\s+)?[*|\\-~/]*\\s*[A-Za-zÁÉÍÓÚáéíóúñÑ0-9\\x27_-]+(?:\\s+[|*\\-~/]+)?\\s*\\((?:${this.racesStr})\\)(?:es)?(?:\\s*[|*\\-~/]+)?)`;
         this.cardinalRegex = /\b(norte|sur|este|oeste|noreste|noroeste|sudeste|sudoeste|arriba|abajo|n|s|e|o|ne|no|se|so)\b/i;
         
+        this.detectedClient = null;
+        this._initPreprocess(this.config.preprocess || {});
+
         const sortedRules = [...this.config.rules].sort((a, b) => (a.priority || 100) - (b.priority || 100));
         this.compiledRules = sortedRules.map(r => ({
             ...r,
-            _regex: new RegExp(r.pattern)
+            _regex: toSharedRegex(r.pattern)
         }));
     }
 
@@ -573,7 +603,207 @@ class RLColorizerJS {
         return res;
     }
 
-    colorizeText(plainText) {
+    // ------------------------------------------------------------------
+    // Preprocess layer: data-driven sanitization (mirrors engine.py)
+    // ------------------------------------------------------------------
+    _initPreprocess(cfg) {
+        this.preClients = (cfg.clients || []).map(c => ({
+            id: c.id,
+            label: c.label || c.id,
+            signatures: (c.signatures || []).map(p => toSharedRegex(p))
+        }));
+        this.preRules = (cfg.rules || []).map(r => {
+            const comp = { ...r };
+            for (const key of ['pattern', 'start', 'end', 'until', 'candidate', 'record']) {
+                if (key in r) comp['_' + key] = toSharedRegex(r[key]);
+            }
+            return comp;
+        });
+    }
+
+    clientLabel(clientId) {
+        const c = this.preClients.find(x => x.id === clientId);
+        return c ? c.label : null;
+    }
+
+    detectClient(textOrLines) {
+        const lines = typeof textOrLines === 'string'
+            ? textOrLines.replace(/\r\n/g, '\n').split('\n')
+            : textOrLines;
+        let bestId = null;
+        let bestHits = 0;
+        for (const c of this.preClients) {
+            let hits = 0;
+            for (const line of lines) {
+                if (c.signatures.some(sig => sig.test(line))) hits++;
+            }
+            if (hits > bestHits) {
+                bestId = c.id;
+                bestHits = hits;
+            }
+        }
+        return bestId;
+    }
+
+    _expandTemplate(template, m) {
+        return template.replace(/\$(\d)/g, (_, d) => {
+            const idx = parseInt(d, 10);
+            const g = idx < m.length ? m[idx] : undefined;
+            return g === undefined || g === null ? '' : g;
+        });
+    }
+
+    preprocessText(text, client = null) {
+        const lines = (text || '').replace(/\r\n/g, '\n').split('\n');
+        if (client === null || client === undefined) {
+            client = this.detectClient(lines);
+        }
+        this.detectedClient = client;
+        const rules = this.preRules.filter(r => !r.clients || !r.clients.length || r.clients.includes(client));
+        if (rules.length === 0) {
+            return lines.join('\n');
+        }
+
+        let out = [];
+        let changed = false;
+        const lastKeys = {};
+        const secrets = new Set(); // tokens removed as login echoes in this input
+        let lastLogin = null;      // input index of the last line handled by a login rule
+        let run = null; // status-block run ending right before the current line: {group, kept}
+        const n = lines.length;
+        let i = 0;
+        while (i < n) {
+            let line = lines[i];
+            let handled = false;
+            for (const r of rules) {
+                const kind = r.kind;
+                if (kind === 'rewrite') {
+                    const m = r._pattern.exec(line);
+                    if (m) {
+                        const newLine = this._expandTemplate(r.replace, m);
+                        if (newLine !== line) {
+                            line = newLine;
+                            changed = true;
+                        }
+                    }
+                    continue;
+                }
+                if (kind === 'drop_before') {
+                    if (!r._pattern.test(line)) continue;
+                    const found = [];
+                    let k = out.length - 1;
+                    if (lastLogin !== null && i - lastLogin <= 2) k = -1; // already handled by the login rule that just fired
+                    const maxBack = (r.max_lines === undefined || r.max_lines === null) ? 3 : r.max_lines;
+                    while (k >= 0 && found.length < maxBack) {
+                        if (/^[ \t]*$/.test(out[k])) { k--; continue; }
+                        if (!r._candidate.test(out[k])) break;
+                        found.push(k);
+                        k--;
+                    }
+                    if (found.length > 0) {
+                        for (const idx of found) secrets.add(out[idx].replace(/[ \t]+$/, ''));
+                        const gone = new Set(found);
+                        out = out.filter((_, idx) => !gone.has(idx));
+                        changed = true;
+                    }
+                    if (r.login) lastLogin = i;
+                    continue;
+                }
+                if (kind === 'drop_secret') {
+                    const win = (r.window === undefined || r.window === null) ? 6 : r.window;
+                    if (!(lastLogin !== null && i - lastLogin <= win && secrets.has(line.replace(/[ \t]+$/, '')))) continue;
+                    i += 1;
+                    changed = true;
+                    run = null;
+                    handled = true;
+                    break;
+                }
+                if (kind === 'drop_block') {
+                    if (!r._start.test(line)) continue;
+                    const limit = (r.max_lines === undefined || r.max_lines === null)
+                        ? n - 1 : Math.min(n - 1, i + r.max_lines);
+                    let endIdx = null;
+                    for (let j = i + 1; j <= limit; j++) {
+                        if (r._end.test(lines[j])) { endIdx = j; break; }
+                    }
+                    if (endIdx === null) continue;
+                    i = r.include_end ? endIdx + 1 : endIdx;
+                } else if (kind === 'drop_after') {
+                    if (!r._pattern.test(line)) continue;
+                    const maxLines = (r.max_lines === undefined || r.max_lines === null) ? 8 : r.max_lines;
+                    const limit = Math.min(n, i + 1 + maxLines);
+                    let j = i + 1;
+                    while (j < limit && !r._until.test(lines[j])) j++;
+                    if (r._record) {
+                        for (let k = i + 1; k < j; k++) {
+                            if (r._record.test(lines[k])) secrets.add(lines[k].replace(/[ \t]+$/, ''));
+                        }
+                    }
+                    if (j < limit && r.include_until) j++;
+                    i = j;
+                } else if (kind === 'drop_closer') {
+                    if (!(run !== null && run.group === r.group && run.kept === 0 && r._pattern.test(line))) continue;
+                    i += 1;
+                } else {
+                    const m = r._pattern.exec(line);
+                    if (!m) continue;
+                    let keep;
+                    if (kind === 'drop') {
+                        keep = false;
+                        if (r.login) lastLogin = i;
+                    } else if (kind === 'dedupe_on_change') {
+                        let key;
+                        if ('key' in r) key = this._expandTemplate(r.key, m);
+                        else if ('key_group' in r) key = m[r.key_group] || '';
+                        else key = line;
+                        key = key.replace(/[ \t]+$/, '');
+                        const scope = ('scope_id' in r) ? r.scope_id : r.id;
+                        keep = lastKeys[scope] !== key;
+                        lastKeys[scope] = key;
+                    } else {
+                        continue;
+                    }
+                    const group = r.group;
+                    if (group) {
+                        if (run === null || run.group !== group) run = { group, kept: 0 };
+                        if (keep) run.kept += 1;
+                    } else {
+                        run = null;
+                    }
+                    if (keep) out.push(line);
+                    else changed = true;
+                    i += 1;
+                    handled = true;
+                    break;
+                }
+                // drop_block / drop_after / drop_closer: lines consumed
+                if (r.login) lastLogin = i - 1;
+                changed = true;
+                run = null;
+                handled = true;
+                break;
+            }
+            if (handled) continue;
+            out.push(line);
+            run = null;
+            i += 1;
+        }
+
+        let result = out;
+        if (changed) {
+            result = [];
+            for (const line of out) {
+                if (/^[ \t]*$/.test(line) && (result.length === 0 || /^[ \t]*$/.test(result[result.length - 1]))) continue;
+                result.push(line);
+            }
+        }
+        return result.join('\n');
+    }
+
+    colorizeText(plainText, preprocess = true, client = null) {
+        if (preprocess) {
+            plainText = this.preprocessText(plainText, client);
+        }
         const trimmed = (plainText || '').replace(/\r\n/g, '\n').replace(/\n+$/, '');
         const normalized = trimmed.replace(/\n{3,}/g, '\n\n');
         if (!normalized) {

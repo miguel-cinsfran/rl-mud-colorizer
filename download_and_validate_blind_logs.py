@@ -4,7 +4,7 @@ import re
 import time
 from pathlib import Path
 
-BASE_DIR = Path(r"C:\Users\Compumar\mud_colorizer")
+BASE_DIR = Path(__file__).resolve().parent
 ACC_DIR = BASE_DIR / "accessibility_logs"
 ACC_DIR.mkdir(parents=True, exist_ok=True)
 

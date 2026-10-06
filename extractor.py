@@ -11,7 +11,7 @@ import urllib.request
 import urllib.parse
 from pathlib import Path
 
-BASE_DIR = Path(r"C:\Users\Compumar\mud_colorizer")
+BASE_DIR = Path(__file__).resolve().parent
 COLORED_DIR = BASE_DIR / "cache_colored"
 PLAIN_DIR = BASE_DIR / "cache_plain"
 BENCHMARK_DIR = BASE_DIR / "cache_benchmark"
