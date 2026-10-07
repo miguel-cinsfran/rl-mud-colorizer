@@ -1,10 +1,10 @@
 """Build item_colors.json from the Armería de RL (https://armeria.reinosdeleyenda.es).
 
-Usage: python tools/build_item_colors.py [--from raw.json] [output.json]
+Usage: python tools/build_item_colors.py [--desde raw.json] [output.json]
 
-Without --from, the whole catalog is downloaded from the Armería's public API, one page of
+Without --desde, the whole catalog is downloaded from the Armería's public API, one page of
 PAGE_SIZE items at a time with a short pause between pages, and saved to RAW_CACHE (git
-ignores it) so --from RAW_CACHE can rebuild without downloading again.
+ignores it) so --desde RAW_CACHE can rebuild without downloading again.
 
 Each item's "short" carries the game's color codes ("%^BOLD%^BLUE%^Espada Azul%^RESET%^").
 Output: {name: [[n_chars, "#rrggbb"], ...]}, the color runs over the name, using the colors
@@ -127,7 +127,7 @@ def reference_runs(table):
     """{name: runs} for items the reference logs always show, after silver text, with other colors."""
     index = item_index(table)
     seen = {}
-    for path in sorted(CACHE_DIR.rglob("*.*")) if CACHE_DIR.exists() else []:
+    for path in sorted(CACHE_DIR.rglob("*.html")) if CACHE_DIR.exists() else []:
         for line in parse_html_log(path.read_text(encoding="utf-8", errors="replace")):
             line = fix_mojibake(line)
             text = line_text(line)
@@ -196,11 +196,11 @@ def build_table(items):
 
 def main():
     args = sys.argv[1:]
-    if args[:1] == ["--from"]:
+    if args[:1] == ["--desde"]:
         items = json.loads(Path(args[1]).read_text(encoding="utf-8"))
         args = args[2:]
     else:
-        print("Downloading the Armería catalog...")
+        print("Bajando el catálogo de la Armería...")
         items = download()
         RAW_CACHE.parent.mkdir(exist_ok=True)
         RAW_CACHE.write_text(json.dumps(items, ensure_ascii=False), encoding="utf-8")
@@ -212,8 +212,8 @@ def main():
     table.update(fixed)
     table = {k: v for k, v in sorted(table.items()) if v and not all(c == SILVER for _, c in v)}
     out_path.write_text(json.dumps(table, ensure_ascii=False, indent=0) + "\n", encoding="utf-8")
-    print(f"{len(table)} colored items kept, {skipped} skipped, {len(fixed)} corrected from Mudlet logs"
-          f" ({', '.join(sorted(fixed))}) -> {out_path.name}")
+    print(f"{len(table)} ítems con color, {skipped} descartados, {len(fixed)} corregidos con los logs de Mudlet"
+          f" ({', '.join(sorted(fixed))}). Guardado en {out_path.name}.")
 
 
 if __name__ == "__main__":

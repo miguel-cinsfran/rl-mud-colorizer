@@ -1,5 +1,31 @@
 {
 "names": {
+"acantilados de hiros: camino sobre el acantilado": [
+[
+12,
+"#0000ff"
+],
+[
+3,
+"#c0c0c0"
+],
+[
+1,
+"#ffffff"
+],
+[
+4,
+"#ffff00"
+],
+[
+2,
+"#c0c0c0"
+],
+[
+26,
+"#808000"
+]
+],
 "aethia: calles": [
 [
 8,
@@ -36,9 +62,41 @@
 "#c0c0c0"
 ]
 ],
+"anduar: arco norte": [
+[
+18,
+"#c0c0c0"
+]
+],
 "anduar: calle de la justicia": [
 [
 28,
+"#c0c0c0"
+]
+],
+"anduar: calle de osucaru": [
+[
+24,
+"#c0c0c0"
+]
+],
+"anduar: plaza mayor": [
+[
+19,
+"#c0c0c0"
+]
+],
+"anduar: plaza mayor (naturalizado)": [
+[
+21,
+"#c0c0c0"
+],
+[
+12,
+"#00ff00"
+],
+[
+1,
 "#c0c0c0"
 ]
 ],
@@ -86,6 +144,12 @@
 "#c0c0c0"
 ]
 ],
+"antiguo templo de ozomatli": [
+[
+26,
+"#008000"
+]
+],
 "arboleda de ucho": [
 [
 16,
@@ -110,6 +174,12 @@
 "#008000"
 ]
 ],
+"barrio noble": [
+[
+12,
+"#c0c0c0"
+]
+],
 "bosque de aethia": [
 [
 10,
@@ -131,6 +201,20 @@
 ],
 [
 7,
+"#c0c0c0"
+]
+],
+"bosque de aethia - sendero": [
+[
+10,
+"#008000"
+],
+[
+7,
+"#808000"
+],
+[
+9,
 "#c0c0c0"
 ]
 ],
@@ -186,6 +270,36 @@
 "#008000"
 ]
 ],
+"bosquecito": [
+[
+10,
+"#008000"
+]
+],
+"bosquecito (profanado)": [
+[
+11,
+"#008000"
+],
+[
+1,
+"#c0c0c0"
+],
+[
+9,
+"#808080"
+],
+[
+1,
+"#c0c0c0"
+]
+],
+"camino a los cultivos de maíz": [
+[
+29,
+"#c0c0c0"
+]
+],
 "camino a los cultivos de maíz (naturalizado)": [
 [
 44,
@@ -208,9 +322,21 @@
 "#c0c0c0"
 ]
 ],
+"camino de amonmen": [
+[
+17,
+"#808000"
+]
+],
 "camino de ascenso al volcán": [
 [
 27,
+"#808000"
+]
+],
+"camino de brenoic a ysalonna": [
+[
+28,
 "#808000"
 ]
 ],
@@ -332,6 +458,26 @@
 "#800000"
 ]
 ],
+"campamento boreal: entrada al campamento": [
+[
+17,
+"#ff0000"
+],
+[
+23,
+"#c0c0c0"
+]
+],
+"campamento boreal: interior": [
+[
+17,
+"#ff0000"
+],
+[
+10,
+"#c0c0c0"
+]
+],
 "campamento militar: entrada": [
 [
 11,
@@ -384,6 +530,20 @@
 "#808000"
 ]
 ],
+"catedral de eralie: entrada": [
+[
+12,
+"#c0c0c0"
+],
+[
+8,
+"#00ffff"
+],
+[
+7,
+"#c0c0c0"
+]
+],
 "caverna oscura": [
 [
 14,
@@ -394,6 +554,12 @@
 [
 20,
 "#00ff00"
+]
+],
+"cubil de lish, la aborrecible": [
+[
+29,
+"#ff0000"
 ]
 ],
 "cuevas pantanosas": [
@@ -436,6 +602,76 @@
 [
 2,
 "#808000"
+]
+],
+"culto de los planos: cúbil de las reliquias": [
+[
+13,
+"#808000"
+],
+[
+8,
+"#808080"
+],
+[
+22,
+"#c0c0c0"
+]
+],
+"culto de los planos: cúpula de la recepción": [
+[
+13,
+"#808000"
+],
+[
+8,
+"#808080"
+],
+[
+22,
+"#c0c0c0"
+]
+],
+"culto de los planos: cúpula de los héroes": [
+[
+13,
+"#808000"
+],
+[
+8,
+"#808080"
+],
+[
+20,
+"#c0c0c0"
+]
+],
+"culto de los planos: gran altar": [
+[
+13,
+"#808000"
+],
+[
+8,
+"#808080"
+],
+[
+10,
+"#c0c0c0"
+]
+],
+"culto de los planos: pasillo de gritos": [
+[
+13,
+"#808000"
+],
+[
+8,
+"#808080"
+],
+[
+17,
+"#c0c0c0"
 ]
 ],
 "desfiladero leherdavel": [
@@ -536,6 +772,12 @@
 "#008000"
 ]
 ],
+"escaleras hacia el culto de los planos": [
+[
+38,
+"#c0c0c0"
+]
+],
 "escaleras hacia las catacumbas": [
 [
 30,
@@ -554,6 +796,12 @@
 "#808000"
 ]
 ],
+"estrecho de wigh: senda de la costa oeste": [
+[
+41,
+"#c0c0c0"
+]
+],
 "estudio del general ssratz": [
 [
 12,
@@ -568,6 +816,52 @@
 [
 31,
 "#ffff00"
+]
+],
+"exterior de anduar: puerta norte": [
+[
+32,
+"#ffff00"
+]
+],
+"feudo de ysalonna: calle principal": [
+[
+17,
+"#808000"
+],
+[
+17,
+"#c0c0c0"
+]
+],
+"feudo de ysalonna: calles": [
+[
+17,
+"#808000"
+],
+[
+8,
+"#c0c0c0"
+]
+],
+"feudo de ysalonna: cerca del camino a brenoic": [
+[
+17,
+"#808000"
+],
+[
+28,
+"#c0c0c0"
+]
+],
+"feudo de ysalonna: encrucijada": [
+[
+17,
+"#808000"
+],
+[
+13,
+"#c0c0c0"
 ]
 ],
 "fortaleza de d'hara: muralla exterior": [
@@ -590,16 +884,20 @@
 "#c0c0c0"
 ]
 ],
+"galería interior": [
+[
+8,
+"#808000"
+],
+[
+8,
+"#ffff00"
+]
+],
 "galerías subterráneas": [
 [
 21,
 "#c0c0c0"
-]
-],
-"golthur orod - primer nivel: avenida lateral": [
-[
-44,
-"#008000"
 ]
 ],
 "golthur orod - segundo nivel: pasillo principal": [
@@ -634,6 +932,16 @@
 "#c0c0c0"
 ]
 ],
+"grimoszk: murallas": [
+[
+10,
+"#00ff00"
+],
+[
+8,
+"#c0c0c0"
+]
+],
 "grimoszk: plaza pública": [
 [
 10,
@@ -644,16 +952,60 @@
 "#c0c0c0"
 ]
 ],
+"grimoszk: puerta oeste": [
+[
+10,
+"#00ff00"
+],
+[
+12,
+"#c0c0c0"
+]
+],
 "habitación del patriarca greszhx": [
 [
 32,
 "#c0c0c0"
 ]
 ],
+"horda negra: armería de guerra": [
+[
+30,
+"#808080"
+]
+],
+"horda negra: galerías del insulto y la disputa": [
+[
+46,
+"#808080"
+]
+],
+"horda negra: manantial de la sangre": [
+[
+35,
+"#808080"
+]
+],
+"horda negra: pasillo de entrada": [
+[
+31,
+"#808080"
+]
+],
 "horda negra: pozo de insalubridad": [
 [
 33,
 "#808080"
+]
+],
+"isla del bucanero: sendero del muelle": [
+[
+17,
+"#008080"
+],
+[
+20,
+"#c0c0c0"
 ]
 ],
 "kattak: frente al templo de eralie": [
@@ -766,6 +1118,16 @@
 "#008000"
 ]
 ],
+"linde este del bosque de orgoth - cruce de ëarmen": [
+[
+31,
+"#00ff00"
+],
+[
+17,
+"#c0c0c0"
+]
+],
 "linde este del bosque de orgoth - dinmen": [
 [
 31,
@@ -804,10 +1166,64 @@
 "#c0c0c0"
 ]
 ],
-"muralla de la fortaleza de golthur orod": [
+"mor groddûr: corredor de contención": [
 [
-39,
-"#baba00"
+13,
+"#808080"
+],
+[
+22,
+"#c0c0c0"
+]
+],
+"mor groddûr: nivel comercial": [
+[
+13,
+"#808080"
+],
+[
+15,
+"#c0c0c0"
+]
+],
+"mor groddûr: nivel de la adoración": [
+[
+13,
+"#808080"
+],
+[
+21,
+"#c0c0c0"
+]
+],
+"mor groddûr: pilar crepitante nororiental": [
+[
+13,
+"#808080"
+],
+[
+28,
+"#c0c0c0"
+]
+],
+"mor groddûr: pilar crepitante sudoriental": [
+[
+13,
+"#808080"
+],
+[
+28,
+"#c0c0c0"
+]
+],
+"muelle pirata de isla del bucanero": [
+[
+17,
+"#c0c0c0"
+],
+[
+17,
+"#008080"
 ]
 ],
 "murallas de galador": [
@@ -838,6 +1254,36 @@
 [
 14,
 "#008000"
+]
+],
+"orilla oeste del río iaurduin": [
+[
+21,
+"#c0c0c0"
+],
+[
+8,
+"#0000ff"
+]
+],
+"palacio: ala este": [
+[
+7,
+"#ff0000"
+],
+[
+10,
+"#c0c0c0"
+]
+],
+"palacio: pasillo este": [
+[
+7,
+"#ff0000"
+],
+[
+14,
+"#c0c0c0"
 ]
 ],
 "pantanos de zulk": [
@@ -884,16 +1330,42 @@
 "#808080"
 ]
 ],
+"pasarela de acceso a la torre noreste": [
+[
+37,
+"#808080"
+]
+],
+"pasarela de acceso a la torre norte": [
+[
+35,
+"#808080"
+]
+],
 "puente de hierro": [
 [
 16,
-"#008000"
+"#c0c0c0"
 ]
 ],
 "puente sobre la grieta de lhoin": [
 [
 31,
 "#0000ff"
+]
+],
+"puerta sur de takome": [
+[
+7,
+"#c0c0c0"
+],
+[
+4,
+"#00ff00"
+],
+[
+9,
+"#c0c0c0"
 ]
 ],
 "puertas de kattak": [
@@ -906,6 +1378,18 @@
 [
 34,
 "#c0c0c0"
+]
+],
+"páramos de ceniza": [
+[
+17,
+"#808080"
+]
+],
+"páramos orientales": [
+[
+18,
+"#808000"
 ]
 ],
 "quebradas de devron - asentamientos de los mercenarios": [
@@ -938,6 +1422,12 @@
 "#ffff00"
 ]
 ],
+"ruinas de la muralla norte de anduar": [
+[
+36,
+"#ffff00"
+]
+],
 "ruinas de la muralla oeste de anduar": [
 [
 36,
@@ -954,6 +1444,12 @@
 [
 25,
 "#808080"
+]
+],
+"ruta boreal: zona en conflicto oriental": [
+[
+39,
+"#c0c0c0"
 ]
 ],
 "sala de espera": [
@@ -1002,6 +1498,18 @@
 "#ffff00"
 ]
 ],
+"selva húmeda": [
+[
+12,
+"#008000"
+]
+],
+"senda": [
+[
+5,
+"#808000"
+]
+],
 "senda antigua entre anduar y orgoth": [
 [
 35,
@@ -1017,6 +1525,12 @@
 "senda de las colinas de anduar": [
 [
 30,
+"#c0c0c0"
+]
+],
+"senda del alba": [
+[
+14,
 "#c0c0c0"
 ]
 ],
@@ -1060,6 +1574,12 @@
 "#008000"
 ]
 ],
+"senda hacia la cantera": [
+[
+22,
+"#c0c0c0"
+]
+],
 "senda olvidada": [
 [
 14,
@@ -1082,16 +1602,36 @@
 "#c0c0c0"
 ]
 ],
-"sendero circundante de la fortaleza": [
-[
-35,
-"#008000"
-]
-],
 "sendero circundante de la fortaleza: encrucijada": [
 [
 48,
 "#c0c0c0"
+]
+],
+"sendero empedrado": [
+[
+17,
+"#c0c0c0"
+]
+],
+"sendero tenebroso: en algún lugar del camino": [
+[
+8,
+"#808000"
+],
+[
+9,
+"#808080"
+],
+[
+27,
+"#c0c0c0"
+]
+],
+"subterráneo": [
+[
+11,
+"#baba00"
 ]
 ],
 "subterráneos bajo el zigurat": [
@@ -1134,6 +1674,42 @@
 "#808000"
 ]
 ],
+"templo de ozomatli: altar de sacrificios": [
+[
+10,
+"#008000"
+],
+[
+8,
+"#00ff00"
+],
+[
+2,
+"#c0c0c0"
+],
+[
+20,
+"#808000"
+]
+],
+"templo de ozomatli: cámara de discusión": [
+[
+10,
+"#008000"
+],
+[
+8,
+"#00ff00"
+],
+[
+2,
+"#c0c0c0"
+],
+[
+19,
+"#808000"
+]
+],
 "templo de ozomatli: explanada de oración": [
 [
 10,
@@ -1152,16 +1728,28 @@
 "#808000"
 ]
 ],
+"templo de ozomatli: sala de acceso": [
+[
+10,
+"#008000"
+],
+[
+8,
+"#00ff00"
+],
+[
+2,
+"#c0c0c0"
+],
+[
+14,
+"#808000"
+]
+],
 "tienda de gobierno: sala de almacenamiento": [
 [
 42,
 "#c0c0c0"
-]
-],
-"tierras húmedas": [
-[
-15,
-"#008000"
 ]
 ],
 "torre de obsidiana - escaleras": [
@@ -1180,23 +1768,53 @@
 "#808000"
 ]
 ],
-"valle de mnenoic": [
+"vieja cantera de anduar": [
 [
-16,
-"#008000"
+6,
+"#c0c0c0"
+],
+[
+8,
+"#808080"
+],
+[
+3,
+"#c0c0c0"
+],
+[
+6,
+"#808000"
+]
+],
+"volcán de ormeion: interior del cráter": [
+[
+19,
+"#808000"
+],
+[
+13,
+"#c0c0c0"
+],
+[
+6,
+"#ff0000"
 ]
 ]
 },
 "zones": {
 "aethia": "#c0c0c0",
 "anduar": "#c0c0c0",
+"campamento boreal": "#ff0000",
 "exterior de anduar": "#ffff00",
+"feudo de ysalonna": "#808000",
 "fortaleza de d'hara": "#808080",
 "grimoszk": "#00ff00",
 "kattak": "#008080",
 "kheleb dum": "#808000",
 "linde este del bosque de orgoth": "#00ff00",
 "linde oeste del bosque de orgoth": "#00ff00",
+"mor groddûr": "#808080",
+"palacio": "#ff0000",
 "pasaje subterráneo": "#808000",
 "quebradas de devron": "#c0c0c0",
 "ruinas de larsen": "#808080",

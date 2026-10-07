@@ -31,7 +31,7 @@ También se quitan los mensajes de los PNJ que te hablan con `te dice:`. Un coma
 
 Cada título de sala toma su color de la primera fuente que lo conozca:
 
-1. Los logs coloreados de Mudlet que usa el evaluador. Ahí se ve el color que manda el juego, que a veces cambia dentro del mismo título: en "Campos de Cultivo", "Campos de" sale en gris y "Cultivo" en amarillo.
+1. Los logs de referencia de Mudlet (ver la sección siguiente a la de ítems). Ahí se ve el color que manda el juego, que a veces cambia dentro del mismo título: en "Campos de Cultivo", "Campos de" sale en gris y "Cultivo" en amarillo.
 2. El color del terreno en el mapa de Mudlet, por nombre exacto de sala y después por zona.
 3. El catálogo de salas (`rooms.json`).
 4. Blanco, si ninguna fuente lo conoce.
@@ -46,7 +46,7 @@ python tools/extract_reference_rooms.py
 python build_rules.py
 ```
 
-El primer comando escribe `room_map_colors.json`, el segundo `room_reference_colors.json` (necesita los logs en `cache_reference/`, ver más abajo) y el tercero recompila `rules.json` y `webapp/rules.js`.
+El primer comando escribe `room_map_colors.json`, el segundo `room_reference_colors.json` a partir de los logs de referencia y el tercero recompila `rules.json` y `webapp/rules.js`.
 
 ## Colores de los ítems
 
@@ -59,7 +59,28 @@ python tools/build_item_colors.py
 python build_rules.py
 ```
 
-El primer comando baja el catálogo entero (unas 40 consultas, con una pausa entre cada una), guarda una copia en `cache_armeria/`, que git ignora, y escribe `item_colors.json`. Con `--from cache_armeria/items.json` se rehace sin volver a bajarlo.
+El primer comando baja el catálogo entero (unas 40 consultas, con una pausa entre cada una), guarda una copia en `cache_armeria/`, que git ignora, y escribe `item_colors.json`. Con `--desde cache_armeria/items.json` se rehace sin volver a bajarlo.
+
+## Logs de referencia
+
+Son logs de RL que otros jugadores subieron a Deathlogs desde Mudlet. Mudlet guarda cada tramo de texto con su color exacto, así que muestran cómo se ve el juego de verdad. Sirven para tres cosas: sacar los colores de las salas, corregir los de los ítems y medir cuánto se parece nuestra salida a la de Mudlet.
+
+```
+python tools/fetch_reference_logs.py --recientes 200
+python tools/evaluate.py --players Naghig Kunkh recientes
+```
+
+El primer comando baja los logs de Naghig y Kunkh y los últimos 200 de RL a `cache_reference/`, que git ignora. Espera un segundo entre pedido y pedido y no vuelve a bajar lo que ya tiene. `python tools/fetch_reference_logs.py --help` explica las opciones.
+
+Quedan fuera tres tipos de logs:
+
+- Los de zMUD y otros clientes, porque sus colores no son los de Mudlet. Se distinguen por cómo está hecho el HTML: Mudlet marca cada tramo de color con `<span style="color: rgb(...)">`, y zMUD con etiquetas `<font color=...>`. Un log cuenta como de Mudlet cuando tiene más de diez veces más tramos `<span>` con color que etiquetas `<font>` (la página de Deathlogs ya trae un `<font>` propio).
+- Los que se subieron con esta herramienta. En Deathlogs quedan iguales que los de Mudlet, así que no hay forma de reconocerlos por el contenido. Sus números se anotan en `OWN_UPLOADS`, dentro del script, y hay que agregar cada log nuevo que se suba.
+- Los de otros juegos o números que no existen.
+
+Los descartados se anotan en `cache_reference/recientes/descartados.txt` para no volver a pedirlos.
+
+El evaluador compara línea por línea, solo cuando el texto visible coincide, e informa del porcentaje de caracteres y líneas con el color correcto y de las confusiones más frecuentes. Muchas de esas confusiones son a propósito: hay líneas que aquí llevan color para leerse mejor y en Mudlet salen grises.
 
 ## Línea de comandos
 
@@ -81,15 +102,6 @@ python -m unittest discover -s tests
 El motor existe dos veces, `engine.py` y `webapp/engine.js`, y ambos deben dar exactamente la misma salida. `tests/test_parity.py` lo comprueba con `node`; si `node` no está instalado, esa prueba se omite.
 
 Hay tres garantías con pruebas propias: ninguna línea que antes tenía color puede quedarse sin él, el texto visible nunca cambia, y el borrado de credenciales se verifica quitando cada regla de login por turnos para confirmar que alguna prueba falla.
-
-Para medir la exactitud contra logs reales coloreados por Mudlet:
-
-```
-python tools/fetch_reference_logs.py
-python tools/evaluate.py
-```
-
-El primer comando descarga los logs a `cache_reference/`, que git ignora. Con `--recent` baja además los últimos 50 logs de la lista de RL en Deathlogs, sin los de zMUD (sus colores no son los de Mudlet) y sin los que se hicieron con esta herramienta, que hay que anotar en `OWN_UPLOADS` dentro del script cada vez que se sube uno. Para medirlos, `python tools/evaluate.py --players Naghig Kunkh recent`. El segundo compara línea por línea, solo cuando el texto visible coincide, e informa del porcentaje de caracteres y líneas con el color correcto y de las confusiones más frecuentes.
 
 ## Créditos y licencia
 

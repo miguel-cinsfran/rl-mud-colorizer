@@ -58,7 +58,7 @@ def main():
     out_path = Path(sys.argv[1]) if len(sys.argv) > 1 else DEFAULT_OUT
     seen = defaultdict(lambda: defaultdict(int))
     zones = defaultdict(lambda: defaultdict(set))
-    for path in sorted(CACHE_DIR.rglob("*.*")):
+    for path in sorted(CACHE_DIR.rglob("*.html")):
         for line in parse_html_log(path.read_text(encoding="utf-8", errors="replace")):
             m = TITLE_EXITS_RE.match(line_text(line))
             if not m:
@@ -82,7 +82,8 @@ def main():
                 zone_table[zone] = color
     out = {"names": table, "zones": zone_table}
     out_path.write_text(json.dumps(out, ensure_ascii=False, indent=0) + "\n", encoding="utf-8")
-    print(f"{len(seen)} titles seen, {len(table)} consistent and kept, {len(zone_table)} zones -> {out_path.name}")
+    print(f"{len(seen)} títulos de sala vistos, {len(table)} con colores claros y {len(zone_table)} zonas."
+          f" Guardado en {out_path.name}.")
 
 
 if __name__ == "__main__":

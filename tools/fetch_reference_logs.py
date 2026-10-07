@@ -1,10 +1,22 @@
-"""Download colored Mudlet reference logs from Deathlogs into cache_reference/<player>/<l_id>.html.
+"""Descarga de Deathlogs logs de Reinos de Leyenda coloreados por Mudlet, para comparar.
 
-With --recent, the logs on the front page of the RL list (the latest 50) go to
-cache_reference/recent/ instead, skipping zMUD logs (<font> markup, not Mudlet's colors),
-logs already cached under another folder, and the logs made with this tool (OWN_UPLOADS):
-Deathlogs stores them exactly like Mudlet's, and comparing against our own output would
-only prove we agree with ourselves. Add every upload made with this tool to OWN_UPLOADS.
+Los logs de un jugador van a cache_reference/<jugador>/<número>.html. Con --recientes N
+se bajan además los últimos N logs de RL a cache_reference/recientes/: primero los de la
+portada de la lista y después los anteriores, número por número, porque la lista no tiene
+más páginas.
+
+Se dejan fuera:
+- Los que no son de Mudlet. Mudlet exporta cada tramo de color como
+  <span style="color: rgb(...)">, mientras que zMUD usa etiquetas <font color=...>. La
+  página de Deathlogs ya trae un <font> propio, así que un log cuenta como de Mudlet
+  cuando tiene más de diez veces más tramos <span> con color que etiquetas <font>.
+- Los que se hicieron con esta herramienta (OWN_UPLOADS). En Deathlogs quedan iguales que
+  los de Mudlet, y compararse con ellos solo probaría que estamos de acuerdo con nosotros
+  mismos. Cada vez que se sube uno, hay que agregar su número a OWN_UPLOADS.
+- Los que ya están descargados en otra carpeta.
+
+Los números descartados se anotan en recientes/descartados.txt para no volver a pedirlos.
+Entre pedido y pedido se espera al menos un segundo.
 """
 
 import argparse
@@ -21,10 +33,13 @@ CACHE_DIR = ROOT / "cache_reference"
 BASE_URL = "https://deathlogs.com/"
 USER_AGENT = "rl-mud-colorizer-reference-fetcher/1.0 (accessibility tooling; polite, cached)"
 DEFAULT_PLAYERS = ["Naghig", "Kunkh"]
-RECENT = "recent"
+RECENT = "recientes"
+SKIPPED_FILE = "descartados.txt"
+# Logs uploaded with this tool; Deathlogs stores them exactly like Mudlet's.
 OWN_UPLOADS = {"57323", "57324", "57325"}
 MUDLET_SPAN_RE = re.compile(r'<span style="color: ?rgb', re.I)
-FONT_RE = re.compile(r"<font", re.I)
+FONT_RE = re.compile(r"<font\b", re.I)
+RL_TITLE_RE = re.compile(r"<title>[^<]*Reinos de Leyenda", re.I)
 LOG_LINK_RE = re.compile(r"""list_log\.php\?m_id=\d+(?:&amp;|&)l_id=(\d+)""")
 
 
@@ -43,16 +58,16 @@ def fetch(url, retries=3, delay=1.0):
                 return raw.decode("cp1252", errors="replace")
         except Exception as exc:  # network errors vary widely
             last = exc
-            print(f"  retry {attempt}/{retries} for {url}: {exc}", file=sys.stderr)
+            print(f"  reintento {attempt}/{retries} de {url}: {exc}", file=sys.stderr)
             time.sleep(2 * attempt)
-    print(f"  FAILED {url}: {last}", file=sys.stderr)
+    print(f"  no se pudo bajar {url}: {last}", file=sys.stderr)
     return None
 
 
-def log_ids(player_page_html):
+def log_ids(page_html):
     """Unique log ids in page order."""
     seen = []
-    for lid in LOG_LINK_RE.findall(html.unescape(player_page_html).replace("&amp;", "&")):
+    for lid in LOG_LINK_RE.findall(html.unescape(page_html).replace("&amp;", "&")):
         if lid not in seen:
             seen.append(lid)
     return seen
@@ -60,12 +75,12 @@ def log_ids(player_page_html):
 
 def fetch_player(player, delay=1.0, cache_dir=CACHE_DIR):
     url = f"{BASE_URL}show_player.php?m_id=10&playername={urllib.parse.quote(player)}"
-    print(f"[{player}] listing {url}")
+    print(f"[{player}] buscando sus logs")
     page = fetch(url, delay=delay)
     if page is None:
         return 0, 0, 1
     ids = log_ids(page)
-    print(f"[{player}] {len(ids)} logs found")
+    print(f"[{player}] {len(ids)} logs")
     out_dir = Path(cache_dir) / player
     out_dir.mkdir(parents=True, exist_ok=True)
     downloaded = skipped = failed = 0
@@ -80,8 +95,8 @@ def fetch_player(player, delay=1.0, cache_dir=CACHE_DIR):
             continue
         target.write_text(body, encoding="utf-8", newline="")
         downloaded += 1
-        print(f"[{player}] {i}/{len(ids)} saved {lid} ({len(body)} chars)")
-    print(f"[{player}] downloaded={downloaded} cached={skipped} failed={failed}")
+        print(f"[{player}] {i}/{len(ids)}: log {lid} guardado")
+    print(f"[{player}] {downloaded} nuevos, {skipped} ya estaban, {failed} fallaron")
     return downloaded, skipped, failed
 
 
@@ -90,44 +105,69 @@ def is_mudlet(page):
     return len(MUDLET_SPAN_RE.findall(page)) > 10 * len(FONT_RE.findall(page))
 
 
-def fetch_recent(delay=1.0, cache_dir=CACHE_DIR):
+def recent_ids(front_page, count):
+    """The front page ids, then older ids one by one, until `count` ids in total."""
+    ids = log_ids(front_page)[:count]
+    next_id = min(int(i) for i in ids) - 1 if ids else 0
+    while len(ids) < count and next_id > 0:
+        ids.append(str(next_id))
+        next_id -= 1
+    return ids
+
+
+def fetch_recent(count, delay=1.0, cache_dir=CACHE_DIR):
     page = fetch(f"{BASE_URL}list_log.php?m_id=10", delay=delay)
     if page is None:
         return 0, 0, 1
-    cached = {p.stem for p in Path(cache_dir).rglob("*.html")}
     out_dir = Path(cache_dir) / RECENT
     out_dir.mkdir(parents=True, exist_ok=True)
+    skipped_path = out_dir / SKIPPED_FILE
+    known_skips = set(skipped_path.read_text(encoding="utf-8").split()) if skipped_path.exists() else set()
+    cached = {p.stem for p in Path(cache_dir).rglob("*.html")}
     downloaded = skipped = failed = 0
-    for lid in log_ids(page):
-        if lid in OWN_UPLOADS or lid in cached:
+    new_skips = []
+    for lid in recent_ids(page, count):
+        if lid in OWN_UPLOADS or lid in cached or lid in known_skips:
             skipped += 1
             continue
         body = fetch(f"{BASE_URL}list_log.php?m_id=10&l_id={lid}", delay=delay)
         if body is None:
             failed += 1
+            continue
+        if not RL_TITLE_RE.search(body):
+            reason = "no es de RL o no existe"
         elif not is_mudlet(body):
-            print(f"[{RECENT}] {lid} is not a Mudlet log, skipped")
-            skipped += 1
+            reason = "no es de Mudlet (zMUD u otro cliente)"
         else:
             (out_dir / f"{lid}.html").write_text(body, encoding="utf-8", newline="")
             downloaded += 1
-            print(f"[{RECENT}] saved {lid} ({len(body)} chars)")
-    print(f"[{RECENT}] downloaded={downloaded} skipped={skipped} failed={failed}")
+            print(f"[{RECENT}] log {lid} guardado")
+            continue
+        print(f"[{RECENT}] log {lid} descartado: {reason}")
+        new_skips.append(lid)
+        skipped += 1
+    if new_skips:
+        with open(skipped_path, "a", encoding="utf-8") as f:
+            f.write("".join(f"{lid}\n" for lid in new_skips))
+    print(f"[{RECENT}] {downloaded} nuevos, {skipped} descartados o ya estaban, {failed} fallaron")
     return downloaded, skipped, failed
 
 
 def main(argv=None):
-    ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("players", nargs="*", default=DEFAULT_PLAYERS, help="player names (default: Naghig Kunkh)")
-    ap.add_argument("--recent", action="store_true", help="also fetch the latest logs of the RL list")
-    ap.add_argument("--delay", type=float, default=1.0, help="seconds between requests (min 1.0)")
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("jugadores", nargs="*", default=DEFAULT_PLAYERS,
+                    help="nombres de jugadores cuyos logs bajar (por defecto: Naghig Kunkh)")
+    ap.add_argument("--recientes", type=int, default=0, metavar="N",
+                    help="bajar también los últimos N logs de RL")
+    ap.add_argument("--espera", type=float, default=1.0, metavar="SEGUNDOS",
+                    help="segundos entre pedidos (mínimo 1)")
     args = ap.parse_args(argv)
-    delay = max(1.0, args.delay)
+    delay = max(1.0, args.espera)
     total_failed = 0
-    for player in args.players:
+    for player in args.jugadores:
         total_failed += fetch_player(player, delay)[2]
-    if args.recent:
-        total_failed += fetch_recent(delay)[2]
+    if args.recientes:
+        total_failed += fetch_recent(args.recientes, delay)[2]
     return 1 if total_failed else 0
 
 

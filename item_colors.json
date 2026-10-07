@@ -9754,7 +9754,7 @@
 "Capa de los Héroes": [
 [
 18,
-"#ffffff"
+"#ff5500"
 ]
 ],
 "Capa de los Héroes Imperiales": [
@@ -11755,11 +11755,11 @@
 ],
 "Colmillo de Lessirnak": [
 [
-8,
+9,
 "#ffffff"
 ],
 [
-4,
+3,
 "#c0c0c0"
 ],
 [
@@ -13929,11 +13929,11 @@
 ],
 "Destripadora de Enanos": [
 [
-13,
-"#ff5500"
+12,
+"#ffffff"
 ],
 [
-3,
+4,
 "#c0c0c0"
 ],
 [
@@ -14889,6 +14889,20 @@
 "#800080"
 ]
 ],
+"Espolón enmohecido de Constructo": [
+[
+8,
+"#c0c0c0"
+],
+[
+11,
+"#008000"
+],
+[
+13,
+"#c0c0c0"
+]
+],
 "Esquirla Cósmica": [
 [
 1,
@@ -15157,11 +15171,11 @@
 ],
 "Fardo del Juglar": [
 [
-5,
+6,
 "#008080"
 ],
 [
-5,
+4,
 "#c0c0c0"
 ],
 [
@@ -21121,32 +21135,48 @@
 "#808000"
 ],
 [
+5,
+"#ffffff"
+],
+[
+1,
+"#c0c0c0"
+],
+[
+1,
+"#808000"
+],
+[
 6,
-"#ff5500"
+"#ffffff"
+],
+[
+1,
+"#c0c0c0"
 ],
 [
 1,
 "#808000"
 ],
 [
-7,
-"#ff5500"
+1,
+"#ffffff"
+],
+[
+1,
+"#c0c0c0"
 ],
 [
 1,
 "#808000"
 ],
 [
-2,
-"#ff5500"
+1,
+"#ffffff"
 ],
 [
 1,
-"#808000"
-],
-[
-2,
-"#ff5500"
+"#c0c0c0"
 ],
 [
 1,
@@ -21154,7 +21184,7 @@
 ],
 [
 5,
-"#ff5500"
+"#ffffff"
 ]
 ],
 "Guante Heroico del Adalid": [
@@ -31504,7 +31534,7 @@
 ],
 [
 7,
-"#800000"
+"#b40000"
 ]
 ],
 "Talabarte Enjoyado de Unqadh Min Almawt": [
@@ -35306,7 +35336,7 @@
 "Zapatos de lujo": [
 [
 15,
-"#ffffff"
+"#ff5500"
 ]
 ],
 "Ámbar de Ent": [
