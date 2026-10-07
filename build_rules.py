@@ -205,12 +205,12 @@ PREPROCESS_DATA = {
             "pattern": r"^Jgd:",
         },
         {
-            # No mirror images: nothing worth showing.
-            "id": "vip_status_imagenes_zero",
+            # Status counters are shown only when there is something (images, skins, astucia, inercia).
+            "id": "vip_status_counters_zero",
             "kind": "drop",
             "clients": ["vipmud"],
             "group": "status",
-            "pattern": r"^Imágenes:0[ \t]*$",
+            "pattern": r"^(?:Imágenes|Pieles|Astucia|Inercia):0[ \t]*$",
         },
         {
             "id": "vip_status_imagenes",
@@ -228,6 +228,24 @@ PREPROCESS_DATA = {
             "group": "status",
             "scope_id": "pieles",
             "pattern": r"^Pieles:(\d+)[ \t]*$",
+            "key_group": 1,
+        },
+        {
+            "id": "vip_status_astucia",
+            "kind": "dedupe_on_change",
+            "clients": ["vipmud"],
+            "group": "status",
+            "scope_id": "astucia",
+            "pattern": r"^Astucia:(\d+)[ \t]*$",
+            "key_group": 1,
+        },
+        {
+            "id": "vip_status_inercia",
+            "kind": "dedupe_on_change",
+            "clients": ["vipmud"],
+            "group": "status",
+            "scope_id": "inercia",
+            "pattern": r"^Inercia:(\d+)[ \t]*$",
             "key_group": 1,
         },
         {
@@ -496,7 +514,7 @@ RULES_DATA = {
             "id": "system_buff_tracker",
             "category": "system",
             "priority": 29,
-            "pattern": r"^(?:[>\]]\s*)?(Pieles:|Imágenes:)(\d+)\s*$",
+            "pattern": r"^(?:[>\]]\s*)?(Pieles:|Imágenes:|Astucia:|Inercia:)(\d+)\s*$",
             "replace": r'<span style="color: #008000;">$1</span><span style="color: #ffff00; font-weight: bold;">$2</span>'
         },
 

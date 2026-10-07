@@ -41,7 +41,7 @@ class StatusDedupeFixtureTest(unittest.TestCase):
         lines, _ = preprocessed(self.NAME)
         # The status Pv line is always dropped: the game prints its own "Pvs:" line on HP changes.
         self.assertEqual([l for l in lines if l.startswith("Pv:")], [])
-        self.assertEqual([l for l in lines if l.startswith("Pieles:")], ["Pieles:0"])
+        self.assertEqual([l for l in lines if l.startswith("Pieles:")], [])  # 0 is never shown
         self.assertEqual([l for l in lines if l.startswith("Im")], ["Imágenes:9"])
 
     def test_closing_prompt_only_survives_after_a_block_that_kept_something(self):
@@ -97,7 +97,7 @@ class MidBlockFragmentTest(unittest.TestCase):
             self.assertFalse([l for l in lines if l.startswith(prefix)])
         # first occurrence in this input is kept (dedupe state starts empty)
         self.assertEqual(lines[0], "Imágenes:9")
-        self.assertEqual(lines[1], "Pieles:0")
+        self.assertNotIn("Pieles:0", lines)  # 0 is never shown
         self.assertEqual(len([l for l in lines if l.startswith("Pv:")]), 0)
 
     def test_tiny_fragments_do_not_crash(self):

@@ -489,13 +489,13 @@ window.COLORIZER_RULES = {
         "pattern": "^Jgd:"
       },
       {
-        "id": "vip_status_imagenes_zero",
+        "id": "vip_status_counters_zero",
         "kind": "drop",
         "clients": [
           "vipmud"
         ],
         "group": "status",
-        "pattern": "^Imágenes:0[ \\t]*$"
+        "pattern": "^(?:Imágenes|Pieles|Astucia|Inercia):0[ \\t]*$"
       },
       {
         "id": "vip_status_imagenes",
@@ -517,6 +517,28 @@ window.COLORIZER_RULES = {
         "group": "status",
         "scope_id": "pieles",
         "pattern": "^Pieles:(\\d+)[ \\t]*$",
+        "key_group": 1
+      },
+      {
+        "id": "vip_status_astucia",
+        "kind": "dedupe_on_change",
+        "clients": [
+          "vipmud"
+        ],
+        "group": "status",
+        "scope_id": "astucia",
+        "pattern": "^Astucia:(\\d+)[ \\t]*$",
+        "key_group": 1
+      },
+      {
+        "id": "vip_status_inercia",
+        "kind": "dedupe_on_change",
+        "clients": [
+          "vipmud"
+        ],
+        "group": "status",
+        "scope_id": "inercia",
+        "pattern": "^Inercia:(\\d+)[ \\t]*$",
         "key_group": 1
       },
       {
@@ -683,7 +705,7 @@ window.COLORIZER_RULES = {
       "id": "system_buff_tracker",
       "category": "system",
       "priority": 29,
-      "pattern": "^(?:[>\\]]\\s*)?(Pieles:|Imágenes:)(\\d+)\\s*$",
+      "pattern": "^(?:[>\\]]\\s*)?(Pieles:|Imágenes:|Astucia:|Inercia:)(\\d+)\\s*$",
       "replace": "<span style=\"color: #008000;\">$1</span><span style=\"color: #ffff00; font-weight: bold;\">$2</span>"
     },
     {

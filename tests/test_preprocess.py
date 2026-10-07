@@ -213,11 +213,22 @@ class SqueezeBlankTest(unittest.TestCase):
         self.assertIn("Imágenes:3", out)
         self.assertFalse([l for l in out if l.startswith("Pv:")])
 
+    def test_real_rules_status_counters_only_when_nonzero_and_changed(self):
+        c = make_colorizer()
+        block = "Jgd:\nPieles:{p}\nAstucia:{a}\nInercia:{i}\n> \nHola."
+        text = "\n".join(block.format(p=p, a=a, i=i) for p, a, i in ((0, 3, 0), (0, 3, 2), (4, 0, 2)))
+        out = c.preprocess_text(text, "vipmud").split("\n")
+        for zero in ("Pieles:0", "Astucia:0", "Inercia:0"):
+            self.assertNotIn(zero, out)
+        self.assertEqual([l for l in out if l.startswith("Astucia:")], ["Astucia:3"])
+        self.assertEqual([l for l in out if l.startswith("Inercia:")], ["Inercia:2"])
+        self.assertEqual([l for l in out if l.startswith("Pieles:")], ["Pieles:4"])
+
     def test_real_rules_squeeze_vipmud_but_mudlet_keeps_blanks(self):
         c = make_colorizer()
         text = "Pv:10\\10 Pe:1\\1 Xp:5\nSL: [n]\nPL:\nJgd:\nImágenes:0\nPieles:0\n> \nHola.\n\nAdios.\n\n> x"
-        # Every blank line goes (Pieles:0 is kept, so the block's "> " closer stays too).
-        self.assertEqual(c.preprocess_text(text, "vipmud").split("\n")[-4:], ["> ", "Hola.", "Adios.", "> x"])
+        # Every blank line goes, and the block kept nothing, so its "> " closer goes too.
+        self.assertEqual(c.preprocess_text(text, "vipmud").split("\n"), ["Hola.", "Adios.", "> x"])
         self.assertIn("", c.preprocess_text("Hola.\n\nAdios.", "mudlet").split("\n"))
 
 
