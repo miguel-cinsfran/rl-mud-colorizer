@@ -163,7 +163,7 @@ Propinas el golpe mortal a Sowy.
 
         previewContainer.innerHTML = previewHtml;
         // The HTML tab shows exactly what "Copiar para Deathlogs" puts on the clipboard.
-        rawHtmlTextarea.value = toDeathlogs(htmlResult);
+        rawHtmlTextarea.value = htmlResult;
 
         // Count output stats
         const lineCount = (htmlResult.match(/<span/g) || []).length;
@@ -218,8 +218,9 @@ Propinas el golpe mortal a Sowy.
 
         try {
             if (navigator.clipboard && navigator.clipboard.writeText) {
-                // Deathlogs version: the downloaded file keeps Mudlet's exact format instead.
-                await navigator.clipboard.writeText(toDeathlogs(currentHtmlOutput));
+                // Mudlet's exact format, same as the download. Deathlogs shows it with a blank line
+                // between lines, which players found easier to read than the compact toDeathlogs().
+                await navigator.clipboard.writeText(currentHtmlOutput);
             } else {
                 // Fallback for older browsers
                 rawHtmlTextarea.style.display = 'block';
