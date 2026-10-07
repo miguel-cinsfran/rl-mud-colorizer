@@ -94,7 +94,20 @@ El evaluador compara línea por línea, solo cuando el texto visible coincide, e
 python engine.py log.txt -o salida.html
 ```
 
-Sin `-o`, el HTML sale por la salida estándar. `--client vipmud` (o `mudlet`) fuerza el cliente en lugar de detectarlo, `--no-preprocess` omite la limpieza de inicio de sesión y bloque de estado, `--keep-private` conserva los mensajes privados, que por defecto se quitan, y `--deathlogs` genera la versión para pegar en Deathlogs en lugar del formato de Mudlet.
+Sin `-o`, el HTML sale por la salida estándar. `--lines 25840-27614` usa solo ese tramo del archivo, contando desde la línea 1 y con las dos puntas incluidas. `--client vipmud` (o `mudlet`) fuerza el cliente en lugar de detectarlo, `--no-preprocess` omite la limpieza de inicio de sesión y bloque de estado, `--keep-private` conserva los mensajes privados, que por defecto se quitan, y `--deathlogs` genera la versión para pegar en Deathlogs en lugar del formato de Mudlet.
+
+## Buscar en los logs
+
+`tools/search_logs.py` busca en los logs de uno o varios personajes, que reconoce por el nombre al principio del archivo ("thyra 2026-10-07.txt"). Lee bien los acentos de los logs de VIPMud, que están en Windows-1252.
+
+```
+python tools/search_logs.py gloria thyra telael --carpeta "ruta/a/los/logs"
+python tools/search_logs.py buscar "voy 1 min" thyra --fecha 2026-10-07
+```
+
+`gloria` lista cada "[Obtienes N puntos de gloria]" con su archivo y línea, a quién mataste y la última sala. Si el golpe mortal lo dio otro jugador, si el rival se lo dio a sí mismo o si no aparece ninguno, también lo dice. `buscar` muestra las líneas que contienen un texto, sin distinguir mayúsculas ni acentos. La carpeta también se puede indicar una sola vez en la variable de entorno `RL_LOGS`.
+
+Con el número de línea, `engine.py --lines` genera el HTML del tramo que interese.
 
 ## Para quien quiera contribuir
 

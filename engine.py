@@ -1050,18 +1050,26 @@ def main(argv=None):
     import argparse
     import sys
 
-    ap = argparse.ArgumentParser(description="Colorize a Reinos de Leyenda text log into Mudlet-style HTML.")
-    ap.add_argument("input", help="plain-text log (UTF-8 or windows-1252)")
-    ap.add_argument("-o", "--output", help="output HTML file (default: stdout)")
-    ap.add_argument("--client", help="force a client id (e.g. vipmud, mudlet) instead of auto-detection")
-    ap.add_argument("--no-preprocess", action="store_true", help="skip login/status sanitization")
+    ap = argparse.ArgumentParser(description="Colorea un log de texto de Reinos de Leyenda como lo muestra Mudlet.")
+    ap.add_argument("input", help="log de texto (UTF-8 o Windows-1252)")
+    ap.add_argument("-o", "--output", help="archivo HTML de salida (por defecto, la salida estándar)")
+    ap.add_argument("--lines", metavar="DESDE-HASTA",
+                    help="usar solo esas líneas del archivo, contando desde 1 y ambas incluidas (ej. 25840-27614)")
+    ap.add_argument("--client", help="forzar el cliente (vipmud o mudlet) en lugar de detectarlo")
+    ap.add_argument("--no-preprocess", action="store_true",
+                    help="no limpiar el inicio de sesión ni el bloque de estado")
     ap.add_argument("--keep-private", action="store_true",
-                    help="keep private messages (tells, telepathy); they are removed by default")
-    ap.add_argument("--deathlogs", action="store_true", help="output the version to paste into Deathlogs")
+                    help="conservar los mensajes privados (telepatías), que por defecto se quitan")
+    ap.add_argument("--deathlogs", action="store_true", help="generar la versión para pegar en Deathlogs")
     args = ap.parse_args(argv)
 
     colorizer = RLColorizer()
     text = read_text_file(args.input)
+    if args.lines:
+        m = re.fullmatch(r"\s*(\d+)\s*-\s*(\d+)\s*", args.lines)
+        if not m or int(m.group(1)) < 1 or int(m.group(1)) > int(m.group(2)):
+            ap.error("--lines espera DESDE-HASTA, por ejemplo 25840-27614")
+        text = "\n".join(text.splitlines()[int(m.group(1)) - 1:int(m.group(2))])
     result = colorizer.colorize_text(text, preprocess=not args.no_preprocess, client=args.client,
                                      hide_private=not args.keep_private)
     if args.deathlogs:
