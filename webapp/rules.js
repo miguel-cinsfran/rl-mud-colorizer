@@ -3192,6 +3192,42 @@ window.COLORIZER_RULES = {
   },
   "room_reference_colors": {
     "names": {
+      "aethia: calles": [
+        [
+          8,
+          "#c0c0c0"
+        ],
+        [
+          6,
+          "#00ff00"
+        ]
+      ],
+      "aethia: risco": [
+        [
+          8,
+          "#c0c0c0"
+        ],
+        [
+          5,
+          "#808000"
+        ]
+      ],
+      "alrededores de kattak": [
+        [
+          15,
+          "#808000"
+        ],
+        [
+          6,
+          "#ffff00"
+        ]
+      ],
+      "anduar: arco este": [
+        [
+          17,
+          "#c0c0c0"
+        ]
+      ],
       "anduar: calle de la justicia": [
         [
           28,
@@ -3210,10 +3246,36 @@ window.COLORIZER_RULES = {
           "#c0c0c0"
         ]
       ],
+      "antigua escalera hacia las catacumbas": [
+        [
+          37,
+          "#c0c0c0"
+        ]
+      ],
+      "antigua senda empedrada": [
+        [
+          23,
+          "#808000"
+        ]
+      ],
       "antigua senda orgoth - anduar": [
         [
           27,
           "#808000"
+        ]
+      ],
+      "antigua torre negra: cimientos del primer piso": [
+        [
+          8,
+          "#c0c0c0"
+        ],
+        [
+          11,
+          "#808080"
+        ],
+        [
+          27,
+          "#c0c0c0"
         ]
       ],
       "arboleda de ucho": [
@@ -3222,16 +3284,46 @@ window.COLORIZER_RULES = {
           "#1a8d1a"
         ]
       ],
-      "avenida de moisã©s": [
+      "avenida de moisés": [
         [
-          18,
+          17,
           "#c0c0c0"
+        ]
+      ],
+      "bajo el puente del iarduin": [
+        [
+          26,
+          "#c0a050"
         ]
       ],
       "banco de golthur orod": [
         [
           21,
           "#1a8d1a"
+        ]
+      ],
+      "bosque de aethia": [
+        [
+          10,
+          "#1a8d1a"
+        ],
+        [
+          6,
+          "#808000"
+        ]
+      ],
+      "bosque de aethia - claro": [
+        [
+          10,
+          "#1a8d1a"
+        ],
+        [
+          7,
+          "#808000"
+        ],
+        [
+          7,
+          "#c0c0c0"
         ]
       ],
       "bosque de maragedom": [
@@ -3262,21 +3354,55 @@ window.COLORIZER_RULES = {
           "#00ff00"
         ]
       ],
-      "camino a los cultivos de maã­z (naturalizado)": [
+      "bosque de thorin: zona frondosa": [
         [
-          45,
+          31,
+          "#00af00"
+        ]
+      ],
+      "bosque de thorin: zona oculta": [
+        [
+          29,
+          "#00af00"
+        ]
+      ],
+      "bosque de wareth": [
+        [
+          16,
+          "#00ff00"
+        ]
+      ],
+      "bosque nuevo": [
+        [
+          12,
+          "#1a8d1a"
+        ]
+      ],
+      "camino a los cultivos de maíz (naturalizado)": [
+        [
+          44,
           "#cccccc"
         ]
       ],
-      "camino de amonmen": [
+      "camino al bosque de wareth": [
         [
-          17,
+          10,
           "#808000"
+        ],
+        [
+          16,
+          "#00ff00"
         ]
       ],
-      "camino de ascenso al volcã¡n": [
+      "camino al cementerio de anduar": [
         [
-          28,
+          30,
+          "#c0c0c0"
+        ]
+      ],
+      "camino de ascenso al volcán": [
+        [
+          27,
           "#808000"
         ]
       ],
@@ -3292,21 +3418,27 @@ window.COLORIZER_RULES = {
           "#808000"
         ]
       ],
-      "camino de los pã¡ramos de orgoth": [
+      "camino de los páramos de orgoth": [
         [
-          32,
+          31,
           "#b36969"
         ]
       ],
-      "camino de ã‹armen": [
+      "camino de naduk": [
         [
-          17,
+          15,
+          "#808000"
+        ]
+      ],
+      "camino de ëarmen": [
+        [
+          16,
           "#1a8d8d"
         ]
       ],
-      "camino de ã‹armen - bosque de orgoth": [
+      "camino de ëarmen - bosque de orgoth": [
         [
-          17,
+          16,
           "#1a8d8d"
         ],
         [
@@ -3314,15 +3446,15 @@ window.COLORIZER_RULES = {
           "#c0c0c0"
         ]
       ],
-      "camino de ã‹armen - bosque de orgoth (profanado)": [
+      "camino de ëarmen - bosque de orgoth (profanado)": [
         [
-          47,
+          46,
           "#cccccc"
         ]
       ],
-      "camino de ã‹armen - cruce de caminos": [
+      "camino de ëarmen - cruce de caminos": [
         [
-          17,
+          16,
           "#1a8d8d"
         ],
         [
@@ -3330,19 +3462,29 @@ window.COLORIZER_RULES = {
           "#c0c0c0"
         ]
       ],
-      "camino de ã‹armen - paso del rã­o cuivinien": [
+      "camino de ëarmen - paso del río cuivinien": [
         [
-          17,
+          16,
           "#1a8d8d"
         ],
         [
-          25,
+          24,
           "#c0c0c0"
         ]
       ],
-      "camino de ã‹armen - senda del cauce oeste": [
+      "camino de ëarmen - puente sobre el iaurduin": [
         [
-          17,
+          16,
+          "#1a8d8d"
+        ],
+        [
+          26,
+          "#c0c0c0"
+        ]
+      ],
+      "camino de ëarmen - senda del cauce oeste": [
+        [
+          16,
           "#1a8d8d"
         ],
         [
@@ -3350,9 +3492,9 @@ window.COLORIZER_RULES = {
           "#c0c0c0"
         ]
       ],
-      "camino de ã‹armen - senda del cauce sur": [
+      "camino de ëarmen - senda del cauce sur": [
         [
-          17,
+          16,
           "#1a8d8d"
         ],
         [
@@ -3366,6 +3508,12 @@ window.COLORIZER_RULES = {
           "#c0c0c0"
         ]
       ],
+      "camino empedrado: antiguos arrabales": [
+        [
+          36,
+          "#c0c0c0"
+        ]
+      ],
       "camino fronterizo": [
         [
           7,
@@ -3374,6 +3522,20 @@ window.COLORIZER_RULES = {
         [
           10,
           "#b36969"
+        ]
+      ],
+      "campamento militar: entrada": [
+        [
+          11,
+          "#1a8d8d"
+        ],
+        [
+          7,
+          "#1a8d1a"
+        ],
+        [
+          9,
+          "#c0c0c0"
         ]
       ],
       "campos de anduar": [
@@ -3392,6 +3554,18 @@ window.COLORIZER_RULES = {
           "#ffff00"
         ]
       ],
+      "cantina al aire libre": [
+        [
+          21,
+          "#c0c0c0"
+        ]
+      ],
+      "carretera comercial norte": [
+        [
+          25,
+          "#c0c0c0"
+        ]
+      ],
       "catacumbas del zigurat": [
         [
           15,
@@ -3406,6 +3580,12 @@ window.COLORIZER_RULES = {
         [
           14,
           "#808080"
+        ]
+      ],
+      "claro de los nyathor": [
+        [
+          20,
+          "#00ff00"
         ]
       ],
       "cuevas pantanosas": [
@@ -3424,6 +3604,94 @@ window.COLORIZER_RULES = {
           "#808080"
         ]
       ],
+      "cultivos pantanosos": [
+        [
+          9,
+          "#1a8d1a"
+        ],
+        [
+          2,
+          "#808000"
+        ],
+        [
+          2,
+          "#ffff00"
+        ],
+        [
+          2,
+          "#808000"
+        ],
+        [
+          2,
+          "#ffff00"
+        ],
+        [
+          2,
+          "#808000"
+        ]
+      ],
+      "desfiladero leherdavel": [
+        [
+          12,
+          "#c0c0c0"
+        ],
+        [
+          10,
+          "#808000"
+        ]
+      ],
+      "desfiladero leherdavel: bifurcación de caminos": [
+        [
+          12,
+          "#c0c0c0"
+        ],
+        [
+          10,
+          "#808000"
+        ],
+        [
+          24,
+          "#c0c0c0"
+        ]
+      ],
+      "desfiladero leherdavel: rodeo por la ladera": [
+        [
+          12,
+          "#c0c0c0"
+        ],
+        [
+          10,
+          "#808000"
+        ],
+        [
+          21,
+          "#c0c0c0"
+        ]
+      ],
+      "desierto de las quebradas: desviación hacia devron": [
+        [
+          50,
+          "#c0c0c0"
+        ]
+      ],
+      "desvío hacia el iaurduin": [
+        [
+          24,
+          "#1a8d8d"
+        ]
+      ],
+      "el gran tenderete de devron": [
+        [
+          27,
+          "#c0c0c0"
+        ]
+      ],
+      "empalizada de devron": [
+        [
+          20,
+          "#c0c0c0"
+        ]
+      ],
       "entrada del zigurat": [
         [
           19,
@@ -3436,9 +3704,9 @@ window.COLORIZER_RULES = {
           "#1a8d1a"
         ]
       ],
-      "entre un montã³n de escombros": [
+      "entre un montón de escombros": [
         [
-          29,
+          28,
           "#808000"
         ]
       ],
@@ -3458,6 +3726,12 @@ window.COLORIZER_RULES = {
         [
           18,
           "#1a8d1a"
+        ]
+      ],
+      "escaleras hacia las catacumbas": [
+        [
+          30,
+          "#c0c0c0"
         ]
       ],
       "esquina interior noroeste del zigurat": [
@@ -3508,9 +3782,9 @@ window.COLORIZER_RULES = {
           "#c0c0c0"
         ]
       ],
-      "galerã­as subterrã¡neas": [
+      "galerías subterráneas": [
         [
-          23,
+          21,
           "#c0c0c0"
         ]
       ],
@@ -3518,6 +3792,18 @@ window.COLORIZER_RULES = {
         [
           44,
           "#1a8d1a"
+        ]
+      ],
+      "golthur orod - segundo nivel: pasillo principal": [
+        [
+          47,
+          "#c0c0c0"
+        ]
+      ],
+      "golthur orod - segundo nivel: salas de tortura": [
+        [
+          46,
+          "#c0c0c0"
         ]
       ],
       "grimoszk: calles": [
@@ -3540,19 +3826,125 @@ window.COLORIZER_RULES = {
           "#c0c0c0"
         ]
       ],
-      "grimoszk: plaza pãºblica": [
+      "grimoszk: plaza pública": [
         [
           10,
           "#00ff00"
+        ],
+        [
+          13,
+          "#c0c0c0"
+        ]
+      ],
+      "habitación del patriarca greszhx": [
+        [
+          32,
+          "#c0c0c0"
+        ]
+      ],
+      "horda negra: pozo de insalubridad": [
+        [
+          33,
+          "#808080"
+        ]
+      ],
+      "kattak: frente al templo de eralie": [
+        [
+          8,
+          "#1a8d8d"
+        ],
+        [
+          26,
+          "#c0c0c0"
+        ]
+      ],
+      "kattak: gran mercado": [
+        [
+          6,
+          "#1a8d8d"
         ],
         [
           14,
           "#c0c0c0"
         ]
       ],
-      "habitaciã³n del patriarca greszhx": [
+      "kattak: plaza de la alianza": [
         [
-          33,
+          6,
+          "#1a8d8d"
+        ],
+        [
+          21,
+          "#c0c0c0"
+        ]
+      ],
+      "kattak: puerta interior oriental": [
+        [
+          6,
+          "#1a8d8d"
+        ],
+        [
+          26,
+          "#c0c0c0"
+        ]
+      ],
+      "kattak: vía de la alianza": [
+        [
+          6,
+          "#1a8d8d"
+        ],
+        [
+          19,
+          "#c0c0c0"
+        ]
+      ],
+      "kheleb dum: avenida principal": [
+        [
+          10,
+          "#808000"
+        ],
+        [
+          19,
+          "#c0c0c0"
+        ]
+      ],
+      "kheleb dum: calle de amkul": [
+        [
+          10,
+          "#808000"
+        ],
+        [
+          16,
+          "#c0c0c0"
+        ]
+      ],
+      "kheleb dum: gran dintel de piedra": [
+        [
+          10,
+          "#808000"
+        ],
+        [
+          23,
+          "#c0c0c0"
+        ]
+      ],
+      "kheleb dum: puente de piedra": [
+        [
+          10,
+          "#808000"
+        ],
+        [
+          18,
+          "#c0c0c0"
+        ]
+      ],
+      "kheleb dum: salón de celebraciones": [
+        [
+          10,
+          "#808000"
+        ],
+        [
+          24,
           "#c0c0c0"
         ]
       ],
@@ -3566,16 +3958,6 @@ window.COLORIZER_RULES = {
           "#1a8d1a"
         ]
       ],
-      "linde este del bosque de orgoth - cruce de ã‹armen": [
-        [
-          31,
-          "#00ff00"
-        ],
-        [
-          18,
-          "#c0c0c0"
-        ]
-      ],
       "linde este del bosque de orgoth - dinmen": [
         [
           31,
@@ -3583,6 +3965,16 @@ window.COLORIZER_RULES = {
         ],
         [
           8,
+          "#c0c0c0"
+        ]
+      ],
+      "linde oeste del bosque de orgoth - camino interior": [
+        [
+          32,
+          "#00ff00"
+        ],
+        [
+          17,
           "#c0c0c0"
         ]
       ],
@@ -3604,16 +3996,40 @@ window.COLORIZER_RULES = {
           "#c0c0c0"
         ]
       ],
-      "montes del destino": [
+      "muralla de la fortaleza de golthur orod": [
         [
-          18,
-          "#939300"
+          39,
+          "#baba00"
         ]
       ],
       "murallas de galador": [
         [
           19,
           "#808080"
+        ]
+      ],
+      "márgenes del iaurduin": [
+        [
+          21,
+          "#1a8d8d"
+        ]
+      ],
+      "nivel del descanso": [
+        [
+          18,
+          "#808080"
+        ]
+      ],
+      "orilla del lago": [
+        [
+          15,
+          "#c0c0c0"
+        ]
+      ],
+      "orilla del río": [
+        [
+          14,
+          "#1a8d1a"
         ]
       ],
       "pantanos de zulk": [
@@ -3638,9 +4054,9 @@ window.COLORIZER_RULES = {
           "#808000"
         ]
       ],
-      "pasaje subterrã¡neo: pared infranqueable": [
+      "pasaje subterráneo: pared infranqueable": [
         [
-          21,
+          20,
           "#808000"
         ],
         [
@@ -3648,10 +4064,16 @@ window.COLORIZER_RULES = {
           "#808080"
         ]
       ],
-      "pasaje subterrã¡neo: zona angosta": [
+      "pasaje subterráneo: zona angosta": [
         [
-          33,
+          32,
           "#808000"
+        ]
+      ],
+      "pasarela central del volcán": [
+        [
+          27,
+          "#808080"
         ]
       ],
       "puente de hierro": [
@@ -3660,16 +4082,46 @@ window.COLORIZER_RULES = {
           "#1a8d1a"
         ]
       ],
-      "puente sobre el rã­o derebar": [
-        [
-          28,
-          "#1a8d1a"
-        ]
-      ],
       "puente sobre la grieta de lhoin": [
         [
           31,
           "#6969ff"
+        ]
+      ],
+      "puertas de kattak": [
+        [
+          17,
+          "#c0c0c0"
+        ]
+      ],
+      "puertas de las quebradas de devron": [
+        [
+          34,
+          "#c0c0c0"
+        ]
+      ],
+      "quebradas de devron - asentamientos de los mercenarios": [
+        [
+          54,
+          "#c0c0c0"
+        ]
+      ],
+      "quebradas de devron - calle del comercio": [
+        [
+          40,
+          "#c0c0c0"
+        ]
+      ],
+      "quebradas de devron - camino del margrave": [
+        [
+          41,
+          "#c0c0c0"
+        ]
+      ],
+      "ruinas de kattak": [
+        [
+          16,
+          "#ffff00"
         ]
       ],
       "ruinas de la muralla este de anduar": [
@@ -3682,6 +4134,18 @@ window.COLORIZER_RULES = {
         [
           36,
           "#ffff00"
+        ]
+      ],
+      "ruinas de la muralla sur de anduar": [
+        [
+          34,
+          "#ffff00"
+        ]
+      ],
+      "ruinas de larsen: puertas": [
+        [
+          25,
+          "#808080"
         ]
       ],
       "sala de espera": [
@@ -3704,13 +4168,13 @@ window.COLORIZER_RULES = {
           "#ffff00"
         ]
       ],
-      "sala de reuniones del ejã©rcito verde": [
+      "sala de reuniones del ejército verde": [
         [
           22,
           "#808000"
         ],
         [
-          15,
+          14,
           "#1a8d1a"
         ]
       ],
@@ -3722,6 +4186,12 @@ window.COLORIZER_RULES = {
         [
           4,
           "#00ff00"
+        ]
+      ],
+      "salón del trono de darin, rey de kheleb dum": [
+        [
+          43,
+          "#ffff00"
         ]
       ],
       "senda antigua entre anduar y orgoth": [
@@ -3742,9 +4212,29 @@ window.COLORIZER_RULES = {
           "#c0c0c0"
         ]
       ],
-      "senda del septentriã³n: lindes del taubã»rz": [
+      "senda del rey durin": [
         [
-          43,
+          10,
+          "#c0c0c0"
+        ],
+        [
+          9,
+          "#ffffff"
+        ]
+      ],
+      "senda del rey durin: antiguo puesto fronterizo": [
+        [
+          21,
+          "#c0c0c0"
+        ],
+        [
+          25,
+          "#808000"
+        ]
+      ],
+      "senda del septentrión: lindes del taubûrz": [
+        [
+          41,
           "#cccccc"
         ]
       ],
@@ -3762,14 +4252,60 @@ window.COLORIZER_RULES = {
           "#1a8d1a"
         ]
       ],
-      "subterrã¡neos bajo el zigurat": [
+      "senda olvidada": [
         [
-          22,
+          14,
+          "#808080"
+        ]
+      ],
+      "senda oscura": [
+        [
+          12,
+          "#808080"
+        ]
+      ],
+      "senda oscura: camino de ascenso a la torre negra": [
+        [
+          14,
+          "#808080"
+        ],
+        [
+          34,
+          "#c0c0c0"
+        ]
+      ],
+      "sendero circundante de la fortaleza": [
+        [
+          35,
+          "#1a8d1a"
+        ]
+      ],
+      "sendero circundante de la fortaleza: encrucijada": [
+        [
+          48,
+          "#c0c0c0"
+        ]
+      ],
+      "subterráneos bajo el zigurat": [
+        [
+          21,
           "#808080"
         ],
         [
           7,
           "#808000"
+        ]
+      ],
+      "templo de eralie: entrada": [
+        [
+          25,
+          "#c0c0c0"
+        ]
+      ],
+      "templo de eralie: soportales": [
+        [
+          28,
+          "#c0c0c0"
         ]
       ],
       "templo de ozomatli: altar": [
@@ -3790,7 +4326,7 @@ window.COLORIZER_RULES = {
           "#808000"
         ]
       ],
-      "templo de ozomatli: explanada de oraciã³n": [
+      "templo de ozomatli: explanada de oración": [
         [
           10,
           "#1a8d1a"
@@ -3804,14 +4340,26 @@ window.COLORIZER_RULES = {
           "#c0c0c0"
         ],
         [
-          21,
+          20,
           "#808000"
         ]
       ],
-      "tierras hãºmedas": [
+      "tienda de gobierno: sala de almacenamiento": [
         [
-          16,
+          42,
+          "#c0c0c0"
+        ]
+      ],
+      "tierras húmedas": [
+        [
+          15,
           "#1a8d1a"
+        ]
+      ],
+      "torre de obsidiana - escaleras": [
+        [
+          30,
+          "#808080"
         ]
       ],
       "trono de zulk": [
@@ -3829,27 +4377,23 @@ window.COLORIZER_RULES = {
           16,
           "#1a8d1a"
         ]
-      ],
-      "viejo puesto fronterizo del sur de takome": [
-        [
-          35,
-          "#c0c0c0"
-        ],
-        [
-          6,
-          "#ffffff"
-        ]
       ]
     },
     "zones": {
+      "aethia": "#c0c0c0",
       "anduar": "#c0c0c0",
       "exterior de anduar": "#ffff00",
       "fortaleza de d'hara": "#808080",
       "grimoszk": "#00ff00",
+      "kattak": "#1a8d8d",
+      "kheleb dum": "#808000",
       "linde este del bosque de orgoth": "#00ff00",
       "linde oeste del bosque de orgoth": "#00ff00",
-      "pasaje subterrã¡neo": "#808000",
-      "taubã»rz, el bosque de los no": "#808080"
+      "pasaje subterráneo": "#808000",
+      "quebradas de devron": "#c0c0c0",
+      "ruinas de larsen": "#808080",
+      "taubûrz, el bosque de los no": "#808080",
+      "templo de eralie": "#c0c0c0"
     }
   },
   "item_colors": {
@@ -5885,11 +6429,11 @@ window.COLORIZER_RULES = {
     ],
     "Barril Rúnico [Vacío]": [
       [
-        13,
+        14,
         "#808000"
       ],
       [
-        8,
+        7,
         "#c0c0c0"
       ]
     ],
@@ -14943,16 +15487,16 @@ window.COLORIZER_RULES = {
         "#c0c0c0"
       ],
       [
-        4,
+        5,
         "#00ffff"
       ],
       [
-        5,
+        4,
         "#808080"
       ],
       [
         1,
-        "#ffffff"
+        "#ff5500"
       ],
       [
         9,
@@ -15279,8 +15823,28 @@ window.COLORIZER_RULES = {
     ],
     "Cinturón del Gigante de Bronce": [
       [
-        30,
+        1,
         "#ffff00"
+      ],
+      [
+        12,
+        "#808000"
+      ],
+      [
+        1,
+        "#ffff00"
+      ],
+      [
+        10,
+        "#808000"
+      ],
+      [
+        1,
+        "#ffff00"
+      ],
+      [
+        5,
+        "#808000"
       ]
     ],
     "Cinturón del Lóbrego Cazador": [
@@ -17763,11 +18327,11 @@ window.COLORIZER_RULES = {
     ],
     "Destripadora de Enanos": [
       [
-        12,
-        "#ffffff"
+        13,
+        "#ff5500"
       ],
       [
-        4,
+        3,
         "#c0c0c0"
       ],
       [
@@ -17850,24 +18414,6 @@ window.COLORIZER_RULES = {
     "Ectoplasma inestable": [
       [
         20,
-        "#008000"
-      ]
-    ],
-    "Efigie del Impedimento": [
-      [
-        1,
-        "#00ff00"
-      ],
-      [
-        10,
-        "#008000"
-      ],
-      [
-        1,
-        "#00ff00"
-      ],
-      [
-        10,
         "#008000"
       ]
     ],
@@ -18739,20 +19285,6 @@ window.COLORIZER_RULES = {
       [
         12,
         "#800080"
-      ]
-    ],
-    "Espolón enmohecido de Constructo": [
-      [
-        8,
-        "#c0c0c0"
-      ],
-      [
-        10,
-        "#008000"
-      ],
-      [
-        14,
-        "#c0c0c0"
       ]
     ],
     "Esquirla Cósmica": [
@@ -24987,48 +25519,32 @@ window.COLORIZER_RULES = {
         "#808000"
       ],
       [
-        5,
-        "#ffffff"
-      ],
-      [
-        1,
-        "#c0c0c0"
-      ],
-      [
-        1,
-        "#808000"
-      ],
-      [
         6,
-        "#ffffff"
-      ],
-      [
-        1,
-        "#c0c0c0"
+        "#ff5500"
       ],
       [
         1,
         "#808000"
       ],
       [
-        1,
-        "#ffffff"
-      ],
-      [
-        1,
-        "#c0c0c0"
+        7,
+        "#ff5500"
       ],
       [
         1,
         "#808000"
       ],
       [
-        1,
-        "#ffffff"
+        2,
+        "#ff5500"
       ],
       [
         1,
-        "#c0c0c0"
+        "#808000"
+      ],
+      [
+        2,
+        "#ff5500"
       ],
       [
         1,
@@ -25036,7 +25552,7 @@ window.COLORIZER_RULES = {
       ],
       [
         5,
-        "#ffffff"
+        "#ff5500"
       ]
     ],
     "Guante Heroico del Adalid": [
@@ -27657,16 +28173,6 @@ window.COLORIZER_RULES = {
         "#00ffff"
       ]
     ],
-    "Hacha Rúnica": [
-      [
-        6,
-        "#c0c0c0"
-      ],
-      [
-        6,
-        "#ff0000"
-      ]
-    ],
     "Hacha Rúnica de Kharod-Kar": [
       [
         16,
@@ -28795,11 +29301,11 @@ window.COLORIZER_RULES = {
     ],
     "Macuto de la Pericia": [
       [
-        7,
+        6,
         "#ff0000"
       ],
       [
-        6,
+        7,
         "#ffffff"
       ],
       [
@@ -37610,7 +38116,7 @@ window.COLORIZER_RULES = {
       ],
       [
         9,
-        "#ffffff"
+        "#ff5500"
       ]
     ],
     "Yelmo Divino de la Cólera": [
@@ -38333,11 +38839,11 @@ window.COLORIZER_RULES = {
     ],
     "Yelmo de Campeón": [
       [
-        5,
+        6,
         "#ffff00"
       ],
       [
-        4,
+        3,
         "#c0c0c0"
       ],
       [
@@ -39228,7 +39734,7 @@ window.COLORIZER_RULES = {
       ],
       [
         7,
-        "#ffffff"
+        "#ff5500"
       ],
       [
         1,
@@ -39236,7 +39742,7 @@ window.COLORIZER_RULES = {
       ],
       [
         7,
-        "#ffffff"
+        "#ff5500"
       ]
     ]
   },

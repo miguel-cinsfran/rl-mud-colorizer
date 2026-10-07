@@ -7,8 +7,9 @@ colors the game actually sent, which can change inside the title ("Campos de " s
 "Cultivo" yellow). Output:
   {"names": {normalized title: [[n_chars, "#rrggbb"], ...]},  runs covering the whole title
    "zones": {zone prefix: "#rrggbb"}}                          color of the part before ":" or " - "
-A title is kept only when every occurrence agrees, so one odd log cannot decide it; a
-zone only when at least MIN_ZONE_TITLES different titles agree on it.
+A title is kept when at least DOMINANCE of its (at least MIN_SEEN) sightings agree, so a
+player with a customized palette cannot decide it; a zone when at least MIN_ZONE_TITLES
+different titles agree on it and no title disagrees.
 """
 
 import json
@@ -26,6 +27,7 @@ from tools.extract_map_colors import normalize_title  # noqa: E402
 
 DEFAULT_OUT = ROOT / "room_reference_colors.json"
 MIN_SEEN = 2
+DOMINANCE = 0.8
 MIN_ZONE_TITLES = 2
 DIRS = r"(?:n|s|e|o|ne|no|se|so|ar|ab|dentro|fuera)"
 TITLE_EXITS_RE = re.compile(r"^([A-ZÁÉÍÓÚÑÜ][^\[\]<>]*?) \[\|?" + DIRS + r"\|?(?:,\|?" + DIRS + r"\|?)*\]\s*$")
@@ -69,10 +71,9 @@ def main():
                 zones[zone[0]][runs[0][1]].add(normalize_title(title))
     table = {}
     for title, variants in sorted(seen.items()):
-        if len(variants) == 1:
-            (runs, n), = variants.items()
-            if n >= MIN_SEEN:
-                table[title] = json.loads(runs)
+        runs, n = max(variants.items(), key=lambda kv: (kv[1], kv[0]))
+        if n >= MIN_SEEN and n / sum(variants.values()) >= DOMINANCE:
+            table[title] = json.loads(runs)
     zone_table = {}
     for zone, colors in sorted(zones.items()):
         if len(colors) == 1:

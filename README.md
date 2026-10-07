@@ -89,7 +89,7 @@ python tools/fetch_reference_logs.py
 python tools/evaluate.py
 ```
 
-El primer comando descarga los logs a `cache_reference/`, que git ignora. El segundo compara línea por línea, solo cuando el texto visible coincide, e informa del porcentaje de caracteres y líneas con el color correcto y de las confusiones más frecuentes.
+El primer comando descarga los logs a `cache_reference/`, que git ignora. Con `--recent` baja además los últimos 50 logs de la lista de RL en Deathlogs, sin los de zMUD (sus colores no son los de Mudlet) y sin los que se hicieron con esta herramienta, que hay que anotar en `OWN_UPLOADS` dentro del script cada vez que se sube uno. Para medirlos, `python tools/evaluate.py --players Naghig Kunkh recent`. El segundo compara línea por línea, solo cuando el texto visible coincide, e informa del porcentaje de caracteres y líneas con el color correcto y de las confusiones más frecuentes.
 
 ## Créditos y licencia
 
