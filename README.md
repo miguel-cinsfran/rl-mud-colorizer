@@ -10,11 +10,11 @@ Página en vivo: https://miguel-cinsfran.github.io/rl-mud-colorizer/
 2. El resultado se actualiza mientras pegas. `Ctrl+Enter` lo fuerza.
 3. Pulsa "Copiar para Deathlogs" y pega el contenido en el campo Log del formulario de envío.
 
-Lo que se copia lleva cada línea en su propia línea de texto, sin `<br>`: Deathlogs convierte cada salto de línea en un `<br>`, y si el log ya los trae, queda una línea en blanco entre cada línea. El botón de descarga guarda el `.html` con el formato exacto que exporta Mudlet, para abrirlo en el navegador. La pestaña "HTML" muestra lo mismo que se copia.
+Lo que se copia no lleva `<br>` al final de cada línea, porque Deathlogs ya convierte cada salto de línea en uno; si los llevara, saldría una línea en blanco entre cada línea. El botón de descarga, en cambio, guarda el `.html` con el formato exacto que exporta Mudlet, para abrirlo en el navegador. La pestaña "HTML" muestra lo mismo que se copia.
 
-### Recortar partes aburridas
+### Notas propias
 
-Si un tramo del log no aporta nada, por ejemplo cuando te pasas un buen rato buscando a alguien que va con sigilo, puedes borrarlo antes de pegar y escribir en su lugar una línea que empiece con `//`, como `// BUSCANDO...` o `// CURANDOME`. Esa línea sale en otro color, con una línea en blanco arriba y otra abajo, para que se vea que es una nota tuya y no parte del juego. Conviene dejar unas pocas líneas antes y después del corte para que se entienda qué pasaba, y no cortar nunca golpes, hechizos ni huidas.
+Una línea que empieza con `//`, como `// BUSCANDO...`, se toma como una nota de quien sube el log y no como texto del juego. Sale en otro color y con una línea en blanco arriba y otra abajo. Sirve, por ejemplo, para marcar el lugar de un tramo que borraste antes de pegar el log.
 
 ## Privacidad
 
@@ -35,7 +35,7 @@ También se quitan los mensajes de los PNJ que te hablan con `te dice:`. Un coma
 
 Cada título de sala toma su color de la primera fuente que lo conozca:
 
-1. Los logs de referencia de Mudlet (ver la sección siguiente a la de ítems). Ahí se ve el color que manda el juego, que a veces cambia dentro del mismo título: en "Campos de Cultivo", "Campos de" sale en gris y "Cultivo" en amarillo.
+1. Los logs de referencia de Mudlet (ver "Logs de referencia" más abajo). Ahí se ve el color que manda el juego, que a veces cambia dentro del mismo título: en "Campos de Cultivo", "Campos de" sale en gris y "Cultivo" en amarillo.
 2. El color del terreno en el mapa de Mudlet, por nombre exacto de sala y después por zona.
 3. El catálogo de salas (`rooms.json`).
 4. Blanco, si ninguna fuente lo conoce.
@@ -79,7 +79,7 @@ El primer comando baja los logs de Naghig y Kunkh y los últimos 200 de RL a `ca
 Quedan fuera tres tipos de logs:
 
 - Los de zMUD y otros clientes, porque sus colores no son los de Mudlet. Se distinguen por cómo está hecho el HTML: Mudlet marca cada tramo de color con `<span style="color: rgb(...)">`, y zMUD con etiquetas `<font color=...>`. Un log cuenta como de Mudlet cuando tiene más de diez veces más tramos `<span>` con color que etiquetas `<font>` (la página de Deathlogs ya trae un `<font>` propio).
-- Los que se subieron con esta herramienta. En Deathlogs quedan iguales que los de Mudlet, así que no hay forma de reconocerlos por el contenido. Sus números se anotan en `OWN_UPLOADS`, dentro del script, y hay que agregar cada log nuevo que se suba.
+- Los que se subieron con esta herramienta. En Deathlogs quedan iguales que los de Mudlet, así que no hay forma de reconocerlos por el contenido. Sus números se anotan en `OWN_UPLOADS`, dentro del script; si subes uno, agrega su número ahí.
 - Los de otros juegos o números que no existen.
 
 Los descartados se anotan en `cache_reference/recientes/descartados.txt` para no volver a pedirlos.
