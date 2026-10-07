@@ -36,7 +36,7 @@ DEFAULT_PLAYERS = ["Naghig", "Kunkh"]
 RECENT = "recientes"
 SKIPPED_FILE = "descartados.txt"
 # Logs uploaded with this tool; Deathlogs stores them exactly like Mudlet's.
-OWN_UPLOADS = {"57323", "57324", "57325", "57326"}
+OWN_UPLOADS = {"57323", "57324", "57325", "57326", ""}
 MUDLET_SPAN_RE = re.compile(r'<span style="color: ?rgb', re.I)
 FONT_RE = re.compile(r"<font\b", re.I)
 RL_TITLE_RE = re.compile(r"<title>[^<]*Reinos de Leyenda", re.I)
