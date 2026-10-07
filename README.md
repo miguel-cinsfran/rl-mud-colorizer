@@ -12,6 +12,10 @@ Página en vivo: https://miguel-cinsfran.github.io/rl-mud-colorizer/
 
 Lo que se copia lleva cada línea en su propia línea de texto, sin `<br>`: Deathlogs convierte cada salto de línea en un `<br>`, y si el log ya los trae, queda una línea en blanco entre cada línea. El botón de descarga guarda el `.html` con el formato exacto que exporta Mudlet, para abrirlo en el navegador. La pestaña "HTML" muestra lo mismo que se copia.
 
+### Recortar partes aburridas
+
+Si un tramo del log no aporta nada, por ejemplo cuando te pasas un buen rato buscando a alguien que va con sigilo, puedes borrarlo antes de pegar y escribir en su lugar una línea que empiece con `//`, como `// BUSCANDO...` o `// CURANDOME`. Esa línea sale en otro color, con una línea en blanco arriba y otra abajo, para que se vea que es una nota tuya y no parte del juego. Conviene dejar unas pocas líneas antes y después del corte para que se entienda qué pasaba, y no cortar nunca golpes, hechizos ni huidas.
+
 ## Privacidad
 
 Todo se ejecuta en tu navegador y no se envía nada a ningún servidor.

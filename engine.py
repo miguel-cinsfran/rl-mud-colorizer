@@ -143,6 +143,11 @@ def normalize_line_to_mudlet(line_html):
 # Characters that continue a word: an item name only matches between non-word characters.
 ITEM_WORD_RE = re.compile(r'[0-9A-Za-zÀ-ÿ]')
 ITEM_KEY_LEN = 4
+# A line starting with "//" is a note from whoever edits the log ("// BUSCANDO..."), put in
+# place of a cut stretch. It gets its own color and a blank line above and below, so it
+# cannot be mistaken for the game.
+NOTE_RE = re.compile(r'^\s*//')
+NOTE_COLOR = "#d7afff"
 MUDLET_SPAN_RE = re.compile(r'<span style="([^"]*)">(.*?)</span>')
 
 
@@ -1012,7 +1017,18 @@ class RLColorizer:
 
         lines = normalized.split('\n')
         self._context = None
-        rendered_lines = [self.colorize_line(line) for line in lines]
+        rendered_lines = []
+        for line in lines:
+            if NOTE_RE.match(line):
+                self._context = None
+                note = f'<span style="color: {NOTE_COLOR};">{html.escape(line.strip())}</span>'
+                if rendered_lines and rendered_lines[-1] != "":
+                    rendered_lines.append("")
+                rendered_lines += [normalize_line_to_mudlet(note), ""]
+            elif line.strip() or not rendered_lines or rendered_lines[-1] != "":
+                rendered_lines.append(self.colorize_line(line))
+        while rendered_lines and rendered_lines[-1] == "":
+            rendered_lines.pop()
         # Same as Mudlet's copy-as-HTML (TBuffer::bufferToHtml): every line ends in "<br>\n".
         body_content = "".join(r + "<br>\n" for r in rendered_lines)
 

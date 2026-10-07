@@ -4,7 +4,7 @@ import re
 import unittest
 
 from _common import ACCESSIBILITY_LOGS, FIXTURES, make_colorizer, visible_lines
-from engine import read_text_file
+from engine import NOTE_RE, read_text_file
 
 
 def expected_lines(colorizer, text):
@@ -16,8 +16,18 @@ def expected_lines(colorizer, text):
     lines = re.sub(r"\n{3,}", "\n\n", trimmed).split("\n")
     out = []
     for line in lines:
+        if NOTE_RE.match(line):
+            # Editor notes ("// BUSCANDO...") stand alone between blank lines.
+            if out and out[-1] != "":
+                out.append("")
+            out += [line.strip(), ""]
+            continue
+        if not line.strip() and out and out[-1] == "":
+            continue
         line = line.replace("&gt;", ">").replace("&lt;", "<").replace("&amp;", "&")
         out.append("" if not line.strip() else line)
+    while out and out[-1] == "":
+        out.pop()
     return out
 
 

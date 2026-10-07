@@ -160,6 +160,12 @@ function normalizeLineToMudlet(lineHtml) {
     return merged.map(([s, c]) => `<span style="${s}">${c}</span>`).join('');
 }
 
+// A line starting with "//" is a note from whoever edits the log ("// BUSCANDO..."), put in
+// place of a cut stretch. It gets its own color and a blank line above and below, so it
+// cannot be mistaken for the game.
+const NOTE_RE = /^\s*\/\//;
+const NOTE_COLOR = '#d7afff';
+
 // Characters that continue a word: an item name only matches between non-word characters.
 const ITEM_WORD_RE = /[0-9A-Za-zÀ-ÿ]/;
 const ITEM_KEY_LEN = 4;
@@ -1116,7 +1122,19 @@ class RLColorizerJS {
 
         const lines = normalized.split('\n');
         this._context = null;
-        const renderedLines = lines.map(line => this.colorizeLine(line));
+        const renderedLines = [];
+        for (const line of lines) {
+            const last = renderedLines.length ? renderedLines[renderedLines.length - 1] : null;
+            if (NOTE_RE.test(line)) {
+                this._context = null;
+                const note = `<span style="color: ${NOTE_COLOR};">${escapeHtml(line.trim())}</span>`;
+                if (last !== null && last !== '') renderedLines.push('');
+                renderedLines.push(normalizeLineToMudlet(note), '');
+            } else if (line.trim() || last === null || last !== '') {
+                renderedLines.push(this.colorizeLine(line));
+            }
+        }
+        while (renderedLines.length && renderedLines[renderedLines.length - 1] === '') renderedLines.pop();
         // Same as Mudlet's copy-as-HTML (TBuffer::bufferToHtml): every line ends in "<br>\n".
         const bodyContent = renderedLines.map(r => r + '<br>\n').join('');
 

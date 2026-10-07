@@ -1,0 +1,5 @@
+buscar
+Carretera Comercial Norte [s,ne]
+// BUSCANDO...
+Viajero llega desde el norte.
+  // CURANDOME
