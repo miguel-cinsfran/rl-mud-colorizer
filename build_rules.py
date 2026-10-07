@@ -556,6 +556,20 @@ RULES_DATA = {
             "replace": r'<span style="color: #ff0000;">$1</span>'
         },
         {
+            "id": "stealth_discovered",
+            "category": "status",
+            "priority": 28,
+            "pattern": r"^(?:[>\]]\s*)?(¡Descubres a " + ACTOR + r" intentando moverse en silencio!)\s*$",
+            "replace": r'<span style="color: #ff00ff;">$1</span>'
+        },
+        {
+            "id": "stealth_presence_sensed",
+            "category": "status",
+            "priority": 29,
+            "pattern": r"^(?:[>\]]\s*)?(Te haces consciente de la presencia de " + ACTOR + r"\.)\s*$",
+            "replace": r'<span style="color: #ff00ff;">$1</span>'
+        },
+        {
             "id": "system_oficio",
             "category": "system",
             "priority": 22,

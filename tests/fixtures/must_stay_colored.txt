@@ -3385,3 +3385,5 @@ Escribe cancelar para finalizar la acción prematuramente.
 Parece que noreste no produjo efecto alguno.
 ¡Sufres daño a causa del ácido de la flecha!
 ! ! ! ! ! Tu PIEL vuelve a su ESTADO NORMAL ! ! ! ! !
+¡Descubres a Viajero intentando moverse en silencio!
+Te haces consciente de la presencia de Kunkh.

@@ -720,6 +720,20 @@ window.COLORIZER_RULES = {
       "replace": "<span style=\"color: #ff0000;\">$1</span>"
     },
     {
+      "id": "stealth_discovered",
+      "category": "status",
+      "priority": 28,
+      "pattern": "^(?:[>\\]]\\s*)?(¡Descubres a [A-ZÁÉÍÓÚÑÜ][^:\"¡!?.]*? intentando moverse en silencio!)\\s*$",
+      "replace": "<span style=\"color: #ff00ff;\">$1</span>"
+    },
+    {
+      "id": "stealth_presence_sensed",
+      "category": "status",
+      "priority": 29,
+      "pattern": "^(?:[>\\]]\\s*)?(Te haces consciente de la presencia de [A-ZÁÉÍÓÚÑÜ][^:\"¡!?.]*?\\.)\\s*$",
+      "replace": "<span style=\"color: #ff00ff;\">$1</span>"
+    },
+    {
       "id": "system_oficio",
       "category": "system",
       "priority": 22,
