@@ -155,6 +155,16 @@ def collapse_blank_runs(lines):
     return out
 
 
+def has_custom_base_color(lines):
+    """True when most of the text is one color other than silver: the player changed Mudlet's
+    default foreground (some use green), so the log says nothing about the game's colors."""
+    counts = Counter(color for line in lines for ch, color in line if not ch.isspace())
+    if not counts:
+        return False
+    color, n = counts.most_common(1)[0]
+    return canon(color) != "#c0c0c0" and n >= 0.5 * sum(counts.values())
+
+
 def evaluate_log(colorizer, ref_html):
     """Colorize the plain text of one reference log; fall back to no preprocessing if lines are lost."""
     ref_lines = collapse_blank_runs(parse_html_log(ref_html, default_color="#cccccc"))
@@ -173,6 +183,7 @@ class Stats:
         self.lines = self.exact = self.eq_exact = 0
         self.misaligned = 0
         self.logs = self.fallbacks = self.unaligned_logs = 0
+        self.custom_base = 0
         self.confusion = Counter()
         self.shapes = {}
         self.text_diffs = {}
@@ -232,7 +243,7 @@ def print_summary(label, stats):
           f"char_accuracy={pct(s['char_accuracy'])} (strict {pct(s['char_accuracy_strict'])}) "
           f"line_exact_match={pct(s['line_exact_rate'])} (strict {pct(s['line_exact_rate_strict'])}) "
           f"misaligned_lines={s['misaligned_lines']} unaligned_logs={s['unaligned_logs']} "
-          f"preprocess_fallback_logs={s['fallback_logs']}")
+          f"preprocess_fallback_logs={s['fallback_logs']} custom_base_color_logs_skipped={stats.custom_base}")
 
 
 def run(players, cache_dir=CACHE_DIR):
@@ -242,7 +253,12 @@ def run(players, cache_dir=CACHE_DIR):
     for player in players:
         stats = Stats()
         for path in sorted((Path(cache_dir) / player).glob("*.html"), key=lambda p: p.name):
-            result = evaluate_log(colorizer, path.read_text(encoding="utf-8", errors="replace"))
+            text = path.read_text(encoding="utf-8", errors="replace")
+            if has_custom_base_color(parse_html_log(text)):
+                stats.custom_base += 1
+                overall.custom_base += 1
+                continue
+            result = evaluate_log(colorizer, text)
             stats.add_log(result)
             overall.add_log(result)
         per_player[player] = stats

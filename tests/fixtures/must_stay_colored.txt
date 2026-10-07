@@ -3377,3 +3377,11 @@ Mortas (Hum) está aquí.
 Barrio del Puerto [s,e,n] 
 Y502: Salina abrasada [o,e,s] 
 Restos putrefactos de Muerto-viviente.
+[Tu estatus con Dendra, Mor Groddür y Ancarak ha aumentado]
+[Tu estatus con Dendra ha disminuido]
+[Tu alineamiento ha aumentado]
+[Tu alineamiento ha disminuído]
+Escribe cancelar para finalizar la acción prematuramente.
+Parece que noreste no produjo efecto alguno.
+¡Sufres daño a causa del ácido de la flecha!
+! ! ! ! ! Tu PIEL vuelve a su ESTADO NORMAL ! ! ! ! !

@@ -678,6 +678,48 @@ window.COLORIZER_RULES = {
       "replace": "<span style=\"color: #c0c0c0;\">$1</span><span style=\"color: #ffff00; font-weight: bold;\">$2</span><span style=\"color: #c0c0c0;\">$3</span>"
     },
     {
+      "id": "system_faction_status",
+      "category": "system",
+      "priority": 22,
+      "pattern": "^(?:[>\\]]\\s*)?(\\[Tu estatus con )(.+?)( ha )(?:(aumentado)|(disminu[ií]do))(\\])\\s*$",
+      "replace": "<span style=\"color: #c0c0c0;\">$1</span><span style=\"color: #ffff00;\">$2</span><span style=\"color: #c0c0c0;\">$3</span><span style=\"color: #00ff00;\">$4</span><span style=\"color: #c0c0c0;\">$5$6</span>"
+    },
+    {
+      "id": "system_alignment_change",
+      "category": "system",
+      "priority": 23,
+      "pattern": "^(?:[>\\]]\\s*)?(\\[Tu alineamiento ha )(aumentado|disminu[ií]do)(\\])\\s*$",
+      "replace": "<span style=\"color: #c0c0c0;\">$1</span><span style=\"color: #ffffff;\">$2</span><span style=\"color: #c0c0c0;\">$3</span>"
+    },
+    {
+      "id": "system_cancel_hint",
+      "category": "system",
+      "priority": 24,
+      "pattern": "^(?:[>\\]]\\s*)?(Escribe )(cancelar)( para finalizar la acci[óo]n prematuramente\\.)\\s*$",
+      "replace": "<span style=\"color: #c0c0c0;\">$1</span><span style=\"color: #ffff00;\">$2</span><span style=\"color: #c0c0c0;\">$3</span>"
+    },
+    {
+      "id": "system_unknown_command",
+      "category": "system",
+      "priority": 25,
+      "pattern": "^(?:[>\\]]\\s*)?(Parece que )(.+?)( no produjo efecto alguno\\.)\\s*$",
+      "replace": "<span style=\"color: #808080;\">$1</span><span style=\"color: #00ff00;\">$2</span><span style=\"color: #808080;\">$3</span>"
+    },
+    {
+      "id": "combat_acid_arrow_damage",
+      "category": "combat",
+      "priority": 26,
+      "pattern": "^(?:[>\\]]\\s*)?(¡Sufres daño a causa del )(ácido)( de la flecha!)\\s*$",
+      "replace": "<span style=\"color: #c0c0c0;\">$1</span><span style=\"color: #ffff00;\">$2</span><span style=\"color: #c0c0c0;\">$3</span>"
+    },
+    {
+      "id": "status_skin_back_to_normal",
+      "category": "status",
+      "priority": 27,
+      "pattern": "^(?:[>\\]]\\s*)?((?:! ){5}Tu PIEL vuelve a su ESTADO NORMAL(?: !){5})\\s*$",
+      "replace": "<span style=\"color: #ff0000;\">$1</span>"
+    },
+    {
       "id": "system_oficio",
       "category": "system",
       "priority": 22,
@@ -3360,16 +3402,16 @@ window.COLORIZER_RULES = {
           "#c0a050"
         ]
       ],
-      "banco de golthur orod": [
-        [
-          21,
-          "#1a8d1a"
-        ]
-      ],
       "barrio noble": [
         [
           12,
           "#c0c0c0"
+        ]
+      ],
+      "bosque baldío": [
+        [
+          13,
+          "#808080"
         ]
       ],
       "bosque de aethia": [
@@ -3934,28 +3976,22 @@ window.COLORIZER_RULES = {
           "#808000"
         ]
       ],
-      "entramado serpenteante de cuevas": [
-        [
-          32,
-          "#1a8d1a"
-        ]
-      ],
       "entre un montón de escombros": [
         [
           28,
           "#808000"
         ]
       ],
-      "erial de los condenados: ante una enorme cueva": [
-        [
-          46,
-          "#1a8d1a"
-        ]
-      ],
       "escalera al nivel superior del zigurat": [
         [
           38,
           "#808000"
+        ]
+      ],
+      "escalera hacia el segundo piso": [
+        [
+          30,
+          "#c0c0c0"
         ]
       ],
       "escalera principal": [
@@ -4092,6 +4128,42 @@ window.COLORIZER_RULES = {
           "#c0c0c0"
         ]
       ],
+      "golthur orod - primer nivel: avenida del nuevo desorden": [
+        [
+          55,
+          "#c0c0c0"
+        ]
+      ],
+      "golthur orod - primer nivel: avenida lateral": [
+        [
+          44,
+          "#c0c0c0"
+        ]
+      ],
+      "golthur orod - primer nivel: la antigua puerta este": [
+        [
+          51,
+          "#c0c0c0"
+        ]
+      ],
+      "golthur orod - primer nivel: pasillo central": [
+        [
+          44,
+          "#c0c0c0"
+        ]
+      ],
+      "golthur orod - primer nivel: pasillo marginal": [
+        [
+          45,
+          "#c0c0c0"
+        ]
+      ],
+      "golthur orod - segundo nivel: barracones": [
+        [
+          40,
+          "#c0c0c0"
+        ]
+      ],
       "golthur orod - segundo nivel: pasillo principal": [
         [
           47,
@@ -4163,6 +4235,12 @@ window.COLORIZER_RULES = {
       "horda negra: armería de guerra": [
         [
           30,
+          "#808080"
+        ]
+      ],
+      "horda negra: atrio circular de los líderes de la horda": [
+        [
+          54,
           "#808080"
         ]
       ],
@@ -4346,6 +4424,16 @@ window.COLORIZER_RULES = {
           "#ffff00"
         ]
       ],
+      "meseta oriental": [
+        [
+          7,
+          "#808000"
+        ],
+        [
+          8,
+          "#c0c0c0"
+        ]
+      ],
       "minas de kheleb - dum - abismo del montacargas": [
         [
           44,
@@ -4416,6 +4504,12 @@ window.COLORIZER_RULES = {
         [
           17,
           "#1a8d8d"
+        ]
+      ],
+      "muralla de la fortaleza de golthur orod: arco de los vientos del norte": [
+        [
+          70,
+          "#808000"
         ]
       ],
       "murallas de galador": [
@@ -4794,15 +4888,33 @@ window.COLORIZER_RULES = {
           "#c0c0c0"
         ]
       ],
+      "sendero circundante de la fortaleza": [
+        [
+          35,
+          "#c0c0c0"
+        ]
+      ],
       "sendero circundante de la fortaleza: encrucijada": [
         [
           48,
           "#c0c0c0"
         ]
       ],
+      "sendero de la negra sangre": [
+        [
+          26,
+          "#c0c0c0"
+        ]
+      ],
       "sendero empedrado": [
         [
           17,
+          "#c0c0c0"
+        ]
+      ],
+      "sendero norte de golthur orod": [
+        [
+          29,
           "#c0c0c0"
         ]
       ],
@@ -5000,12 +5112,16 @@ window.COLORIZER_RULES = {
       "exterior de anduar": "#ffff00",
       "feudo de ysalonna": "#808000",
       "fortaleza de d'hara": "#808080",
+      "golthur orod - primer nivel": "#c0c0c0",
+      "golthur orod - segundo nivel": "#c0c0c0",
       "grimoszk": "#00ff00",
+      "horda negra": "#808080",
       "kattak": "#1a8d8d",
       "kheleb dum": "#808000",
       "linde este del bosque de orgoth": "#00ff00",
       "linde oeste del bosque de orgoth": "#00ff00",
       "mor groddûr": "#808080",
+      "muralla de la fortaleza de golthur orod": "#808000",
       "palacio": "#ff0000",
       "pasaje subterráneo": "#808000",
       "quebradas de devron": "#c0c0c0",

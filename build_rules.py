@@ -509,6 +509,52 @@ RULES_DATA = {
             "pattern": r"^(?:[>\]]\s*)?(\[Obtienes )(\d+)( puntos de gloria\])\s*$",
             "replace": r'<span style="color: #c0c0c0;">$1</span><span style="color: #ffff00; font-weight: bold;">$2</span><span style="color: #c0c0c0;">$3</span>'
         },
+        # The following game colors were checked against colored Mudlet logs on Deathlogs:
+        # each one shows the same way in dozens of logs from different players.
+        {
+            "id": "system_faction_status",
+            "category": "system",
+            "priority": 22,
+            "pattern": r"^(?:[>\]]\s*)?(\[Tu estatus con )(.+?)( ha )(?:(aumentado)|(disminu[ií]do))(\])\s*$",
+            "replace": r'<span style="color: #c0c0c0;">$1</span><span style="color: #ffff00;">$2</span><span style="color: #c0c0c0;">$3</span><span style="color: #00ff00;">$4</span><span style="color: #c0c0c0;">$5$6</span>'
+        },
+        {
+            "id": "system_alignment_change",
+            "category": "system",
+            "priority": 23,
+            "pattern": r"^(?:[>\]]\s*)?(\[Tu alineamiento ha )(aumentado|disminu[ií]do)(\])\s*$",
+            "replace": r'<span style="color: #c0c0c0;">$1</span><span style="color: #ffffff;">$2</span><span style="color: #c0c0c0;">$3</span>'
+        },
+        {
+            "id": "system_cancel_hint",
+            "category": "system",
+            "priority": 24,
+            "pattern": r"^(?:[>\]]\s*)?(Escribe )(cancelar)( para finalizar la acci[óo]n prematuramente\.)\s*$",
+            "replace": r'<span style="color: #c0c0c0;">$1</span><span style="color: #ffff00;">$2</span><span style="color: #c0c0c0;">$3</span>'
+        },
+        {
+            # The game echoes the unknown command in green; the rest keeps the gray of
+            # system_actions_warning.
+            "id": "system_unknown_command",
+            "category": "system",
+            "priority": 25,
+            "pattern": r"^(?:[>\]]\s*)?(Parece que )(.+?)( no produjo efecto alguno\.)\s*$",
+            "replace": r'<span style="color: #808080;">$1</span><span style="color: #00ff00;">$2</span><span style="color: #808080;">$3</span>'
+        },
+        {
+            "id": "combat_acid_arrow_damage",
+            "category": "combat",
+            "priority": 26,
+            "pattern": r"^(?:[>\]]\s*)?(¡Sufres daño a causa del )(ácido)( de la flecha!)\s*$",
+            "replace": r'<span style="color: #c0c0c0;">$1</span><span style="color: #ffff00;">$2</span><span style="color: #c0c0c0;">$3</span>'
+        },
+        {
+            "id": "status_skin_back_to_normal",
+            "category": "status",
+            "priority": 27,
+            "pattern": r"^(?:[>\]]\s*)?((?:! ){5}Tu PIEL vuelve a su ESTADO NORMAL(?: !){5})\s*$",
+            "replace": r'<span style="color: #ff0000;">$1</span>'
+        },
         {
             "id": "system_oficio",
             "category": "system",

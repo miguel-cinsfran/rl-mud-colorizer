@@ -80,6 +80,8 @@ Quedan fuera tres tipos de logs:
 
 Los descartados se anotan en `cache_reference/recientes/descartados.txt` para no volver a pedirlos.
 
+Hay además jugadores que cambiaron el color base de Mudlet, por ejemplo a verde, y su log sale casi entero de ese color. Esos logs se bajan pero no se usan ni para sacar colores ni para medir: se reconocen porque más de la mitad del texto tiene un mismo color que no es el gris normal.
+
 El evaluador compara línea por línea, solo cuando el texto visible coincide, e informa del porcentaje de caracteres y líneas con el color correcto y de las confusiones más frecuentes. Muchas de esas confusiones son a propósito: hay líneas que aquí llevan color para leerse mejor y en Mudlet salen grises.
 
 ## Línea de comandos

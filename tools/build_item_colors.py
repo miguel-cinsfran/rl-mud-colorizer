@@ -33,7 +33,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from engine import ITEM_WORD_RE, item_index  # noqa: E402
-from tools.evaluate import CACHE_DIR, line_text, parse_html_log  # noqa: E402
+from tools.evaluate import CACHE_DIR, has_custom_base_color, line_text, parse_html_log  # noqa: E402
 
 MIN_SEEN = 2
 DOMINANCE = 0.8
@@ -128,7 +128,10 @@ def reference_runs(table):
     index = item_index(table)
     seen = {}
     for path in sorted(CACHE_DIR.rglob("*.html")) if CACHE_DIR.exists() else []:
-        for line in parse_html_log(path.read_text(encoding="utf-8", errors="replace")):
+        lines = parse_html_log(path.read_text(encoding="utf-8", errors="replace"))
+        if has_custom_base_color(lines):
+            continue
+        for line in lines:
             line = fix_mojibake(line)
             text = line_text(line)
             for i in range(1, len(text)):

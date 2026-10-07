@@ -168,16 +168,16 @@
 "#c0a050"
 ]
 ],
-"banco de golthur orod": [
-[
-21,
-"#008000"
-]
-],
 "barrio noble": [
 [
 12,
 "#c0c0c0"
+]
+],
+"bosque baldío": [
+[
+13,
+"#808080"
 ]
 ],
 "bosque de aethia": [
@@ -742,28 +742,22 @@
 "#808000"
 ]
 ],
-"entramado serpenteante de cuevas": [
-[
-32,
-"#008000"
-]
-],
 "entre un montón de escombros": [
 [
 28,
 "#808000"
 ]
 ],
-"erial de los condenados: ante una enorme cueva": [
-[
-46,
-"#008000"
-]
-],
 "escalera al nivel superior del zigurat": [
 [
 38,
 "#808000"
+]
+],
+"escalera hacia el segundo piso": [
+[
+30,
+"#c0c0c0"
 ]
 ],
 "escalera principal": [
@@ -900,6 +894,42 @@
 "#c0c0c0"
 ]
 ],
+"golthur orod - primer nivel: avenida del nuevo desorden": [
+[
+55,
+"#c0c0c0"
+]
+],
+"golthur orod - primer nivel: avenida lateral": [
+[
+44,
+"#c0c0c0"
+]
+],
+"golthur orod - primer nivel: la antigua puerta este": [
+[
+51,
+"#c0c0c0"
+]
+],
+"golthur orod - primer nivel: pasillo central": [
+[
+44,
+"#c0c0c0"
+]
+],
+"golthur orod - primer nivel: pasillo marginal": [
+[
+45,
+"#c0c0c0"
+]
+],
+"golthur orod - segundo nivel: barracones": [
+[
+40,
+"#c0c0c0"
+]
+],
 "golthur orod - segundo nivel: pasillo principal": [
 [
 47,
@@ -971,6 +1001,12 @@
 "horda negra: armería de guerra": [
 [
 30,
+"#808080"
+]
+],
+"horda negra: atrio circular de los líderes de la horda": [
+[
+54,
 "#808080"
 ]
 ],
@@ -1154,6 +1190,16 @@
 "#ffff00"
 ]
 ],
+"meseta oriental": [
+[
+7,
+"#808000"
+],
+[
+8,
+"#c0c0c0"
+]
+],
 "minas de kheleb - dum - abismo del montacargas": [
 [
 44,
@@ -1224,6 +1270,12 @@
 [
 17,
 "#008080"
+]
+],
+"muralla de la fortaleza de golthur orod: arco de los vientos del norte": [
+[
+70,
+"#808000"
 ]
 ],
 "murallas de galador": [
@@ -1602,15 +1654,33 @@
 "#c0c0c0"
 ]
 ],
+"sendero circundante de la fortaleza": [
+[
+35,
+"#c0c0c0"
+]
+],
 "sendero circundante de la fortaleza: encrucijada": [
 [
 48,
 "#c0c0c0"
 ]
 ],
+"sendero de la negra sangre": [
+[
+26,
+"#c0c0c0"
+]
+],
 "sendero empedrado": [
 [
 17,
+"#c0c0c0"
+]
+],
+"sendero norte de golthur orod": [
+[
+29,
 "#c0c0c0"
 ]
 ],
@@ -1808,12 +1878,16 @@
 "exterior de anduar": "#ffff00",
 "feudo de ysalonna": "#808000",
 "fortaleza de d'hara": "#808080",
+"golthur orod - primer nivel": "#c0c0c0",
+"golthur orod - segundo nivel": "#c0c0c0",
 "grimoszk": "#00ff00",
+"horda negra": "#808080",
 "kattak": "#008080",
 "kheleb dum": "#808000",
 "linde este del bosque de orgoth": "#00ff00",
 "linde oeste del bosque de orgoth": "#00ff00",
 "mor groddûr": "#808080",
+"muralla de la fortaleza de golthur orod": "#808000",
 "palacio": "#ff0000",
 "pasaje subterráneo": "#808000",
 "quebradas de devron": "#c0c0c0",
