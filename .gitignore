@@ -1,39 +1,14 @@
-# Byte-compiled / optimized / DLL files
+# Python
 __pycache__/
 *.py[cod]
-*$py.class
 
-# Cache directories (large HTML scraped logs)
-cache_benchmark/
-cache_colored/
-cache_plain/
-output/
-output_accessibility/
+# Data downloaded by tools/ (never commit: large, and logs from other players)
+cache_reference/
+cache_armeria/
 
-# Temporary / Scratch runner files
-temp_*
-*.tmp
-scratch_*
-check_*
-inspect_*
-colorize_57317.py
-fetch_new_logs.py
-test_refined_combat.py
-test_spacing.py
-test_parity.js
-audit_false_positives.py
-audit_uncolored.py
-
-# Environment / IDE files
+# Editors and OS
 .vscode/
 .idea/
 *.swp
-*.swo
-
-# OS files
 .DS_Store
 Thumbs.db
-
-# Reference logs downloaded from Deathlogs (never commit)
-cache_reference/
-cache_armeria/
