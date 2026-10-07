@@ -176,11 +176,11 @@ PREPROCESS_DATA = {
 
         # --- VIPMud status block (Pv/SL/PL/Jgd/Imágenes/Pieles + closing prompt) ---
         {
+            # Always dropped: when HP changes the game prints its own "Pvs: N/N (+-N) Pe: ..." line.
             "id": "vip_status_pv",
-            "kind": "dedupe_on_change",
+            "kind": "drop",
             "clients": ["vipmud"],
             "group": "status",
-            "scope_id": "pv",
             "pattern": r"^Pv:\d+\\\d+ Pe:\d+\\\d+ Xp:\d+",
         },
         {
@@ -203,6 +203,14 @@ PREPROCESS_DATA = {
             "clients": ["vipmud"],
             "group": "status",
             "pattern": r"^Jgd:",
+        },
+        {
+            # No mirror images: nothing worth showing.
+            "id": "vip_status_imagenes_zero",
+            "kind": "drop",
+            "clients": ["vipmud"],
+            "group": "status",
+            "pattern": r"^Imágenes:0[ \t]*$",
         },
         {
             "id": "vip_status_imagenes",
@@ -235,7 +243,8 @@ PREPROCESS_DATA = {
             "id": "vip_squeeze_blank",
             "kind": "squeeze_blank",
             "clients": ["vipmud"],
-            "keep_before": r"^(?:[>\]]|Pv:\d|.*[ \t]\[[a-z,]+\][ \t]*$)",
+            # Never matches: every blank line of a VIPMud log is dropped.
+            "keep_before": r"(?!)",
         },
     ],
 }

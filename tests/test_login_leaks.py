@@ -84,7 +84,7 @@ class TypeAheadFixtureTest(unittest.TestCase):
     def test_fragment_without_end_marker_keeps_game_output(self):
         c = make_colorizer()
         pre = c.preprocess_text(fixture_text("vipmud_login_case_c.txt"))
-        self.assertIn(r"Pv:2611\2611 Pe:625\688 Xp:1231367", pre)
+        self.assertNotIn(r"Pv:2611\2611 Pe:625\688 Xp:1231367", pre)  # status line, dropped by design
         self.assertIn("Estás siendo atacada por Agricultora.", pre)
 
     def test_head_only_fragment_leaves_nothing(self):

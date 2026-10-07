@@ -39,7 +39,8 @@ class StatusDedupeFixtureTest(unittest.TestCase):
 
     def test_unchanged_values_are_kept_only_once(self):
         lines, _ = preprocessed(self.NAME)
-        self.assertEqual([l for l in lines if l.startswith("Pv:")], ["Pv:2841\\2841 Pe:884\\904 Xp:1643412"])
+        # The status Pv line is always dropped: the game prints its own "Pvs:" line on HP changes.
+        self.assertEqual([l for l in lines if l.startswith("Pv:")], [])
         self.assertEqual([l for l in lines if l.startswith("Pieles:")], ["Pieles:0"])
         self.assertEqual([l for l in lines if l.startswith("Im")], ["Imágenes:9"])
 
@@ -66,7 +67,7 @@ class StatusDedupeFixtureTest(unittest.TestCase):
         c = make_colorizer()
         out = c.colorize_text(fixture_text(self.NAME))
         visible = visible_lines(out)
-        self.assertIn("Pv:2841\\2841 Pe:884\\904 Xp:1643412", visible)
+        self.assertNotIn("Pv:2841\\2841 Pe:884\\904 Xp:1643412", visible)
         self.assertIn("Estás siendo atacada por Fantasma.", visible)
         self.assertIn(RED + "; background: rgb(0,0,0); \">Estás siendo atacada por Fantasma.", out)
         self.assertIn(OLIVE, out)  # echoed bare command "o"
@@ -97,7 +98,7 @@ class MidBlockFragmentTest(unittest.TestCase):
         # first occurrence in this input is kept (dedupe state starts empty)
         self.assertEqual(lines[0], "Imágenes:9")
         self.assertEqual(lines[1], "Pieles:0")
-        self.assertEqual(len([l for l in lines if l.startswith("Pv:")]), 1)
+        self.assertEqual(len([l for l in lines if l.startswith("Pv:")]), 0)
 
     def test_tiny_fragments_do_not_crash(self):
         c = make_colorizer()
@@ -184,7 +185,7 @@ class PvpCombatFixtureTest(unittest.TestCase):
     def test_status_noise_removed(self):
         for prefix in STATUS_PREFIXES:
             self.assertFalse([l for l in self.visible if l.startswith(prefix)])
-        self.assertEqual(len([l for l in self.visible if l.startswith("Pv:")]), 2)  # 1611 and 1676 differ
+        self.assertEqual(len([l for l in self.visible if l.startswith("Pv:")]), 0)  # always dropped
 
     def test_other_player_uses_race_color(self):
         self.assertIn("Mortas (Hum) se va hacia norte.", self.visible)

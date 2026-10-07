@@ -205,10 +205,19 @@ class SqueezeBlankTest(unittest.TestCase):
         out, _ = run(rules, "a\n\nb", client="alpha")
         self.assertEqual(out, ["a", "b"])
 
+    def test_real_rules_hide_imagenes_zero_and_status_pv(self):
+        c = make_colorizer()
+        text = "Pv:10\\10 Pe:1\\1 Xp:5\nJgd:\nImágenes:0\nPieles:2\n> \nHola.\nImágenes:3\n> \nAdios."
+        out = c.preprocess_text(text, "vipmud").split("\n")
+        self.assertNotIn("Imágenes:0", out)
+        self.assertIn("Imágenes:3", out)
+        self.assertFalse([l for l in out if l.startswith("Pv:")])
+
     def test_real_rules_squeeze_vipmud_but_mudlet_keeps_blanks(self):
         c = make_colorizer()
         text = "Pv:10\\10 Pe:1\\1 Xp:5\nSL: [n]\nPL:\nJgd:\nImágenes:0\nPieles:0\n> \nHola.\n\nAdios.\n\n> x"
-        self.assertEqual(c.preprocess_text(text, "vipmud").split("\n")[-4:], ["Hola.", "Adios.", "", "> x"])
+        # Every blank line goes (Pieles:0 is kept, so the block's "> " closer stays too).
+        self.assertEqual(c.preprocess_text(text, "vipmud").split("\n")[-4:], ["> ", "Hola.", "Adios.", "> x"])
         self.assertIn("", c.preprocess_text("Hola.\n\nAdios.", "mudlet").split("\n"))
 
 

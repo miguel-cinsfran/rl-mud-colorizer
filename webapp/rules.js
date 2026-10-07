@@ -454,12 +454,11 @@ window.COLORIZER_RULES = {
       },
       {
         "id": "vip_status_pv",
-        "kind": "dedupe_on_change",
+        "kind": "drop",
         "clients": [
           "vipmud"
         ],
         "group": "status",
-        "scope_id": "pv",
         "pattern": "^Pv:\\d+\\\\\\d+ Pe:\\d+\\\\\\d+ Xp:\\d+"
       },
       {
@@ -488,6 +487,15 @@ window.COLORIZER_RULES = {
         ],
         "group": "status",
         "pattern": "^Jgd:"
+      },
+      {
+        "id": "vip_status_imagenes_zero",
+        "kind": "drop",
+        "clients": [
+          "vipmud"
+        ],
+        "group": "status",
+        "pattern": "^Imágenes:0[ \\t]*$"
       },
       {
         "id": "vip_status_imagenes",
@@ -526,7 +534,7 @@ window.COLORIZER_RULES = {
         "clients": [
           "vipmud"
         ],
-        "keep_before": "^(?:[>\\]]|Pv:\\d|.*[ \\t]\\[[a-z,]+\\][ \\t]*$)"
+        "keep_before": "(?!)"
       }
     ]
   },
