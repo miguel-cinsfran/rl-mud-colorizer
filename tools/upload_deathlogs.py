@@ -45,14 +45,14 @@ def request(url, data=None, headers=None):
 
 
 def parse_form(page):
-    """(players {lowercase name: name}, hidden fields {date, ip}) from the upload form page."""
+    """(players {lowercase name: (name, option value)}, hidden fields {date, ip}) from the form page."""
     select = page[page.find("name=sel"):]
     select = select[:select.find("</select>")]
     players = {}
-    for _, name in OPTION_RE.findall(select):
+    for value, name in OPTION_RE.findall(select):
         name = html.unescape(name).strip()
         if name:
-            players[name.lower()] = name
+            players[name.lower()] = (name, value)
     hidden = {k: v for k, v in HIDDEN_RE.findall(page)}
     return players, hidden
 
@@ -109,8 +109,10 @@ def main(argv=None):
     if missing and not args.crear_jugadores:
         print(f"No están en la lista de Deathlogs: {', '.join(missing)}. Revisa cómo se escriben o usa --crear-jugadores.")
         return 1
-    winners = [players.get(n.lower(), n) for n in args.ganador]
-    losers = [players.get(n.lower(), n) for n in args.perdedor]
+    winners = [players.get(n.lower(), (n, ""))[0] for n in args.ganador]
+    losers = [players.get(n.lower(), (n, ""))[0] for n in args.perdedor]
+    # The browser also sends the player left selected in the list: the last one added.
+    selected = players.get((args.perdedor or args.ganador)[-1].lower(), ("", "0"))[1]
 
     print(f"Título: {args.titulo}")
     print(f"Ganadores: {', '.join(winners) or 'ninguno'}. Perdedores: {', '.join(losers) or 'ninguno'}.")
@@ -125,10 +127,14 @@ def main(argv=None):
         body, ctype = multipart([("m_id", "10"), ("level", "2"), ("newname", name), ("add", "Add Player")])
         request(BASE_URL + "add_log_test.php", body, {"Content-Type": ctype})
     before = {int(i) for i, _ in LIST_ENTRY_RE.findall(request(LIST_URL))}
+    # As a browser does: textareas go with CRLF line ends, and the unchecked "alternate"
+    # box (an alternative log, without winners or losers) is not sent at all.
     body, ctype = multipart([
-        ("qu", ""), ("winners", "".join(n + "\n" for n in winners)), ("loosers", "".join(n + "\n" for n in losers)),
+        ("qu", ""), ("sel", selected), ("winners", "".join(n + "\r\n" for n in winners)),
+        ("loosers", "".join(n + "\r\n" for n in losers)),
         ("level", "2"), ("m_id", "10"), ("logtitle", args.titulo),
-        ("date", hidden.get("date", "")), ("ip", hidden.get("ip", "")), ("log", log),
+        ("date", hidden.get("date", "")), ("ip", hidden.get("ip", "")),
+        ("log", log.replace("\r\n", "\n").replace("\n", "\r\n")),
     ])
     request(BASE_URL + "add_log_test.php", body, {"Content-Type": ctype})
 

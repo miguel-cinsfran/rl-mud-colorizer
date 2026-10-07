@@ -38,7 +38,7 @@ class UploadDeathlogsTest(unittest.TestCase):
 
     def test_parse_form_reads_players_and_hidden_fields(self):
         players, hidden = up.parse_form(FORM)
-        self.assertEqual(players, {"choi": "Choi", "thyra": "Thyra", "zellor": "Zellor"})
+        self.assertEqual(players, {"choi": ("Choi", "0"), "thyra": ("Thyra", "1"), "zellor": ("Zellor", "2")})
         self.assertEqual(hidden, {"date": "07.10.2026", "ip": "1.2.3.4"})
 
     def test_published_breaks_count_as_line_ends(self):
