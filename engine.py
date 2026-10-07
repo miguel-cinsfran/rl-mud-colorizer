@@ -859,6 +859,17 @@ class RLColorizer:
         return f"{MUDLET_HEADER}{body_content} </div></body>\n</html>"
 
 
+def to_deathlogs(mudlet_html):
+    """Version of the Mudlet HTML to paste into Deathlogs.
+
+    Deathlogs turns every newline of the pasted log into a <br> and keeps the <br> already
+    there, so Mudlet's "<br>\\n" line ends would show as a blank line after every line
+    (checked on a real upload). Lines are separated by the newline alone; the newlines are
+    still needed, since a log pasted as a single line is rejected.
+    """
+    return mudlet_html.replace("<br>\n", "\n")
+
+
 def main(argv=None):
     import argparse
     import sys
@@ -868,11 +879,14 @@ def main(argv=None):
     ap.add_argument("-o", "--output", help="output HTML file (default: stdout)")
     ap.add_argument("--client", help="force a client id (e.g. vipmud, mudlet) instead of auto-detection")
     ap.add_argument("--no-preprocess", action="store_true", help="skip login/status sanitization")
+    ap.add_argument("--deathlogs", action="store_true", help="output the version to paste into Deathlogs")
     args = ap.parse_args(argv)
 
     colorizer = RLColorizer()
     text = read_text_file(args.input)
     result = colorizer.colorize_text(text, preprocess=not args.no_preprocess, client=args.client)
+    if args.deathlogs:
+        result = to_deathlogs(result)
     if args.output:
         Path(args.output).write_text(result, encoding="utf-8", newline="")
     else:

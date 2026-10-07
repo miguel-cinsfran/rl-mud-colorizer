@@ -949,6 +949,13 @@ class RLColorizerJS {
     }
 }
 
+// Version of the Mudlet HTML to paste into Deathlogs (twin of engine.py to_deathlogs).
+// Deathlogs turns every newline into a <br> and keeps the existing <br>, so lines are
+// separated by the newline alone; a log pasted as a single line is rejected.
+function toDeathlogs(mudletHtml) {
+    return mudletHtml.split('<br>\n').join('\n');
+}
+
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { RLColorizerJS, escapeHtml };
+    module.exports = { RLColorizerJS, escapeHtml, toDeathlogs };
 }

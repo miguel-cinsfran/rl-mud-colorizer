@@ -158,7 +158,8 @@ Propinas el golpe mortal a Sowy.
             : htmlResult).replace(/<br\s*\/?>\n/g, '<br>');
 
         previewContainer.innerHTML = previewHtml;
-        rawHtmlTextarea.value = htmlResult;
+        // The HTML tab shows exactly what "Copiar para Deathlogs" puts on the clipboard.
+        rawHtmlTextarea.value = toDeathlogs(htmlResult);
 
         // Count output stats
         const lineCount = (htmlResult.match(/<span/g) || []).length;
@@ -213,7 +214,8 @@ Propinas el golpe mortal a Sowy.
 
         try {
             if (navigator.clipboard && navigator.clipboard.writeText) {
-                await navigator.clipboard.writeText(currentHtmlOutput);
+                // Deathlogs version: the downloaded file keeps Mudlet's exact format instead.
+                await navigator.clipboard.writeText(toDeathlogs(currentHtmlOutput));
             } else {
                 // Fallback for older browsers
                 rawHtmlTextarea.style.display = 'block';
@@ -223,7 +225,7 @@ Propinas el golpe mortal a Sowy.
                     rawHtmlTextarea.style.display = 'none';
                 }
             }
-            announce("¡HTML de Mudlet copiado al portapapeles! Listo para pegar en el formulario de Deathlogs.");
+            announce("Log copiado. Pégalo en el campo Log del formulario de Deathlogs.");
         } catch (err) {
             console.error("Clipboard error:", err);
             announce("Error al copiar al portapapeles.", true);

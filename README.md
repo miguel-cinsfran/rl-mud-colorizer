@@ -8,15 +8,15 @@ Página en vivo: https://miguel-cinsfran.github.io/rl-mud-colorizer/
 
 1. Pega el log en el cuadro de la izquierda o carga un archivo `.txt`. Se leen archivos en UTF-8 y en Windows-1252, que es lo que escribe VIPMud.
 2. El resultado se actualiza mientras pegas. `Ctrl+Enter` lo fuerza.
-3. Pulsa "Copiar para Deathlogs" y pega el contenido en el formulario de envío.
+3. Pulsa "Copiar para Deathlogs" y pega el contenido en el campo Log del formulario de envío.
 
-También puedes descargar el resultado como `.html` o revisar el código en la pestaña "HTML".
+Lo que se copia lleva cada línea en su propia línea de texto, sin `<br>`: Deathlogs convierte cada salto de línea en un `<br>`, y si el log ya los trae, queda una línea en blanco entre cada línea. El botón de descarga guarda el `.html` con el formato exacto que exporta Mudlet, para abrirlo en el navegador. La pestaña "HTML" muestra lo mismo que se copia.
 
 ## Privacidad
 
 Todo se ejecuta en tu navegador y no se envía nada a ningún servidor.
 
-El inicio de sesión (banner, usuario, clave y texto de bienvenida) se borra siempre antes de colorizar, incluso si pegas solo un fragmento del log. En el bloque de estado de VIPMud se conservan `Pv`, `Imágenes` y `Pieles` solo cuando cambian, y se quitan `SL`, `PL` y `Jgd`. Los logs de Mudlet no pierden esas líneas.
+El inicio de sesión (banner, usuario, clave y texto de bienvenida) se borra siempre antes de colorizar, incluso si pegas solo un fragmento del log. En el bloque de estado de VIPMud se quitan siempre `Pv`, `SL`, `PL` y `Jgd`, porque el juego ya muestra su propia línea `Pvs:` cuando cambia la vida. `Imágenes`, `Pieles`, `Astucia` e `Inercia` aparecen solo cuando cambian y nunca si valen 0. También se quitan las líneas en blanco. Los logs de Mudlet no pierden nada de esto.
 
 ## Colores de los títulos de sala
 
@@ -43,7 +43,7 @@ El primer comando escribe `room_map_colors.json` y el segundo recompila `rules.j
 python engine.py log.txt -o salida.html
 ```
 
-Sin `-o`, el HTML sale por la salida estándar. `--client vipmud` (o `mudlet`) fuerza el cliente en lugar de detectarlo, y `--no-preprocess` omite la limpieza de inicio de sesión y bloque de estado.
+Sin `-o`, el HTML sale por la salida estándar. `--client vipmud` (o `mudlet`) fuerza el cliente en lugar de detectarlo, `--no-preprocess` omite la limpieza de inicio de sesión y bloque de estado, y `--deathlogs` genera la versión para pegar en Deathlogs en lugar del formato de Mudlet.
 
 ## Para quien quiera contribuir
 
