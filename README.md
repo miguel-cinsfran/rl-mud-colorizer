@@ -109,6 +109,17 @@ python tools/search_logs.py buscar "voy 1 min" thyra --fecha 2026-10-07
 
 Con el número de línea, `engine.py --lines` genera el HTML del tramo que interese.
 
+## Subir a Deathlogs desde la línea de comandos
+
+`tools/upload_deathlogs.py` envía el formulario de Deathlogs sin abrir el navegador. Sin `--enviar` solo comprueba el archivo y los jugadores y muestra lo que mandaría.
+
+```
+python engine.py "thyra 2026-10-07.txt" --lines 25840-27614 --deathlogs -o choi.html
+python tools/upload_deathlogs.py choi.html --titulo "Toreando las astas" --ganador Thyra --perdedor Choi --enviar
+```
+
+Los nombres tienen que existir en la lista de jugadores de Deathlogs; `--crear-jugadores` da de alta los que falten. Después de publicar, comprueba en la página el título, los jugadores y el principio y el final del log, y agrega el número del log a `OWN_UPLOADS` (ver "Logs de referencia").
+
 ## Para quien quiera contribuir
 
 Las reglas de color y de limpieza están en `build_rules.py`. Después de cambiarlas, o de tocar `rooms.json`, ejecuta:
