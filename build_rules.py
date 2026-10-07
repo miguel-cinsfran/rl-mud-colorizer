@@ -746,6 +746,15 @@ RULES_DATA = {
             "pattern": r"^(?:[>\]]\s*)?(Curas\s+(?:algunas|todas|gran parte)\s+de\s+(?:tus|las)\s+heridas\b.*?\.?)\s*$",
             "replace": r'<span style="color: #ff0000;">$1</span>'
         },
+        {
+            # Someone else healing: "<X> cura algunas de sus heridas más ligeras/moderadas/serias/críticas."
+            # Healer and severity are generic. Enemy-spell magenta, so it reads apart from our own heal.
+            "id": "spell_healing_other",
+            "category": "spell",
+            "priority": 47,
+            "pattern": r'^(?:[>\]]\s*)?(' + ACTOR + r' cura (?:algunas|todas|gran parte) de sus heridas(?: más)?(?: [a-záéíóúñ]+)?\.)\s*$',
+            "replace": r'<span style="color: #ff00f3;">$1</span>'
+        },
 
         # Devolver conjuro / reflected spells. Own spell effects share the magic-missile blue
         # (#8cc4ff); the spell winding down uses the gray of "deja de formular"; effects that the
@@ -963,7 +972,7 @@ RULES_DATA = {
             "id": "combat_enemy_maneuver",
             "category": "combat",
             "priority": 65,
-            "pattern": r"^(?:([>\]])\s*)?(!\s*)?([A-Za-zÁÉÍÓÚáéíóúñÑ0-9'|\-/() ]+?)(\s+)(se prepara para ejecutar|se prepara para|tensa sus músculos|se echa hacia atrás|empieza a centrar|comienza a serpentear|te examina|examina las defensas de|te mira fijamente)\b(.*)$",
+            "pattern": r"^(?:([>\]])\s*)?(!\s*)?([A-Za-zÁÉÍÓÚáéíóúñÑ0-9'|\-/(), ]+?)(\s+)(se prepara para ejecutar|se prepara para|tensa sus músculos|se echa hacia atrás|empieza a centrar|comienza a serpentear|te examina|examina las defensas de|te mira fijamente|comienza a realizar|comienza a moverse)\b(.*)$",
             "type": "composite_enemy_maneuver"
         },
         {

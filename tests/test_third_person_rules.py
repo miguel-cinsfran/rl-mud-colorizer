@@ -63,6 +63,38 @@ class FatalBlowThird(Cases, unittest.TestCase):
     )
 
 
+class HealOther(Cases, unittest.TestCase):
+    COLOR = "#ff00f3"  # enemy-spell magenta, apart from our own heal ("Curas ...", #ff0000)
+    TEMPLATES = tuple(
+        "{a} cura algunas de sus heridas más " + severity + "."
+        for severity in ("ligeras", "moderadas", "serias", "críticas")
+    )
+    NEGATIVES = (
+        "Dices: '{a} cura algunas de sus heridas más ligeras.'",
+        "{a} te dice: {b} cura algunas de sus heridas más serias.",
+        "[Chat] {a}: {b} cura algunas de sus heridas más críticas.",
+    )
+
+
+class EnemyManeuverWarnings(unittest.TestCase):
+    """"! X ..." maneuver warnings get the friend's maneuver colors, whatever the verb."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.c = make_colorizer()
+
+    def test_new_warnings_match_the_existing_one(self):
+        reference = colors(self.c, "! Zorak se prepara para ejecutar tajar sobre ti.")
+        for name in NAMES:
+            for tail in (
+                "comienza a realizar los movimientos rituales movimientos rituales de una maniobra de Khaldar.",
+                "comienza a moverse tentativamente a tu alrededor, buscando un flanco desprotegido sobre el que abalanzarse.",
+            ):
+                line = f"! {name} {tail}"
+                with self.subTest(line=line):
+                    self.assertEqual(colors(self.c, line), reference)
+
+
 class TouchCast(Cases, unittest.TestCase):
     COLOR = "#008080"  # same as the "Pronuncias el cántico:" prefix
     TEMPLATES = ("Tocas a {a} mientras formulas el hechizo.",)

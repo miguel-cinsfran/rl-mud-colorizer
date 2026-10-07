@@ -962,6 +962,13 @@ window.COLORIZER_RULES = {
       "replace": "<span style=\"color: #ff0000;\">$1</span>"
     },
     {
+      "id": "spell_healing_other",
+      "category": "spell",
+      "priority": 47,
+      "pattern": "^(?:[>\\]]\\s*)?([A-ZÁÉÍÓÚÑÜ][^:\"¡!?.]*? cura (?:algunas|todas|gran parte) de sus heridas(?: más)?(?: [a-záéíóúñ]+)?\\.)\\s*$",
+      "replace": "<span style=\"color: #ff00f3;\">$1</span>"
+    },
+    {
       "id": "spell_reflect_own_activates",
       "category": "spell",
       "priority": 48,
@@ -1154,7 +1161,7 @@ window.COLORIZER_RULES = {
       "id": "combat_enemy_maneuver",
       "category": "combat",
       "priority": 65,
-      "pattern": "^(?:([>\\]])\\s*)?(!\\s*)?([A-Za-zÁÉÍÓÚáéíóúñÑ0-9'|\\-/() ]+?)(\\s+)(se prepara para ejecutar|se prepara para|tensa sus músculos|se echa hacia atrás|empieza a centrar|comienza a serpentear|te examina|examina las defensas de|te mira fijamente)\\b(.*)$",
+      "pattern": "^(?:([>\\]])\\s*)?(!\\s*)?([A-Za-zÁÉÍÓÚáéíóúñÑ0-9'|\\-/(), ]+?)(\\s+)(se prepara para ejecutar|se prepara para|tensa sus músculos|se echa hacia atrás|empieza a centrar|comienza a serpentear|te examina|examina las defensas de|te mira fijamente|comienza a realizar|comienza a moverse)\\b(.*)$",
       "type": "composite_enemy_maneuver"
     },
     {
