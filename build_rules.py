@@ -720,6 +720,45 @@ RULES_DATA = {
             "pattern": r'^(?:[>\]]\s*)?(' + HOWL_EFFECTS + r')\s*$',
             "replace": r'<span style="color: #cc6666;">$1</span>'
         },
+        # Own defensive spells taking effect ("Eres rodeada por un globo de protección.", gendered
+        # rodead[oa] / envuelt[oa] / cubiert[oa]) and own damage spells (window sequence, aura
+        # retaliation): the own-spell blue. Names are generic; every pattern starts with fixed text.
+        {
+            "id": "spell_own_defense_on",
+            "category": "spell",
+            "priority": 48,
+            "pattern": r'^(?:[>\]]\s*)?(Eres (?:rodead|envuelt|cubiert)[oa] por (?:un|una) [^:"]*?(?:protecci[oó]n|aura|globo|escudo|campo|barrera|manto)[^:"]*\.|Un campo de energ[ií]a forma un escudo m[aá]gico ante ti\.|Un aura protectora empieza a formarse a tu alrededor\.)\s*$',
+            "replace": r'<span style="color: #8cc4ff;">$1</span>'
+        },
+        {
+            "id": "spell_own_damage_effects",
+            "category": "spell",
+            "priority": 48,
+            "pattern": r'^(?:[>\]]\s*)?(Trazas con ambas manos un rect[aá]ngulo en el aire y una enorme ventana aparece justo detr[aá]s de ' + NAME
+                       + r' entre una gran humareda chispeante\.'
+                       + r'|¡Cierras con fuerza sendos pu[ñn]os y una r[aá]faga m[aá]gica sale disparada en direcci[oó]n a ' + NAME + r'!'
+                       + r'|¡' + ACTOR + r' sale disparad[oa] contra la ventana y la revienta estruendosamente, volando \d+ metros? antes de caer malherid[oa] al suelo!'
+                       + r'|Tu aura brilla castigando a ' + NAME + r' con el mismo dolor\.)\s*$',
+            "replace": r'<span style="color: #8cc4ff;">$1</span>'
+        },
+        {
+            "id": "spell_dispelled_on_you",
+            "category": "spell",
+            "priority": 48,
+            "pattern": r'^(?:[>\]]\s*)?(Sientes como un poder m[aá]gico sin igual choca contigo y hace a[ñn]icos la magia que te rodeaba(?: mientras ' + NAME + r' finaliza su hechizo)?\.)\s*$',
+            "replace": r'<span style="color: #cc6666;">$1</span>'
+        },
+        {
+            "id": "spell_effect_ends",
+            "category": "spell",
+            "priority": 48,
+            "pattern": r'^(?:[>\]]\s*)?(Tu (?:globo|escudo|armadura|aura|debilidad)[^:".]*? (?:empieza a parpadear hasta que desaparece|se desvanece)\.'
+                       + r'|El globo que rodea a ' + NAME + r' empieza a parpadear hasta que desaparece\.'
+                       + r'|(?:Notas como )?[Tt]u hechizo de [^:"]+? llega a su fin\.'
+                       + r'|La regeneraci[oó]n m[aá]gica de ' + NAME + r' termina\.'
+                       + r'|' + ACTOR + r' parece menos decidid[oa] que antes cuando su sortilegio llega a su fin\.)\s*$',
+            "replace": r'<span style="color: #808080;">$1</span>'
+        },
 
         # --- 5. MOVEMENTS, ROOM EXITS & ENTITIES ---
         {

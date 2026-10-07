@@ -950,6 +950,34 @@ window.COLORIZER_RULES = {
       "replace": "<span style=\"color: #cc6666;\">$1</span>"
     },
     {
+      "id": "spell_own_defense_on",
+      "category": "spell",
+      "priority": 48,
+      "pattern": "^(?:[>\\]]\\s*)?(Eres (?:rodead|envuelt|cubiert)[oa] por (?:un|una) [^:\"]*?(?:protecci[oó]n|aura|globo|escudo|campo|barrera|manto)[^:\"]*\\.|Un campo de energ[ií]a forma un escudo m[aá]gico ante ti\\.|Un aura protectora empieza a formarse a tu alrededor\\.)\\s*$",
+      "replace": "<span style=\"color: #8cc4ff;\">$1</span>"
+    },
+    {
+      "id": "spell_own_damage_effects",
+      "category": "spell",
+      "priority": 48,
+      "pattern": "^(?:[>\\]]\\s*)?(Trazas con ambas manos un rect[aá]ngulo en el aire y una enorme ventana aparece justo detr[aá]s de [^:\"¡!?.]+? entre una gran humareda chispeante\\.|¡Cierras con fuerza sendos pu[ñn]os y una r[aá]faga m[aá]gica sale disparada en direcci[oó]n a [^:\"¡!?.]+?!|¡[A-ZÁÉÍÓÚÑÜ][^:\"¡!?.]*? sale disparad[oa] contra la ventana y la revienta estruendosamente, volando \\d+ metros? antes de caer malherid[oa] al suelo!|Tu aura brilla castigando a [^:\"¡!?.]+? con el mismo dolor\\.)\\s*$",
+      "replace": "<span style=\"color: #8cc4ff;\">$1</span>"
+    },
+    {
+      "id": "spell_dispelled_on_you",
+      "category": "spell",
+      "priority": 48,
+      "pattern": "^(?:[>\\]]\\s*)?(Sientes como un poder m[aá]gico sin igual choca contigo y hace a[ñn]icos la magia que te rodeaba(?: mientras [^:\"¡!?.]+? finaliza su hechizo)?\\.)\\s*$",
+      "replace": "<span style=\"color: #cc6666;\">$1</span>"
+    },
+    {
+      "id": "spell_effect_ends",
+      "category": "spell",
+      "priority": 48,
+      "pattern": "^(?:[>\\]]\\s*)?(Tu (?:globo|escudo|armadura|aura|debilidad)[^:\".]*? (?:empieza a parpadear hasta que desaparece|se desvanece)\\.|El globo que rodea a [^:\"¡!?.]+? empieza a parpadear hasta que desaparece\\.|(?:Notas como )?[Tt]u hechizo de [^:\"]+? llega a su fin\\.|La regeneraci[oó]n m[aá]gica de [^:\"¡!?.]+? termina\\.|[A-ZÁÉÍÓÚÑÜ][^:\"¡!?.]*? parece menos decidid[oa] que antes cuando su sortilegio llega a su fin\\.)\\s*$",
+      "replace": "<span style=\"color: #808080;\">$1</span>"
+    },
+    {
       "id": "room_exits_inline",
       "category": "movement",
       "priority": 50,

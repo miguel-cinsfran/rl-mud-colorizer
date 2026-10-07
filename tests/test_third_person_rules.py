@@ -153,6 +153,77 @@ class HowlSequence(Cases, unittest.TestCase):
     )
 
 
+class OwnDefenseOn(Cases, unittest.TestCase):
+    COLOR = "#8cc4ff"
+    TEMPLATES = (
+        "Eres rodeada por un globo de protección.",
+        "Eres rodeado por un intenso aura blanquecino de protección.",
+        "Eres envuelta por una protección invisible.",
+        "Eres envuelto por una protección invisible.",
+        "Eres cubierta por un aura roja brillante.",
+        "Un campo de energía forma un escudo mágico ante ti.",
+        "Un aura protectora empieza a formarse a tu alrededor.",
+    )
+    NEGATIVES = (
+        "Dices: 'Eres rodeada por un globo de protección.'",
+        "{a} te dice: Un campo de energía forma un escudo mágico ante ti.",
+        "[Chat] {a}: Eres envuelta por una protección invisible.",
+        "Un aura protectora empieza a formarse alrededor de {a}.",
+        "Eres rodeada por un grupo de orcos.",
+    )
+
+
+class OwnDamageSpell(Cases, unittest.TestCase):
+    COLOR = "#8cc4ff"
+    TEMPLATES = (
+        "Trazas con ambas manos un rectángulo en el aire y una enorme ventana aparece justo detrás de {a} entre una gran humareda chispeante.",
+        "¡Cierras con fuerza sendos puños y una ráfaga mágica sale disparada en dirección a {a}!",
+        "¡{a} sale disparada contra la ventana y la revienta estruendosamente, volando 6 metros antes de caer malherida al suelo!",
+        "¡{a} sale disparado contra la ventana y la revienta estruendosamente, volando 1 metro antes de caer malherido al suelo!",
+        "Tu aura brilla castigando a {a} con el mismo dolor.",
+    )
+    NEGATIVES = (
+        "Dices: 'Tu aura brilla castigando a {a} con el mismo dolor.'",
+        "{a} te dice: ¡Cierras con fuerza sendos puños y una ráfaga mágica sale disparada en dirección a {b}!",
+        "[Chat] {a}: Trazas con ambas manos un rectángulo en el aire y una enorme ventana aparece justo detrás de {b} entre una gran humareda chispeante.",
+        "{a} dice: ¡{b} sale disparada contra la ventana y la revienta estruendosamente, volando 6 metros antes de caer malherida al suelo!",
+    )
+
+
+class DispelledOnYou(Cases, unittest.TestCase):
+    COLOR = "#cc6666"
+    TEMPLATES = (
+        "Sientes como un poder mágico sin igual choca contigo y hace añicos la magia que te rodeaba mientras {a} finaliza su hechizo.",
+        "Sientes como un poder mágico sin igual choca contigo y hace añicos la magia que te rodeaba.",
+    )
+    NEGATIVES = (
+        "Dices: 'Sientes como un poder mágico sin igual choca contigo y hace añicos la magia que te rodeaba.'",
+        "{a} te dice: Sientes como un poder mágico sin igual choca contigo y hace añicos la magia que te rodeaba mientras {b} finaliza su hechizo.",
+        "[Chat] {a}: Sientes como un poder mágico sin igual choca contigo y hace añicos la magia que te rodeaba.",
+    )
+
+
+class EffectEnds(Cases, unittest.TestCase):
+    COLOR = "#808080"
+    TEMPLATES = (
+        "Tu globo de invulnerabilidad empieza a parpadear hasta que desaparece.",
+        "Tu escudo de protección se desvanece.",
+        "Tu armadura espiritual se desvanece.",
+        "El globo que rodea a {a} empieza a parpadear hasta que desaparece.",
+        "La regeneración mágica de {a} termina.",
+        "{a} parece menos decidido que antes cuando su sortilegio llega a su fin.",
+        "{a} parece menos decidida que antes cuando su sortilegio llega a su fin.",
+        "Notas como tu hechizo de precognición llega a su fin.",
+    )
+    NEGATIVES = (
+        "Dices: 'La regeneración mágica de {a} termina.'",
+        "{a} te dice: {b} parece menos decidido que antes cuando su sortilegio llega a su fin.",
+        "[Chat] {a}: La regeneración mágica de {b} termina.",
+        "Dices: 'Tu globo de invulnerabilidad empieza a parpadear hasta que desaparece.'",
+        "{a} te dice: El globo que rodea a {b} empieza a parpadear hasta que desaparece.",
+    )
+
+
 class OutputSpacing(unittest.TestCase):
     def test_output_has_no_newline_after_br(self):
         out = make_colorizer().colorize_text("a\nb\nc")
