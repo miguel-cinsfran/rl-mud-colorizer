@@ -1,14 +1,18 @@
-"""Build item_colors.json from an item catalog with the game's color codes.
+"""Build item_colors.json from the Armería de RL (https://armeria.reinosdeleyenda.es).
 
-Usage: python tools/build_item_colors.py <items.json> [output.json]
+Usage: python tools/build_item_colors.py [--from raw.json] [output.json]
 
-The input is the catalog Franco extracts from the Armería de RL
-(https://github.com/FrancoMPaniagua/rl-mud-colorizer, items.json): {name: {"raw_short": ...}},
-where raw_short carries the game's codes ("%^BOLD%^BLUE%^Espada Azul%^RESET%^").
+Without --from, the whole catalog is downloaded from the Armería's public API, one page of
+PAGE_SIZE items at a time with a short pause between pages, and saved to RAW_CACHE (git
+ignores it) so --from RAW_CACHE can rebuild without downloading again.
+
+Each item's "short" carries the game's color codes ("%^BOLD%^BLUE%^Espada Azul%^RESET%^").
 Output: {name: [[n_chars, "#rrggbb"], ...]}, the color runs over the name, using the colors
 Mudlet shows, checked code by code against colored Mudlet logs: BOLD selects the bright
 shade, ORANGE is the dark yellow, YELLOW is always bright, and BOLD alone stays silver.
-Names that would stay plain silver are left out.
+The name drops a trailing note like "( Izquierdo )". Left out: names that would stay plain
+silver, and one-word names unless written joined ("RobaAlmas"), since "Agua" or "Perla"
+are everyday words. A name with several versions keeps the most common one.
 
 When the colored Mudlet logs of tools/fetch_reference_logs.py are in cache_reference/, an
 item they show with other colors (the Armería can lag behind the game) takes the colors
@@ -17,8 +21,11 @@ DOMINANCE of those sightings agree.
 """
 
 import json
-from collections import Counter
+import re
 import sys
+import time
+import urllib.request
+from collections import Counter
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -33,6 +40,11 @@ DOMINANCE = 0.8
 # Items missing from the Armería whose colors are taken from the reference logs only.
 EXTRA_NAMES = ["Bolsita para plantas", "Pin 'Yo escalé el Mallorn'"]
 DEFAULT_OUT = ROOT / "item_colors.json"
+RAW_CACHE = ROOT / "cache_armeria" / "items.json"
+API_URL = "https://armeria.reinosdeleyenda.es/api/items?limit={limit}&offset={offset}"
+PAGE_SIZE = 100
+PAUSE_SECONDS = 0.5
+JOINED_WORD_RE = re.compile(r"[a-záéíóúñü][A-ZÁÉÍÓÚÑÜ]")
 SILVER = "#c0c0c0"
 
 # (normal, bold) shades for each game color code.
@@ -51,8 +63,8 @@ PALETTE = {
 CONTROL = {"BOLD", "NOBOLD", "RESET", "FLASH", "DIM"}
 
 
-def name_runs(raw_short, name):
-    """[[n, color], ...] for the leading `name` in raw_short, or None if it does not match."""
+def decode(raw_short):
+    """[(char, color), ...] for the text of raw_short, as Mudlet shows it."""
     color, bold, chars = None, False, []
     # Codes are delimited by "%^" and share delimiters: "%^BOLD%^RED%^Text".
     for part in raw_short.split("%^"):
@@ -66,6 +78,12 @@ def name_runs(raw_short, name):
             color = part
         elif part not in CONTROL:
             chars += [(ch, PALETTE[color][bold]) for ch in part]
+    return chars
+
+
+def name_runs(raw_short, name):
+    """[[n, color], ...] for the leading `name` in raw_short, or None if it does not match."""
+    chars = decode(raw_short)
     text = "".join(ch for ch, _ in chars)
     if not text.startswith(name):
         return None
@@ -93,7 +111,7 @@ def fix_mojibake(line):
     out, i = [], 0
     while i < len(line):
         ch, color = line[i]
-        if ch in "ÃÂ" and i + 1 < len(line) and "" <= line[i + 1][0] <= "¿":
+        if ch in "\xc3\xc2" and i + 1 < len(line) and "\x80" <= line[i + 1][0] <= "\xbf":
             try:
                 out.append(((ch + line[i + 1][0]).encode("latin-1").decode("utf-8"), color))
                 i += 2
@@ -135,17 +153,59 @@ def reference_runs(table):
     return out
 
 
-def main():
-    src = Path(sys.argv[1])
-    out_path = Path(sys.argv[2]) if len(sys.argv) > 2 else DEFAULT_OUT
-    catalog = json.loads(src.read_text(encoding="utf-8"))
+def download():
+    items, offset = [], 0
+    while True:
+        req = urllib.request.Request(API_URL.format(limit=PAGE_SIZE, offset=offset),
+                                     headers={"User-Agent": "rl-mud-colorizer"})
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            page = json.load(resp)
+        items += page["data"]
+        print(f"  {len(items)} / {page['meta']['total']}")
+        if not page["data"] or len(items) >= page["meta"]["total"]:
+            return items
+        offset += PAGE_SIZE
+        time.sleep(PAUSE_SECONDS)
+
+
+def item_name(raw_short):
+    """The display name: the decoded text without a trailing "( Izquierdo )" note."""
+    text = "".join(ch for ch, _ in decode(raw_short)).strip()
+    return re.sub(r"\s*\([^)]*\)$", "", text).strip()
+
+
+def build_table(items):
+    """{name: runs} for the colored items, plus the number of colored shorts left out."""
+    versions = {}
+    for item in items:
+        short = (item.get("short") or "").strip()
+        if "%^" in short:
+            versions.setdefault(item_name(short), Counter())[short] += 1
     table, skipped = {}, 0
-    for name, item in sorted(catalog.items()):
-        runs = name_runs(item.get("raw_short", ""), name)
-        if not runs or all(c == SILVER for _, c in runs) or len(name) < 4:
+    for name, shorts in sorted(versions.items()):
+        # Most common version first; ties go to the longest, then alphabetical, so it is stable.
+        short = sorted(shorts.items(), key=lambda kv: (-kv[1], -len(kv[0]), kv[0]))[0][0]
+        runs = name_runs(short.lstrip(), name)
+        one_word = " " not in name and not JOINED_WORD_RE.search(name)
+        if not runs or all(c == SILVER for _, c in runs) or len(name) < 4 or one_word or "  " in name:
             skipped += 1
             continue
         table[name] = runs
+    return table, skipped
+
+
+def main():
+    args = sys.argv[1:]
+    if args[:1] == ["--from"]:
+        items = json.loads(Path(args[1]).read_text(encoding="utf-8"))
+        args = args[2:]
+    else:
+        print("Downloading the Armería catalog...")
+        items = download()
+        RAW_CACHE.parent.mkdir(exist_ok=True)
+        RAW_CACHE.write_text(json.dumps(items, ensure_ascii=False), encoding="utf-8")
+    out_path = Path(args[0]) if args else DEFAULT_OUT
+    table, skipped = build_table(items)
     for name in EXTRA_NAMES:
         table.setdefault(name, None)
     fixed = reference_runs(table)

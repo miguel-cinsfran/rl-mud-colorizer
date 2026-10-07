@@ -52,12 +52,14 @@ El primer comando escribe `room_map_colors.json`, el segundo `room_reference_col
 
 Los nombres de ítems conocidos se pintan con los colores del juego, letra por letra si hace falta ("Capucha" en gris y "Tenebrosa" en violeta), en cualquier línea que no tenga ya otro color: inventario, empuñar, quitarse cosas o lo que otro saca de su bolsa. Un nombre partido en dos líneas por el ancho del juego queda sin color.
 
-Los datos salen del catálogo de la Armería que Franco publica en su repositorio (`items.json` en [FrancoMPaniagua/rl-mud-colorizer](https://github.com/FrancoMPaniagua/rl-mud-colorizer)). Los códigos de color del juego se pasan a los tonos que muestra Mudlet, comprobados contra los logs de referencia. Si esos logs muestran un ítem con otros colores de forma constante, mandan los logs. Para actualizarlo:
+Los datos salen de la API pública de la [Armería de RL](https://armeria.reinosdeleyenda.es), que guarda los códigos de color de cada ítem. Esos códigos se pasan a los tonos que muestra Mudlet, comprobados contra los logs de referencia. Si esos logs muestran un ítem con otros colores de forma constante, mandan los logs. No se colorean los nombres de una sola palabra, como "Agua" o "Perla", porque son palabras de uso común; sí los que van pegados, como "RobaAlmas". Para actualizarlo:
 
 ```
-python tools/build_item_colors.py ruta/a/items.json
+python tools/build_item_colors.py
 python build_rules.py
 ```
+
+El primer comando baja el catálogo entero (unas 40 consultas, con una pausa entre cada una), guarda una copia en `cache_armeria/`, que git ignora, y escribe `item_colors.json`. Con `--from cache_armeria/items.json` se rehace sin volver a bajarlo.
 
 ## Línea de comandos
 

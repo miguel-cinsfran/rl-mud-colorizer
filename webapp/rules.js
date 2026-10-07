@@ -4654,7 +4654,7 @@ window.COLORIZER_RULES = {
     "Alga Marina": [
       [
         11,
-        "#0000ff"
+        "#00ff00"
       ]
     ],
     "Aliento vital": [
@@ -6083,6 +6083,12 @@ window.COLORIZER_RULES = {
       [
         10,
         "#00ff00"
+      ]
+    ],
+    "BastónConNúcleoMagmático": [
+      [
+        24,
+        "#800000"
       ]
     ],
     "Baya Roja": [
@@ -30329,6 +30335,12 @@ window.COLORIZER_RULES = {
         "#808080"
       ]
     ],
+    "Manopla del Caos": [
+      [
+        16,
+        "#000080"
+      ]
+    ],
     "Manopla del Capitán Tan": [
       [
         12,
@@ -33425,6 +33437,48 @@ window.COLORIZER_RULES = {
         "#ffffff"
       ]
     ],
+    "PernerasAutomáticasDeAltaVelocidad": [
+      [
+        1,
+        "#808080"
+      ],
+      [
+        7,
+        "#c0c0c0"
+      ],
+      [
+        1,
+        "#808080"
+      ],
+      [
+        10,
+        "#c0c0c0"
+      ],
+      [
+        1,
+        "#808080"
+      ],
+      [
+        1,
+        "#c0c0c0"
+      ],
+      [
+        1,
+        "#808080"
+      ],
+      [
+        3,
+        "#c0c0c0"
+      ],
+      [
+        1,
+        "#808080"
+      ],
+      [
+        8,
+        "#c0c0c0"
+      ]
+    ],
     "Peto Bendito de Kathleen la Sanadora": [
       [
         36,
@@ -34353,6 +34407,12 @@ window.COLORIZER_RULES = {
         "#800000"
       ]
     ],
+    "RobaAlmas": [
+      [
+        9,
+        "#808080"
+      ]
+    ],
     "Rocío de Naggrung": [
       [
         9,
@@ -34391,6 +34451,16 @@ window.COLORIZER_RULES = {
       [
         7,
         "#ffff00"
+      ]
+    ],
+    "RompeHuesos": [
+      [
+        5,
+        "#808080"
+      ],
+      [
+        6,
+        "#ffffff"
       ]
     ],
     "Rúbrica de Nyel'phax": [
@@ -37439,6 +37509,98 @@ window.COLORIZER_RULES = {
       [
         7,
         "#ff0000"
+      ]
+    ],
+    "VisorQuePermiteVerLaRealidadInstantesAntesDeQueÉstaSucedaOtorgándoteAsíInfinidadDeVentajas": [
+      [
+        5,
+        "#00ffff"
+      ],
+      [
+        3,
+        "#008080"
+      ],
+      [
+        7,
+        "#00ffff"
+      ],
+      [
+        3,
+        "#008080"
+      ],
+      [
+        2,
+        "#00ffff"
+      ],
+      [
+        8,
+        "#008080"
+      ],
+      [
+        9,
+        "#00ffff"
+      ],
+      [
+        5,
+        "#008080"
+      ],
+      [
+        2,
+        "#00ffff"
+      ],
+      [
+        3,
+        "#008080"
+      ],
+      [
+        4,
+        "#00ffff"
+      ],
+      [
+        6,
+        "#008080"
+      ],
+      [
+        11,
+        "#00ffff"
+      ],
+      [
+        3,
+        "#008080"
+      ],
+      [
+        9,
+        "#00ffff"
+      ],
+      [
+        2,
+        "#008080"
+      ],
+      [
+        8,
+        "#00ffff"
+      ]
+    ],
+    "VolcánPortátilDeMagmokhur": [
+      [
+        4,
+        "#808080"
+      ],
+      [
+        6,
+        "#800000"
+      ],
+      [
+        6,
+        "#ff0000"
+      ],
+      [
+        5,
+        "#800000"
+      ],
+      [
+        4,
+        "#808080"
       ]
     ],
     "Yagrul Gragbadûr": [
