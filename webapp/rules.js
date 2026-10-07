@@ -1225,7 +1225,7 @@ window.COLORIZER_RULES = {
       "category": "command",
       "priority": 80,
       "prompt_only": true,
-      "pattern": "^([a-zA-Z0-9_'-]+.*)$",
+      "pattern": "^((?:[a-z0-9ñáéíóú_'-]|F\\d)[^\\n]*)$",
       "replace": "<span style=\"color: #717100;\">$1</span>"
     },
     {

@@ -1038,7 +1038,9 @@ RULES_DATA = {
             "category": "command",
             "priority": 80,
             "prompt_only": True,
-            "pattern": r"^([a-zA-Z0-9_'-]+.*)$",
+            # Typed commands start in lowercase, with a digit or as a function key (F12). Game
+            # messages printed right after the prompt start in uppercase ("] Estás persiguiendo a X.").
+            "pattern": r"^((?:[a-z0-9ñáéíóú_'-]|F\d)[^\n]*)$",
             "replace": r'<span style="color: #717100;">$1</span>'
         },
         {

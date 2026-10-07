@@ -297,3 +297,20 @@ class MudletFixtureTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class PromptCommandEchoTest(unittest.TestCase):
+    """Text right after a "> " / "] " prompt is a typed command only when it starts like one."""
+
+    def test_game_messages_after_prompt_are_not_commands(self):
+        c = make_colorizer()
+        for line in ("] Estás persiguiendo a Chacal.", "> Hace algo de frío en el ambiente.",
+                     "> Esqueleto del Túmulo te protege valientemente."):
+            with self.subTest(line=line):
+                self.assertNotIn("rgb(113,113,0)", c.colorize_text(line, preprocess=False))
+
+    def test_typed_commands_after_prompt_stay_olive(self):
+        c = make_colorizer()
+        for line in ("> ataca koch", "] f12", "> F3", "> 2 n"):
+            with self.subTest(line=line):
+                self.assertIn("rgb(113,113,0)", c.colorize_text(line, preprocess=False))
