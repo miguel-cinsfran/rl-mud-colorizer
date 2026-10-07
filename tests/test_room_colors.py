@@ -14,6 +14,8 @@ def compiled_colors(config):
     colors = list(config["room_colors"].values())
     colors += list(config["room_map_colors"]["names"].values())
     colors += list(config["room_map_colors"]["zones"].values())
+    colors += list(config["room_reference_colors"]["zones"].values())
+    colors += [c for runs in config["room_reference_colors"]["names"].values() for _, c in runs]
     colors.append(config["room_fallback_color"])
     return colors
 
@@ -90,6 +92,41 @@ class LookupOrder(unittest.TestCase):
     def test_known_title_only_line_is_colored(self):
         out = self.make().colorize_line("Plaza: Sur")
         self.assertIn("color: rgb(0,255,0)", out)
+
+
+class ReferenceTitleRuns(unittest.TestCase):
+    """Titles seen in colored Mudlet logs keep the game's colors, even mixed inside the title."""
+
+    def make(self):
+        return RLColorizer(config={
+            "rules": [
+                {"id": "exits", "type": "composite_room_exits", "priority": 1,
+                 "pattern": r"^(?:([>\]])\s*)?(.+?)(\s+)(\[[a-z,]+\])\s*$"},
+            ],
+            "room_colors": {"campos de cultivo": "#ff0000"},
+            "room_map_colors": {"names": {"ciudad: calle": "#eac6a6"}, "zones": {}},
+            "room_reference_colors": {
+                "names": {"campos de cultivo": [[10, "#c0c0c0"], [7, "#ffff00"]],
+                          "ciudad: plaza": [[13, "#c0c0c0"]]},
+                "zones": {"ciudad": "#c0c0c0"},
+            },
+            "room_fallback_color": "#ffffff",
+        })
+
+    def test_mixed_title_keeps_each_run(self):
+        out = self.make().colorize_line("Campos de Cultivo [ne,o]")
+        self.assertIn('<span style="color: rgb(192,192,192); background: rgb(0,0,0); ">Campos de </span>'
+                      '<span style="color: rgb(255,255,0); background: rgb(0,0,0); ">Cultivo</span>', out)
+
+    def test_reference_zone_beats_map_name(self):
+        self.assertEqual(self.make().get_room_runs("Ciudad: Calle"), [(7, "#c0c0c0")])
+
+    def test_silver_titles_of_a_silver_zone_look_alike(self):
+        c = self.make()
+        self.assertEqual(c.get_room_runs("Ciudad: Plaza"), c.get_room_runs("Ciudad: Calle"))
+
+    def test_runs_ignored_when_length_differs(self):
+        self.assertEqual(self.make().get_room_runs("Campos  de Cultivo"), [(18, "#ff0000")])
 
 
 class SilverTitlesTurnWhite(unittest.TestCase):

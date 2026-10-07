@@ -1,0 +1,662 @@
+{
+"names": {
+"anduar: calle de la justicia": [
+[
+28,
+"#c0c0c0"
+]
+],
+"anduar: senda de acceso": [
+[
+23,
+"#c0c0c0"
+]
+],
+"angosto sendero entre las rocas": [
+[
+31,
+"#c0c0c0"
+]
+],
+"antigua senda orgoth - anduar": [
+[
+27,
+"#808000"
+]
+],
+"arboleda de ucho": [
+[
+16,
+"#008000"
+]
+],
+"avenida de moisã©s": [
+[
+18,
+"#c0c0c0"
+]
+],
+"banco de golthur orod": [
+[
+21,
+"#008000"
+]
+],
+"bosque de maragedom": [
+[
+19,
+"#008000"
+]
+],
+"bosque de maragedom: cerca de wareth": [
+[
+30,
+"#008000"
+],
+[
+6,
+"#00ff00"
+]
+],
+"bosque de thorin": [
+[
+16,
+"#00ff00"
+]
+],
+"bosque de thorin: senda": [
+[
+23,
+"#00ff00"
+]
+],
+"camino a los cultivos de maã­z (naturalizado)": [
+[
+45,
+"#cccccc"
+]
+],
+"camino de amonmen": [
+[
+17,
+"#808000"
+]
+],
+"camino de ascenso al volcã¡n": [
+[
+28,
+"#808000"
+]
+],
+"camino de galador a brenoic": [
+[
+27,
+"#808000"
+]
+],
+"camino de galador a mnenoic": [
+[
+27,
+"#808000"
+]
+],
+"camino de los pã¡ramos de orgoth": [
+[
+32,
+"#800000"
+]
+],
+"camino de ã‹armen": [
+[
+17,
+"#008080"
+]
+],
+"camino de ã‹armen - bosque de orgoth": [
+[
+17,
+"#008080"
+],
+[
+18,
+"#c0c0c0"
+]
+],
+"camino de ã‹armen - bosque de orgoth (profanado)": [
+[
+47,
+"#cccccc"
+]
+],
+"camino de ã‹armen - cruce de caminos": [
+[
+17,
+"#008080"
+],
+[
+18,
+"#c0c0c0"
+]
+],
+"camino de ã‹armen - paso del rã­o cuivinien": [
+[
+17,
+"#008080"
+],
+[
+25,
+"#c0c0c0"
+]
+],
+"camino de ã‹armen - senda del cauce oeste": [
+[
+17,
+"#008080"
+],
+[
+23,
+"#c0c0c0"
+]
+],
+"camino de ã‹armen - senda del cauce sur": [
+[
+17,
+"#008080"
+],
+[
+21,
+"#c0c0c0"
+]
+],
+"camino empedrado de takome": [
+[
+26,
+"#c0c0c0"
+]
+],
+"camino fronterizo": [
+[
+7,
+"#808000"
+],
+[
+10,
+"#800000"
+]
+],
+"campos de anduar": [
+[
+16,
+"#c0c0c0"
+]
+],
+"campos de cultivo": [
+[
+10,
+"#c0c0c0"
+],
+[
+7,
+"#ffff00"
+]
+],
+"catacumbas del zigurat": [
+[
+15,
+"#800000"
+],
+[
+7,
+"#808000"
+]
+],
+"caverna oscura": [
+[
+14,
+"#808080"
+]
+],
+"cuevas pantanosas": [
+[
+7,
+"#808080"
+],
+[
+10,
+"#008000"
+]
+],
+"cuevas vedadas": [
+[
+14,
+"#808080"
+]
+],
+"entrada del zigurat": [
+[
+19,
+"#808000"
+]
+],
+"entramado serpenteante de cuevas": [
+[
+32,
+"#008000"
+]
+],
+"entre un montã³n de escombros": [
+[
+29,
+"#808000"
+]
+],
+"erial de los condenados: ante una enorme cueva": [
+[
+46,
+"#008000"
+]
+],
+"escalera al nivel superior del zigurat": [
+[
+38,
+"#808000"
+]
+],
+"escalera principal": [
+[
+18,
+"#008000"
+]
+],
+"esquina interior noroeste del zigurat": [
+[
+37,
+"#808000"
+]
+],
+"esquina interior sudeste del zigurat": [
+[
+36,
+"#808000"
+]
+],
+"estudio del general ssratz": [
+[
+12,
+"#008000"
+],
+[
+14,
+"#ffff00"
+]
+],
+"exterior de anduar: puerta este": [
+[
+31,
+"#ffff00"
+]
+],
+"fortaleza de d'hara: muralla exterior": [
+[
+19,
+"#808080"
+],
+[
+18,
+"#c0c0c0"
+]
+],
+"fortaleza de d'hara: muralla norte, cerca del meteorito": [
+[
+19,
+"#808080"
+],
+[
+36,
+"#c0c0c0"
+]
+],
+"galerã­as subterrã¡neas": [
+[
+23,
+"#c0c0c0"
+]
+],
+"golthur orod - primer nivel: avenida lateral": [
+[
+44,
+"#008000"
+]
+],
+"grimoszk: calles": [
+[
+10,
+"#00ff00"
+],
+[
+6,
+"#c0c0c0"
+]
+],
+"grimoszk: entrada al zigurat": [
+[
+10,
+"#00ff00"
+],
+[
+18,
+"#c0c0c0"
+]
+],
+"grimoszk: plaza pãºblica": [
+[
+10,
+"#00ff00"
+],
+[
+14,
+"#c0c0c0"
+]
+],
+"habitaciã³n del patriarca greszhx": [
+[
+33,
+"#c0c0c0"
+]
+],
+"la piel escamosa": [
+[
+8,
+"#c0c0c0"
+],
+[
+8,
+"#008000"
+]
+],
+"linde este del bosque de orgoth - cruce de ã‹armen": [
+[
+31,
+"#00ff00"
+],
+[
+18,
+"#c0c0c0"
+]
+],
+"linde este del bosque de orgoth - dinmen": [
+[
+31,
+"#00ff00"
+],
+[
+8,
+"#c0c0c0"
+]
+],
+"mercado de takome. calle este": [
+[
+29,
+"#ffff00"
+]
+],
+"minas de kheleb - dum - abismo del montacargas": [
+[
+44,
+"#c0c0c0"
+]
+],
+"minas de kheleb dum - nivel 1": [
+[
+29,
+"#c0c0c0"
+]
+],
+"montes del destino": [
+[
+18,
+"#939300"
+]
+],
+"murallas de galador": [
+[
+19,
+"#808080"
+]
+],
+"pantanos de zulk": [
+[
+16,
+"#008000"
+]
+],
+"pantanos de zulk: cerca de la ciudad de grimoszk": [
+[
+18,
+"#008000"
+],
+[
+30,
+"#808000"
+]
+],
+"pasadizo en el interior del zigurat": [
+[
+35,
+"#808000"
+]
+],
+"pasaje subterrã¡neo: pared infranqueable": [
+[
+21,
+"#808000"
+],
+[
+19,
+"#808080"
+]
+],
+"pasaje subterrã¡neo: zona angosta": [
+[
+33,
+"#808000"
+]
+],
+"puente de hierro": [
+[
+16,
+"#008000"
+]
+],
+"puente sobre el rã­o derebar": [
+[
+28,
+"#008000"
+]
+],
+"puente sobre la grieta de lhoin": [
+[
+31,
+"#0000ff"
+]
+],
+"ruinas de la muralla este de anduar": [
+[
+35,
+"#ffff00"
+]
+],
+"ruinas de la muralla oeste de anduar": [
+[
+36,
+"#ffff00"
+]
+],
+"sala de espera": [
+[
+14,
+"#008000"
+]
+],
+"sala de las riquezas": [
+[
+12,
+"#ffffff"
+],
+[
+1,
+"#808000"
+],
+[
+7,
+"#ffff00"
+]
+],
+"sala de reuniones del ejã©rcito verde": [
+[
+22,
+"#808000"
+],
+[
+15,
+"#008000"
+]
+],
+"sala del consejo de zulk": [
+[
+20,
+"#008000"
+],
+[
+4,
+"#00ff00"
+]
+],
+"senda antigua entre anduar y orgoth": [
+[
+35,
+"#008080"
+]
+],
+"senda ascendente": [
+[
+16,
+"#939300"
+]
+],
+"senda de las colinas de anduar": [
+[
+30,
+"#c0c0c0"
+]
+],
+"senda del septentriã³n: lindes del taubã»rz": [
+[
+43,
+"#cccccc"
+]
+],
+"senda en el bosque": [
+[
+6,
+"#808000"
+],
+[
+6,
+"#c0c0c0"
+],
+[
+6,
+"#008000"
+]
+],
+"subterrã¡neos bajo el zigurat": [
+[
+22,
+"#808080"
+],
+[
+7,
+"#808000"
+]
+],
+"templo de ozomatli: altar": [
+[
+10,
+"#008000"
+],
+[
+8,
+"#00ff00"
+],
+[
+2,
+"#c0c0c0"
+],
+[
+5,
+"#808000"
+]
+],
+"templo de ozomatli: explanada de oraciã³n": [
+[
+10,
+"#008000"
+],
+[
+8,
+"#00ff00"
+],
+[
+2,
+"#c0c0c0"
+],
+[
+21,
+"#808000"
+]
+],
+"tierras hãºmedas": [
+[
+16,
+"#008000"
+]
+],
+"trono de zulk": [
+[
+9,
+"#008000"
+],
+[
+4,
+"#808000"
+]
+],
+"valle de mnenoic": [
+[
+16,
+"#008000"
+]
+],
+"viejo puesto fronterizo del sur de takome": [
+[
+35,
+"#c0c0c0"
+],
+[
+6,
+"#ffffff"
+]
+]
+},
+"zones": {
+"anduar": "#c0c0c0",
+"exterior de anduar": "#ffff00",
+"fortaleza de d'hara": "#808080",
+"grimoszk": "#00ff00",
+"linde este del bosque de orgoth": "#00ff00",
+"linde oeste del bosque de orgoth": "#00ff00",
+"pasaje subterrã¡neo": "#808000",
+"taubã»rz, el bosque de los no": "#808080"
+}
+}

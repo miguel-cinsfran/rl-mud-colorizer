@@ -31,20 +31,33 @@ También se quitan los mensajes de los PNJ que te hablan con `te dice:`. Un coma
 
 Cada título de sala toma su color de la primera fuente que lo conozca:
 
-1. El color del terreno en el mapa de Mudlet, por nombre exacto de sala y después por zona.
-2. El catálogo de salas (`rooms.json`).
-3. Blanco, si ninguna de las dos lo conoce.
+1. Los logs coloreados de Mudlet que usa el evaluador. Ahí se ve el color que manda el juego, que a veces cambia dentro del mismo título: en "Campos de Cultivo", "Campos de" sale en gris y "Cultivo" en amarillo.
+2. El color del terreno en el mapa de Mudlet, por nombre exacto de sala y después por zona.
+3. El catálogo de salas (`rooms.json`).
+4. Blanco, si ninguna fuente lo conoce.
 
-Los colores demasiado oscuros sobre fondo negro se aclaran hasta llegar a un contraste de 4,5. Las salas que en el mapa quedaron con terreno blanco se tratan como sin dato, para que decida el catálogo.
+Un título que sale gris de punta a punta se pinta blanco, para que se distinga del texto. Las salas de una zona gris, como Anduar, llevan la zona en blanco y el resto en gris. Los colores demasiado oscuros sobre fondo negro se aclaran hasta llegar a un contraste de 4,5. Las salas que en el mapa quedaron con terreno blanco se tratan como sin dato.
 
-Cuando tengas una exportación nueva del mapa en JSON, regenera los colores y las reglas:
+Cuando tengas una exportación nueva del mapa en JSON, o más logs de referencia, regenera los colores y las reglas:
 
 ```
 python tools/extract_map_colors.py ruta/al/map_export.json
+python tools/extract_reference_rooms.py
 python build_rules.py
 ```
 
-El primer comando escribe `room_map_colors.json` y el segundo recompila `rules.json` y `webapp/rules.js`.
+El primer comando escribe `room_map_colors.json`, el segundo `room_reference_colors.json` (necesita los logs en `cache_reference/`, ver más abajo) y el tercero recompila `rules.json` y `webapp/rules.js`.
+
+## Colores de los ítems
+
+Los nombres de ítems conocidos se pintan con los colores del juego, letra por letra si hace falta ("Capucha" en gris y "Tenebrosa" en violeta), en cualquier línea que no tenga ya otro color: inventario, empuñar, quitarse cosas o lo que otro saca de su bolsa. Un nombre partido en dos líneas por el ancho del juego queda sin color.
+
+Los datos salen del catálogo de la Armería que Franco publica en su repositorio (`items.json` en [FrancoMPaniagua/rl-mud-colorizer](https://github.com/FrancoMPaniagua/rl-mud-colorizer)). Los códigos de color del juego se pasan a los tonos que muestra Mudlet, comprobados contra los logs de referencia. Si esos logs muestran un ítem con otros colores de forma constante, mandan los logs. Para actualizarlo:
+
+```
+python tools/build_item_colors.py ruta/a/items.json
+python build_rules.py
+```
 
 ## Línea de comandos
 

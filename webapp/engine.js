@@ -160,6 +160,82 @@ function normalizeLineToMudlet(lineHtml) {
     return merged.map(([s, c]) => `<span style="${s}">${c}</span>`).join('');
 }
 
+// Characters that continue a word: an item name only matches between non-word characters.
+const ITEM_WORD_RE = /[0-9A-Za-zÀ-ÿ]/;
+const ITEM_KEY_LEN = 4;
+
+function unescapeHtml(str) {
+    return str
+        .replace(/&#x27;/g, "'")
+        .replace(/&quot;/g, '"')
+        .replace(/&gt;/g, '>')
+        .replace(/&lt;/g, '<')
+        .replace(/&amp;/g, '&');
+}
+
+// {first ITEM_KEY_LEN chars: [names, longest first]} for item names of at least that length.
+function itemIndex(itemColors) {
+    const index = new Map();
+    const names = Object.keys(itemColors).sort((a, b) => (b.length - a.length) || (a < b ? -1 : a > b ? 1 : 0));
+    for (const name of names) {
+        if (name.length < ITEM_KEY_LEN) continue;
+        const key = name.slice(0, ITEM_KEY_LEN);
+        if (!index.has(key)) index.set(key, []);
+        index.get(key).push(name);
+    }
+    return index;
+}
+
+// Color known item names inside the default (silver) spans of a Mudlet-normalized line,
+// run by run, as the game does ("Capucha " silver, "Tenebrosa" purple).
+function applyItemColors(lineHtml, itemColors, index) {
+    if (!index.size || !lineHtml.includes(DEFAULT_MUDLET_STYLE)) return lineHtml;
+    const tokens = [];
+    const spanRe = /<span style="([^"]*)">(.*?)<\/span>/g;
+    let m;
+    while ((m = spanRe.exec(lineHtml)) !== null) {
+        const style = m[1];
+        if (style !== DEFAULT_MUDLET_STYLE) {
+            tokens.push([style, m[2]]);
+            continue;
+        }
+        const text = unescapeHtml(m[2]);
+        let start = 0;
+        let i = 0;
+        while (i <= text.length - ITEM_KEY_LEN) {
+            let name = null;
+            if (i === 0 || !ITEM_WORD_RE.test(text[i - 1])) {
+                for (const cand of index.get(text.slice(i, i + ITEM_KEY_LEN)) || []) {
+                    const end = i + cand.length;
+                    if (text.startsWith(cand, i) && (end === text.length || !ITEM_WORD_RE.test(text[end]))) {
+                        name = cand;
+                        break;
+                    }
+                }
+            }
+            if (!name) {
+                i += 1;
+                continue;
+            }
+            tokens.push([style, escapeHtml(text.slice(start, i))]);
+            let pos = i;
+            for (const [n, color] of itemColors[name]) {
+                tokens.push([styleToMudlet(`color: ${color};`), escapeHtml(text.slice(pos, pos + n))]);
+                pos += n;
+            }
+            i = start = i + name.length;
+        }
+        tokens.push([style, escapeHtml(text.slice(start))]);
+    }
+    const merged = [];
+    for (const [style, content] of tokens) {
+        if (!content) continue;
+        if (merged.length > 0 && merged[merged.length - 1][0] === style) merged[merged.length - 1][1] += content;
+        else merged.push([style, content]);
+    }
+    return merged.map(([st, c]) => `<span style="${st}">${c}</span>`).join('');
+}
+
 class RLColorizerJS {
     constructor(config) {
         this.config = config || (typeof window !== 'undefined' ? window.COLORIZER_RULES : null);
@@ -177,7 +253,12 @@ class RLColorizerJS {
         const mapColors = this.config.room_map_colors || {};
         this.roomMapNames = mapColors.names || {};
         this.roomMapZones = mapColors.zones || {};
+        const refColors = this.config.room_reference_colors || {};
+        this.roomRefNames = refColors.names || {};
+        this.roomRefZones = refColors.zones || {};
         this.roomFallbackColor = this.config.room_fallback_color || '#ffffff';
+        this.itemColors = this.config.item_colors || {};
+        this.itemIndex = itemIndex(this.itemColors);
         
         this.racesStr = "Hlag|Lag|Melf|Elf|S-e|Gob|Gno|Hum|Orc|S-o|Ena|Mdro|Drow|S-d|Hal|Hlf|Duer|Drg|Min|Mino|Gnl|Gnol|Kob|Org|Orgo|Drax|Ctd|Cent|Kuo|Ggt|S-g";
         this.raceTagRegex = new RegExp(`\\((?:${this.racesStr})\\)`, 'i');
@@ -344,7 +425,7 @@ class RLColorizerJS {
 
         const marker = this._markerColor(rawText);
         if (marker) lineHtml = this._applyMarker(lineHtml, marker[0], marker[1]);
-        return normalizeLineToMudlet(promptHtml + lineHtml);
+        return applyItemColors(normalizeLineToMudlet(promptHtml + lineHtml), this.itemColors, this.itemIndex);
     }
 
     // ` (+12)` after a stat: only the signed number is colored; a zero delta stays default.
@@ -450,14 +531,16 @@ class RLColorizerJS {
     }
 
     // {color, n}: color for the first n characters of the title, or null when unknown.
-    // Order: Mudlet map (exact name, then zone), then the room catalog (exact, then zone).
-    // An exact match colors the whole title; a zone match colors only the zone
-    // prefix, up to the ":" or the first "-" (the reference leaves the rest default).
+    // Order: zones seen in colored Mudlet logs, then the Mudlet map (exact name, then zone),
+    // then the room catalog (exact, then zone). An exact match colors the whole title; a
+    // zone match colors only the zone prefix, up to the ":" or the first "-" (the reference
+    // leaves the rest default). Exact titles seen in Mudlet logs go through getRoomRuns.
     getRoomColor(roomTitle) {
         if (!roomTitle) return null;
-        const cleanTitle = roomTitle.replace(/\s*-\s*/g, ' - ').replace(/\s*:\s*/g, ': ').replace(/\s+/g, ' ').trim().toLowerCase();
+        const cleanTitle = this._cleanRoomTitle(roomTitle);
         const has = (t, k) => Object.prototype.hasOwnProperty.call(t, k);
-        for (const [names, zones] of [[this.roomMapNames, this.roomMapZones], [this.roomColors, this.roomColors]]) {
+        const sources = [[{}, this.roomRefZones], [this.roomMapNames, this.roomMapZones], [this.roomColors, this.roomColors]];
+        for (const [names, zones] of sources) {
             if (has(names, cleanTitle)) return { color: names[cleanTitle], n: roomTitle.length };
             if (cleanTitle.includes(':')) {
                 const zone = cleanTitle.split(':')[0].trim();
@@ -471,17 +554,45 @@ class RLColorizerJS {
         return null;
     }
 
+    _cleanRoomTitle(roomTitle) {
+        return roomTitle.replace(/\s*-\s*/g, ' - ').replace(/\s*:\s*/g, ': ').replace(/\s+/g, ' ').trim().toLowerCase();
+    }
+
+    // [[n, color], ...] runs from the start of the title, or null when unknown. A title seen
+    // in colored Mudlet logs keeps the colors the game sent, which can change inside the
+    // title ("Campos de " silver, "Cultivo" yellow); otherwise getRoomColor.
+    getRoomRuns(roomTitle) {
+        if (!roomTitle) return null;
+        const key = this._cleanRoomTitle(roomTitle);
+        const runs = Object.prototype.hasOwnProperty.call(this.roomRefNames, key) ? this.roomRefNames[key] : null;
+        const found = this.getRoomColor(roomTitle);
+        if (runs && runs.reduce((t, r) => t + r[0], 0) === roomTitle.length) {
+            // An all-silver title inside a silver zone is drawn like the rest of its zone.
+            const silverZone = found && found.n < roomTitle.length && this._nearSilver(found.color);
+            if (!(silverZone && runs.every(r => this._nearSilver(r[1])))) return runs.map(r => [r[0], r[1]]);
+        }
+        return found ? [[found.n, found.color]] : null;
+    }
+
     _nearSilver(color) {
         const [r, g, b] = hexToRgb(color);
         return Math.sqrt((r - 192) ** 2 + (g - 192) ** 2 + (b - 192) ** 2) < SILVER_TITLE_DISTANCE;
     }
 
-    // Bold title: known color on the matched prefix, fallback color when unknown.
+    // Bold title: known colors on the matched runs, fallback color when unknown. A title that
+    // is silver all over is drawn white so it stands out from the body text; silver next to
+    // another color stays silver, as the game shows it.
     _roomTitleHtml(roomTitle) {
-        const found = this.getRoomColor(roomTitle);
-        if (!found) return `<span style="color: ${this.roomFallbackColor}; font-weight: bold;">${escapeHtml(roomTitle)}</span>`;
-        const color = this._nearSilver(found.color) ? '#ffffff' : found.color;
-        return `<span style="color: ${color}; font-weight: bold;">${escapeHtml(roomTitle.slice(0, found.n))}</span>${escapeHtml(roomTitle.slice(found.n))}`;
+        let runs = this.getRoomRuns(roomTitle);
+        if (!runs) return `<span style="color: ${this.roomFallbackColor}; font-weight: bold;">${escapeHtml(roomTitle)}</span>`;
+        if (runs.every(r => this._nearSilver(r[1]))) runs = [[runs.reduce((t, r) => t + r[0], 0), '#ffffff']];
+        let out = '';
+        let pos = 0;
+        for (const [n, color] of runs) {
+            out += `<span style="color: ${color}; font-weight: bold;">${escapeHtml(roomTitle.slice(pos, pos + n))}</span>`;
+            pos += n;
+        }
+        return out + escapeHtml(roomTitle.slice(pos));
     }
 
     _renderRoomExits(m) {
@@ -494,7 +605,7 @@ class RLColorizerJS {
 
     _renderRoomTitle(m) {
         const roomTitle = m[2];
-        if (!this.getRoomColor(roomTitle)) return null;
+        if (!this.getRoomRuns(roomTitle)) return null;
         return this._roomTitleHtml(roomTitle);
     }
 

@@ -140,6 +140,62 @@ def normalize_line_to_mudlet(line_html):
     return "".join(f'<span style="{s}">{c}</span>' for s, c in merged)
 
 
+# Characters that continue a word: an item name only matches between non-word characters.
+ITEM_WORD_RE = re.compile(r'[0-9A-Za-zÀ-ÿ]')
+ITEM_KEY_LEN = 4
+MUDLET_SPAN_RE = re.compile(r'<span style="([^"]*)">(.*?)</span>')
+
+
+def item_index(item_colors):
+    """{first ITEM_KEY_LEN chars: [names, longest first]} for item names of at least that length."""
+    index = {}
+    for name in sorted(item_colors, key=lambda n: (-len(n), n)):
+        if len(name) >= ITEM_KEY_LEN:
+            index.setdefault(name[:ITEM_KEY_LEN], []).append(name)
+    return index
+
+
+def apply_item_colors(line_html, item_colors, index):
+    """Color known item names inside the default (silver) spans of a Mudlet-normalized line,
+    run by run, as the game does ("Capucha " silver, "Tenebrosa" purple)."""
+    if not index or DEFAULT_MUDLET_STYLE not in line_html:
+        return line_html
+    tokens = []
+    for style, content in MUDLET_SPAN_RE.findall(line_html):
+        if style != DEFAULT_MUDLET_STYLE:
+            tokens.append((style, content))
+            continue
+        text = html.unescape(content)
+        start = i = 0
+        while i <= len(text) - ITEM_KEY_LEN:
+            name = None
+            if i == 0 or not ITEM_WORD_RE.match(text[i - 1]):
+                for cand in index.get(text[i:i + ITEM_KEY_LEN], ()):
+                    end = i + len(cand)
+                    if text.startswith(cand, i) and (end == len(text) or not ITEM_WORD_RE.match(text[end])):
+                        name = cand
+                        break
+            if not name:
+                i += 1
+                continue
+            tokens.append((style, html.escape(text[start:i])))
+            pos = i
+            for n, color in item_colors[name]:
+                tokens.append((style_to_mudlet(f"color: {color};"), html.escape(text[pos:pos + n])))
+                pos += n
+            i = start = i + len(name)
+        tokens.append((style, html.escape(text[start:])))
+    merged = []
+    for style, content in tokens:
+        if not content:
+            continue
+        if merged and merged[-1][0] == style:
+            merged[-1] = (style, merged[-1][1] + content)
+        else:
+            merged.append((style, content))
+    return "".join(f'<span style="{s}">{c}</span>' for s, c in merged)
+
+
 class RLColorizer:
     def __init__(self, rules_path=RULES_FILE, config=None):
         if config is not None:
@@ -155,8 +211,13 @@ class RLColorizer:
         map_colors = self.config.get('room_map_colors') or {}
         self.room_map_names = map_colors.get('names', {})
         self.room_map_zones = map_colors.get('zones', {})
+        ref_colors = self.config.get('room_reference_colors') or {}
+        self.room_ref_names = ref_colors.get('names', {})
+        self.room_ref_zones = ref_colors.get('zones', {})
         self.room_fallback_color = self.config.get('room_fallback_color', '#ffffff')
         self.theme = self.config.get('theme', {})
+        self.item_colors = self.config.get('item_colors', {})
+        self.item_index = item_index(self.item_colors)
         
         self.races_str = r'Hlag|Lag|Melf|Elf|S-e|Gob|Gno|Hum|Orc|S-o|Ena|Mdro|Drow|S-d|Hal|Hlf|Duer|Drg|Min|Mino|Gnl|Gnol|Kob|Org|Orgo|Drax|Ctd|Cent|Kuo|Ggt|S-g'
         self.race_tag_regex = re.compile(rf'\((?:{self.races_str})\)', re.IGNORECASE)
@@ -320,7 +381,7 @@ class RLColorizer:
         marker = self._marker_color(raw_text)
         if marker:
             line_html = self._apply_marker(line_html, *marker)
-        return normalize_line_to_mudlet(prompt_html + line_html)
+        return apply_item_colors(normalize_line_to_mudlet(prompt_html + line_html), self.item_colors, self.item_index)
 
     @staticmethod
     def _prompt_delta_html(ws, delta):
@@ -414,15 +475,17 @@ class RLColorizer:
     def get_room_color(self, room_title):
         """(color, n) with the first n characters of the title to color, or None when unknown.
 
-        Order: Mudlet map (exact name, then zone), then the room catalog (exact, then zone).
-        An exact match colors the whole title; a zone match colors only the zone prefix,
-        up to the ":" or the first "-" (the reference leaves the rest default).
+        Order: zones seen in colored Mudlet logs, then the Mudlet map (exact name, then zone),
+        then the room catalog (exact, then zone). An exact match colors the whole title; a
+        zone match colors only the zone prefix, up to the ":" or the first "-" (the reference
+        leaves the rest default). Exact titles seen in Mudlet logs go through get_room_runs.
         """
         if not room_title:
             return None
-        clean_title = re.sub(r'\s+', ' ', re.sub(r'\s*-\s*', ' - ', room_title)).strip().lower()
-        clean_title = re.sub(r'\s*:\s*', ': ', clean_title)
-        for names, zones in ((self.room_map_names, self.room_map_zones), (self.room_colors, self.room_colors)):
+        clean_title = self._clean_room_title(room_title)
+        sources = (({}, self.room_ref_zones), (self.room_map_names, self.room_map_zones),
+                   (self.room_colors, self.room_colors))
+        for names, zones in sources:
             if clean_title in names:
                 return names[clean_title], len(room_title)
             if ':' in clean_title:
@@ -436,19 +499,48 @@ class RLColorizer:
         return None
 
     @staticmethod
+    def _clean_room_title(room_title):
+        clean_title = re.sub(r'\s+', ' ', re.sub(r'\s*-\s*', ' - ', room_title)).strip().lower()
+        return re.sub(r'\s*:\s*', ': ', clean_title)
+
+    def get_room_runs(self, room_title):
+        """[(n, color), ...] runs from the start of the title, or None when unknown.
+
+        A title seen in colored Mudlet logs keeps the colors the game sent, which can change
+        inside the title ("Campos de " silver, "Cultivo" yellow); otherwise get_room_color.
+        """
+        if not room_title:
+            return None
+        runs = self.room_ref_names.get(self._clean_room_title(room_title))
+        found = self.get_room_color(room_title)
+        if runs and sum(n for n, _ in runs) == len(room_title):
+            # An all-silver title inside a silver zone is drawn like the rest of its zone.
+            silver_zone = found and found[1] < len(room_title) and self._near_silver(found[0])
+            if not (silver_zone and all(self._near_silver(c) for _, c in runs)):
+                return [(n, c) for n, c in runs]
+        return [(found[1], found[0])] if found else None
+
+    @staticmethod
     def _near_silver(color):
         r, g, b = hex_to_rgb(color)
         return ((r - 192) ** 2 + (g - 192) ** 2 + (b - 192) ** 2) ** 0.5 < SILVER_TITLE_DISTANCE
 
     def _room_title_html(self, room_title):
-        """Bold title: known color on the matched prefix, fallback color when unknown."""
-        found = self.get_room_color(room_title)
-        if not found:
+        """Bold title: known colors on the matched runs, fallback color when unknown.
+
+        A title that is silver all over is drawn white so it stands out from the body text;
+        silver next to another color stays silver, as the game shows it.
+        """
+        runs = self.get_room_runs(room_title)
+        if not runs:
             return f'<span style="color: {self.room_fallback_color}; font-weight: bold;">{html.escape(room_title)}</span>'
-        color, n = found
-        if self._near_silver(color):
-            color = '#ffffff'
-        return f'<span style="color: {color}; font-weight: bold;">{html.escape(room_title[:n])}</span>{html.escape(room_title[n:])}'
+        if all(self._near_silver(c) for _, c in runs):
+            runs = [(sum(n for n, _ in runs), '#ffffff')]
+        out, pos = [], 0
+        for n, color in runs:
+            out.append(f'<span style="color: {color}; font-weight: bold;">{html.escape(room_title[pos:pos + n])}</span>')
+            pos += n
+        return "".join(out) + html.escape(room_title[pos:])
 
     def _render_room_exits(self, m):
         prompt_sym, room_title, sep, exits = m.groups()
@@ -457,7 +549,7 @@ class RLColorizer:
 
     def _render_room_title(self, m):
         prompt_sym, room_title = m.groups()
-        if not self.get_room_color(room_title):
+        if not self.get_room_runs(room_title):
             return None
         return self._room_title_html(room_title)
 

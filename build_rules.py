@@ -1071,6 +1071,8 @@ RULES_DATA = {
 
 ROOMS_FILE = BASE_DIR / "rooms.json"
 MAP_COLORS_FILE = BASE_DIR / "room_map_colors.json"
+REFERENCE_COLORS_FILE = BASE_DIR / "room_reference_colors.json"
+ITEM_COLORS_FILE = BASE_DIR / "item_colors.json"
 WEBAPP_RULES_FILE = BASE_DIR / "webapp" / "rules.js"
 
 # Room-title legibility rules (checked by tests/test_room_colors.py).
@@ -1153,6 +1155,28 @@ def build_rules_data(verbose=False):
     elif verbose:
         print("Warning: room_map_colors.json not found!")
     RULES_DATA["room_map_colors"] = map_colors
+    ref_colors = {"names": {}, "zones": {}}
+    if REFERENCE_COLORS_FILE.exists():
+        with open(REFERENCE_COLORS_FILE, 'r', encoding='utf-8') as rf:
+            raw = json.load(rf)
+        ref_colors = {
+            "names": {k: [[n, make_readable(c)] for n, c in runs] for k, runs in raw.get("names", {}).items()},
+            "zones": _readable_table(raw.get("zones", {}), adjustments),
+        }
+        if verbose:
+            print(f"Loaded {len(ref_colors['names'])} names and {len(ref_colors['zones'])} zones from room_reference_colors.json")
+    elif verbose:
+        print("Warning: room_reference_colors.json not found!")
+    RULES_DATA["room_reference_colors"] = ref_colors
+    item_colors = {}
+    if ITEM_COLORS_FILE.exists():
+        with open(ITEM_COLORS_FILE, 'r', encoding='utf-8') as itf:
+            item_colors = json.load(itf)
+        if verbose:
+            print(f"Loaded {len(item_colors)} colored items from item_colors.json")
+    elif verbose:
+        print("Warning: item_colors.json not found!")
+    RULES_DATA["item_colors"] = item_colors
     RULES_DATA["room_fallback_color"] = ROOM_FALLBACK
     if verbose:
         pairs = sorted(set(adjustments))

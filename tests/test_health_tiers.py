@@ -64,8 +64,9 @@ class GroupStatus(unittest.TestCase):
         self.assertEqual(got[1], [("90%", GREEN)])
 
     def test_without_header_nothing_is_colored(self):
+        # "Colgante del Oso" is a known item, so its name keeps the item colors; the % stays plain.
         for line in ("Colgante del Oso 28%", "Zorak          100%", "Rothe, el Artista         100%"):
-            self.assertEqual(colored(self.c, line), [[]], line)
+            self.assertEqual([t for t, _ in colored(self.c, line)[0] if "%" in t], [], line)
 
     def test_context_ends_at_blank_or_other_line(self):
         self.assertEqual(colored(self.c, f"{HEADER}\n\nZorak 90%")[2], [])
@@ -138,7 +139,7 @@ class TierPalette(unittest.TestCase):
             data = json.load(f)
         tiers = {t["color"] for r in data["rules"] if r.get("tiers") for t in r["tiers"]}
         self.assertEqual(tiers, {GREEN, AMBER, RED})
-        skip = {"room_colors", "room_map_colors", "preprocess"}
+        skip = {"room_colors", "room_map_colors", "room_reference_colors", "preprocess"}
         others = set(re.findall(r"#[0-9a-f]{6}", json.dumps({k: v for k, v in data.items() if k not in skip}).lower()))
         others |= set(re.findall(r"#[0-9a-f]{6}", (ROOT / "engine.py").read_text(encoding="utf-8").lower()))
         others -= tiers
