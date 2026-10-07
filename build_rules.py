@@ -62,6 +62,19 @@ RULES_FILE = BASE_DIR / "rules.json"
 #                    the source had blanks there. Leading/trailing blanks are dropped.
 #                    VIPMud adds a blank line after most server messages; this keeps
 #                    the colored paste compact.
+#   drop_with_echo   {pattern, message_group, continuation, lookback, max_prefix,
+#                     max_prefix_words, prefix_reject}
+#                    drop the matching line (and the `continuation` lines right after it, which
+#                    belong to the same wrapped message), then remove the most recent line among
+#                    the last `lookback` non-blank emitted lines whose text (prompt removed,
+#                    spaces collapsed) ends with the message (group `message_group` plus the
+#                    continuation lines). What precedes the message must be at most
+#                    `max_prefix` characters, end on a space, have at most `max_prefix_words`
+#                    words and not match `prefix_reject`. Used to remove a typed tell command
+#                    whatever its alias; lines in between are kept. No state across inputs.
+#   drop             also accepts `continuation`: following lines matching it are dropped too.
+# Any rule may carry "option": "<name>"; it only runs when that option is enabled. The only
+# option is "hide_private" (on by default; CLI --keep-private, checkbox in the web page).
 # Any rule may carry "clients": [...]; without it the rule is client-agnostic.
 # Client detection: the client whose "signatures" match the most lines wins
 # (ties: first declared); no match -> only client-agnostic rules apply.
@@ -172,6 +185,41 @@ PREPROCESS_DATA = {
             "login": True,
             "kind": "drop",
             "pattern": r"^- Tu última conexión fue el .* desde la IP ",
+        },
+
+        # --- Private messages (option "hide_private", on by default): tells and telepathy ---
+        # Players type tells through aliases (t, tell, r, telepatia, custom words, even a stray
+        # DEL char), so the typed command is found by its message, never by its command word.
+        {
+            # "X te dice: msg" / "te pregunta:" / "te exclama:", also numbered in history lists
+            # ("26: X te dice: ..."). The ':' ban in the name keeps public chat lines out.
+            # Indented lines right after it are the wrapped rest of the message (or the
+            # "Debido a tu invisibilidad..." notice); an indented "[exits]" line is not.
+            "id": "private_tell_in",
+            "option": "hide_private",
+            "kind": "drop",
+            "pattern": r"^(?:[>\]][ \t]*)?(?:\d+:[ \t]*)?[^:\n]{1,80}? te (?:dice|pregunta|exclama):",
+            "continuation": r"^[ \t]{2,}[^ \t\[]",
+        },
+        {
+            "id": "private_telepathy_notice",
+            "option": "hide_private",
+            "kind": "drop",
+            "pattern": r"^(?:[>\]][ \t]*)?[^:\n]{1,80}? contacta telepáticamente con ",
+        },
+        {
+            # "Dices a X: msg" (also Preguntas / Exclamas): the server echo of your own tell,
+            # plus the command you typed to send it.
+            "id": "private_tell_out",
+            "option": "hide_private",
+            "kind": "drop_with_echo",
+            "pattern": r"^(?:[>\]][ \t]*)?(?:Dices|Preguntas|Exclamas) a [^:\n]{1,60}:[ \t]*(.*)$",
+            "message_group": 1,
+            "continuation": r"^[ \t]{2,}[^ \t\[]",
+            "lookback": 15,
+            "max_prefix": 40,
+            "max_prefix_words": 3,
+            "prefix_reject": r":",
         },
 
         # --- VIPMud status block (Pv/SL/PL/Jgd/Imágenes/Pieles + closing prompt) ---

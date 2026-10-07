@@ -30,7 +30,7 @@ class CompiledRulesTest(unittest.TestCase):
     def test_preprocess_section_is_compiled_for_both_engines(self):
         data = json.loads((ROOT / "rules.json").read_text(encoding="utf-8"))
         kinds = {r["kind"] for r in data["preprocess"]["rules"]}
-        self.assertTrue(kinds <= {"drop", "drop_block", "drop_after", "dedupe_on_change", "rewrite", "drop_closer", "drop_before", "drop_secret", "squeeze_blank"})
+        self.assertTrue(kinds <= {"drop", "drop_block", "drop_after", "dedupe_on_change", "rewrite", "drop_closer", "drop_before", "drop_secret", "squeeze_blank", "drop_with_echo"})
         self.assertTrue({"drop", "drop_block", "drop_after", "dedupe_on_change", "drop_closer"} <= kinds)
         ids = [r["id"] for r in data["preprocess"]["rules"]]
         self.assertEqual(len(ids), len(set(ids)), "preprocess rule ids must be unique")

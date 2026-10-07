@@ -452,6 +452,31 @@
         "pattern": "^- Tu última conexión fue el .* desde la IP "
       },
       {
+        "id": "private_tell_in",
+        "option": "hide_private",
+        "kind": "drop",
+        "pattern": "^(?:[>\\]][ \\t]*)?(?:\\d+:[ \\t]*)?[^:\\n]{1,80}? te (?:dice|pregunta|exclama):",
+        "continuation": "^[ \\t]{2,}[^ \\t\\[]"
+      },
+      {
+        "id": "private_telepathy_notice",
+        "option": "hide_private",
+        "kind": "drop",
+        "pattern": "^(?:[>\\]][ \\t]*)?[^:\\n]{1,80}? contacta telepáticamente con "
+      },
+      {
+        "id": "private_tell_out",
+        "option": "hide_private",
+        "kind": "drop_with_echo",
+        "pattern": "^(?:[>\\]][ \\t]*)?(?:Dices|Preguntas|Exclamas) a [^:\\n]{1,60}:[ \\t]*(.*)$",
+        "message_group": 1,
+        "continuation": "^[ \\t]{2,}[^ \\t\\[]",
+        "lookback": 15,
+        "max_prefix": 40,
+        "max_prefix_words": 3,
+        "prefix_reject": ":"
+      },
+      {
         "id": "vip_status_pv",
         "kind": "drop",
         "clients": [

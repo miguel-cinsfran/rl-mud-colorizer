@@ -37,11 +37,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const statClient = document.getElementById('stat-client');
 
     const toast = document.getElementById('toast');
+    const optHidePrivate = document.getElementById('opt-hide-private');
     const inputPanel = document.getElementById('input-panel');
 
     let currentHtmlOutput = '';
     let lastAnnouncedClient = null;
     let suppressClientAnnounce = false;
+    let lastPrivateRemoved = 0;
 
     // Decode a file's bytes: strict UTF-8 first (Mudlet), Windows-1252 fallback (VIPMud).
     function decodeLogBuffer(buffer) {
@@ -72,7 +74,8 @@ document.addEventListener('DOMContentLoaded', () => {
             lastAnnouncedClient = colorizer.detectedClient;
             announce(
                 `Archivo "${file.name}" cargado con éxito (codificación ${encoding}). ` +
-                (label ? `Cliente detectado: ${label}.` : 'Cliente no reconocido, se aplican solo las reglas generales.')
+                (label ? `Cliente detectado: ${label}.` : 'Cliente no reconocido, se aplican solo las reglas generales.') +
+                privateRemovedNote()
             );
         };
         reader.onerror = () => announce(`No se pudo leer el archivo "${file.name}".`, true);
@@ -132,8 +135,9 @@ Propinas el golpe mortal a Sowy.
             return;
         }
 
-        const htmlResult = colorizer.colorizeText(text);
+        const htmlResult = colorizer.colorizeText(text, true, null, optHidePrivate.checked);
         currentHtmlOutput = htmlResult;
+        lastPrivateRemoved = colorizer.privateRemoved;
 
         // Client detection (VIPMud / Mudlet): show it, and announce it when it changes
         const clientId = colorizer.detectedClient;
@@ -268,10 +272,28 @@ Propinas el golpe mortal a Sowy.
     tabHtml.addEventListener('click', () => selectTab('html'));
 
     // Event Listeners
+    function privateRemovedNote() {
+        if (!optHidePrivate.checked || lastPrivateRemoved <= 0) return '';
+        return lastPrivateRemoved === 1
+            ? ' Se quitó 1 línea privada.'
+            : ` Se quitaron ${lastPrivateRemoved.toLocaleString()} líneas privadas.`;
+    }
+
+    optHidePrivate.addEventListener('change', () => {
+        processLog();
+        if (!inputTextarea.value.trim()) {
+            announce(optHidePrivate.checked ? 'Se quitarán los mensajes privados.' : 'Se conservarán los mensajes privados.');
+            return;
+        }
+        announce(optHidePrivate.checked
+            ? (privateRemovedNote().trim() || 'No hay mensajes privados en este log.')
+            : 'Mensajes privados conservados.');
+    });
+
     btnColorize.addEventListener('click', () => {
         processLog();
         const lines = (currentHtmlOutput.match(/<span/g) || []).length;
-        announce(`Log colorizado con éxito. ${lines} líneas preparadas para Deathlogs.`);
+        announce(`Log colorizado con éxito. ${lines} líneas preparadas para Deathlogs.${privateRemovedNote()}`);
     });
 
     btnCopy.addEventListener('click', copyToClipboard);

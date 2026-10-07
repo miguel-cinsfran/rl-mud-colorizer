@@ -185,6 +185,7 @@ class RLColorizerJS {
         this.cardinalRegex = /\b(norte|sur|este|oeste|noreste|noroeste|sudeste|sudoeste|arriba|abajo|n|s|e|o|ne|no|se|so)\b/i;
         
         this.detectedClient = null;
+        this.privateRemoved = 0;
         this._context = null; // block context set by a `sets_context` rule (e.g. group status list)
         this._initPreprocess(this.config.preprocess || {});
 
@@ -715,7 +716,8 @@ class RLColorizerJS {
         }));
         this.preRules = (cfg.rules || []).map(r => {
             const comp = { ...r };
-            for (const key of ['pattern', 'start', 'end', 'until', 'candidate', 'record', 'echo', 'keep_before']) {
+            for (const key of ['pattern', 'start', 'end', 'until', 'candidate', 'record', 'echo', 'keep_before',
+                              'continuation', 'prefix_reject']) {
                 if (key in r) comp['_' + key] = toSharedRegex(r[key]);
             }
             return comp;
@@ -771,13 +773,51 @@ class RLColorizerJS {
         return out;
     }
 
-    preprocessText(text, client = null) {
+    // Collapse runs of spaces/tabs and trim spaces (same result as engine.py _norm_ws).
+    _normWs(s) {
+        return s.replace(/[ \t]+/g, ' ').replace(/^ +| +$/g, '');
+    }
+
+    // Index in `out` of the typed command that produced the message `full`, or null (twin of engine.py).
+    _findEcho(out, r, full) {
+        if (!full) return null;
+        const lookback = (r.lookback === undefined || r.lookback === null) ? 15 : r.lookback;
+        const maxPrefix = (r.max_prefix === undefined || r.max_prefix === null) ? 40 : r.max_prefix;
+        const maxWords = (r.max_prefix_words === undefined || r.max_prefix_words === null) ? 3 : r.max_prefix_words;
+        let seen = 0;
+        let k = out.length - 1;
+        while (k >= 0 && seen < lookback) {
+            const cand = out[k];
+            if (/^[ \t]*$/.test(cand)) { k--; continue; }
+            seen++;
+            const text = this._normWs(cand.replace(/^[>\]][ \t]*/, ''));
+            if (text.endsWith(full)) {
+                const prefix = text.slice(0, text.length - full.length);
+                if (prefix.length <= maxPrefix
+                    && (prefix === '' || prefix.endsWith(' '))
+                    && prefix.split(' ').length - 1 <= maxWords
+                    && !(r._prefix_reject && r._prefix_reject.test(prefix))) {
+                    return k;
+                }
+            }
+            k--;
+        }
+        return null;
+    }
+
+    // hidePrivate: rules tagged "option": "hide_private" (tells, telepathy) only run when true.
+    // Sets this.detectedClient and this.privateRemoved (number of private lines removed).
+    preprocessText(text, client = null, hidePrivate = true) {
         const lines = (text || '').replace(/\r\n/g, '\n').split('\n');
         if (client === null || client === undefined) {
             client = this.detectClient(lines);
         }
         this.detectedClient = client;
-        const rules = this.preRules.filter(r => !r.clients || !r.clients.length || r.clients.includes(client));
+        this.privateRemoved = 0;
+        const options = { hide_private: !!hidePrivate };
+        const rules = this.preRules.filter(r =>
+            (!r.clients || !r.clients.length || r.clients.includes(client))
+            && (!r.option || options[r.option]));
         if (rules.length === 0) {
             return lines.join('\n');
         }
@@ -837,6 +877,26 @@ class RLColorizerJS {
                     handled = true;
                     break;
                 }
+                if (kind === 'drop_with_echo') {
+                    const m = r._pattern.exec(line);
+                    if (!m) continue;
+                    let j = i + 1;
+                    while (j < n && r._continuation && r._continuation.test(lines[j])) j++;
+                    const mg = (r.message_group === undefined || r.message_group === null) ? 1 : r.message_group;
+                    const full = this._normWs([m[mg] || ''].concat(lines.slice(i + 1, j)).join(' '));
+                    const k = this._findEcho(out, r, full);
+                    let removed = j - i;
+                    if (k !== null) {
+                        out.splice(k, 1);
+                        removed += 1;
+                    }
+                    if (r.option === 'hide_private') this.privateRemoved += removed;
+                    i = j;
+                    changed = true;
+                    run = null;
+                    handled = true;
+                    break;
+                }
                 if (kind === 'drop_block') {
                     if (!r._start.test(line)) continue;
                     const limit = (r.max_lines === undefined || r.max_lines === null)
@@ -871,9 +931,12 @@ class RLColorizerJS {
                     const m = r._pattern.exec(line);
                     if (!m) continue;
                     let keep;
+                    let extra = 0; // continuation lines consumed together with this one
                     if (kind === 'drop') {
                         keep = false;
                         if (r.login) lastLogin = i;
+                        while (r._continuation && i + 1 + extra < n && r._continuation.test(lines[i + 1 + extra])) extra++;
+                        if (r.option === 'hide_private') this.privateRemoved += 1 + extra;
                     } else if (kind === 'dedupe_on_change') {
                         let key;
                         if ('key' in r) key = this._expandTemplate(r.key, m);
@@ -895,7 +958,7 @@ class RLColorizerJS {
                     }
                     if (keep) out.push(line);
                     else changed = true;
-                    i += 1;
+                    i += 1 + extra;
                     handled = true;
                     break;
                 }
@@ -929,9 +992,10 @@ class RLColorizerJS {
         return result.join('\n');
     }
 
-    colorizeText(plainText, preprocess = true, client = null) {
+    colorizeText(plainText, preprocess = true, client = null, hidePrivate = true) {
+        this.privateRemoved = 0;
         if (preprocess) {
-            plainText = this.preprocessText(plainText, client);
+            plainText = this.preprocessText(plainText, client, hidePrivate);
         }
         const trimmed = (plainText || '').replace(/\r\n/g, '\n').replace(/\n+$/, '');
         const normalized = trimmed.replace(/\n{3,}/g, '\n\n');

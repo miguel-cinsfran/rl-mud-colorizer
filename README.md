@@ -18,6 +18,15 @@ Todo se ejecuta en tu navegador y no se envía nada a ningún servidor.
 
 El inicio de sesión (banner, usuario, clave y texto de bienvenida) se borra siempre antes de colorizar, incluso si pegas solo un fragmento del log. En el bloque de estado de VIPMud se quitan siempre `Pv`, `SL`, `PL` y `Jgd`, porque el juego ya muestra su propia línea `Pvs:` cuando cambia la vida. `Imágenes`, `Pieles`, `Astucia` e `Inercia` aparecen solo cuando cambian y nunca si valen 0. También se quitan las líneas en blanco. Los logs de Mudlet no pierden nada de esto.
 
+Los mensajes privados también se quitan, salvo que lo desmarques: la casilla "Quitar mensajes privados (telepatías)" viene marcada y está antes del botón de colorizar. Al cambiarla, el resultado se recalcula y se anuncia cuántas líneas privadas se quitaron. Se borran:
+
+- Lo que te dicen: `X te dice:`, `X te pregunta:` y `X te exclama:`, y las líneas sangradas que continúan el mensaje.
+- El aviso `X contacta telepáticamente con ...`.
+- Lo que dices: `Dices a X:`, `Preguntas a X:` y `Exclamas a X:`.
+- El comando con el que lo escribiste. No se reconoce por la palabra (`t`, `tell`, `r` o un alias propio), sino por el mensaje: se busca, en las 15 líneas anteriores, la más reciente que termine con el mismo mensaje. Lo que haya entre medias se conserva.
+
+También se quitan los mensajes de los PNJ que te hablan con `te dice:`. Un comando de telepatía sin texto, o con un mensaje que el juego mostró distinto, puede quedar en el log.
+
 ## Colores de los títulos de sala
 
 Cada título de sala toma su color de la primera fuente que lo conozca:
@@ -43,7 +52,7 @@ El primer comando escribe `room_map_colors.json` y el segundo recompila `rules.j
 python engine.py log.txt -o salida.html
 ```
 
-Sin `-o`, el HTML sale por la salida estándar. `--client vipmud` (o `mudlet`) fuerza el cliente en lugar de detectarlo, `--no-preprocess` omite la limpieza de inicio de sesión y bloque de estado, y `--deathlogs` genera la versión para pegar en Deathlogs en lugar del formato de Mudlet.
+Sin `-o`, el HTML sale por la salida estándar. `--client vipmud` (o `mudlet`) fuerza el cliente en lugar de detectarlo, `--no-preprocess` omite la limpieza de inicio de sesión y bloque de estado, `--keep-private` conserva los mensajes privados, que por defecto se quitan, y `--deathlogs` genera la versión para pegar en Deathlogs en lugar del formato de Mudlet.
 
 ## Para quien quiera contribuir
 

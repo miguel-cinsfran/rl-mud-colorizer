@@ -167,6 +167,7 @@ class RLColorizer:
         self.cardinal_regex = re.compile(r'\b(norte|sur|este|oeste|noreste|noroeste|sudeste|sudoeste|arriba|abajo|n|s|e|o|ne|no|se|so)\b', re.IGNORECASE)
         
         self.detected_client = None
+        self.private_removed = 0
         self._context = None  # block context set by a `sets_context` rule (e.g. group status list)
         self._init_preprocess(self.config.get('preprocess') or {})
 
@@ -620,7 +621,8 @@ class RLColorizer:
         self.pre_rules = []
         for r in cfg.get('rules', []):
             comp = dict(r)
-            for key in ('pattern', 'start', 'end', 'until', 'candidate', 'record', 'echo', 'keep_before'):
+            for key in ('pattern', 'start', 'end', 'until', 'candidate', 'record', 'echo', 'keep_before',
+                        'continuation', 'prefix_reject'):
                 if key in r:
                     comp['_' + key] = re.compile(r[key])
             self.pre_rules.append(comp)
@@ -675,18 +677,58 @@ class RLColorizer:
             out.append(line)
         return out
 
-    def preprocess_text(self, text, client=None):
+    @staticmethod
+    def _norm_ws(s):
+        """Collapse runs of spaces/tabs and trim spaces (same result as the JS engine)."""
+        return re.sub(r'^ +| +$', '', re.sub(r'[ \t]+', ' ', s))
+
+    def _find_echo(self, out, r, full):
+        """Index in `out` of the typed command that produced the message `full`, or None.
+
+        Looks back through up to r['lookback'] non-blank emitted lines for the most recent one
+        whose text (optional prompt removed) ends with the message. The part before it must be
+        short, end on a space, hold at most max_prefix_words words and match no prefix_reject
+        (server lines such as "Cantas: ..." have a colon there).
+        """
+        if not full:
+            return None
+        seen = 0
+        k = len(out) - 1
+        while k >= 0 and seen < r.get('lookback', 15):
+            cand = out[k]
+            if re.match(r'^[ \t]*$', cand):
+                k -= 1
+                continue
+            seen += 1
+            text = self._norm_ws(re.sub(r'^[>\]][ \t]*', '', cand))
+            if text.endswith(full):
+                prefix = text[:len(text) - len(full)]
+                if (len(prefix) <= r.get('max_prefix', 40)
+                        and (prefix == '' or prefix.endswith(' '))
+                        and len(prefix.split(' ')) - 1 <= r.get('max_prefix_words', 3)
+                        and not ('_prefix_reject' in r and r['_prefix_reject'].search(prefix))):
+                    return k
+            k -= 1
+        return None
+
+    def preprocess_text(self, text, client=None, hide_private=True):
         """Sanitize a raw log (login/credentials, client status blocks) before colorizing.
 
         client: explicit client id, or None to auto-detect. Rules with a "clients"
         list only run when the client is in that list; rules without it are
-        client-agnostic. Sets self.detected_client. Returns the cleaned text.
+        client-agnostic. Rules tagged "option": "hide_private" (tells, telepathy) only run
+        when hide_private is true. Sets self.detected_client and self.private_removed (number
+        of private lines removed). Returns the cleaned text.
         """
         lines = (text or '').replace('\r\n', '\n').split('\n')
         if client is None:
             client = self.detect_client(lines)
         self.detected_client = client
-        rules = [r for r in self.pre_rules if not r.get('clients') or client in r['clients']]
+        self.private_removed = 0
+        options = {'hide_private': bool(hide_private)}
+        rules = [r for r in self.pre_rules
+                 if (not r.get('clients') or client in r['clients'])
+                 and (not r.get('option') or options.get(r['option']))]
         if not rules:
             return '\n'.join(lines)
 
@@ -746,6 +788,26 @@ class RLColorizer:
                     run = None
                     handled = True
                     break
+                if kind == 'drop_with_echo':
+                    m = r['_pattern'].search(line)
+                    if not m:
+                        continue
+                    j = i + 1
+                    while j < n and '_continuation' in r and r['_continuation'].search(lines[j]):
+                        j += 1
+                    full = self._norm_ws(' '.join([m.group(r.get('message_group', 1)) or ''] + lines[i + 1:j]))
+                    k = self._find_echo(out, r, full)
+                    removed = j - i
+                    if k is not None:
+                        del out[k]
+                        removed += 1
+                    if r.get('option') == 'hide_private':
+                        self.private_removed += removed
+                    i = j
+                    changed = True
+                    run = None
+                    handled = True
+                    break
                 if kind == 'drop_block':
                     if not r['_start'].search(line):
                         continue
@@ -784,10 +846,15 @@ class RLColorizer:
                     m = r['_pattern'].search(line)
                     if not m:
                         continue
+                    extra = 0  # continuation lines consumed together with this one
                     if kind == 'drop':
                         keep = False
                         if r.get('login'):
                             last_login = i
+                        while '_continuation' in r and i + 1 + extra < n and r['_continuation'].search(lines[i + 1 + extra]):
+                            extra += 1
+                        if r.get('option') == 'hide_private':
+                            self.private_removed += 1 + extra
                     elif kind == 'dedupe_on_change':
                         if 'key' in r:
                             key = self._expand_template(r['key'], m)
@@ -813,7 +880,7 @@ class RLColorizer:
                         out.append(line)
                     else:
                         changed = True
-                    i += 1
+                    i += 1 + extra
                     handled = True
                     break
                 # drop_block / drop_after / drop_closer: lines consumed
@@ -842,9 +909,10 @@ class RLColorizer:
             out = collapsed
         return '\n'.join(out)
 
-    def colorize_text(self, plain_text, preprocess=True, client=None):
+    def colorize_text(self, plain_text, preprocess=True, client=None, hide_private=True):
+        self.private_removed = 0
         if preprocess:
-            plain_text = self.preprocess_text(plain_text, client)
+            plain_text = self.preprocess_text(plain_text, client, hide_private)
         trimmed = (plain_text or "").replace('\r\n', '\n').rstrip('\n')
         normalized = re.sub(r'\n{3,}', '\n\n', trimmed)
         if not normalized:
@@ -879,12 +947,15 @@ def main(argv=None):
     ap.add_argument("-o", "--output", help="output HTML file (default: stdout)")
     ap.add_argument("--client", help="force a client id (e.g. vipmud, mudlet) instead of auto-detection")
     ap.add_argument("--no-preprocess", action="store_true", help="skip login/status sanitization")
+    ap.add_argument("--keep-private", action="store_true",
+                    help="keep private messages (tells, telepathy); they are removed by default")
     ap.add_argument("--deathlogs", action="store_true", help="output the version to paste into Deathlogs")
     args = ap.parse_args(argv)
 
     colorizer = RLColorizer()
     text = read_text_file(args.input)
-    result = colorizer.colorize_text(text, preprocess=not args.no_preprocess, client=args.client)
+    result = colorizer.colorize_text(text, preprocess=not args.no_preprocess, client=args.client,
+                                     hide_private=not args.keep_private)
     if args.deathlogs:
         result = to_deathlogs(result)
     if args.output:
@@ -894,6 +965,8 @@ def main(argv=None):
     if not args.no_preprocess:
         label = colorizer.client_label(colorizer.detected_client)
         print(f"Detected client: {label or 'unknown'}", file=sys.stderr)
+        if colorizer.private_removed:
+            print(f"Private lines removed: {colorizer.private_removed}", file=sys.stderr)
     return 0
 
 

@@ -133,6 +133,29 @@ code, kbd {
     padding: 1px 5px;
 }
 
+/* Opción previa a convertir */
+.options {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 2px 10px;
+}
+.options input[type="checkbox"] {
+    width: 22px;
+    height: 22px;
+    margin: 0;
+    accent-color: var(--accent);
+}
+.options label {
+    font-weight: 600;
+    cursor: pointer;
+}
+.options-help {
+    grid-column: 2;
+    max-width: 46rem;
+    color: var(--text-secondary);
+}
+
 /* Barra de acciones */
 .toolbar {
     display: flex;
