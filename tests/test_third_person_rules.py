@@ -225,11 +225,12 @@ class EffectEnds(Cases, unittest.TestCase):
 
 
 class OutputSpacing(unittest.TestCase):
-    def test_output_has_no_newline_after_br(self):
+    def test_lines_end_like_mudlet_copy_as_html(self):
+        # Mudlet's TBuffer::bufferToHtml ends every line with "<br>\n"; Deathlogs accepts that format.
         out = make_colorizer().colorize_text("a\nb\nc")
         body = out.split("<body><div>", 1)[1].rsplit("</div></body>", 1)[0]
-        self.assertNotIn("<br>\n", body)
-        self.assertEqual(len(re.findall("<br>", body)), 3)
+        self.assertEqual(len(re.findall("<br>\n", body)), 3)
+        self.assertTrue(out.endswith("<br>\n </div></body>\n</html>"))
 
 
 if __name__ == "__main__":

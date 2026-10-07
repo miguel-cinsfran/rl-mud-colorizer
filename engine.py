@@ -853,8 +853,8 @@ class RLColorizer:
         lines = normalized.split('\n')
         self._context = None
         rendered_lines = [self.colorize_line(line) for line in lines]
-        # No newline after <br>: Deathlogs renders the paste inside <PRE>, where it would double-space.
-        body_content = "".join(r + "<br>" for r in rendered_lines)
+        # Same as Mudlet's copy-as-HTML (TBuffer::bufferToHtml): every line ends in "<br>\n".
+        body_content = "".join(r + "<br>\n" for r in rendered_lines)
 
         return f"{MUDLET_HEADER}{body_content} </div></body>\n</html>"
 

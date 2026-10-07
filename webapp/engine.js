@@ -942,8 +942,8 @@ class RLColorizerJS {
         const lines = normalized.split('\n');
         this._context = null;
         const renderedLines = lines.map(line => this.colorizeLine(line));
-        // No newline after <br>: Deathlogs renders the paste inside <PRE>, where it would double-space.
-        const bodyContent = renderedLines.map(r => r + '<br>').join('');
+        // Same as Mudlet's copy-as-HTML (TBuffer::bufferToHtml): every line ends in "<br>\n".
+        const bodyContent = renderedLines.map(r => r + '<br>\n').join('');
 
         return `${MUDLET_HEADER}${bodyContent} </div></body>\n</html>`;
     }
