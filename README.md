@@ -10,7 +10,7 @@ Página en vivo: https://miguel-cinsfran.github.io/rl-mud-colorizer/
 2. El resultado se actualiza mientras pegas. `Ctrl+Enter` lo fuerza.
 3. Pulsa "Copiar para Deathlogs" y pega el contenido en el campo Log del formulario de envío.
 
-Se copia el mismo HTML que exporta Mudlet, igual que el botón de descarga. Deathlogs convierte cada salto de línea en un `<br>` y conserva los que ya trae el log, así que queda una línea en blanco entre cada línea, que es como se lee más cómodo. La pestaña "HTML" muestra lo mismo que se copia.
+Lo que se copia lleva cada línea en su propia línea de texto, sin `<br>`: Deathlogs convierte cada salto de línea en un `<br>`, y si el log ya los trae, queda una línea en blanco entre cada línea. El botón de descarga guarda el `.html` con el formato exacto que exporta Mudlet, para abrirlo en el navegador. La pestaña "HTML" muestra lo mismo que se copia.
 
 ## Privacidad
 
@@ -52,7 +52,7 @@ El primer comando escribe `room_map_colors.json` y el segundo recompila `rules.j
 python engine.py log.txt -o salida.html
 ```
 
-Sin `-o`, el HTML sale por la salida estándar. `--client vipmud` (o `mudlet`) fuerza el cliente en lugar de detectarlo, `--no-preprocess` omite la limpieza de inicio de sesión y bloque de estado, `--keep-private` conserva los mensajes privados, que por defecto se quitan, y `--deathlogs` genera una versión compacta, sin `<br>`, que Deathlogs muestra sin líneas en blanco.
+Sin `-o`, el HTML sale por la salida estándar. `--client vipmud` (o `mudlet`) fuerza el cliente en lugar de detectarlo, `--no-preprocess` omite la limpieza de inicio de sesión y bloque de estado, `--keep-private` conserva los mensajes privados, que por defecto se quitan, y `--deathlogs` genera la versión para pegar en Deathlogs en lugar del formato de Mudlet.
 
 ## Para quien quiera contribuir
 
