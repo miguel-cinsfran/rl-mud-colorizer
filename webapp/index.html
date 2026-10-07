@@ -7,7 +7,7 @@
     <title>RL Log Colorizer</title>
     <!-- Cache busting: sube el número de ?v= en las cuatro etiquetas (style.css, rules.js, engine.js, app.js)
          cada vez que cambies alguno de esos archivos, para que GitHub Pages no sirva una copia vieja. -->
-    <link rel="stylesheet" href="style.css?v=12">
+    <link rel="stylesheet" href="style.css?v=13">
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23161512'/%3E%3Ctext x='32' y='43' font-family='monospace' font-size='30' font-weight='bold' text-anchor='middle' fill='%23d2a65c'%3ERL%3C/text%3E%3C/svg%3E">
 </head>
 <body>
@@ -38,7 +38,7 @@
         <div class="options">
             <input type="checkbox" id="opt-hide-private" checked aria-describedby="opt-hide-private-help">
             <label for="opt-hide-private">Quitar mensajes privados (telepatías)</label>
-            <p id="opt-hide-private-help" class="options-help">Borra lo que te dicen, lo que dices por telepatía y el comando con el que lo escribiste. Viene marcado para que no subas conversaciones privadas.</p>
+            <p id="opt-hide-private-help" class="options-help">Borra lo que te dicen, lo que dices por telepatía y el comando con el que lo escribiste. Viene marcado para que no subas conversaciones privadas. También quita lo que te dicen los personajes del juego, como en misiones o tiendas.</p>
         </div>
 
         <nav class="toolbar" aria-label="Acciones">
@@ -209,8 +209,8 @@
     <!-- Aviso visual; el mismo texto se anuncia en la región en vivo de arriba -->
     <div id="toast" class="toast" role="status" aria-hidden="true"></div>
 
-    <script src="rules.js?v=12"></script>
-    <script src="engine.js?v=12"></script>
-    <script src="app.js?v=12"></script>
+    <script src="rules.js?v=13"></script>
+    <script src="engine.js?v=13"></script>
+    <script src="app.js?v=13"></script>
 </body>
 </html>
