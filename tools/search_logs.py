@@ -37,6 +37,8 @@ SELF_KILL_RE = re.compile(r"^(?:[>\]]\s*)?(.+?) se propina el golpe mortal\.\s*$
 DIED_RE = re.compile(r"^(?:[>\]]\s*)?(.+?) ha muerto\.\s*$")
 # A room title with its exits; "SL: [o,s,e,n]" in VIPMud's status block is not one.
 ROOM_RE = re.compile(r"^(?:[>\]]\s*)?(?!SL:)([A-ZÁÉÍÓÚÑÜ][^\[\]]*?)\s+\[[a-z|,]+\]\s*$")
+# "Choi (Hum) llega...", "Jgd:Zellor (Mdro)": the race tag after a player's name.
+RACE_TAG = r"\(([A-Z][A-Za-z-]{1,5})\)"
 KILL_LOOKBACK = 12
 ROOM_LOOKBACK = 400
 
@@ -57,6 +59,16 @@ def fold(text):
     return "".join(c for c in unicodedata.normalize("NFD", text.lower()) if not unicodedata.combining(c))
 
 
+def with_race(lines, before, name):
+    """ "Choi (Hum)": the name with the race tag seen closest above the kill, if any."""
+    tag = re.compile(r"(?<![\w])" + re.escape(name) + r" " + RACE_TAG)
+    for line in reversed(lines[:before]):
+        m = tag.search(line)
+        if m:
+            return f"{name} ({m.group(1)})"
+    return name
+
+
 def glory_events(lines):
     """(line number, points, kill description, room) for every glory line."""
     for i, line in enumerate(lines):
@@ -73,7 +85,7 @@ def glory_events(lines):
         for back in above:
             own, other, self_kill = OWN_KILL_RE.match(back), OTHER_KILL_RE.match(back), SELF_KILL_RE.match(back)
             if own:
-                kill = f"por matar a {own.group(1)}"
+                kill = f"por matar a {with_race(lines, i, own.group(1))}"
             elif self_kill:
                 kill = f"{self_kill.group(1)} se dio el golpe mortal a sí mismo"
             elif other:
@@ -98,7 +110,7 @@ def cmd_glory(files):
     total = 0
     for path in files:
         for number, points, kill, room in glory_events(read_text_file(path).splitlines()):
-            where = f" ({room})" if room else ""
+            where = f", en {room}" if room else ""
             print(f"{path.name}, línea {number}: {points} de gloria, {kill}{where}.")
             total += 1
     print(f"{total} {'vez' if total == 1 else 'veces'} con gloria en {files_text(len(files))}.")

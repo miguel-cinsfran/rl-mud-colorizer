@@ -1046,6 +1046,37 @@ def to_deathlogs(mudlet_html):
     return mudlet_html.replace("<br>\n", "\n")
 
 
+def _line_range(spec, option):
+    m = re.fullmatch(r"\s*(\d+)\s*-\s*(\d+)\s*", spec or "")
+    if not m or int(m.group(1)) < 1 or int(m.group(1)) > int(m.group(2)):
+        raise ValueError(f"{option} espera DESDE-HASTA, por ejemplo 25840-27614")
+    return int(m.group(1)), int(m.group(2))
+
+
+def select_lines(text, lines=None, cuts=()):
+    """Keep the "first-last" range of the file and replace each cut range by its note.
+
+    Line numbers count from 1 in the original file, both ends included, for the range and the
+    cuts alike. A note that does not start with "//" gets it, so it renders as an editor note.
+    """
+    source = text.splitlines()
+    first, last = _line_range(lines, "--lines") if lines else (1, len(source))
+    parsed = sorted((_line_range(spec, "--cut") + (note,) for spec, note in cuts), key=lambda c: c[0])
+    for (a, b, _), (c, _d, _n) in zip(parsed, parsed[1:]):
+        if c <= b:
+            raise ValueError(f"--cut {a}-{b} y --cut {c}-{_d} se pisan")
+    for a, b, _ in parsed:
+        if a < first or b > last:
+            raise ValueError(f"--cut {a}-{b} queda fuera de las líneas {first}-{last}")
+    out, n = [], first
+    for a, b, note in parsed:
+        out += source[n - 1:a - 1]
+        out.append(note if NOTE_RE.match(note) else "// " + note)
+        n = b + 1
+    out += source[n - 1:last]
+    return "\n".join(out)
+
+
 def main(argv=None):
     import argparse
     import sys
@@ -1055,6 +1086,10 @@ def main(argv=None):
     ap.add_argument("-o", "--output", help="archivo HTML de salida (por defecto, la salida estándar)")
     ap.add_argument("--lines", metavar="DESDE-HASTA",
                     help="usar solo esas líneas del archivo, contando desde 1 y ambas incluidas (ej. 25840-27614)")
+    ap.add_argument("--cut", nargs=2, action="append", default=[], metavar=("DESDE-HASTA", "NOTA"),
+                    help="cambiar esas líneas por una nota, por ejemplo --cut 41192-41686 BUSCANDO...; "
+                         "la nota se escribe sin // (se agregan solas), se puede repetir y usa la "
+                         "misma numeración que --lines")
     ap.add_argument("--client", help="forzar el cliente (vipmud o mudlet) en lugar de detectarlo")
     ap.add_argument("--no-preprocess", action="store_true",
                     help="no limpiar el inicio de sesión ni el bloque de estado")
@@ -1065,11 +1100,11 @@ def main(argv=None):
 
     colorizer = RLColorizer()
     text = read_text_file(args.input)
-    if args.lines:
-        m = re.fullmatch(r"\s*(\d+)\s*-\s*(\d+)\s*", args.lines)
-        if not m or int(m.group(1)) < 1 or int(m.group(1)) > int(m.group(2)):
-            ap.error("--lines espera DESDE-HASTA, por ejemplo 25840-27614")
-        text = "\n".join(text.splitlines()[int(m.group(1)) - 1:int(m.group(2))])
+    if args.lines or args.cut:
+        try:
+            text = select_lines(text, args.lines, args.cut)
+        except ValueError as exc:
+            ap.error(str(exc))
     result = colorizer.colorize_text(text, preprocess=not args.no_preprocess, client=args.client,
                                      hide_private=not args.keep_private)
     if args.deathlogs:

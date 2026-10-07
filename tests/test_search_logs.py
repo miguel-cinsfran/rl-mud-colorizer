@@ -11,7 +11,8 @@ from _common import ROOT  # noqa: F401  (puts the repo on sys.path)
 import engine
 from tools import search_logs
 
-LOG = """Campos de Cultivo [ne,o]
+LOG = """Choi (Hum) llega desde el noroeste.
+Campos de Cultivo [ne,o]
 Propinas el golpe mortal a Choi.
 Choi ha muerto.
 [Obtienes 106 puntos de gloria]
@@ -49,14 +50,14 @@ class SearchLogsTest(unittest.TestCase):
         code, lines = run(["gloria", "thyra", "--carpeta", str(self.dir)])
         self.assertEqual(code, 0)
         self.assertEqual(lines[:5], [
-            "thyra 2026-10-07.txt, línea 4: 106 de gloria, por matar a Choi (Campos de Cultivo).",
-            "thyra 2026-10-07.txt, línea 7: 20 de gloria, el golpe mortal a Zeh lo dio Thangrim (Campos de Cultivo).",
-            "thyra 2026-10-07.txt, línea 10: 156 de gloria, Koch se dio el golpe mortal a sí mismo"
-            " (Exterior de Anduar: Puerta Este).",
-            "thyra 2026-10-07.txt, línea 12: 5 de gloria, murió Rhyzan, sin golpe mortal a la vista"
-            " (Exterior de Anduar: Puerta Este).",
-            "thyra 2026-10-07.txt, línea 13: 7 de gloria, no aparece ningún golpe mortal en las líneas de arriba"
-            " (Exterior de Anduar: Puerta Este).",
+            "thyra 2026-10-07.txt, línea 5: 106 de gloria, por matar a Choi (Hum), en Campos de Cultivo.",
+            "thyra 2026-10-07.txt, línea 8: 20 de gloria, el golpe mortal a Zeh lo dio Thangrim, en Campos de Cultivo.",
+            "thyra 2026-10-07.txt, línea 11: 156 de gloria, Koch se dio el golpe mortal a sí mismo"
+            ", en Exterior de Anduar: Puerta Este.",
+            "thyra 2026-10-07.txt, línea 13: 5 de gloria, murió Rhyzan, sin golpe mortal a la vista"
+            ", en Exterior de Anduar: Puerta Este.",
+            "thyra 2026-10-07.txt, línea 14: 7 de gloria, no aparece ningún golpe mortal en las líneas de arriba"
+            ", en Exterior de Anduar: Puerta Este.",
         ])
         self.assertEqual(lines[-1], "5 veces con gloria en 1 archivo.")
 
@@ -67,13 +68,29 @@ class SearchLogsTest(unittest.TestCase):
 
     def test_search_ignores_case_and_accents_in_cp1252_logs(self):
         _, lines = run(["buscar", "TELEPATICAMENTE", "thyra", "telael", "--carpeta", str(self.dir)])
-        self.assertEqual(lines, ["thyra 2026-10-07.txt, línea 14: Choi te dice: voy 1 min, ya vuelvo telepáticamente",
+        self.assertEqual(lines, ["thyra 2026-10-07.txt, línea 15: Choi te dice: voy 1 min, ya vuelvo telepáticamente",
                                  "1 línea en 2 archivos."])
 
     def test_unknown_character_fails_cleanly(self):
         code, lines = run(["gloria", "nadie", "--carpeta", str(self.dir)])
         self.assertEqual(code, 1)
         self.assertIn("No hay logs de nadie", lines[0])
+
+
+class EngineCutOptionTest(unittest.TestCase):
+    def test_cut_replaces_ranges_with_notes(self):
+        text = "\n".join(f"l{i}" for i in range(1, 11))
+        self.assertEqual(engine.select_lines(text, "2-9", [("4-5", "BUSCANDO..."), ("7-7", "// CURANDOME")]),
+                         "l2\nl3\n// BUSCANDO...\nl6\n// CURANDOME\nl8\nl9")
+
+    def test_cut_alone_keeps_the_whole_file(self):
+        self.assertEqual(engine.select_lines("a\nb\nc", None, [("2-2", "X")]), "a\n// X\nc")
+
+    def test_bad_cuts_are_refused(self):
+        text = "\n".join(f"l{i}" for i in range(1, 11))
+        for lines, cuts in (("2-9", [("1-3", "x")]), (None, [("2-5", "x"), ("5-6", "y")]), (None, [("5-2", "x")])):
+            with self.subTest(lines=lines, cuts=cuts), self.assertRaises(ValueError):
+                engine.select_lines(text, lines, cuts)
 
 
 class EngineLinesOptionTest(unittest.TestCase):
