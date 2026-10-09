@@ -505,6 +505,15 @@ window.COLORIZER_RULES = {
         "pattern": "^PL:"
       },
       {
+        "id": "vip_status_nm_ld",
+        "kind": "drop",
+        "clients": [
+          "vipmud"
+        ],
+        "group": "status",
+        "pattern": "^(?:NM|LD):"
+      },
+      {
         "id": "vip_status_jgd",
         "kind": "drop",
         "clients": [

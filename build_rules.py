@@ -222,7 +222,7 @@ PREPROCESS_DATA = {
             "prefix_reject": r":",
         },
 
-        # --- VIPMud status block (Pv/SL/PL/Jgd/Imágenes/Pieles + closing prompt) ---
+        # --- VIPMud status block (Pv/SL/PL/NM/LD/Jgd/Imágenes/Pieles + closing prompt) ---
         {
             # Always dropped: when HP changes the game prints its own "Pvs: N/N (+-N) Pe: ..." line.
             "id": "vip_status_pv",
@@ -244,6 +244,14 @@ PREPROCESS_DATA = {
             "clients": ["vipmud"],
             "group": "status",
             "pattern": r"^PL:",
+        },
+        {
+            # Prompt variant with the nearby-enemies lists ("NM:", "LD:") instead of "Jgd:".
+            "id": "vip_status_nm_ld",
+            "kind": "drop",
+            "clients": ["vipmud"],
+            "group": "status",
+            "pattern": r"^(?:NM|LD):",
         },
         {
             "id": "vip_status_jgd",

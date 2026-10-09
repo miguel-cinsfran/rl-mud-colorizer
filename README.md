@@ -20,7 +20,7 @@ Una línea que empieza con `//`, como `// BUSCANDO...`, se toma como una nota de
 
 Todo se ejecuta en tu navegador y no se envía nada a ningún servidor.
 
-El inicio de sesión (banner, usuario, clave y texto de bienvenida) se borra siempre antes de colorizar, incluso si pegas solo un fragmento del log. En el bloque de estado de VIPMud se quitan siempre `Pv`, `SL`, `PL` y `Jgd`, porque el juego ya muestra su propia línea `Pvs:` cuando cambia la vida. `Imágenes`, `Pieles`, `Astucia` e `Inercia` aparecen solo cuando cambian y nunca si valen 0. También se quitan las líneas en blanco. Los logs de Mudlet no pierden nada de esto.
+El inicio de sesión (banner, usuario, clave y texto de bienvenida) se borra siempre antes de colorizar, incluso si pegas solo un fragmento del log. En el bloque de estado de VIPMud se quitan siempre `Pv`, `SL`, `PL`, `NM`, `LD` y `Jgd`, porque el juego ya muestra su propia línea `Pvs:` cuando cambia la vida. `Imágenes`, `Pieles`, `Astucia` e `Inercia` aparecen solo cuando cambian y nunca si valen 0. También se quitan las líneas en blanco. Los logs de Mudlet no pierden nada de esto.
 
 Los mensajes privados también se quitan, salvo que lo desmarques: la casilla "Quitar mensajes privados (telepatías)" viene marcada y está antes del botón de colorizar. Al cambiarla, el resultado se recalcula y se anuncia cuántas líneas privadas se quitaron. Se borran:
 

@@ -48,6 +48,14 @@ class StatusDedupeFixtureTest(unittest.TestCase):
         lines, _ = preprocessed(self.NAME)
         self.assertEqual(len([l for l in lines if LONE_PROMPT.match(l)]), 1)
 
+    def test_prompt_with_enemy_lists_and_a_command_echo(self):
+        c = make_colorizer()
+        raw = ("Pv:5861\\5861 Pe:1348\\1408 Xp:7937695\nSL: [no,so,e]\nPL:Thyra (Mdro)\n"
+               "NM:Thyra (Mdro)\nLD:\nz\n> \nIgnorando 'zarpazo x'.\n\nPv:5861\\5861 Pe:1348\\1408 Xp:7937695\n"
+               "SL: [no,so,e]\nPL:\nNM:\nLD:Kleopfergh (Hum)\n] \nZeh (Mdro) llega desde el noreste.\n")
+        self.assertEqual(c.preprocess_text(raw, "vipmud").split("\n"),
+                         ["z", "> ", "Ignorando 'zarpazo x'.", "Zeh (Mdro) llega desde el noreste."])
+
     def test_game_output_is_preserved(self):
         lines, _ = preprocessed(self.NAME)
         for expected in (
